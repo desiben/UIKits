@@ -16,6 +16,14 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 
 ---
 
+## What's new in v1.2
+
+- **56 new components** across Charts, Data display, AI, Feedback, Forms, Layout, Navigation and Overlays — built in Figma (Variables, variants) and live on the site with a **Desktop / Mobile preview toggle** on every example.
+- **Charts** — `assets/charts.js` renders area, line, bar, composed, pie, radar, radial and sparkline charts from `data-chart` JSON, with tooltips and auto re-render on resize and theme change.
+- **Style themes** — Default, Soft, Glass and Mono (`html[data-style]`, `Facet.theme.setStyle()`), stacked on top of the 6 brand colors and light/dark. In Figma they live in the **Style** collection.
+- **AI agents** — 6 working demos at [`/#/agents`](https://facetui.vercel.app/#/agents) (Banking, Commerce ops, Travel, Email, Health, Support): chain of thought, tool calls, generative UI and approvals that really change the app.
+- **Components overview** at [`/#/components`](https://facetui.vercel.app/#/components) with live previews, search and **Copy Markdown** for AI coding tools.
+
 ## Table of contents
 
 1. [What is Facet UI?](#what-is-facet-ui)
@@ -46,7 +54,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 
 | Layer | What it is | Who uses it |
 |---|---|---|
-| **Figma library** | 9 pages, 88 components (53 variant sets, 420+ variants), 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
+| **Figma library** | 9 pages, 144 components (78 variant sets, 500+ variants), 147 icons, 4 style themes, 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
 | **Design tokens** | 228 Figma variables exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset | Designers and developers |
 | **Living style guide** | A dependency-free HTML/CSS/JS reference implementation with live previews, copy-paste code and a theme studio | Developers |
 
@@ -456,7 +464,7 @@ The Figma file goes further, with **10 templates and 26 desktop and mobile scree
 | **00 — Start Here** | Cover, design directions explored, principles, inventory and build status, getting started |
 | **01 — Foundations** | Color ramps, typography, spacing, radius, elevation, iconography |
 | **02 — Design Tokens** | Theme matrix (brand × light/dark), density comparison, CSS reference, brand-color examples |
-| **03 — Components** | 88 components, 53 variant sets, 100 Lucide icon components |
+| **03 — Components** | 144 components, 78 variant sets, 504 variants, 147 Lucide icon components |
 | **04 — Patterns** | 23 patterns: app shell, filter bar, KPI row, table toolbar, auth forms, onboarding, AI dock, marketing sections |
 | **05 — Templates** | 10 apps, 26 screens (desktop and mobile), annotated |
 | **06 — Playground** | Desktop and mobile sandboxes, theme lab, component tray, **clickable prototype flows** |
@@ -528,7 +536,7 @@ Facet aims to be honest about what isn't finished:
 
 1. **`border/input` contrast is 2.5:1** against white. That's below WCAG 1.4.11's 3:1 for control boundaries. Labels and placeholders carry the meaning, but if your audit requires 3:1, change `--border-input` to `var(--ink-500)`.
 2. **Code and Data text styles use Mona Sans**, not a true monospace, to keep the kit to one family. Swap `--font-mono` if you show a lot of code.
-3. **The HTML style guide implements about 50 of the 88 Figma components.** The rest (e.g. Workflow Builder, Resource Planner, Combobox, Navigation Menu) are Figma-only for now.
+3. **The HTML style guide documents 92 of the 144 Figma components.** The rest (e.g. Workflow Builder, Resource Planner, Combobox, Navigation Menu) are Figma-only for now.
 4. **The HTML is a reference implementation, not a React package.** Focus-trapping in dialogs and the full calendar keyboard model are simplified. For production React apps, use shadcn/ui (Radix) with the Facet preset.
 5. **The Figma prototype covers two flows.** The remaining template screens are static.
 6. **Mona Sans loads from Google Fonts.** Offline, it falls back to the system UI font.

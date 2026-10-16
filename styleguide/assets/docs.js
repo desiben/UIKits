@@ -27,13 +27,30 @@
   const tidy = (h) => h.replace(/<svg class="icon([^"]*)" aria-hidden="true"><use href="#([^"]+)"\/><\/svg>/g, '<svg class="icon$1"><use href="#$2"/></svg>');
   const codeBlock = (code, lang = "js") => `<div class="codeblock"><button class="copy" data-copy>${i("copy", "icon-sm")} Copy</button><pre class="code"><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, lang)}</code></pre></div>`;
 
+  /* ---------- AI agent examples (agents/*.html) ---------- */
+  const AGENTS = [
+    { id: "banking", name: "Business Banking", icon: "landmark", desc: "Cash, burn, runway and vendor spend — with approval-gated transfers.", tags: ["Charts", "Approvals", "KPIs"] },
+    { id: "commerce", name: "Commerce Ops", icon: "store", desc: "Orders, inventory and channel revenue, with approval-based restocking.", tags: ["Data grid", "Approvals", "Charts"] },
+    { id: "travel", name: "Travel", icon: "plane", desc: "Compare destinations, build a day-by-day itinerary and budget the trip.", tags: ["Map", "Agenda", "Cards"] },
+    { id: "email", name: "Email", icon: "mail", desc: "Find, summarize, draft and safely send email from a real inbox.", tags: ["List view", "Rich text", "Approvals"] },
+    { id: "health", name: "Health", icon: "heart-pulse", desc: "Workouts, sleep and nutrition over 90 days, with goal tracking.", tags: ["Radial", "Charts", "Agenda"] },
+    { id: "support", name: "Support", icon: "life-buoy", desc: "Ticket queues, SLA health and CSAT, with triage actions.", tags: ["Tables", "Charts", "Tools"] },
+  ];
+
   /* ---------- navigation model ---------- */
   const PAGES = [
-    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors", "New"], ["figma", "Figma file"], ["showcase", "Showcase", "New"]] },
+    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors"], ["styles", "Style themes", "New"], ["figma", "Figma file"], ["showcase", "Showcase"]] },
     { group: "Foundations", items: [["colors", "Colors"], ["typography", "Typography"], ["spacing", "Spacing & density"], ["radius", "Radius & the Facet cut"], ["elevation", "Elevation & focus"], ["motion", "Motion", "New"], ["icons", "Icons"]] },
   ];
-  const groups = [...new Set(R.map((c) => c.group))];
-  groups.forEach((g) => PAGES.push({ group: g === "Signature" ? "Signature components" : g, items: R.filter((c) => c.group === g).map((c) => ["components/" + c.slug, c.name]) }));
+  // v1.2 categories (older "Signature" entries are filed into their natural category)
+  const REGROUP = { "command-palette": "Navigation", kanban: "Data display", pricing: "Data display", ai: "AI", timeline: "Data display", "empty-state": "Feedback", charts: "Charts" };
+  R.forEach((c) => { if (REGROUP[c.slug]) c.group = REGROUP[c.slug]; });
+  const CATS = ["Actions", "Forms", "Data display", "Charts", "AI", "Feedback", "Layout", "Navigation", "Overlays"];
+  const CAT_ICON = { Actions: "mouse-pointer-click", Forms: "text-cursor", "Data display": "layout-grid", Charts: "bar-chart-3", AI: "sparkles", Feedback: "star", Layout: "panel-left", Navigation: "navigation", Overlays: "layers" };
+  R.sort((a, b) => CATS.indexOf(a.group) - CATS.indexOf(b.group) || a.name.localeCompare(b.name));
+  PAGES.push({ group: "Components", items: [["components", "All components", "v1.2"]] });
+  CATS.forEach((g) => { const items = R.filter((c) => c.group === g); if (items.length) PAGES.push({ group: g, items: items.map((c) => ["components/" + c.slug, c.name, c.isNew ? "New" : ""]) }); });
+  PAGES.push({ group: "AI agents", items: [["agents", "Agent examples", "New"]].concat(AGENTS.map((a) => ["agents/" + a.id, a.name])) });
   PAGES.push({ group: "Examples", items: [["examples", "All examples"], ["examples/dashboard", "Dashboard"], ["examples/login", "Login"], ["examples/settings", "Settings"]] });
   const FLAT = PAGES.flatMap((g) => g.items.map(([id, label]) => ({ id, label, group: g.group })));
 
@@ -47,8 +64,8 @@
     const id = "ex" + k + Math.random().toString(36).slice(2, 6);
     const code = tidy(ex.html.trim());
     return `<h3 id="${id}">${ex.title}</h3><div class="example">
-      <div class="example-bar"><div class="seg" role="tablist"><button role="tab" aria-selected="true" data-view="p">Preview</button><button role="tab" aria-selected="false" data-view="c">HTML</button></div><span class="spacer"></span><button class="copy" data-copy-ex>${i("copy", "icon-sm")} Copy HTML</button></div>
-      <div class="preview ${ex.layout || ""}" data-pane="p">${ex.html}</div>
+      <div class="example-bar"><div class="seg" role="tablist"><button role="tab" aria-selected="true" data-view="p">Preview</button><button role="tab" aria-selected="false" data-view="c">HTML</button></div><div class="seg vp" role="group" aria-label="Viewport"><button aria-selected="true" data-vp="desktop" aria-label="Desktop">${i("monitor", "icon-sm")}</button><button aria-selected="false" data-vp="mobile" aria-label="Mobile">${i("smartphone", "icon-sm")}</button></div><span class="spacer"></span><button class="copy" data-copy-ex>${i("copy", "icon-sm")} <span class="label-text">Copy HTML</span></button></div>
+      <div class="preview-wrap" data-pane="p"><div class="preview ${ex.layout || ""}">${ex.html}</div></div>
       <pre class="code" data-pane="c" hidden><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, "html")}</code></pre></div>`;
   };
 
@@ -56,7 +73,7 @@
   const P = {};
   P.introduction = () => page("Getting started", "Facet UI", "A token-driven UI kit for product teams — Figma library, design tokens and a framework-agnostic CSS/JS implementation that mirrors shadcn/ui's component model with its own visual language.",
     `<div class="ex-cards">
-      ${[["layers", "88 components", "53 variant sets, 420+ variants in Figma; the most-used 30 are implemented here."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
+      ${[["layers", "144 components", "In Figma with Variables and every state. 92 are documented and working on this site."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
     </div>
     <div class="example" style="margin-top:24px"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
     <p class="t-body-sm text-tertiary">Micro-interactions demo · <a href="#/showcase">Showcase</a> · <a href="https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4" target="_blank" rel="noopener">Video on GitHub</a></p>
@@ -159,7 +176,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
   P.figma = () => page("Getting started", "Figma file", "The design source of truth. Nine pages, all token-driven.", `
     <p><a class="btn" href="${FIGMA}" target="_blank" rel="noopener">${i("external-link")} Open Facet UI in Figma</a></p>
     <table class="api"><thead><tr><th>Page</th><th>Contents</th></tr></thead><tbody>
-    ${[["00 — Start Here", "Cover, design directions, principles, inventory & status, getting started"], ["01 — Foundations", "Color ramps, typography (25 Mona Sans styles), spacing, radius, elevation, icons"], ["02 — Design Tokens", "Theme matrix (brand × light/dark), density, CSS reference, brand color examples"], ["03 — Components", "88 components / 53 variant sets with properties, states and sizes + 100 Lucide icons"], ["04 — Patterns", "23 pattern components (app shell, filter bar, auth forms, AI dock, marketing sections…)"], ["05 — Templates", "10 apps, 26 desktop + mobile screens: dashboard, CRM, PM, AI, e-commerce, finance, calendar, settings, auth, marketing"], ["06 — Playground", "Sandboxes, theme lab, component tray, clickable prototype flows"], ["07 — Documentation", "20 component doc cards (anatomy, props, a11y, React code, do/don't) + customization guide"], ["08 — Changelog", "Version history and known limitations"]].map(([a, b]) => `<tr><td><b>${a}</b></td><td>${b}</td></tr>`).join("")}</tbody></table>
+    ${[["00 — Start Here", "Cover, design directions, principles, inventory & status, getting started"], ["01 — Foundations", "Color ramps, typography (25 Mona Sans styles), spacing, radius, elevation, icons"], ["02 — Design Tokens", "Theme matrix (brand × light/dark), density, CSS reference, brand color examples"], ["03 — Components", "144 components / 78 variant sets with properties, states and sizes + 147 Lucide icons"], ["04 — Patterns", "23 pattern components (app shell, filter bar, auth forms, AI dock, marketing sections…)"], ["05 — Templates", "10 apps, 26 desktop + mobile screens: dashboard, CRM, PM, AI, e-commerce, finance, calendar, settings, auth, marketing"], ["06 — Playground", "Sandboxes, theme lab, component tray, clickable prototype flows"], ["07 — Documentation", "20 component doc cards (anatomy, props, a11y, React code, do/don't) + customization guide"], ["08 — Changelog", "Version history and known limitations"]].map(([a, b]) => `<tr><td><b>${a}</b></td><td>${b}</td></tr>`).join("")}</tbody></table>
     <h2 id="prototype">Prototype</h2><p>Open <b>06 — Playground</b> and press Present. Flows: <i>Auth → Onboarding → Dashboard</i> and <i>Settings sections</i>. Interactive components (button, tabs, checkbox, switch, toggle, chip, accordion, menu item, sidebar item, input) have hover/press/toggle states wired.</p>`);
 
   P.colors = () => {
@@ -278,6 +295,21 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
       `<div class="example"><iframe class="example-frame" src="examples/${s}.html" title="${s} example" loading="lazy"></iframe></div>`);
   });
 
+  P.styles = () => page("Getting started", "Style themes", "Four looks on top of the six brand colors and light/dark: Default, Soft, Glass and Mono. They change shape, surfaces and depth — not your content. Switch with one attribute in code, or one Variable mode in Figma.",
+    `<div class="style-grid">${Object.entries(T.styles).map(([k, n]) => `<button class="style-card" data-style-pick="${k}" aria-label="Use ${n}"><div class="style-demo" data-style="${k === "default" ? "" : k}"><div class="card kpi"><span class="kpi-label">Revenue</span><div class="kpi-row"><span class="kpi-value">$248.9k</span><span class="trend-chip">${i("trending-up")} 12%</span></div><div class="row" style="--gap:6px;margin-top:10px"><span class="btn btn-sm">Primary</span><span class="btn btn-outline btn-sm">Outline</span></div></div></div><div class="style-cap"><b>${n}</b><span>${STYLE_DESC[k]}</span></div></button>`).join("")}</div>
+    <h2 id="use">Use it in code</h2>${codeBlock(`<html data-theme="light" data-brand="iris" data-style="glass">  <!-- default | soft | glass | mono -->\n\n// or at runtime\nFacet.theme.setStyle("glass");`, "html")}
+    <h2 id="figma">Use it in Figma</h2><p>The <b>Style</b> collection has four modes — Default, Soft, Glass, Mono. Select a frame and pick the mode in the Layer panel's <b>Appearance → Variable modes</b>. Radius, borders and surfaces update together, and you can still switch Brand and Light/Dark independently.</p>
+    <h2 id="tokens">What changes</h2><table class="api"><thead><tr><th>Style</th><th>Radius</th><th>Surfaces & borders</th><th>Depth</th></tr></thead><tbody><tr><td>Default</td><td>Facet cut · 8/12 px</td><td>Solid, 1px hairlines</td><td>Soft layered shadows</td></tr><tr><td>Soft</td><td>12/18 px</td><td>Borderless, brand-tinted canvas</td><td>Wide, diffused shadows</td></tr><tr><td>Glass</td><td>12/16 px</td><td>Translucent + 18px backdrop blur over a color mesh</td><td>Inner highlight + drop shadow</td></tr><tr><td>Mono</td><td>2–4 px</td><td>Black & white, ink borders; brand becomes ink</td><td>Hard offset shadows</td></tr></tbody></table>`);
+
+  P.agents = () => page("AI agents", "AI agent examples", "Six product surfaces with an AI assistant built from Facet's AI components. Each one has its own data, suggested prompts and answers that render real UI — charts, approval cards, tables and maps. They work on desktop and mobile.",
+    `<div class="agent-grid">${AGENTS.map((a) => `<a class="agent-card" href="#/agents/${a.id}"><div class="agent-shot"><img src="agents/shots/${a.id}.jpg" alt="${a.name} agent example" loading="lazy" width="1440" height="900"></div><div class="agent-meta"><span class="item-card-icon brand">${i(a.icon)}</span><div class="grow"><b>${a.name}</b><span>${a.desc}</span></div></div><div class="row" style="--gap:6px;padding:0 16px 16px">${a.tags.map((t) => `<span class="badge">${t}</span>`).join("")}</div></a>`).join("")}</div>
+    <h2 id="how">How they're built</h2><p>Every example is one HTML page made only of Facet components: <a href="#/components/app-layout">App Layout</a>, <a href="#/components/chat-conversation">Chat Conversation</a>, <a href="#/components/chain-of-thought">Chain Of Thought</a>, <a href="#/components/chat-tool">Chat Tool</a> (with approvals), <a href="#/components/prompt-input">Prompt Input</a>, <a href="#/components/prompt-suggestion">Prompt Suggestion</a> and the chart components. A small script (<code>agents/agent.js</code>) plays scripted answers so you can try them without a backend — swap it for your model's streaming API.</p>
+    ${codeBlock(`// agents/agent.js — plug in your own model\nFacetAgent.mount("#assistant", {\n  prompts: ["Show my runway", "Pay the AWS invoice"],\n  async reply(text, ui) {\n    ui.thinking(["Reading balances", "Forecasting burn"]);\n    const res = await fetch("/api/agent", { method: "POST", body: text });\n    ui.stream(res.body);           // markdown, charts, approvals\n  },\n});`, "js")}`);
+  AGENTS.forEach((a) => {
+    P["agents/" + a.id] = () => page(`AI agents ${i("chevron-right", "icon-sm")} ${a.name}`, a.name, `${a.desc} <a href="agents/${a.id}.html" target="_blank" rel="noopener">Open full screen ${i("external-link", "icon-sm")}</a>`,
+      `<div class="example agent-frame-wrap"><div class="example-bar"><span class="t-label-sm text-tertiary" style="padding-left:4px">Live demo — click a suggested prompt</span><span class="spacer"></span><div class="seg vp-frame" role="group" aria-label="Viewport"><button aria-selected="true" data-frame="desktop" aria-label="Desktop">${i("monitor", "icon-sm")}</button><button aria-selected="false" data-frame="mobile" aria-label="Mobile">${i("smartphone", "icon-sm")}</button></div></div><div class="agent-frame-box"><iframe class="agent-frame" src="agents/${a.id}.html" title="${a.name} agent example" loading="lazy"></iframe></div></div>`);
+  });
+
   const MOTION = {
     button: ["Hover", "Lifts 1px, gains a soft shadow and a spotlight that follows the cursor."], 
     toggle: ["Press / select", "Presses to 97%; in single-select groups a pill glides to the chosen option."],
@@ -314,6 +346,12 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     timeline: ["Reveal / live", "Items rise in sequence; AI nodes pulse; unread notifications ping."],
     pricing: ["Idle / hover", "The featured plan has a slowly rotating gradient border; cards lift on hover."],
   };
+  P.components = () => page("Components", "Components", `${R.length} documented components in ${CATS.length} categories — ${R.filter((c) => c.isNew).length} of them new in v1.2. Every one is a real Figma component with Variables, and a working HTML/CSS version here. Each card is a live, scaled-down preview.`,
+    `<div class="ov-filter"><div class="input-group" style="max-width:320px;flex:1"><svg class="icon"><use href="#search"/></svg><input class="input" id="ov-q" placeholder="Filter components…" aria-label="Filter components"></div><div class="row ov-chips">${CATS.map((g) => `<a class="chip" href="javascript:void 0" data-scroll="cat-${g.replace(/\W+/g, "-")}">${i(CAT_ICON[g], "icon-sm")} ${g}</a>`).join("")}</div></div>` +
+    CATS.map((g) => { const items = R.filter((c) => c.group === g); if (!items.length) return ""; return `<h2 id="cat-${g.replace(/\W+/g, "-")}">${g} <span class="badge">${items.length}</span></h2><div class="ov-grid">${items.map((c) => `<a class="ov-card" href="#/components/${c.slug}" data-name="${c.name.toLowerCase()} ${g.toLowerCase()}"><div class="ov-thumb" aria-hidden="true" inert><div class="ov-inner">${c.examples[0].html}</div></div><div class="ov-meta"><b>${c.name}</b>${c.isNew ? '<span class="badge badge-accent">New</span>' : ""}<span class="ov-count">${c.examples.length} example${c.examples.length > 1 ? "s" : ""}</span></div></a>`).join("")}</div>`; }).join(""),
+    `<span class="badge badge-outline">${i("layers", "icon-sm")} ${R.length} documented · 144 in Figma</span><button class="badge badge-outline" data-copy-md style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>`);
+  const md = (c) => `# ${c.name}\n\n${c.desc}\n\nCategory: ${c.group} · Figma: ${c.figma}\n\n` + c.examples.map((e) => `## ${e.title}\n\n\`\`\`html\n${tidy(e.html.trim())}\n\`\`\`\n`).join("\n") + `\n## React\n\n\`\`\`tsx\n${c.react}\n\`\`\`\n\n## API\n\n| Name | Type | Description |\n|---|---|---|\n` + c.api.map(([a, b, d]) => `| \`${a}\` | ${b} | ${d} |`).join("\n") + `\n\n## Accessibility\n\n` + c.a11y.map((x) => `- ${x}`).join("\n") + "\n";
+  window.FACET_MD = md;
   R.forEach((c) => {
     P["components/" + c.slug] = () => page(`Components ${i("chevron-right", "icon-sm")} ${c.group}`, c.name, c.desc,
       c.examples.map(example).join("") +
@@ -321,7 +359,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
       `<h2 id="react">React (shadcn/ui + Facet preset)</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
-      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Open in Figma</a>`);
+      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Open in Figma</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? '<span class="badge badge-accent">New in v1.2</span>' : ""}`);
   });
 
   /* ---------- router ---------- */
@@ -330,7 +368,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     const fn = P[id] || P.introduction; const cur = P[id] ? id : "introduction";
     const main = $(".docs-main"); main.innerHTML = fn();
     const idx = FLAT.findIndex((f) => f.id === cur), prev = FLAT[idx - 1], next = FLAT[idx + 1];
-    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav><p class="doc-credit">Facet UI v1.1 · by ELTouch apps</p>`);
+    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav><p class="doc-credit">Facet UI v1.2 · by ELTouch apps</p>`);
     renderSide(cur); toc(); Facet.enhance(main); if (Facet.motion) Facet.motion.refresh(document); document.body.classList.remove("nav-open");
     document.title = (FLAT[idx] ? FLAT[idx].label + " — " : "") + "Facet UI";
     window.scrollTo(0, 0);
@@ -340,7 +378,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     document.querySelectorAll(".header-nav a").forEach((a) => a.classList.toggle("on", cur.startsWith(a.dataset.sec)));
   }
   function toc() {
-    const hs = [...document.querySelectorAll(".docs-main h2, .docs-main h3")];
+    const hs = [...document.querySelectorAll(".docs-main article > h2, .docs-main article > h3")];
     hs.forEach((h, k) => { if (!h.id) h.id = "s" + k; });
     $(".docs-toc").innerHTML = hs.length ? `<b>On this page</b>` + hs.map((h) => `<a href="javascript:void 0" data-scroll="${h.id}" style="${h.tagName === "H3" ? "padding-left:22px" : ""}">${h.textContent}</a>`).join("") : "";
   }
@@ -377,7 +415,12 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     $("#brand-dot").style.setProperty("--sw", s.custom || T.presets[s.brand] || "#5d4ff3");
     const mb = $("#motion-btn"); if (mb) mb.setAttribute("aria-pressed", document.documentElement.dataset.motion !== "off");
     document.querySelectorAll("#brand-menu [data-b]").forEach((b) => b.setAttribute("aria-checked", !s.custom && b.dataset.b === s.brand));
+    document.querySelectorAll("[data-style-pick]").forEach((b) => b.setAttribute("aria-checked", b.dataset.stylePick === s.style));
+    const sl = $("#style-label"); if (sl) sl.textContent = (T.styles || {})[s.style] || "Default";
   }
+  const STYLE_DESC = { default: "Facet cut, crisp borders", soft: "Rounder, borderless, tinted", glass: "Frosted, translucent", mono: "Black & white, hard shadows" };
+  const styleThumb = (k) => `<span class="style-thumb" data-style-preview="${k}"><i></i><i></i><b></b></span>`;
+  $("#style-menu").innerHTML = `<div class="menu-label">Style theme</div>` + Object.entries(T.styles || {}).map(([k, n]) => `<button class="menu-item style-item" role="menuitemradio" data-style-pick="${k}">${styleThumb(k)}<span class="grow"><b>${n}</b><small>${STYLE_DESC[k]}</small></span></button>`).join("") + `<div class="menu-sep"></div><a class="menu-item" role="menuitem" href="#/styles">${i("book-open")} About style themes</a>`;
   $("#brand-menu").innerHTML = `<div class="menu-label">Brand</div>` + Object.entries(T.presets).map(([n, h]) => `<button class="menu-item" role="menuitemradio" data-b="${n}"><span class="swatch-dot" style="--sw:${h}"></span>${n[0].toUpperCase() + n.slice(1)}</button>`).join("") + `<div class="menu-sep"></div><a class="menu-item" role="menuitem" href="#/brand-colors">${i("palette")} Custom color…</a>`;
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-b]"); if (b) T.setBrand(b.dataset.b);
@@ -389,6 +432,16 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     // example tabs
     const v = e.target.closest(".example-bar [data-view]");
     if (v) { const ex = v.closest(".example"); ex.querySelectorAll("[data-view]").forEach((x) => x.setAttribute("aria-selected", x === v)); ex.querySelectorAll("[data-pane]").forEach((p) => (p.hidden = p.dataset.pane !== v.dataset.view)); }
+    const fr = e.target.closest("[data-frame]");
+    if (fr) { const ex = fr.closest(".example"); ex.querySelectorAll("[data-frame]").forEach((x) => x.setAttribute("aria-selected", x === fr)); ex.classList.toggle("is-mobile", fr.dataset.frame === "mobile"); }
+    // viewport toggle
+    const vp = e.target.closest(".example-bar [data-vp]");
+    if (vp) { const ex = vp.closest(".example"); ex.querySelectorAll("[data-vp]").forEach((x) => x.setAttribute("aria-selected", x === vp)); ex.classList.toggle("is-mobile", vp.dataset.vp === "mobile"); requestAnimationFrame(() => { if (Facet.ui) Facet.ui.refresh(ex); if (Facet.charts) ex.querySelectorAll(".chart[data-chart]").forEach((c) => Facet.charts.render(c, c._chart)); }); }
+    // copy markdown
+    const cm = e.target.closest("[data-copy-md]");
+    if (cm) { const slug = cm.dataset.copyMd; const txt = slug ? window.FACET_MD(R.find((c) => c.slug === slug)) : `# Facet UI components\n\n` + CATS.map((g) => `## ${g}\n\n` + R.filter((c) => c.group === g).map((c) => `- **${c.name}** — ${c.desc}`).join("\n")).join("\n\n"); (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => Facet.toast({ title: "Markdown copied", description: "Paste it into your AI assistant or docs.", timeout: 2200 })).catch(() => {}); }
+    // style themes
+    const st = e.target.closest("[data-style-pick]"); if (st) T.setStyle(st.dataset.stylePick);
     // copy
     const cp = e.target.closest("[data-copy], [data-copy-ex], [data-copy-text]");
     if (cp) {
@@ -397,6 +450,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     }
   });
   document.addEventListener("input", (e) => {
+    if (e.target.id === "ov-q") { const q = e.target.value.toLowerCase().trim(); document.querySelectorAll(".ov-card").forEach((c) => (c.hidden = q && !c.dataset.name.includes(q))); document.querySelectorAll(".docs-main h2[id^=cat-]").forEach((h) => { const g = h.nextElementSibling; h.hidden = g.hidden = q && ![...g.children].some((c) => !c.hidden); }); }
     if (e.target.id === "icon-q") { const q = e.target.value.toLowerCase(); document.querySelectorAll(".icon-cell").forEach((c) => (c.hidden = !c.dataset.name.includes(q))); }
   });
   document.addEventListener("facet:theme", syncHeader);

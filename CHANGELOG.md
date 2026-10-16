@@ -2,6 +2,27 @@
 
 All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
+## [1.2.0] — 2026-10-16
+
+### Added
+- 56 new components (144 in Figma, 78 variant sets, 504 variants; 92 documented on the site):
+  - Charts: line, composed, pie/donut, radar, radial (rings, gauge), sparkline, chart tooltip.
+  - Data display: Widget, KPI, KPI Group, Trend Chip, Item Card, Item Card Group, List View, Agenda, Action Bar, Carousel, Data Grid, File Tree, Floating TOC, Holo Card, Map.
+  - AI: Chat Conversation, Chain of Thought, Chat Tool (with approval), Chat Loader, Message Actions, Chat List, Prompt Suggestion, Citation, Chat Attachment, Markdown, Text Shimmer.
+  - Feedback and layout: Rating (half stars), Emoji Reaction, Number Value, Pressable, Resizable.
+  - Forms: Cell (switch, select, slider, color), Cell Group, Checkbox/Radio Button Group, Inline Select, Native Select, Number Stepper, Rich Text Editor.
+  - Navigation and overlays: Segment, Navbar, App Layout (desktop + mobile, auto aside), Context Menu, Emoji Picker, Sheet.
+- `assets/charts.js`: a declarative SVG chart renderer.
+- Style themes Default, Soft, Glass and Mono (`Facet.theme.setStyle`), a header Style menu and a Styles page. In Figma: a Style collection plus a Brand Mono mode.
+- 6 AI agent demos (`styleguide/agents/`) and an Agents gallery page.
+- Components overview with live previews and search, Copy Markdown on every page, and a Desktop / Mobile viewport toggle on every example.
+- 47 new Lucide icons (147 in Figma, 199 in the site sprite).
+- Build scripts: `scripts/build_assets.sh` (concatenates `assets/src/` into `facet.css` / `facet.js`) and `scripts/build_icons.py`.
+
+### Changed
+- Sidebar categories were reorganised into Actions, Forms, Data display, Charts, AI, Feedback, Layout, Navigation and Overlays.
+- Responsive internals use container queries, so components adapt to their container, not just to the viewport.
+
 ## [1.1.2] — 2026-10-16
 
 ### Added

@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 .vscode/
 .idea/
+styleguide/.DS_Store

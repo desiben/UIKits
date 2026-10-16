@@ -1,0 +1,43 @@
+/* Facet UI — AI agent examples (page chrome only; everything else is Facet components) */
+@font-face { font-family: "Mona Sans"; src: url("../marketing/fonts/mona-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900; font-display: swap; }
+html, body { height: 100%; }
+body { background: var(--bg-subtle); }
+.app-layout.full { height: 100vh; height: 100dvh; min-height: 0; --sb-w: 232px; }
+.app-layout.full .app-body { overflow: auto; }
+.app-aside.agent { width: 400px; background: var(--bg-surface); }
+.app-layout[data-variant="inset"] .app-aside.agent { margin: 8px 8px 8px 0; border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); box-shadow: var(--shadow-1); height: calc(100% - 16px); }
+.app-aside.agent .chat-conversation { flex: 1; }
+.app-aside.agent .chat-conversation-content { padding: var(--space-4); gap: var(--space-4); }
+.app-aside.agent .chat-msg-text { font: var(--text-body-sm); }
+.app-aside.agent .chat-msg[data-role="user"] .chat-msg-text { max-width: 90%; }
+.agent-compose { padding: var(--space-3); border-top: 1px solid var(--border-subtle); flex: none; }
+.agent-compose .composer { box-shadow: var(--shadow-1); }
+.agent-compose .composer textarea { min-height: 40px; font: var(--text-body-sm); }
+.agent-hint { margin-top: 6px; text-align: center; font: var(--text-caption); color: var(--text-tertiary); } .agent-hint a { color: inherit; }
+.agent-welcome { display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-2); padding: var(--space-6) var(--space-2) var(--space-2); }
+.agent-welcome .prompt-suggestions { margin-top: var(--space-3); width: 100%; grid-template-columns: 1fr 1fr; }
+.agent-welcome .prompt-suggestion { text-align: left; }
+.gen-ui { display: flex; flex-direction: column; gap: var(--space-3); animation: m-rise var(--duration-slower) var(--ease-spring) both; }
+.gen-ui .widget { max-width: none; }
+.gen-ui .widget-content { padding: var(--space-3); }
+.gen-ui .table td, .gen-ui .table th { padding: 0 var(--space-3); }
+.chat-msg-body > .prompt-suggestions .prompt-suggestion { min-height: 30px; padding: 4px 12px; font: var(--text-label-xs); }
+.ask-ai .icon { color: inherit; }
+@container (max-width: 520px) { .ask-ai span { display: none; } .ask-ai { width: var(--h); padding: 0; } }
+/* surface helpers */
+.surface-head { display: flex; align-items: flex-end; gap: var(--space-3); flex-wrap: wrap; }
+.surface-head h1 { font: var(--text-heading-h2); letter-spacing: var(--tracking-heading-h2); }
+.surface-head p { font: var(--text-body-sm); color: var(--text-tertiary); margin-top: 2px; }
+.surface-head .row { margin-left: auto; }
+.g2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--space-4); }
+.g3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-4); }
+.span-2 { grid-column: span 2; } @container (max-width: 900px) { .span-2 { grid-column: auto; } }
+.flash { animation: surface-flash 1.2s var(--ease-out); }
+@keyframes surface-flash { 0% { box-shadow: inset 0 0 0 2px var(--border-focus); } 100% { box-shadow: inset 0 0 0 2px transparent; } }
+.hl-new { animation: row-new 2.4s var(--ease-out); } @keyframes row-new { 0%, 40% { background: var(--bg-selected); } 100% { background: transparent; } }
+.ai-callout { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: linear-gradient(100deg, var(--bg-primary-subtle), transparent 80%); border: 1px solid color-mix(in srgb, var(--border-brand) 25%, var(--border-default)); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); }
+.ai-callout .grow b { display: block; font: var(--text-label-md); } .ai-callout .grow span { font: var(--text-body-xs); color: var(--text-tertiary); }
+.thumb-img { aspect-ratio: 4 / 3; border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); background: var(--tone, linear-gradient(135deg, var(--brand-300), var(--brand-700))); display: grid; place-items: end start; padding: 10px; color: #fff; font: var(--text-label-sm); position: relative; overflow: hidden; }
+.thumb-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 40%, rgb(0 0 0 / .45)); } .thumb-img > * { position: relative; z-index: 1; }
+@container (max-width: 1024px) { .app-aside.agent { width: min(420px, 100%); margin: 0 !important; border-radius: 0 !important; height: 100% !important; border: 0 !important; } }
+@container (max-width: 768px) { .app-aside.agent { width: 100%; } }
