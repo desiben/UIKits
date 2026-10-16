@@ -6,7 +6,7 @@
   const i = (n, c = "") => `<svg class="icon${c ? " " + c : ""}" aria-hidden="true"><use href="#${n}"/></svg>`;
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const FIGMA = "https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi";
-  const REPO = "https://github.com/desiben/UIKits/tree/FacetUI";
+  const REPO = "https://github.com/desiben/UIKits";
 
   /* ---------- syntax highlight (tiny, HTML/JS/CSS) ---------- */
   function hl(code, lang) {
@@ -29,7 +29,7 @@
 
   /* ---------- navigation model ---------- */
   const PAGES = [
-    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors", "New"], ["figma", "Figma file"]] },
+    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors", "New"], ["figma", "Figma file"], ["showcase", "Showcase", "New"]] },
     { group: "Foundations", items: [["colors", "Colors"], ["typography", "Typography"], ["spacing", "Spacing & density"], ["radius", "Radius & the Facet cut"], ["elevation", "Elevation & focus"], ["motion", "Motion", "New"], ["icons", "Icons"]] },
   ];
   const groups = [...new Set(R.map((c) => c.group))];
@@ -56,8 +56,10 @@
   const P = {};
   P.introduction = () => page("Getting started", "Facet UI", "A token-driven UI kit for product teams — Figma library, design tokens and a framework-agnostic CSS/JS implementation that mirrors shadcn/ui's component model with its own visual language.",
     `<div class="ex-cards">
-      ${[["layers", "88 components", "53 variant sets, 420+ variants in Figma; the most-used 30 are implemented here."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="5"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
+      ${[["layers", "88 components", "53 variant sets, 420+ variants in Figma; the most-used 30 are implemented here."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
     </div>
+    <div class="example" style="margin-top:24px"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
+    <p class="t-body-sm text-tertiary">Micro-interactions demo · <a href="#/showcase">Showcase</a> · <a href="https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4" target="_blank" rel="noopener">Video on GitHub</a></p>
     <h2 id="principles">Design principles</h2>
     <ul class="prose"><li><b>Tokens first.</b> Every color, space, radius and type style in the components is a variable. Change the token, not the component.</li>
     <li><b>The Facet cut.</b> Containers and controls have a slightly sharper top-right corner — a quiet, recognizable signature.</li>
@@ -197,6 +199,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
     ${codeBlock(`:focus-visible { box-shadow: var(--ring); } /* 1.5px surface gap + 3px border/focus */`, "js")}`);
 
   P.motion = () => page("Foundations", "Motion & micro-interactions", "Every component responds to the cursor with a small, springy motion — fast enough to feel instant, soft enough to feel alive. Hover anything on this site to try it.", `
+    <div class="example"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
     <h2 id="principles">Principles</h2>
     <ul class="prose"><li><b>Responsive, not decorative.</b> Motion confirms an action (press, select, open) or guides the eye (sliding indicators). Nothing moves on its own except live-status pulses.</li>
     <li><b>Fast.</b> 80–320ms. State changes use a gentle spring overshoot; exits are quicker than entrances.</li>
@@ -213,7 +216,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
       <label class="check"><input type="checkbox"><span>Draw a check</span></label>
     </div>
     <div class="preview" style="padding-top:0">
-      <div class="card kpi" data-tilt="6" style="width:260px"><span class="kpi-label">Tilt + spotlight card</span><span class="kpi-value">$248,920</span><span class="t-caption text-tertiary">Hover and move the cursor</span></div>
+      <div class="card kpi" data-tilt="4" style="width:260px"><span class="kpi-label">Tilt + spotlight card</span><span class="kpi-value">$248,920</span><span class="t-caption text-tertiary">Hover and move the cursor</span></div>
       <div class="tabs-pill" role="tablist" aria-label="Range"><button class="tab" role="tab" aria-selected="false">Day</button><button class="tab" role="tab" aria-selected="true">Week</button><button class="tab" role="tab" aria-selected="false">Month</button></div>
       <div class="menu" role="menu" style="width:220px"><button class="menu-item" role="menuitem">${i("pencil")} Gliding highlight</button><button class="menu-item" role="menuitem">${i("copy")} Duplicate</button><button class="menu-item" role="menuitem">${i("download")} Export</button><button class="menu-item danger" role="menuitem">${i("trash-2")} Delete</button></div>
     </div></div>
@@ -233,7 +236,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
     ${codeBlock(`<link rel="stylesheet" href="assets/motion.css">   <!-- after facet.css -->
 <script src="assets/motion.js" defer></script>        <!-- after facet.js -->
 
-<div class="card" data-tilt="6">…</div>               <!-- 3D tilt, max 6° -->
+<div class="card" data-tilt="4">…</div>               <!-- 3D tilt, max 4° -->
 <button class="btn" data-magnetic="0.12">…</button>   <!-- follows the cursor, max 6px -->
 <span data-countup>$248,920</span>                    <!-- counts up on first view -->`, "html")}
     ${codeBlock(`Facet.motion.set("off")      // or "on" — persisted per browser
@@ -248,6 +251,19 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
 <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }} transition={spring} />
 <motion.span layoutId="tab-indicator" transition={spring} />    // sliding tab underline`, "js")}`);
 
+  P.showcase = () => {
+    const shots = [["01-cover","Cover"],["02-components","88 components"],["03-brands-themes","6 brands × light & dark"],["04-templates","10 app templates"],["05-light-dark","Light & dark"],["06-mobile","Mobile screens"],["07-ai-signature","AI & signature components"],["08-tokens-handoff","Tokens & developer handoff"]];
+    return page("Getting started", "Showcase", "The Facet UI marketing kit, marketplace previews and the micro-interaction demo. Every image is 1920×1080 and ready to upload to Figma Community, Gumroad, UI8 or Creative Market.", `
+    <div class="row" style="margin:-8px 0 24px"><a class="btn" href="https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews" target="_blank" rel="noopener">${i("github")} Previews on GitHub</a><a class="btn btn-outline" href="https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4" target="_blank" rel="noopener">${i("external-link")} Video on GitHub</a><a class="btn btn-ghost" href="${FIGMA}" target="_blank" rel="noopener">${i("component")} Open in Figma</a></div>
+    <h2 id="marketing">Marketing kit</h2><p>A 55-second product demo, a 33-second components reel, 13 angled hero images (3840×2160 and 2160×2160) and ready-to-paste listing copy. Everything is on the <a href="marketing/">marketing page</a> with download links.</p>
+    <div class="example" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px"><video class="showcase-video" controls muted playsinline preload="none" poster="marketing/media/facet-ui-demo-poster.jpg" aria-label="Facet UI product demo"><source src="marketing/media/facet-ui-demo.webm" type="video/webm"><source src="marketing/media/facet-ui-demo.mp4" type="video/mp4"></video><video class="showcase-video" controls muted playsinline preload="none" poster="marketing/media/facet-ui-components-reel-poster.jpg" aria-label="Facet UI components reel"><source src="marketing/media/facet-ui-components-reel.webm" type="video/webm"><source src="marketing/media/facet-ui-components-reel.mp4" type="video/mp4"></video></div>
+    <div class="row" style="margin:12px 0 8px"><a class="btn" href="marketing/">${i("external-link")} Open the marketing kit</a><a class="btn btn-outline" href="${REPO}/tree/main/styleguide/marketing/media" target="_blank" rel="noopener">${i("github")} Files on GitHub</a></div>
+    <h2 id="video">Micro-interactions demo</h2><p>24 seconds, 1280×720. Hover the components on the <a href="#/motion">Motion</a> page to try them yourself.</p>
+    <div class="example"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
+    <h2 id="previews">Marketplace previews</h2><p>Click an image to open it full size. The source frames live on <b>00 — Start Here → Marketplace previews</b> in Figma, set to export at 1x and 2x.</p>
+    <div class="showcase-grid">${shots.map(([f, t]) => `<a class="card showcase-shot" data-tilt="3" href="assets/showcase/${f}.png" target="_blank" rel="noopener"><img src="assets/showcase/${f}.png" alt="${t} — Facet UI marketplace preview" loading="lazy" width="1920" height="1080"><span>${t}</span></a>`).join("")}</div>`);
+  };
+
   P.icons = () => page("Foundations", "Icons", `Lucide (ISC). ${window.FACET_ICONS.length} icons are bundled in the sprite; the Figma file has 100 as components. Click to copy.`, `
     <div class="input-group" style="max-width:360px;margin-bottom:16px">${i("search")}<input class="input" id="icon-q" placeholder="Filter icons…"></div>
     <div class="icon-grid" id="icon-grid">${window.FACET_ICONS.map((n) => `<button class="icon-cell" data-copy-text='<svg class="icon"><use href="#${n}"/></svg>' data-name="${n}">${i(n)}${n}</button>`).join("")}</div>
@@ -255,7 +271,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
 <svg class="icon"><use href="#sparkles"/></svg>  <!-- .icon-sm / .icon-lg -->`, "html")}
     <p>Need more? Add any icon from <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a> to the sprite, or use <code>lucide-react</code> in React.</p>`);
 
-  P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" data-tilt="5" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
+  P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" data-tilt="3" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
     <p>The Figma file has 10 complete templates (26 screens) — CRM, project management, AI workspace, e-commerce, finance, calendar, settings, auth and marketing.</p>`);
   ["dashboard", "login", "settings"].forEach((s) => {
     P["examples/" + s] = () => page(`Examples ${i("chevron-right", "icon-sm")} ${s}`, s[0].toUpperCase() + s.slice(1), `Built from Facet components. <a href="examples/${s}.html" target="_blank" rel="noopener">Open standalone ${i("external-link", "icon-sm")}</a>`,
@@ -314,7 +330,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     const fn = P[id] || P.introduction; const cur = P[id] ? id : "introduction";
     const main = $(".docs-main"); main.innerHTML = fn();
     const idx = FLAT.findIndex((f) => f.id === cur), prev = FLAT[idx - 1], next = FLAT[idx + 1];
-    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav>`);
+    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav><p class="doc-credit">Facet UI v1.1 · by ELTouch apps</p>`);
     renderSide(cur); toc(); Facet.enhance(main); if (Facet.motion) Facet.motion.refresh(document); document.body.classList.remove("nav-open");
     document.title = (FLAT[idx] ? FLAT[idx].label + " — " : "") + "Facet UI";
     window.scrollTo(0, 0);

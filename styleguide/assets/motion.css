@@ -11,14 +11,14 @@
 .btn { position: relative; isolation: isolate;
   transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast), border-color var(--duration-fast),
               box-shadow var(--duration-base) var(--ease-out), transform var(--duration-base) var(--ease-spring); }
-.btn:not(.btn-link):not(.btn-ghost):not(:disabled):hover { transform: translateY(var(--lift-sm)); box-shadow: var(--shadow-2); }
+.btn:not(.btn-link):not(.btn-ghost):not(:disabled):hover { transform: translateY(var(--lift-sm)); box-shadow: var(--shadow-1); }
 .btn:not(:disabled):active { transform: translateY(0) scale(var(--press-scale)); box-shadow: var(--shadow-0); transition-duration: var(--duration-instant); }
 .btn:focus-visible { box-shadow: var(--ring); }
 /* spotlight that follows the cursor (motion.js sets --mx / --my) */
 .btn::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
-  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / .22), transparent 65%);
+  background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / .12), transparent 65%);
   transition: opacity var(--duration-base) var(--ease-out); }
-.btn-secondary::before, .btn-outline::before, .btn-ghost::before { background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--brand-500) 14%, transparent), transparent 65%); }
+.btn-secondary::before, .btn-outline::before, .btn-ghost::before { background: radial-gradient(120px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--brand-500) 6%, transparent), transparent 65%); }
 .btn:not(:disabled):hover::before { opacity: 1; }
 .btn-link::before { display: none; }
 /* press ripple (motion.js wraps ripples in .m-fx so tooltips on buttons aren't clipped) */
@@ -78,7 +78,7 @@
 /* switch: springy thumb that stretches while pressed */
 .switch input { transition: background-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base); }
 .switch input::after { transition: transform var(--duration-slow) var(--ease-spring), width var(--duration-base) var(--ease-spring); }
-.switch:hover input:not(:disabled) { box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-500) 14%, transparent); }
+.switch:hover input:not(:disabled) { box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-500) 8%, transparent); }
 .switch input:active:not(:disabled)::after { width: 21px; }
 .switch input:checked:active:not(:disabled)::after { transform: translateX(11px); }
 .switch-sm input:active:not(:disabled)::after { width: 16px; }
@@ -86,7 +86,7 @@
 
 /* slider: thumb grows on hover / drag */
 .slider::-webkit-slider-thumb { transition: transform var(--duration-slow) var(--ease-spring), box-shadow var(--duration-base); }
-.slider:hover::-webkit-slider-thumb { transform: scale(1.15); box-shadow: 0 0 0 6px color-mix(in srgb, var(--brand-500) 16%, transparent); }
+.slider:hover::-webkit-slider-thumb { transform: scale(1.12); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand-500) 9%, transparent); }
 .slider:active::-webkit-slider-thumb { transform: scale(1.3); }
 .slider::-moz-range-thumb { transition: transform var(--duration-slow) var(--ease-spring); }
 .slider:hover::-moz-range-thumb { transform: scale(1.15); }
@@ -111,7 +111,7 @@
 .notif[data-unread]::before { animation: m-ping 2.2s var(--ease-out) infinite; color: var(--bg-primary); }
 
 .avatar { transition: transform var(--duration-slow) var(--ease-spring), margin var(--duration-slow) var(--ease-spring), box-shadow var(--duration-base); }
-.avatar:hover { transform: translateY(-2px) scale(1.06); z-index: 1; }
+.avatar:hover { transform: translateY(-1px) scale(1.04); z-index: 1; }
 .avatar-group .avatar + .avatar { transition: margin var(--duration-slow) var(--ease-spring), transform var(--duration-slow) var(--ease-spring); }
 .avatar-group:hover .avatar + .avatar { margin-left: -2px; }
 
@@ -125,11 +125,11 @@
 
 /* cards: spotlight border + glow, gentle lift when interactive */
 .card { transition: box-shadow var(--duration-base) var(--ease-out), border-color var(--duration-base), transform var(--duration-slow) var(--ease-spring), background-color var(--duration-fast); }
-.card:not(.featured):hover { border-color: color-mix(in srgb, var(--border-brand) 35%, var(--border-default)); background-image: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--brand-500) 7%, transparent), transparent 55%); }
-:is(a.card, .card[data-interactive], .ex-card, .kanban-card, .pricing):hover { transform: translateY(var(--lift-md)); box-shadow: var(--shadow-3); }
+.card:not(.featured):hover { border-color: color-mix(in srgb, var(--border-brand) 12%, var(--border-default)); background-image: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--brand-500) 2.5%, transparent), transparent 60%); }
+:is(a.card, .card[data-interactive], .ex-card, .kanban-card, .pricing):hover { transform: translateY(var(--lift-sm)); box-shadow: var(--shadow-2); }
 /* tilt (motion.js sets --rx / --ry on [data-tilt]) */
 [data-tilt] { transform-style: preserve-3d; transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0)); }
-[data-tilt]:hover { --ty: var(--lift-md); }
+[data-tilt]:hover { --ty: var(--lift-sm); }
 
 /* KPI delta arrows bob once on hover */
 .kpi:hover .delta .icon { animation: m-hop 520ms var(--ease-out); }
@@ -142,7 +142,7 @@
 
 /* calendar */
 .cal-day { transition: background-color var(--duration-fast), transform var(--duration-slow) var(--ease-spring), color var(--duration-fast); }
-.cal-day:not(.muted):hover { transform: scale(1.08); }
+.cal-day:not(.muted):hover { transform: scale(1.04); }
 .cal-day[aria-selected="true"] { animation: m-pop var(--duration-slow) var(--ease-spring); }
 
 /* charts: bars grow on reveal, brighten on hover */
@@ -231,7 +231,7 @@
 
 /* ---------- Signature ---------- */
 .kanban-card { transition: box-shadow var(--duration-base), transform var(--duration-slow) var(--ease-spring), border-color var(--duration-base); }
-.kanban-card:active { cursor: grabbing; transform: rotate(-1.5deg) scale(1.02); box-shadow: var(--shadow-4); transition-duration: var(--duration-base); }
+.kanban-card:active { cursor: grabbing; transform: rotate(-1deg) scale(1.01); box-shadow: var(--shadow-3); transition-duration: var(--duration-base); }
 .pricing.featured { border-color: transparent; background: linear-gradient(var(--bg-surface), var(--bg-surface)) padding-box, conic-gradient(from var(--m-angle, 0deg), var(--brand-300), var(--brand-600), var(--lime-300), var(--brand-500), var(--brand-300)) border-box; animation: m-spin-angle 6s linear infinite; }
 @property --m-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 @keyframes m-spin-angle { to { --m-angle: 360deg; } }

@@ -2,13 +2,15 @@
 
 # Facet UI
 
+<sub>by ELTouch apps</sub>
+
 **A token-driven design system: a Figma library, design tokens and a framework-agnostic HTML/CSS/JS implementation.**
 
 It follows shadcn/ui's component model and naming but has its own visual language: the *Facet cut* and the *signal rail*.
 
-**[Live style guide](https://facetui.vercel.app)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
 
-![Facet UI cover](FacetUI-marketplace-previews/01-cover.png)
+![Facet UI — the design system with an edge](styleguide/marketing/media/facet-ui-hero.jpg)
 
 </div>
 
@@ -23,17 +25,18 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 5. [Theming: change purple to any color](#theming-change-purple-to-any-color)
 6. [Motion & micro-interactions](#motion--micro-interactions)
 7. [Marketplace previews](#marketplace-previews)
-8. [Design tokens](#design-tokens)
-9. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
-10. [Components](#components)
-11. [Example pages](#example-pages)
-12. [The Figma file](#the-figma-file)
-13. [Accessibility](#accessibility)
-14. [Browser support](#browser-support)
-15. [Regenerating tokens](#regenerating-tokens)
-16. [Project structure](#project-structure)
-17. [Known limitations](#known-limitations)
-18. [Credits and licenses](#credits-and-licenses)
+8. [Marketing kit: videos & images](#marketing-kit-videos--images)
+9. [Design tokens](#design-tokens)
+10. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
+11. [Components](#components)
+12. [Example pages](#example-pages)
+13. [The Figma file](#the-figma-file)
+14. [Accessibility](#accessibility)
+15. [Browser support](#browser-support)
+16. [Regenerating tokens](#regenerating-tokens)
+17. [Project structure](#project-structure)
+18. [Known limitations](#known-limitations)
+19. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -295,7 +298,41 @@ Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumro
 | **Light & dark**<br>![Light & dark](FacetUI-marketplace-previews/05-light-dark.png) | **Mobile**<br>![Mobile](FacetUI-marketplace-previews/06-mobile.png) |
 | **AI & signature components**<br>![AI & signature components](FacetUI-marketplace-previews/07-ai-signature.png) | **Tokens & developer handoff**<br>![Tokens & developer handoff](FacetUI-marketplace-previews/08-tokens-handoff.png) |
 
-For the listing video, use [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) (1280×720, 24 s).
+For a short listing video, use [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) (1280×720, 24 s). For full-HD videos and angled hero images, see the marketing kit below.
+
+---
+
+## Marketing kit: videos & images
+
+Everything you need to market and sell Facet UI is on one page: **[facetui.vercel.app/marketing](https://facetui.vercel.app/marketing/)**. The files are in [`styleguide/marketing/media/`](https://github.com/desiben/UIKits/tree/main/styleguide/marketing/media), and the sources that generate them are in [`marketing/`](marketing/).
+
+| Asset | Details |
+|---|---|
+| [▶ Product demo](https://github.com/desiben/UIKits/blob/main/styleguide/marketing/media/facet-ui-demo.mp4) | 55 s, 1920×1080, 30 fps (MP4 + WebM). Features, theming, variables, layers, templates, components, mobile and code. |
+| [▶ Components reel](https://github.com/desiben/UIKits/blob/main/styleguide/marketing/media/facet-ui-components-reel.mp4) | 33 s, 1920×1080, 30 fps (MP4 + WebM). Live components with a real cursor: magnetic buttons, spotlight cards, sliding tabs, switches, hover rails, toasts. |
+| 11 wide images | 3840×2160 JPG: angled 3D hero shots, a template wall, feature cards, theming, variables, layers, floating components, phones, code handoff and stats. |
+| 2 square images | 2160×2160 JPG for Instagram, X and Figma Community thumbnails. |
+| Listing copy | Tagline, one-liner, description and feature bullets, each with a copy button. |
+
+The videos are silent so you can add your own music.
+
+| | |
+|---|---|
+| ![Hero](styleguide/marketing/media/thumbs/facet-ui-hero.webp) | ![Key features](styleguide/marketing/media/thumbs/facet-ui-features.webp) |
+| ![Theming](styleguide/marketing/media/thumbs/facet-ui-themes.webp) | ![Template wall](styleguide/marketing/media/thumbs/facet-ui-wall.webp) |
+| ![Components](styleguide/marketing/media/thumbs/facet-ui-components.webp) | ![Mobile](styleguide/marketing/media/thumbs/facet-ui-mobile.webp) |
+| ![Variables](styleguide/marketing/media/thumbs/facet-ui-variables.webp) | ![Hero (light)](styleguide/marketing/media/thumbs/facet-ui-hero-light.webp) |
+
+The images highlight what buyers look for:
+
+- Built for Figma — no plugins or setup required
+- Fully editable colors, grids, spacing and styles
+- Auto Layout + Variables for instant theme switching
+- Organized layers, semantic naming and a systemized structure
+- Pixel-perfect, professional and scalable components
+- Works equally well for light, dark and custom brand themes
+
+To re-render them (for example after changing the brand), see [`marketing/README.md`](marketing/README.md).
 
 ---
 
@@ -480,6 +517,8 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/assets/icons.js` | Lucide sprite | ✅ (or use `lucide` / `lucide-react`) |
 | `styleguide/assets/docs.*`, `registry.js`, `tokens-meta.js` | Style guide site only | ❌ |
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
+| `styleguide/marketing/` | Marketing page, videos and images | ❌ |
+| `marketing/`, `scripts/render_marketing_*.js` | Sources and render scripts for the marketing kit | ❌ |
 
 ---
 
@@ -500,8 +539,9 @@ Facet aims to be honest about what isn't finished:
 
 - **Typeface:** [Mona Sans](https://github.com/github/mona-sans) by GitHub, SIL Open Font License 1.1.
 - **Icons:** [Lucide](https://lucide.dev) v0.460.0, ISC License (see `styleguide/assets/LUCIDE-LICENSE.txt`).
+- **Marketing kit:** rendered with Playwright and ffmpeg from the sources in `marketing/`.
 - **Inspiration:** the component inventory and API conventions of [shadcn/ui](https://ui.shadcn.com) (MIT). Facet does not copy shadcn's code or visual design.
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Choose and add a `LICENSE` file for Facet UI itself before distributing it publicly.
 
-<div align="center"><sub>Facet UI v1.1 · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
+<div align="center"><sub>Facet UI v1.1 · by ELTouch apps · Built with Figma variables, OKLCH color and plain CSS.</sub></div>

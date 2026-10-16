@@ -25,7 +25,7 @@
       const s = t.closest(SPOT);
       if (s) { const r = s.getBoundingClientRect(); s.style.setProperty("--mx", ev.clientX - r.left + "px"); s.style.setProperty("--my", ev.clientY - r.top + "px"); }
       const tl = t.closest("[data-tilt], .kanban-card");
-      if (tl && fine) { const r = tl.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width - 0.5, py = (ev.clientY - r.top) / r.height - 0.5; const max = parseFloat(tl.dataset.tilt) || 5;
+      if (tl && fine) { const r = tl.getBoundingClientRect(); const px = (ev.clientX - r.left) / r.width - 0.5, py = (ev.clientY - r.top) / r.height - 0.5; const max = parseFloat(tl.dataset.tilt) || 3;
         if (tl.hasAttribute("data-tilt")) { tl.style.setProperty("--ry", (px * max).toFixed(2) + "deg"); tl.style.setProperty("--rx", (-py * max).toFixed(2) + "deg"); } }
       const mg = t.closest("[data-magnetic]");
       if (mg && fine) { const r = mg.getBoundingClientRect(); const k = parseFloat(mg.dataset.magnetic) || 0.12, cl = (v) => Math.max(-6, Math.min(6, v)); mg.style.setProperty("--tx", cl((ev.clientX - r.left - r.width / 2) * k).toFixed(1) + "px"); mg.style.setProperty("--ty2", cl((ev.clientY - r.top - r.height / 2) * k).toFixed(1) + "px"); }
