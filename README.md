@@ -8,7 +8,7 @@
 
 It follows shadcn/ui's component model and naming but has its own visual language: the *Facet cut* and the *signal rail*.
 
-**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
 
 ![Facet UI — the design system with an edge](styleguide/marketing/media/facet-ui-hero.jpg)
 
@@ -251,7 +251,7 @@ Choices are saved in `localStorage` (key `facet-theme`) and restored on load.
 
 Every component reacts to the cursor with a small, springy motion, in the spirit of Kokonut UI, Motion and Animate UI. It's fast enough to feel instant and soft enough to feel alive. The effects come from two optional, dependency-free files: `motion.css` (CSS-only effects) and `motion.js` (cursor-aware effects).
 
-**▶ [Watch the 20-second demo](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4)**. You can also see it on the [live Showcase page](https://facetui.vercel.app/#/showcase), or try every effect yourself on the [Motion page](https://facetui.vercel.app/#/motion).
+**▶ [Watch the 20-second demo](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4)**. You can also see it on the [live Showcase page](https://facetui.vercel.app/#/showcase), or try every effect yourself on the [Motion page](https://facetui.vercel.app/#/motion).
 
 ![Micro-interactions demo](docs/motion/facet-micro-interactions.gif)
 
@@ -297,7 +297,7 @@ Facet.motion.refresh(el);    // after injecting new markup (SPA routes, modals)
 
 ## Marketplace previews
 
-Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumroad, UI8 or Creative Market. They're in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) and on the [live Showcase page](https://facetui.vercel.app/#/showcase). In Figma, they're the "Marketplace previews" section on **00 — Start Here**, set to export at 1x and 2x.
+Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumroad, UI8 or Creative Market. They're in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) and on the [live Showcase page](https://facetui.vercel.app/#/showcase). In Figma, they're the "Marketplace previews" section on **00 — Start Here**, set to export at 1x and 2x.
 
 | | |
 |---|---|
@@ -306,18 +306,18 @@ Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumro
 | **Light & dark**<br>![Light & dark](FacetUI-marketplace-previews/05-light-dark.png) | **Mobile**<br>![Mobile](FacetUI-marketplace-previews/06-mobile.png) |
 | **AI & signature components**<br>![AI & signature components](FacetUI-marketplace-previews/07-ai-signature.png) | **Tokens & developer handoff**<br>![Tokens & developer handoff](FacetUI-marketplace-previews/08-tokens-handoff.png) |
 
-For a short listing video, use [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) (1280×720, 24 s). For full-HD videos and angled hero images, see the marketing kit below.
+For a short listing video, use [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) (1280×720, 24 s). For full-HD videos and angled hero images, see the marketing kit below.
 
 ---
 
 ## Marketing kit: videos & images
 
-Everything you need to market and sell Facet UI is on one page: **[facetui.vercel.app/marketing](https://facetui.vercel.app/marketing/)**. The files are in [`styleguide/marketing/media/`](https://github.com/desiben/UIKits/tree/main/styleguide/marketing/media), and the sources that generate them are in [`marketing/`](marketing/).
+Everything you need to market and sell Facet UI is on one page: **[facetui.vercel.app/marketing](https://facetui.vercel.app/marketing/)**. The files are in [`styleguide/marketing/media/`](https://github.com/desiben/UIKits/tree/FacetUI/styleguide/marketing/media), and the sources that generate them are in [`marketing/`](marketing/).
 
 | Asset | Details |
 |---|---|
-| [▶ Product demo](https://github.com/desiben/UIKits/blob/main/styleguide/marketing/media/facet-ui-demo.mp4) | 55 s, 1920×1080, 30 fps (MP4 + WebM). Features, theming, variables, layers, templates, components, mobile and code. |
-| [▶ Components reel](https://github.com/desiben/UIKits/blob/main/styleguide/marketing/media/facet-ui-components-reel.mp4) | 33 s, 1920×1080, 30 fps (MP4 + WebM). Live components with a real cursor: magnetic buttons, spotlight cards, sliding tabs, switches, hover rails, toasts. |
+| [▶ Product demo](https://github.com/desiben/UIKits/blob/FacetUI/styleguide/marketing/media/facet-ui-demo.mp4) | 55 s, 1920×1080, 30 fps (MP4 + WebM). Features, theming, variables, layers, templates, components, mobile and code. |
+| [▶ Components reel](https://github.com/desiben/UIKits/blob/FacetUI/styleguide/marketing/media/facet-ui-components-reel.mp4) | 33 s, 1920×1080, 30 fps (MP4 + WebM). Live components with a real cursor: magnetic buttons, spotlight cards, sliding tabs, switches, hover rails, toasts. |
 | 11 wide images | 3840×2160 JPG: angled 3D hero shots, a template wall, feature cards, theming, variables, layers, floating components, phones, code handoff and stats. |
 | 2 square images | 2160×2160 JPG for Instagram, X and Figma Community thumbnails. |
 | Listing copy | Tagline, one-liner, description and feature bullets, each with a copy button. |
