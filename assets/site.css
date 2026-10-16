@@ -257,3 +257,4 @@ button.stage-panel { cursor: pointer; }
   radial-gradient(40% 50% at 100% 45%, rgb(99 102 241 / .3), transparent 70%),
   var(--aurora-base); }
 .fine { margin: 12px auto 0; max-width: 440px; font-size: 12.5px; line-height: 1.5; color: var(--muted); }
+.faq details p a { color: var(--fg); text-decoration: underline; text-underline-offset: 2px; }

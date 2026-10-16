@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claim your purchase · ETKits</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f4f4f5">
+<script>
+  (function () {
+    var pref = "system";
+    try { pref = localStorage.getItem("etkits-theme") || "system"; } catch (e) {}
+    var dark = pref === "dark" || (pref === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.setAttribute("data-theme", pref);
+    document.documentElement.setAttribute("data-mode", dark ? "dark" : "light");
+  })();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%2318181b'/%3E%3Cpath d='M10 10h12v3H13.5v2H20v3h-6.5v2H22v3H10z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .claim { width: min(520px, 100% - 32px); margin: 72px auto 0; }
+  .claim-card { margin-top: 32px; padding: 28px; border-radius: var(--r-xl); background: var(--card); box-shadow: var(--shadow); }
+  .claim-card label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+  .claim-row { display: flex; gap: 8px; }
+  .claim-row input { flex: 1; min-width: 0; height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--soft); color: var(--fg); font: 14px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .claim-row input:focus { outline: 2px solid #006fee; outline-offset: 1px; }
+  .claim-row .btn { height: 42px; }
+  .hint { margin: 10px 0 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .msg { margin-top: 16px; padding: 12px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+  .msg-error { background: rgb(243 18 96 / .1); color: #c20e4d; }
+  :root[data-mode="dark"] .msg-error { color: #f871a0; }
+  .result { margin-top: 20px; display: grid; gap: 10px; }
+  .result .btn { width: 100%; height: 44px; }
+  .terms { margin-top: 24px; font-size: 12.5px; color: var(--muted); line-height: 1.6; text-align: center; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="./" aria-label="ETKits home"><span class="logo-mark" aria-hidden="true">E</span>ETKits</a>
+  </div>
+</header>
+
+<main class="claim">
+  <div class="center">
+    <span class="kicker">Buyers</span>
+    <h2>Claim your purchase.<br><span class="dim">Get the Figma file.</span></h2>
+    <p class="sub">Enter the license key from your Gumroad receipt to unlock the Figma file and downloads.</p>
+  </div>
+
+  <form class="claim-card" id="claim-form" novalidate>
+    <label for="key">License key</label>
+    <div class="claim-row">
+      <input id="key" name="key" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" required>
+      <button class="btn btn-dark" type="submit" id="submit">Unlock</button>
+    </div>
+    <p class="hint">Find it in your Gumroad receipt email or in your Gumroad Library. Each key can be claimed a limited number of times.</p>
+    <div class="msg msg-error" id="error" role="alert" hidden></div>
+    <div class="result" id="result" hidden>
+      <a class="btn btn-dark" id="figma-link" href="#" target="_blank" rel="noopener noreferrer">Open the Figma file</a>
+      <a class="btn btn-white" id="download-link" href="#" target="_blank" rel="noopener noreferrer" hidden>Download code &amp; tokens</a>
+      <p class="hint" id="uses-left"></p>
+    </div>
+  </form>
+
+  <p class="terms">Your license covers your own use as described in the license you bought. Please don't share the file, link or key.</p>
+</main>
+
+<script>
+  (function () {
+    var form = document.getElementById("claim-form");
+    var input = document.getElementById("key");
+    var submit = document.getElementById("submit");
+    var error = document.getElementById("error");
+    var result = document.getElementById("result");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var key = input.value.trim();
+      error.hidden = true; result.hidden = true;
+      if (!key) { error.textContent = "Paste your license key first."; error.hidden = false; return; }
+      submit.disabled = true; submit.textContent = "Checking…";
+
+      fetch("/api/claim", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key: key }) })
+        .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; }); })
+        .then(function (data) {
+          if (!data.ok) { error.textContent = data.error || "That key couldn't be verified."; error.hidden = false; return; }
+          document.getElementById("figma-link").href = data.figmaUrl;
+          var dl = document.getElementById("download-link");
+          if (data.downloadUrl) { dl.href = data.downloadUrl; dl.hidden = false; } else { dl.hidden = true; }
+          document.getElementById("uses-left").textContent = "Verified. Claims left on this key: " + data.usesLeft + ".";
+          result.hidden = false;
+        })
+        .catch(function () { error.textContent = "Couldn't reach the server. Check your connection and try again."; error.hidden = false; })
+        .then(function () { submit.disabled = false; submit.textContent = "Unlock"; });
+    });
+  })();
+</script>
+</body>
+</html>

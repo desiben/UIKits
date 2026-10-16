@@ -24,8 +24,33 @@ Styled after HeroUI Pro, with a light, dark and system theme switch in the top-r
 ## Selling: keep the kit behind the purchase
 
 - **Buy buttons:** set the Gumroad product URL once, in `window.ETKITS_BUY_URL` in [`assets/kits.js`](assets/kits.js). Until it is set, buy buttons scroll to the `#get` section.
-- **Never link the Figma source file or this repo** from the site. Buyers get the Figma file, tokens and code through Gumroad after purchase.
+- **Never link the Figma source file or this repo** from the site. Buyers unlock the Figma file on the claim page (below) after purchase.
 - The public live preview (facetui.vercel.app) is a demo; anything it serves can be saved from a browser.
+
+### License check: the claim page
+
+Buyers never see a Figma link until their license is verified:
+
+1. They buy on Gumroad, which emails them a unique **license key**.
+2. They enter it at **[etkits.vercel.app/claim](https://etkits.vercel.app/claim)** (`claim.html`, hidden from search engines).
+3. [`api/claim.js`](api/claim.js), a Vercel function, checks the key with Gumroad's license API and only for a valid purchase returns the Figma link (and optional download link) from private environment variables. Refunded, charged-back and disputed purchases are rejected, and each key can be claimed a limited number of times.
+
+**Setup (once per kit):**
+
+1. In Gumroad, open the product → **Content** → enable **Generate a unique license key per sale**, and copy the **product ID** shown there.
+2. In Figma, make a *sale copy* of the kit, share it as view-only with copying allowed only via its duplicate link, and copy that link. Keep the master file as *Only people invited*.
+3. In Vercel → project **et-uikits** → Settings → Environment Variables, add:
+
+| Variable | Value |
+|---|---|
+| `GUMROAD_PRODUCT_ID` | the product ID from step 1 |
+| `FIGMA_DELIVERY_URL` | the Figma duplicate link from step 2 |
+| `DOWNLOAD_URL` | optional: link to the code + tokens zip |
+| `CLAIM_MAX_USES` | optional: claims per key (default 3) |
+
+4. Redeploy. Until the variables are set, the claim page answers "Claiming is not set up yet".
+
+In the Gumroad receipt, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your license key."* If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
 
 Gumroad listing images for Facet UI (cover, highlights, templates, thank-you, square thumbnail, long description) live on the `FacetUI` branch in [`marketing/gumroad/`](https://github.com/desiben/UIKits/tree/FacetUI/marketing/gumroad).
 
