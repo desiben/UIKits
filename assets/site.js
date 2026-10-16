@@ -96,6 +96,30 @@
     });
   });
 
+  // Theme switcher: light / dark / system (follows the OS setting live).
+  var root = document.documentElement;
+  var media = window.matchMedia("(prefers-color-scheme: dark)");
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(pref) {
+    var dark = pref === "dark" || (pref === "system" && media.matches);
+    root.setAttribute("data-theme", pref);
+    root.setAttribute("data-mode", dark ? "dark" : "light");
+    if (themeMeta) themeMeta.setAttribute("content", dark ? "#000000" : "#f4f4f5");
+    document.querySelectorAll("[data-theme-set]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-theme-set") === pref));
+    });
+  }
+  document.querySelectorAll("[data-theme-set]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var pref = b.getAttribute("data-theme-set");
+      try { localStorage.setItem("etkits-theme", pref); } catch (e) {}
+      applyTheme(pref);
+    });
+  });
+  var onSystemChange = function () { if (root.getAttribute("data-theme") === "system") applyTheme("system"); };
+  if (media.addEventListener) media.addEventListener("change", onSystemChange); else if (media.addListener) media.addListener(onSystemChange);
+  applyTheme(root.getAttribute("data-theme") || "system");
+
   // Full-size showreel dialog.
   var dialog = document.getElementById("reel");
   var player = document.getElementById("reel-video");
