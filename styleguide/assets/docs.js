@@ -5,8 +5,8 @@
   const $ = (s, el = document) => el.querySelector(s);
   const i = (n, c = "") => `<svg class="icon${c ? " " + c : ""}" aria-hidden="true"><use href="#${n}"/></svg>`;
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const FIGMA = "https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi";
-  const REPO = "https://github.com/desiben/UIKits";
+  // The Figma source is delivered after purchase, so public links go to the store.
+  const FIGMA = "https://etkits.vercel.app/#get";
 
   /* ---------- syntax highlight (tiny, HTML/JS/CSS) ---------- */
   function hl(code, lang) {
@@ -76,7 +76,7 @@
       ${[["layers", "144 components", "In Figma with Variables and every state. 92 are documented and working on this site."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
     </div>
     <div class="example" style="margin-top:24px"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
-    <p class="t-body-sm text-tertiary">Micro-interactions demo · <a href="#/showcase">Showcase</a> · <a href="https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4" target="_blank" rel="noopener">Video on GitHub</a></p>
+    <p class="t-body-sm text-tertiary">Micro-interactions demo · <a href="#/showcase">Showcase</a></p>
     <h2 id="principles">Design principles</h2>
     <ul class="prose"><li><b>Tokens first.</b> Every color, space, radius and type style in the components is a variable. Change the token, not the component.</li>
     <li><b>The Facet cut.</b> Containers and controls have a slightly sharper top-right corner — a quiet, recognizable signature.</li>
@@ -88,7 +88,7 @@
       <tr><td><code>facet.tokens.json</code></td><td>tokens/</td><td>W3C Design Tokens format (Style Dictionary, Tokens Studio)</td></tr>
       <tr><td><code>tailwind.preset.js</code></td><td>tokens/</td><td>Tailwind / shadcn/ui projects</td></tr>
       <tr><td><code>facet.css</code> + <code>facet.js</code></td><td>styleguide/assets/</td><td>Drop-in components for plain HTML</td></tr>
-      <tr><td>Figma library</td><td><a href="${FIGMA}" target="_blank" rel="noopener">Open in Figma</a></td><td>Design, prototypes, documentation, templates</td></tr></tbody></table>
+      <tr><td>Figma library</td><td><a href="${FIGMA}" target="_blank" rel="noopener">Get the Figma file</a></td><td>Design, prototypes, documentation, templates</td></tr></tbody></table>
     <div class="callout">${i("info")}<div>The CSS here is a faithful reference implementation of the Figma components, not a React package. For React, use shadcn/ui components with the Facet Tailwind preset (see <a href="#/installation">Installation</a>).</div></div>`);
 
   P.installation = () => page("Getting started", "Installation", "Three ways to use Facet: plain HTML, Tailwind + shadcn/ui, or tokens only.", `
@@ -174,7 +174,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
   };
 
   P.figma = () => page("Getting started", "Figma file", "The design source of truth. Nine pages, all token-driven.", `
-    <p><a class="btn" href="${FIGMA}" target="_blank" rel="noopener">${i("external-link")} Open Facet UI in Figma</a></p>
+    <p><a class="btn" href="${FIGMA}" target="_blank" rel="noopener">${i("external-link")} Get the Facet UI Figma file</a></p>
     <table class="api"><thead><tr><th>Page</th><th>Contents</th></tr></thead><tbody>
     ${[["00 — Start Here", "Cover, design directions, principles, inventory & status, getting started"], ["01 — Foundations", "Color ramps, typography (25 Mona Sans styles), spacing, radius, elevation, icons"], ["02 — Design Tokens", "Theme matrix (brand × light/dark), density, CSS reference, brand color examples"], ["03 — Components", "144 components / 78 variant sets with properties, states and sizes + 147 Lucide icons"], ["04 — Patterns", "23 pattern components (app shell, filter bar, auth forms, AI dock, marketing sections…)"], ["05 — Templates", "10 apps, 26 desktop + mobile screens: dashboard, CRM, PM, AI, e-commerce, finance, calendar, settings, auth, marketing"], ["06 — Playground", "Sandboxes, theme lab, component tray, clickable prototype flows"], ["07 — Documentation", "20 component doc cards (anatomy, props, a11y, React code, do/don't) + customization guide"], ["08 — Changelog", "Version history and known limitations"]].map(([a, b]) => `<tr><td><b>${a}</b></td><td>${b}</td></tr>`).join("")}</tbody></table>
     <h2 id="prototype">Prototype</h2><p>Open <b>06 — Playground</b> and press Present. Flows: <i>Auth → Onboarding → Dashboard</i> and <i>Settings sections</i>. Interactive components (button, tabs, checkbox, switch, toggle, chip, accordion, menu item, sidebar item, input) have hover/press/toggle states wired.</p>`);
@@ -271,10 +271,10 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
   P.showcase = () => {
     const shots = [["01-cover","Cover"],["02-components","88 components"],["03-brands-themes","6 brands × light & dark"],["04-templates","10 app templates"],["05-light-dark","Light & dark"],["06-mobile","Mobile screens"],["07-ai-signature","AI & signature components"],["08-tokens-handoff","Tokens & developer handoff"]];
     return page("Getting started", "Showcase", "The Facet UI marketing kit, marketplace previews and the micro-interaction demo. Every image is 1920×1080 and ready to upload to Figma Community, Gumroad, UI8 or Creative Market.", `
-    <div class="row" style="margin:-8px 0 24px"><a class="btn" href="https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews" target="_blank" rel="noopener">${i("github")} Previews on GitHub</a><a class="btn btn-outline" href="https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4" target="_blank" rel="noopener">${i("external-link")} Video on GitHub</a><a class="btn btn-ghost" href="${FIGMA}" target="_blank" rel="noopener">${i("component")} Open in Figma</a></div>
+    <div class="row" style="margin:-8px 0 24px"><a class="btn btn-ghost" href="${FIGMA}" target="_blank" rel="noopener">${i("component")} Get the Figma file</a></div>
     <h2 id="marketing">Marketing kit</h2><p>A 55-second product demo, a 33-second components reel, 13 angled hero images (3840×2160 and 2160×2160) and ready-to-paste listing copy. Everything is on the <a href="marketing/">marketing page</a> with download links.</p>
     <div class="example" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px"><video class="showcase-video" controls muted playsinline preload="none" poster="marketing/media/facet-ui-demo-poster.jpg" aria-label="Facet UI product demo"><source src="marketing/media/facet-ui-demo.webm" type="video/webm"><source src="marketing/media/facet-ui-demo.mp4" type="video/mp4"></video><video class="showcase-video" controls muted playsinline preload="none" poster="marketing/media/facet-ui-components-reel-poster.jpg" aria-label="Facet UI components reel"><source src="marketing/media/facet-ui-components-reel.webm" type="video/webm"><source src="marketing/media/facet-ui-components-reel.mp4" type="video/mp4"></video></div>
-    <div class="row" style="margin:12px 0 8px"><a class="btn" href="marketing/">${i("external-link")} Open the marketing kit</a><a class="btn btn-outline" href="${REPO}/tree/main/styleguide/marketing/media" target="_blank" rel="noopener">${i("github")} Files on GitHub</a></div>
+    <div class="row" style="margin:12px 0 8px"><a class="btn" href="marketing/">${i("external-link")} Open the marketing kit</a></div>
     <h2 id="video">Micro-interactions demo</h2><p>24 seconds, 1280×720. Hover the components on the <a href="#/motion">Motion</a> page to try them yourself.</p>
     <div class="example"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
     <h2 id="previews">Marketplace previews</h2><p>Click an image to open it full size. The source frames live on <b>00 — Start Here → Marketplace previews</b> in Figma, set to export at 1x and 2x.</p>
@@ -359,7 +359,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
       `<h2 id="react">React (shadcn/ui + Facet preset)</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
-      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Open in Figma</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? '<span class="badge badge-accent">New in v1.2</span>' : ""}`);
+      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? '<span class="badge badge-accent">New in v1.2</span>' : ""}`);
   });
 
   /* ---------- router ---------- */
