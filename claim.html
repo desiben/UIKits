@@ -49,16 +49,16 @@
   <div class="center">
     <span class="kicker">Buyers</span>
     <h2>Claim your purchase.<br><span class="dim">Get the Figma file.</span></h2>
-    <p class="sub">Enter the license key from your Gumroad receipt to unlock the Figma file and downloads.</p>
+    <p class="sub">Enter the license key from your Gumroad receipt or the purchase code from Envato to unlock the Figma file and downloads.</p>
   </div>
 
   <form class="claim-card" id="claim-form" novalidate>
-    <label for="key">License key</label>
+    <label for="key">License key or purchase code</label>
     <div class="claim-row">
-      <input id="key" name="key" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" required>
+      <input id="key" name="key" autocomplete="off" spellcheck="false" placeholder="Gumroad key or Envato purchase code" required>
       <button class="btn btn-dark" type="submit" id="submit">Unlock</button>
     </div>
-    <p class="hint">Find it in your Gumroad receipt email or in your Gumroad Library. Each key can be claimed a limited number of times.</p>
+    <p class="hint"><b>Gumroad:</b> the key is in your receipt email and your Gumroad Library. <b>Envato:</b> open Downloads, then Download → License certificate &amp; purchase code. <b>UI8:</b> your files are in your UI8 downloads, no claim needed.</p>
     <div class="msg msg-error" id="error" role="alert" hidden></div>
     <div class="result" id="result" hidden>
       <a class="btn btn-dark" id="figma-link" href="#" target="_blank" rel="noopener noreferrer">Open the Figma file</a>
@@ -92,7 +92,7 @@
           document.getElementById("figma-link").href = data.figmaUrl;
           var dl = document.getElementById("download-link");
           if (data.downloadUrl) { dl.href = data.downloadUrl; dl.hidden = false; } else { dl.hidden = true; }
-          document.getElementById("uses-left").textContent = "Verified. Claims left on this key: " + data.usesLeft + ".";
+          document.getElementById("uses-left").textContent = "Verified " + data.store + " purchase" + (data.license ? " (" + String(data.license).replace(/[()]/g, "") + ")" : "") + "." + (data.usesLeft != null ? " Claims left on this key: " + data.usesLeft + "." : "");
           result.hidden = false;
         })
         .catch(function () { error.textContent = "Couldn't reach the server. Check your connection and try again."; error.hidden = false; })

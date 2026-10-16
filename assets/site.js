@@ -97,12 +97,23 @@
     });
   });
 
-  // Point every "Buy" button at the store once the URL is configured.
-  if (window.ETKITS_BUY_URL) {
+  // Stores: point every "Buy" button at the first store with a URL, and
+  // render the "Available on" row.
+  var stores = window.ETKITS_STORES || [];
+  var primaryStore = stores.filter(function (st) { return st.url; })[0];
+  if (primaryStore) {
     document.querySelectorAll("[data-buy]").forEach(function (a) {
-      a.href = window.ETKITS_BUY_URL; a.target = "_blank"; a.rel = "noopener";
+      a.href = primaryStore.url; a.target = "_blank"; a.rel = "noopener";
     });
   }
+  document.querySelectorAll("[data-stores]").forEach(function (row) {
+    stores.forEach(function (st) {
+      var item = st.url
+        ? el("a", { class: "store", href: st.url, target: "_blank", rel: "noopener" }, [el("b", { text: st.name }), el("span", { text: "Buy now →" })])
+        : el("span", { class: "store store-soon" }, [el("b", { text: st.name }), el("span", { text: "Coming soon" })]);
+      row.appendChild(item);
+    });
+  });
 
   // Theme switcher: light / dark / system (follows the OS setting live).
   var root = document.documentElement;

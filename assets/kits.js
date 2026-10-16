@@ -28,15 +28,20 @@ window.UIKITS = [
     tags: ["Figma", "Design tokens", "HTML/CSS/JS", "Tailwind preset", "Light & dark", "6 brands", "4 style themes"],
     // Never link the Figma source or the repo here: buyers get them after purchase.
     links: [
-      { label: "Buy on Gumroad", buy: true, primary: true },
+      { label: "Buy Facet UI", buy: true, primary: true },
       { label: "Live preview", href: "https://facetui.vercel.app" }
     ]
   }
 ];
 
-/* PLACEHOLDER: paste the Gumroad product URL here. Until it is set, every
- * "Buy" button scrolls to the #get section instead. */
-window.ETKITS_BUY_URL = "";
+/* PLACEHOLDER: paste each store's product URL. The first store with a URL is
+ * used by every "Buy" button; stores without a URL show as "Coming soon".
+ * Until any URL is set, "Buy" buttons scroll to the #get section. */
+window.ETKITS_STORES = [
+  { name: "Gumroad", url: "" },
+  { name: "Envato Market", url: "" },
+  { name: "UI8", url: "" }
+];
 
 /* Placeholder tiles shown after the real kits, so the grid reads as a growing collection. */
 window.UIKITS_COMING_SOON = 2;

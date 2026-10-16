@@ -8,9 +8,9 @@ Live: **[etkits.vercel.app](https://etkits.vercel.app)**. It is a static site wi
 
 ## Kits
 
-| Kit | Branch | Live preview | Buy |
+| Kit | Branch | Live preview | Stores |
 |---|---|---|---|
-| **Facet UI** v1.2 | [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI) | [facetui.vercel.app](https://facetui.vercel.app) | Gumroad (set `ETKITS_BUY_URL`) |
+| **Facet UI** v1.2 | [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI) | [facetui.vercel.app](https://facetui.vercel.app) | Gumroad, Envato Market, UI8 (set in `ETKITS_STORES`) |
 
 ## What's on the page
 
@@ -23,36 +23,44 @@ Styled after HeroUI Pro, with a light, dark and system theme switch in the top-r
 
 ## Selling: keep the kit behind the purchase
 
-- **Buy buttons:** set the Gumroad product URL once, in `window.ETKITS_BUY_URL` in [`assets/kits.js`](assets/kits.js). Until it is set, buy buttons scroll to the `#get` section.
+- **Stores and buy buttons:** set each store's product URL in `window.ETKITS_STORES` in [`assets/kits.js`](assets/kits.js). The "Available on" row shows every store (those without a URL say "Coming soon"), and every "Buy" button uses the first store that has a URL. Until one is set, buy buttons scroll to the `#get` section.
 - **Never link the Figma source file or this repo** from the site. Buyers unlock the Figma file on the claim page (below) after purchase.
 - The public live preview (facetui.vercel.app) is a demo; anything it serves can be saved from a browser.
 
 ### License check: the claim page
 
-Buyers never see a Figma link until their license is verified:
+Buyers never see a Figma link until their purchase is verified:
 
-1. They buy on Gumroad, which emails them a unique **license key**.
-2. They enter it at **[etkits.vercel.app/claim](https://etkits.vercel.app/claim)** (`claim.html`, hidden from search engines).
-3. [`api/claim.js`](api/claim.js), a Vercel function, checks the key with Gumroad's license API and only for a valid purchase returns the Figma link (and optional download link) from private environment variables. Refunded, charged-back and disputed purchases are rejected, and each key can be claimed a limited number of times.
+| Store | What the buyer gets | Verified by `api/claim.js` |
+|---|---|---|
+| **Gumroad** | A unique **license key** per sale | Gumroad license API. Refunded, charged-back and disputed sales are rejected; each key can be claimed `CLAIM_MAX_USES` times. |
+| **Envato Market** | A unique **purchase code** per sale (a UUID) | Envato author API (`/v3/market/author/sale`), only for your own item IDs. |
+| **UI8** | Files from their UI8 downloads | Not needed: UI8 has no public verification API and delivers the files itself. |
+
+1. The buyer enters their key or code at **[etkits.vercel.app/claim](https://etkits.vercel.app/claim)** (`claim.html`, hidden from search engines). The function tells Gumroad keys and Envato codes apart by their format.
+2. [`api/claim.js`](api/claim.js), a Vercel function, verifies it with the right store and only for a valid purchase returns the Figma link (and optional download link) from private environment variables.
 
 **Setup (once per kit):**
 
-1. In Gumroad, open the product → **Content** → enable **Generate a unique license key per sale**, and copy the **product ID** shown there.
+1. **Gumroad:** open the product → **Content** → enable **Generate a unique license key per sale**, and copy the **product ID** shown there. **Envato:** once the item is approved, note its item ID (in the item URL) and create a personal token at [build.envato.com](https://build.envato.com/create-token/) with the *View your items' sales history* permission.
 2. In Figma, make a *sale copy* of the kit, share it as view-only with copying allowed only via its duplicate link, and copy that link. Keep the master file as *Only people invited*.
 3. In Vercel → project **et-uikits** → Settings → Environment Variables, add:
 
 | Variable | Value |
 |---|---|
-| `GUMROAD_PRODUCT_ID` | the product ID from step 1 |
+| `GUMROAD_PRODUCT_ID` | the Gumroad product ID from step 1 |
+| `ENVATO_TOKEN` | the Envato personal token from step 1 |
+| `ENVATO_ITEM_ID` | the Envato item ID (comma-separate several) |
 | `FIGMA_DELIVERY_URL` | the Figma duplicate link from step 2 |
+| `FIGMA_DELIVERY_URL_GUMROAD`, `FIGMA_DELIVERY_URL_ENVATO` | optional: a separate sale copy per store, so a leak can be traced and swapped per store |
 | `DOWNLOAD_URL` | optional: link to the code + tokens zip |
 | `CLAIM_MAX_USES` | optional: claims per key (default 3) |
 
-4. Redeploy. Until the variables are set, the claim page answers "Claiming is not set up yet".
+4. Redeploy. Until a store's variables are set, the claim page answers "Claiming for … purchases is not set up yet".
 
-In the Gumroad receipt, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your license key."* If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
+In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your license key or purchase code."* If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
 
-Gumroad listing images for Facet UI (cover, highlights, templates, thank-you, square thumbnail, long description) live on the `FacetUI` branch in [`marketing/gumroad/`](https://github.com/desiben/UIKits/tree/FacetUI/marketing/gumroad).
+Listing images for each store (Gumroad, UI8, Envato) live on the `FacetUI` branch in [`marketing/listings/`](https://github.com/desiben/UIKits/tree/FacetUI/marketing/listings).
 
 ## How this repo is organized
 
