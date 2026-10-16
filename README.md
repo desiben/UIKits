@@ -37,7 +37,7 @@ Buyers never see a Figma link until their purchase is verified:
 | **Envato Market** | A unique **purchase code** per sale (a UUID) | Envato author API (`/v3/market/author/sale`), only for your own item IDs. |
 | **UI8** | Files from their UI8 downloads | Not needed: UI8 has no public verification API and delivers the files itself. |
 
-1. The buyer enters their key or code at **[etkits.vercel.app/claim](https://etkits.vercel.app/claim)** (`claim.html`, hidden from search engines). The function tells Gumroad keys and Envato codes apart by their format.
+1. The buyer enters their purchase code at **[etkits.vercel.app/claim](https://etkits.vercel.app/claim)** (`claim.html`, hidden from search engines). The function tells Gumroad keys and Envato codes apart by their format.
 2. [`api/claim.js`](api/claim.js), a Vercel function, verifies it with the right store and only for a valid purchase returns the Figma link (and optional download link) from private environment variables.
 
 **Setup (once per kit):**
@@ -58,7 +58,7 @@ Buyers never see a Figma link until their purchase is verified:
 
 4. Redeploy. Until a store's variables are set, the claim page answers "Claiming for … purchases is not set up yet".
 
-In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your license key or purchase code."* If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
+In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your purchase code."* (Gumroad calls it a license key; buyers paste it in the same box.) If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
 
 Listing images for each store (Gumroad, UI8, Envato) live on the `FacetUI` branch in [`marketing/listings/`](https://github.com/desiben/UIKits/tree/FacetUI/marketing/listings).
 

@@ -49,16 +49,16 @@
   <div class="center">
     <span class="kicker">Buyers</span>
     <h2>Claim your purchase.<br><span class="dim">Get the Figma file.</span></h2>
-    <p class="sub">Enter the license key from your Gumroad receipt or the purchase code from Envato to unlock the Figma file and downloads.</p>
+    <p class="sub">Enter your purchase code to unlock the Figma file and downloads.</p>
   </div>
 
   <form class="claim-card" id="claim-form" novalidate>
-    <label for="key">License key or purchase code</label>
+    <label for="key">Purchase code</label>
     <div class="claim-row">
-      <input id="key" name="key" autocomplete="off" spellcheck="false" placeholder="Gumroad key or Envato purchase code" required>
+      <input id="key" name="key" autocomplete="off" spellcheck="false" placeholder="Enter your purchase code" required>
       <button class="btn btn-dark" type="submit" id="submit">Unlock</button>
     </div>
-    <p class="hint"><b>Gumroad:</b> the key is in your receipt email and your Gumroad Library. <b>Envato:</b> open Downloads, then Download → License certificate &amp; purchase code. <b>UI8:</b> your files are in your UI8 downloads, no claim needed.</p>
+    <p class="hint">You'll find your purchase code in your order confirmation or your account's downloads. Each code can be claimed a limited number of times.</p>
     <div class="msg msg-error" id="error" role="alert" hidden></div>
     <div class="result" id="result" hidden>
       <a class="btn btn-dark" id="figma-link" href="#" target="_blank" rel="noopener noreferrer">Open the Figma file</a>
@@ -67,7 +67,7 @@
     </div>
   </form>
 
-  <p class="terms">Your license covers your own use as described in the license you bought. Please don't share the file, link or key.</p>
+  <p class="terms">Your license covers your own use as described in the license you bought. Please don't share the file, link or purchase code.</p>
 </main>
 
 <script>
@@ -82,17 +82,17 @@
       e.preventDefault();
       var key = input.value.trim();
       error.hidden = true; result.hidden = true;
-      if (!key) { error.textContent = "Paste your license key first."; error.hidden = false; return; }
+      if (!key) { error.textContent = "Enter your purchase code first."; error.hidden = false; return; }
       submit.disabled = true; submit.textContent = "Checking…";
 
       fetch("/api/claim", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ key: key }) })
         .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; }); })
         .then(function (data) {
-          if (!data.ok) { error.textContent = data.error || "That key couldn't be verified."; error.hidden = false; return; }
+          if (!data.ok) { error.textContent = data.error || "That purchase code couldn't be verified."; error.hidden = false; return; }
           document.getElementById("figma-link").href = data.figmaUrl;
           var dl = document.getElementById("download-link");
           if (data.downloadUrl) { dl.href = data.downloadUrl; dl.hidden = false; } else { dl.hidden = true; }
-          document.getElementById("uses-left").textContent = "Verified " + data.store + " purchase" + (data.license ? " (" + String(data.license).replace(/[()]/g, "") + ")" : "") + "." + (data.usesLeft != null ? " Claims left on this key: " + data.usesLeft + "." : "");
+          document.getElementById("uses-left").textContent = "Purchase verified." + (data.usesLeft != null ? " Claims left on this code: " + data.usesLeft + "." : "");
           result.hidden = false;
         })
         .catch(function () { error.textContent = "Couldn't reach the server. Check your connection and try again."; error.hidden = false; })
