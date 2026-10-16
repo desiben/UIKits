@@ -10,15 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/tokens.css">
   <link rel="stylesheet" href="assets/facet.css">
+  <link rel="stylesheet" href="assets/motion.css">
   <link rel="stylesheet" href="assets/docs.css">
   <script src="assets/icons.js"></script>
   <script src="assets/facet.js"></script>
+  <script src="assets/motion.js"></script>
 </head>
 <body>
   <a class="sr-only" href="#main">Skip to content</a>
   <header class="docs-header">
     <button class="btn btn-ghost btn-sm icon-btn mobile-nav" aria-label="Open navigation"><svg class="icon"><use href="#menu"/></svg></button>
-    <a class="brand-mark" href="#/introduction"><span class="logo">F</span>Facet UI <small>v1.0</small></a>
+    <a class="brand-mark" href="#/introduction"><span class="logo">F</span>Facet UI <small>v1.1</small></a>
     <nav class="header-nav" aria-label="Sections">
       <a href="#/introduction" data-sec="introduction">Docs</a>
       <a href="#/components/button" data-sec="components">Components</a>
@@ -31,6 +33,7 @@
         <button class="btn btn-ghost btn-sm" data-dropdown-trigger aria-haspopup="menu" aria-expanded="false" aria-label="Brand color"><span class="swatch-dot" id="brand-dot"></span><svg class="icon icon-sm"><use href="#chevron-down"/></svg></button>
         <div class="menu" role="menu" id="brand-menu"></div>
       </div>
+      <button class="btn btn-ghost btn-sm icon-btn" id="motion-btn" aria-label="Toggle animations" data-tooltip="Motion" data-tooltip-side="bottom" aria-pressed="true"><svg class="icon"><use href="#zap"/></svg></button>
       <button class="btn btn-ghost btn-sm icon-btn" id="density-btn" aria-label="Toggle compact density" data-tooltip="Density" data-tooltip-side="bottom" aria-pressed="false"><svg class="icon"><use href="#sliders-horizontal"/></svg></button>
       <button class="btn btn-ghost btn-sm icon-btn" id="mode-btn" aria-label="Toggle dark mode"></button>
       <a class="btn btn-ghost btn-sm icon-btn" href="https://github.com/desiben/UIKits/tree/FacetUI" target="_blank" rel="noopener" aria-label="GitHub repository"><svg class="icon"><use href="#github"/></svg></a>

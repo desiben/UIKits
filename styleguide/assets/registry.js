@@ -355,7 +355,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     a11y: ["Tooltips must not hold essential info; they don't show on touch."] });
 
   add({ slug: "accordion", name: "Accordion", group: "Overlays", figma: "Accordion · Accordion Item",
-    desc: "Progressive disclosure using native <details>.",
+    desc: "Progressive disclosure using native &lt;details&gt;.",
     examples: [{ title: "Accordion", layout: "block", html: `<div class="accordion" style="max-width:560px;margin:auto">
   <details open><summary>Can I change the brand color?${i("chevron-down")}</summary><div>Yes — switch data-brand or call Facet.theme.setCustomBrand('#ff5a1f').</div></details>
   <details><summary>Does it support dark mode?${i("chevron-down")}</summary><div>Every semantic token has Light and Dark values.</div></details>
@@ -499,8 +499,8 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
 
   add({ slug: "pricing", name: "Pricing Card", group: "Signature", figma: "Pricing Card",
     desc: "Plan comparison for marketing and upgrade flows.",
-    examples: [{ title: "Pricing", html: `<div class="card pricing" style="width:280px"><div><b class="t-h4">Starter</b><p class="t-body-sm text-tertiary">For small teams</p></div><div class="price">$0<small> /user/mo</small></div><button class="btn btn-outline btn-block">Get started</button><ul><li>${i("check")}Up to 5 projects</li><li>${i("check")}Basic analytics</li></ul></div>
-<div class="card pricing featured" style="width:280px"><div class="row" style="justify-content:space-between"><b class="t-h4">Growth</b><span class="badge badge-accent">Popular</span></div><div class="price">$24<small> /user/mo</small></div><button class="btn btn-block">Start free trial</button><ul><li>${i("check")}Unlimited projects</li><li>${i("check")}AI copilot</li><li>${i("check")}Advanced permissions</li></ul></div>` }],
+    examples: [{ title: "Pricing", html: `<div class="card pricing" data-tilt="4" style="width:280px"><div><b class="t-h4">Starter</b><p class="t-body-sm text-tertiary">For small teams</p></div><div class="price">$0<small> /user/mo</small></div><button class="btn btn-outline btn-block">Get started</button><ul><li>${i("check")}Up to 5 projects</li><li>${i("check")}Basic analytics</li></ul></div>
+<div class="card pricing featured" data-tilt="4" style="width:280px"><div class="row" style="justify-content:space-between"><b class="t-h4">Growth</b><span class="badge badge-accent">Popular</span></div><div class="price">$24<small> /user/mo</small></div><button class="btn btn-block">Start free trial</button><ul><li>${i("check")}Unlimited projects</li><li>${i("check")}AI copilot</li><li>${i("check")}Advanced permissions</li></ul></div>` }],
     react: `<PricingCard plan="Growth" price={24} featured features={[…]} />`,
     api: [["pricing / pricing.featured", "class", "Card + highlighted plan"]], a11y: ["Make the price readable as text, not an image."] });
 

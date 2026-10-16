@@ -8,9 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/tokens.css">
   <link rel="stylesheet" href="../assets/facet.css">
+  <link rel="stylesheet" href="../assets/motion.css">
   <link rel="stylesheet" href="example.css">
   <script src="../assets/icons.js"></script>
   <script src="../assets/facet.js"></script>
+  <script src="../assets/motion.js"></script>
 </head>
 <body>
 <div class="app">
@@ -37,7 +39,7 @@
       <span class="grow"></span>
       <button class="btn btn-ghost btn-sm icon-btn" aria-label="Notifications" data-tooltip="Notifications" data-tooltip-side="bottom"><svg class="icon"><use href="#bell"/></svg></button>
       <button class="btn btn-ghost btn-sm icon-btn" aria-label="Toggle theme" onclick="Facet.theme.setMode(Facet.theme.get().mode==='dark'?'light':'dark')"><svg class="icon"><use href="#moon"/></svg></button>
-      <button class="btn btn-sm" data-open="new-dialog"><svg class="icon icon-sm"><use href="#plus"/></svg>New report</button>
+      <button class="btn btn-sm" data-open="new-dialog" data-magnetic="0.2"><svg class="icon icon-sm"><use href="#plus"/></svg>New report</button>
     </header>
 
     <main class="content">

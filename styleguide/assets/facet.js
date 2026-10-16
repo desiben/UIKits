@@ -160,7 +160,7 @@
     if (t.closest("[data-close]")) closeOverlay(t.closest(".overlay"));
     if (t.classList && t.classList.contains("overlay")) closeOverlay(t);
     // Toast trigger
-    const tt = t.closest("[data-toast]"); if (tt) toast(JSON.parse(tt.dataset.toast || "{}"));
+    const tt = t.closest("[data-toast]"); if (tt) (global.Facet.toast || toast)(JSON.parse(tt.dataset.toast || "{}"));
     // Calendar day select
     const day = t.closest(".cal-day"); if (day && !day.classList.contains("muted")) { day.closest(".cal-grid").querySelectorAll(".cal-day").forEach((d) => d.removeAttribute("aria-selected")); day.setAttribute("aria-selected", "true"); }
   });

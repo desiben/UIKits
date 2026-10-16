@@ -30,7 +30,7 @@
   /* ---------- navigation model ---------- */
   const PAGES = [
     { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors", "New"], ["figma", "Figma file"]] },
-    { group: "Foundations", items: [["colors", "Colors"], ["typography", "Typography"], ["spacing", "Spacing & density"], ["radius", "Radius & the Facet cut"], ["elevation", "Elevation & focus"], ["icons", "Icons"]] },
+    { group: "Foundations", items: [["colors", "Colors"], ["typography", "Typography"], ["spacing", "Spacing & density"], ["radius", "Radius & the Facet cut"], ["elevation", "Elevation & focus"], ["motion", "Motion", "New"], ["icons", "Icons"]] },
   ];
   const groups = [...new Set(R.map((c) => c.group))];
   groups.forEach((g) => PAGES.push({ group: g === "Signature" ? "Signature components" : g, items: R.filter((c) => c.group === g).map((c) => ["components/" + c.slug, c.name]) }));
@@ -56,7 +56,7 @@
   const P = {};
   P.introduction = () => page("Getting started", "Facet UI", "A token-driven UI kit for product teams — Figma library, design tokens and a framework-agnostic CSS/JS implementation that mirrors shadcn/ui's component model with its own visual language.",
     `<div class="ex-cards">
-      ${[["layers", "88 components", "53 variant sets, 420+ variants in Figma; the most-used 30 are implemented here."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
+      ${[["layers", "88 components", "53 variant sets, 420+ variants in Figma; the most-used 30 are implemented here."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="5"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
     </div>
     <h2 id="principles">Design principles</h2>
     <ul class="prose"><li><b>Tokens first.</b> Every color, space, radius and type style in the components is a variable. Change the token, not the component.</li>
@@ -196,6 +196,58 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
     <h2 id="focus">Focus ring</h2><div class="row"><button class="btn" style="box-shadow:var(--ring)">Focused</button><button class="btn btn-destructive" style="box-shadow:var(--ring-danger)">Danger focus</button><input class="input" style="width:220px;box-shadow:var(--ring);border-color:var(--border-focus)" value="Focused input"></div>
     ${codeBlock(`:focus-visible { box-shadow: var(--ring); } /* 1.5px surface gap + 3px border/focus */`, "js")}`);
 
+  P.motion = () => page("Foundations", "Motion & micro-interactions", "Every component responds to the cursor with a small, springy motion — fast enough to feel instant, soft enough to feel alive. Hover anything on this site to try it.", `
+    <h2 id="principles">Principles</h2>
+    <ul class="prose"><li><b>Responsive, not decorative.</b> Motion confirms an action (press, select, open) or guides the eye (sliding indicators). Nothing moves on its own except live-status pulses.</li>
+    <li><b>Fast.</b> 80–320ms. State changes use a gentle spring overshoot; exits are quicker than entrances.</li>
+    <li><b>Transform & opacity.</b> Animations stay on the compositor, so they never cause layout shifts or jank.</li>
+    <li><b>Respectful.</b> <code>prefers-reduced-motion</code> turns everything off, and so does <code>&lt;html data-motion="off"&gt;</code> (the ⚡ toggle in the header).</li></ul>
+    <h2 id="try">Try it</h2>
+    <div class="example"><div class="preview">
+      <button class="btn" data-magnetic>${i("sparkles")} Magnetic button</button>
+      <button class="btn btn-outline">Continue ${i("arrow-right")}</button>
+      <button class="btn btn-secondary icon-btn" aria-label="Add">${i("plus")}</button>
+      <button class="btn btn-ghost icon-btn" aria-label="Notifications">${i("bell")}</button>
+      <button class="btn btn-ghost icon-btn" aria-label="Delete">${i("trash-2")}</button>
+      <label class="switch"><input type="checkbox" role="switch" checked> Spring switch</label>
+      <label class="check"><input type="checkbox"><span>Draw a check</span></label>
+    </div>
+    <div class="preview" style="padding-top:0">
+      <div class="card kpi" data-tilt="6" style="width:260px"><span class="kpi-label">Tilt + spotlight card</span><span class="kpi-value">$248,920</span><span class="t-caption text-tertiary">Hover and move the cursor</span></div>
+      <div class="tabs-pill" role="tablist" aria-label="Range"><button class="tab" role="tab" aria-selected="false">Day</button><button class="tab" role="tab" aria-selected="true">Week</button><button class="tab" role="tab" aria-selected="false">Month</button></div>
+      <div class="menu" role="menu" style="width:220px"><button class="menu-item" role="menuitem">${i("pencil")} Gliding highlight</button><button class="menu-item" role="menuitem">${i("copy")} Duplicate</button><button class="menu-item" role="menuitem">${i("download")} Export</button><button class="menu-item danger" role="menuitem">${i("trash-2")} Delete</button></div>
+    </div></div>
+    <h2 id="tokens">Motion tokens</h2>
+    <table class="api"><thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead><tbody>
+      <tr><td><code>--duration-instant</code></td><td>80ms</td><td>Press feedback</td></tr>
+      <tr><td><code>--duration-fast</code></td><td>120ms</td><td>Color, background</td></tr>
+      <tr><td><code>--duration-base</code></td><td>200ms</td><td>Shadows, fades</td></tr>
+      <tr><td><code>--duration-slow</code></td><td>320ms</td><td>Springs: indicators, pops, lifts</td></tr>
+      <tr><td><code>--duration-slower</code></td><td>480ms</td><td>Overlays, reveals</td></tr>
+      <tr><td><code>--ease-out</code></td><td>cubic-bezier(.2,.8,.2,1)</td><td>Default exit / fade</td></tr>
+      <tr><td><code>--ease-spring</code></td><td>cubic-bezier(.34,1.56,.64,1)</td><td>State changes with a soft overshoot</td></tr>
+      <tr><td><code>--ease-in-out</code></td><td>cubic-bezier(.65,0,.35,1)</td><td>Height / loops</td></tr>
+      <tr><td><code>--lift-sm / --lift-md</code></td><td>-1px / -2px</td><td>Hover lift for controls / cards</td></tr>
+      <tr><td><code>--press-scale</code></td><td>.97</td><td>Press feedback</td></tr></tbody></table>
+    <h2 id="setup">Setup</h2>
+    ${codeBlock(`<link rel="stylesheet" href="assets/motion.css">   <!-- after facet.css -->
+<script src="assets/motion.js" defer></script>        <!-- after facet.js -->
+
+<div class="card" data-tilt="6">…</div>               <!-- 3D tilt, max 6° -->
+<button class="btn" data-magnetic="0.12">…</button>   <!-- follows the cursor, max 6px -->
+<span data-countup>$248,920</span>                    <!-- counts up on first view -->`, "html")}
+    ${codeBlock(`Facet.motion.set("off")      // or "on" — persisted per browser
+Facet.motion.refresh(el)    // after injecting new markup (SPA routes, modals)`, "js")}
+    <h2 id="catalog">Interaction catalog</h2>
+    <table class="api"><thead><tr><th>Component</th><th>Trigger</th><th>Behaviour</th></tr></thead><tbody>
+    ${R.filter((c) => MOTION[c.slug]).map((c) => `<tr><td><a href="#/components/${c.slug}">${c.name}</a></td><td>${MOTION[c.slug][0]}</td><td>${MOTION[c.slug][1]}</td></tr>`).join("")}</tbody></table>
+    <h2 id="react-motion">In React</h2><p>The CSS layer works unchanged with shadcn/ui markup. For JS-driven effects (tilt, magnetic, sliding indicators) use <code>motion</code> (Framer Motion) with the same values:</p>
+    ${codeBlock(`import { motion } from "motion/react"
+const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-spring @ 320ms
+
+<motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.97 }} transition={spring} />
+<motion.span layoutId="tab-indicator" transition={spring} />    // sliding tab underline`, "js")}`);
+
   P.icons = () => page("Foundations", "Icons", `Lucide (ISC). ${window.FACET_ICONS.length} icons are bundled in the sprite; the Figma file has 100 as components. Click to copy.`, `
     <div class="input-group" style="max-width:360px;margin-bottom:16px">${i("search")}<input class="input" id="icon-q" placeholder="Filter icons…"></div>
     <div class="icon-grid" id="icon-grid">${window.FACET_ICONS.map((n) => `<button class="icon-cell" data-copy-text='<svg class="icon"><use href="#${n}"/></svg>' data-name="${n}">${i(n)}${n}</button>`).join("")}</div>
@@ -203,16 +255,53 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
 <svg class="icon"><use href="#sparkles"/></svg>  <!-- .icon-sm / .icon-lg -->`, "html")}
     <p>Need more? Add any icon from <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a> to the sprite, or use <code>lucide-react</code> in React.</p>`);
 
-  P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
+  P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" data-tilt="5" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
     <p>The Figma file has 10 complete templates (26 screens) — CRM, project management, AI workspace, e-commerce, finance, calendar, settings, auth and marketing.</p>`);
   ["dashboard", "login", "settings"].forEach((s) => {
     P["examples/" + s] = () => page(`Examples ${i("chevron-right", "icon-sm")} ${s}`, s[0].toUpperCase() + s.slice(1), `Built from Facet components. <a href="examples/${s}.html" target="_blank" rel="noopener">Open standalone ${i("external-link", "icon-sm")}</a>`,
       `<div class="example"><iframe class="example-frame" src="examples/${s}.html" title="${s} example" loading="lazy"></iframe></div>`);
   });
 
+  const MOTION = {
+    button: ["Hover", "Lifts 1px, gains a soft shadow and a spotlight that follows the cursor."], 
+    toggle: ["Press / select", "Presses to 97%; in single-select groups a pill glides to the chosen option."],
+    input: ["Focus", "Focus ring springs open; leading icon turns brand and scales up; invalid fields shake on submit."],
+    field: ["Focus / error", "Same spring focus as Input; error text stays put so layout never jumps."],
+    checkbox: ["Check", "Box pops with a spring and the check mark draws left-to-right; hover scales 1.08."],
+    switch: ["Toggle", "Thumb springs across and stretches while pressed (like iOS); hover shows a soft halo."],
+    slider: ["Drag", "Thumb grows on hover and more while dragging; progress bars ease to their value with a moving sheen."],
+    "input-otp": ["Type", "Each slot lifts on focus and pops when a digit lands; focus auto-advances."],
+    dropzone: ["Hover / drag", "Icon floats up; the zone swells slightly while a file is dragged over."],
+    badge: ["Hover / live", "Lifts 1px; success dots pulse gently to signal live status."],
+    avatar: ["Hover", "Avatar lifts and scales; groups fan out so each face is visible."],
+    kbd: ["Press", "Key depresses (bottom border collapses) when hovered or when its button is pressed."],
+    card: ["Hover", "Border tints toward the brand and a radial spotlight tracks the cursor; KPI values count up on first view."],
+    table: ["Hover", "Row tint; the row avatar tilts and scales; action menus stagger in."],
+    calendar: ["Hover / select", "Days scale on hover; the selected day pops."],
+    charts: ["Reveal / hover", "Bars grow from the baseline with a stagger when scrolled into view; hovered bars brighten and legends dim the others."],
+    alert: ["Enter", "Rises in and the signal rail draws downward."],
+    toast: ["Enter / exit", "Springs up from below, shows a draining progress line (pauses on hover) and slides out right."],
+    "empty-state": ["Idle", "Icon floats with a slow breathing motion."],
+    dialog: ["Open", "Backdrop blurs; panel scales up from 95% with a gentle overshoot."],
+    sheet: ["Open", "Sheet slides in from the edge; drawer rises from the bottom with a spring."],
+    "dropdown-menu": ["Open / hover", "Menu scales from its trigger corner, items stagger in, and a highlight glides between items."],
+    popover: ["Open / hover", "Tooltips wait 120ms, then spring in; popovers scale from 96%."],
+    accordion: ["Expand", "Height animates open with a spring; the chevron flips; the row nudges right on hover."],
+    tabs: ["Select", "The underline (or pill) slides to the new tab with a spring instead of jumping."],
+    breadcrumb: ["Hover", "Page buttons lift; the current page pops; chevrons nudge in their direction."],
+    chip: ["Press / select", "Press-to-97% with a ripple; the check icon pops in when selected; links underline from the left."],
+    stepper: ["Reveal", "Progress bars fill one after another when the stepper scrolls into view."],
+    sidebar: ["Hover", "A highlight glides between items; icons scale up slightly."],
+    "command-palette": ["Open / navigate", "Results stagger in; the selection highlight glides with arrow keys."],
+    ai: ["Compose / send", "Composer lifts on focus; the send arrow flies out and back; messages rise in; the AI mark shimmers."],
+    kanban: ["Hover / drag", "Cards lift on hover; while grabbed they tilt 1.5° with a deeper shadow."],
+    timeline: ["Reveal / live", "Items rise in sequence; AI nodes pulse; unread notifications ping."],
+    pricing: ["Idle / hover", "The featured plan has a slowly rotating gradient border; cards lift on hover."],
+  };
   R.forEach((c) => {
     P["components/" + c.slug] = () => page(`Components ${i("chevron-right", "icon-sm")} ${c.group}`, c.name, c.desc,
       c.examples.map(example).join("") +
+      (MOTION[c.slug] ? `<h2 id="motion">Motion</h2><div class="callout">${i("zap")}<div><b>${MOTION[c.slug][0]}.</b> ${MOTION[c.slug][1]} Turned off automatically for reduced-motion users. <a href="#/motion">Motion guide</a></div></div>` : "") +
       `<h2 id="react">React (shadcn/ui + Facet preset)</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
@@ -226,7 +315,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
     const main = $(".docs-main"); main.innerHTML = fn();
     const idx = FLAT.findIndex((f) => f.id === cur), prev = FLAT[idx - 1], next = FLAT[idx + 1];
     main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav>`);
-    renderSide(cur); toc(); Facet.enhance(main); document.body.classList.remove("nav-open");
+    renderSide(cur); toc(); Facet.enhance(main); if (Facet.motion) Facet.motion.refresh(document); document.body.classList.remove("nav-open");
     document.title = (FLAT[idx] ? FLAT[idx].label + " — " : "") + "Facet UI";
     window.scrollTo(0, 0);
     if (cur === "brand-colors") studio();
@@ -270,12 +359,14 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
     $("#mode-btn").setAttribute("aria-label", s.mode === "dark" ? "Switch to light mode" : "Switch to dark mode");
     $("#density-btn").setAttribute("aria-pressed", s.density === "compact");
     $("#brand-dot").style.setProperty("--sw", s.custom || T.presets[s.brand] || "#5d4ff3");
+    const mb = $("#motion-btn"); if (mb) mb.setAttribute("aria-pressed", document.documentElement.dataset.motion !== "off");
     document.querySelectorAll("#brand-menu [data-b]").forEach((b) => b.setAttribute("aria-checked", !s.custom && b.dataset.b === s.brand));
   }
   $("#brand-menu").innerHTML = `<div class="menu-label">Brand</div>` + Object.entries(T.presets).map(([n, h]) => `<button class="menu-item" role="menuitemradio" data-b="${n}"><span class="swatch-dot" style="--sw:${h}"></span>${n[0].toUpperCase() + n.slice(1)}</button>`).join("") + `<div class="menu-sep"></div><a class="menu-item" role="menuitem" href="#/brand-colors">${i("palette")} Custom color…</a>`;
   document.addEventListener("click", (e) => {
     const b = e.target.closest("[data-b]"); if (b) T.setBrand(b.dataset.b);
     if (e.target.closest("#mode-btn")) T.setMode(T.get().mode === "dark" ? "light" : "dark");
+    if (e.target.closest("#motion-btn") && Facet.motion) { Facet.motion.set(document.documentElement.dataset.motion === "off" ? "on" : "off"); syncHeader(); }
     if (e.target.closest("#density-btn")) T.setDensity(T.get().density === "compact" ? "comfortable" : "compact");
     if (e.target.closest(".mobile-nav")) document.body.classList.toggle("nav-open");
     const sc = e.target.closest("[data-scroll]"); if (sc) document.getElementById(sc.dataset.scroll).scrollIntoView({ behavior: "smooth" });

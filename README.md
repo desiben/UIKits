@@ -21,17 +21,18 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 3. [Quick start](#quick-start)
 4. [The living style guide](#the-living-style-guide)
 5. [Theming: change purple to any color](#theming-change-purple-to-any-color)
-6. [Design tokens](#design-tokens)
-7. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
-8. [Components](#components)
-9. [Example pages](#example-pages)
-10. [The Figma file](#the-figma-file)
-11. [Accessibility](#accessibility)
-12. [Browser support](#browser-support)
-13. [Regenerating tokens](#regenerating-tokens)
-14. [Project structure](#project-structure)
-15. [Known limitations](#known-limitations)
-16. [Credits and licenses](#credits-and-licenses)
+6. [Motion & micro-interactions](#motion--micro-interactions)
+7. [Design tokens](#design-tokens)
+8. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
+9. [Components](#components)
+10. [Example pages](#example-pages)
+11. [The Figma file](#the-figma-file)
+12. [Accessibility](#accessibility)
+13. [Browser support](#browser-support)
+14. [Regenerating tokens](#regenerating-tokens)
+15. [Project structure](#project-structure)
+16. [Known limitations](#known-limitations)
+17. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -73,6 +74,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 │   │   ├── tokens.css           ← copy of tokens/tokens.css
 │   │   ├── facet.css            ← component styles
 │   │   ├── facet.js             ← theming API + interactive behaviours
+│   │   ├── motion.css / motion.js ← micro-interactions (hover, press, spring, reveal)
 │   │   ├── icons.js             ← Lucide icon sprite (89 icons)
 │   │   ├── docs.css / docs.js   ← style guide chrome (not needed in your app)
 │   │   ├── registry.js          ← component docs data (examples, API, a11y)
@@ -105,7 +107,7 @@ python3 -m http.server 8000      # or: npx serve .
 
 ### 2. Use Facet in your own HTML
 
-Copy `styleguide/assets/tokens.css`, `facet.css`, `facet.js` and `icons.js` into your project:
+Copy `styleguide/assets/tokens.css`, `facet.css`, `motion.css`, `facet.js`, `motion.js` and `icons.js` into your project:
 
 ```html
 <!doctype html>
@@ -115,8 +117,10 @@ Copy `styleguide/assets/tokens.css`, `facet.css`, `facet.js` and `icons.js` into
   <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/tokens.css">
   <link rel="stylesheet" href="assets/facet.css">
+  <link rel="stylesheet" href="assets/motion.css">   <!-- optional: micro-interactions -->
   <script src="assets/icons.js"></script>
   <script src="assets/facet.js"></script>
+  <script src="assets/motion.js"></script>          <!-- optional: cursor-aware effects -->
 </head>
 <body>
   <button class="btn"><svg class="icon"><use href="#plus"/></svg> New project</button>
@@ -222,6 +226,54 @@ document.addEventListener("facet:theme", (e) => console.log(e.detail));
 Choices are saved in `localStorage` (key `facet-theme`) and restored on load.
 
 ![Dashboard in Lagoon + dark](docs/images/example-dashboard-dark-lagoon.png)
+
+---
+
+## Motion & micro-interactions
+
+Every component reacts to the cursor with a small, springy motion, in the spirit of Kokonut UI, Motion and Animate UI. It's fast enough to feel instant and soft enough to feel alive. The effects come from two optional, dependency-free files: `motion.css` (CSS-only effects) and `motion.js` (cursor-aware effects).
+
+**▶ [Watch the 20-second demo](docs/motion/facet-micro-interactions.mp4)**
+
+![Micro-interactions demo](docs/motion/facet-micro-interactions.gif)
+
+| Component | Interaction |
+|---|---|
+| **Button** | Lifts 1 px with a shadow and a spotlight that follows the cursor. Presses to 97% with a ripple. Icons act out their meaning: arrows nudge forward, plus rotates 90°, the trash can wiggles, the bell rings, send flies off. |
+| **Input / Field** | The focus ring springs open and the leading icon turns brand-colored. Invalid fields shake on submit. |
+| **Checkbox / Radio** | The box pops with a spring and the check mark draws left → right. |
+| **Switch** | The thumb springs across and stretches while pressed, iOS-style. A soft halo appears on hover. |
+| **Slider / Progress** | The thumb grows on hover and while dragging. Bars ease to their value with a moving sheen. |
+| **Tabs / Toggle group** | The underline or pill *glides* to the new option instead of jumping. |
+| **Menu / Command palette / Sidebar** | A highlight glides between items with the signal rail. Items stagger in when a menu opens. |
+| **Card / KPI** | A brand-tinted spotlight tracks the cursor. Optional 3D tilt (`data-tilt`). KPI numbers count up the first time they scroll into view. |
+| **Charts** | Bars grow from the baseline with a stagger. The hovered bar brightens and the legend dims the other series. |
+| **Dialog / Sheet / Drawer** | The backdrop blurs and the panel springs in from 95%, the edge or the bottom. |
+| **Toast** | Springs up from below with a draining progress line (pauses on hover), then slides out. |
+| **Accordion** | Height springs open, the chevron flips, and the row nudges on hover. |
+| **Avatar group / Badge / Kbd** | Avatars fan out on hover, success dots pulse, and keys depress. |
+| **Kanban / Pricing / AI** | Cards lift and tilt while dragged. The featured plan has a rotating gradient border. The composer lifts on focus and the AI mark shimmers. |
+
+**Using it**
+
+```html
+<div class="card" data-tilt="6">…</div>              <!-- 3D tilt, max 6° -->
+<button class="btn" data-magnetic="0.12">…</button>  <!-- pulls toward the cursor, max 6px -->
+<span data-countup>$248,920</span>                   <!-- counts up on first view -->
+```
+
+```js
+Facet.motion.set("off");     // or "on" (saved per browser)
+Facet.motion.refresh(el);    // after injecting new markup (SPA routes, modals)
+```
+
+**Motion tokens:** `--duration-instant` 80 ms · `--duration-fast` 120 ms · `--duration-base` 200 ms · `--duration-slow` 320 ms · `--duration-slower` 480 ms · `--ease-out` · `--ease-spring` `cubic-bezier(.34,1.56,.64,1)` · `--ease-in-out` · `--lift-sm/md` · `--press-scale`.
+
+**Accessibility:** everything is switched off for users with `prefers-reduced-motion`, and with `<html data-motion="off">` (the ⚡ button in the style guide header). Animations only use `transform` and `opacity`, so they never shift layout.
+
+**In Figma:** the 78 interactive component states use Smart Animate with a Gentle spring (320 ms, or 120 ms for press). Hover variants of buttons, icon buttons and chips gain Elevation/2 for a lift. The full spec is in **07 — Documentation → Motion & micro-interactions**. Effects that follow the cursor (spotlight, tilt, magnetic pull, gliding indicators) can't be expressed in Figma prototypes, so they exist only in code.
+
+**In React:** the CSS layer works unchanged with shadcn/ui markup. For the JS-driven effects, use `motion` (Framer Motion) with `{ type: "spring", stiffness: 420, damping: 28 }`, which roughly matches `--ease-spring` at 320 ms.
 
 ---
 
@@ -366,7 +418,7 @@ See [`figma/README.md`](figma/README.md) for a full walkthrough.
 - **Visible focus everywhere.** A two-layer focus ring (surface gap + `border-focus`) shows on light, dark and colored backgrounds, with a danger variant for destructive actions.
 - **Semantic HTML first.** Native `<button>`, `<input>`, `<details>` and `<table>`, with the correct ARIA roles for tabs, menus, dialogs, switches and OTP inputs.
 - **Keyboard support.** Arrow keys for tabs and menus, Escape closes overlays and menus, focus returns to the trigger, ⌘K search, OTP auto-advance, backspace and paste.
-- **Reduced motion.** `prefers-reduced-motion` disables animations.
+- **Reduced motion.** `prefers-reduced-motion` (or `data-motion="off"`) disables every animation and micro-interaction.
 
 See [Known limitations](#known-limitations) for the open accessibility notes.
 
@@ -402,6 +454,7 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `tokens/tokens.css` | All CSS variables | ✅ |
 | `styleguide/assets/facet.css` | Component classes | ✅ (if not using Tailwind) |
 | `styleguide/assets/facet.js` | Theme API + behaviours (≈ 12 KB unminified, no deps) | ✅ (optional) |
+| `styleguide/assets/motion.css` + `motion.js` | Micro-interactions (≈ 36 KB unminified, no deps) | ✅ (optional) |
 | `styleguide/assets/icons.js` | Lucide sprite | ✅ (or use `lucide` / `lucide-react`) |
 | `styleguide/assets/docs.*`, `registry.js`, `tokens-meta.js` | Style guide site only | ❌ |
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
@@ -429,4 +482,4 @@ Facet aims to be honest about what isn't finished:
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Choose and add a `LICENSE` file for Facet UI itself before distributing it publicly.
 
-<div align="center"><sub>Facet UI v1.0 · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
+<div align="center"><sub>Facet UI v1.1 · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
