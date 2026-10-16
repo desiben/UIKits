@@ -9,7 +9,7 @@ Everything on the live [marketing page](https://facetui.vercel.app/marketing/) i
 | `src/reel.html` + `src/reel.js` | Components reel: live components, a scripted real mouse and virtual-time animations |
 | `src/screens/` | 1x template screenshots exported from Figma |
 | `src/fonts/` | Mona Sans (SIL OFL 1.1) |
-| `gumroad/mockups.html` | Gumroad / marketplace listing images with monitor, laptop and phone mockups. Rendered PNGs live next to it: cover, highlights, templates, thank-you, a 1200×1200 thumbnail and `facet-ui-gumroad-long.png` (1280-wide description image) |
+| `listings/mockups.html` | Store listing images with monitor, laptop and phone mockups, rendered into `listings/gumroad/` (1920×1080, 1200×1200 thumbnail, 1280-wide long image), `listings/ui8/` (1600×1200) and `listings/envato/` (80×80 thumbnail, 590×300 preview, 1920×1080 screenshots) |
 
 ## Re-render
 
@@ -20,7 +20,7 @@ npm i -D playwright            # once
 node scripts/render_marketing_images.js          # → styleguide/marketing/media/*.jpg + thumbs/*.webp
 node scripts/render_marketing_video.js styleguide/marketing/media/facet-ui-demo
 node scripts/render_marketing_reel.js  styleguide/marketing/media/facet-ui-components-reel
-node scripts/render_gumroad_images.js            # → marketing/gumroad/*.png
+node scripts/render_listing_images.js            # → marketing/listings/{gumroad,ui8,envato}/
 # WebM versions
 ffmpeg -i styleguide/marketing/media/facet-ui-demo.mp4 -c:v libvpx-vp9 -b:v 0 -crf 34 styleguide/marketing/media/facet-ui-demo.webm
 ```

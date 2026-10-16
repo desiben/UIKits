@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Facet UI — Gumroad mockups</title>
+<title>Facet UI — marketplace listing mockups</title>
 <!--
-  Gumroad / marketplace listing images with device mockups.
-  Each <section class="board"> is one image. Render them with:
-    node scripts/render_gumroad_images.js
-  Open this file over http (python3 -m http.server) to preview; ?board=<id> shows one board.
+  Marketplace listing images (Gumroad, UI8, Envato) with device mockups.
+  Each <section class="board"> is one image. Render them all with:
+    node scripts/render_listing_images.js
+  Open this file over http (python3 -m http.server) to preview:
+    ?board=<id>                       one board
+    ?board=<id>&frame=1600x1200       the board fitted inside a W×H canvas (fit=contain, default)
+    ?board=<id>&frame=590x300&fit=cover   the board scaled to fill and cropped
 -->
 <style>
   @font-face { font-family: "Mona Sans"; src: url("../src/fonts/mona-sans-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900; }
   :root { --ink: #04060f; --navy: #0a1a4a; --blue: #2e5bff; --brand: #5d4ff3; --brand-2: #8f84ff; --text: #f4f6ff; --muted: #a9b3d6; }
   * { box-sizing: border-box; }
   body { margin: 0; background: #222; font-family: "Mona Sans", system-ui, sans-serif; color: var(--text); -webkit-font-smoothing: antialiased; }
-  .board { position: relative; width: 1920px; height: 1080px; overflow: hidden; margin: 0 auto 40px; isolation: isolate;
-    background: radial-gradient(1200px 700px at 78% 62%, rgb(46 91 255 / .55), transparent 65%), radial-gradient(900px 600px at 10% 110%, rgb(93 79 243 / .35), transparent 70%), linear-gradient(180deg, #02040b 0%, #061032 70%, #0a1d5c 100%); }
+  .board, .canvas { --board-bg: radial-gradient(1200px 700px at 78% 62%, rgb(46 91 255 / .55), transparent 65%), radial-gradient(900px 600px at 10% 110%, rgb(93 79 243 / .35), transparent 70%), linear-gradient(180deg, #02040b 0%, #061032 70%, #0a1d5c 100%); }
+  .board { position: relative; width: 1920px; height: 1080px; overflow: hidden; margin: 0 auto 40px; isolation: isolate; background: var(--board-bg); }
+  .canvas { position: relative; overflow: hidden; background: var(--board-bg); }
+  .canvas > .board { position: absolute; margin: 0; transform-origin: 0 0; background: none; overflow: visible; }
+  .board.icon { width: 400px; height: 400px; display: grid; place-items: center; }
+  .board.icon .brand b { width: 220px; height: 220px; border-radius: 60px 18px 60px 60px; }
+  .board.icon .brand b::after { width: 78px; height: 78px; border-radius: 22px 8px 22px 22px; }
   .board.square { width: 1200px; height: 1200px; }
   .board::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgb(255 255 255 / .035) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / .035) 1px, transparent 1px); background-size: 80px 80px; mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000, transparent 80%); }
 
@@ -170,11 +178,29 @@
   <div class="phone" style="left:850px;top:560px;width:270px;transform:rotate(5deg)"><img src="../src/screens/m-dash-light.png" alt=""></div>
 </section>
 
+<!-- 6. Icon (Envato 80×80 thumbnail; rendered at 400 and scaled down) -->
+<section class="board icon" id="icon"><div class="brand"><b></b></div></section>
+
 <script>
-  var only = new URLSearchParams(location.search).get("board");
+  var params = new URLSearchParams(location.search);
+  var only = params.get("board");
   if (only) {
     document.body.classList.add("single");
     document.querySelectorAll(".board").forEach(function (b) { if (b.id !== only) b.remove(); });
+    var frame = (params.get("frame") || "").match(/^(\d+)x(\d+)$/);
+    var board = document.getElementById(only);
+    if (frame && board) {
+      // Fit the board into a W×H canvas: "contain" letterboxes on the board
+      // background, "cover" fills the canvas and crops the overflow.
+      var W = +frame[1], H = +frame[2], bw = board.offsetWidth, bh = board.offsetHeight;
+      var scale = (params.get("fit") === "cover" ? Math.max : Math.min)(W / bw, H / bh);
+      var canvas = document.createElement("div");
+      canvas.className = "canvas"; canvas.id = "canvas";
+      canvas.style.width = W + "px"; canvas.style.height = H + "px";
+      board.parentNode.insertBefore(canvas, board); canvas.appendChild(board);
+      board.style.transform = "scale(" + scale + ")";
+      board.style.left = (W - bw * scale) / 2 + "px"; board.style.top = (H - bh * scale) / 2 + "px";
+    }
   }
 </script>
 </body>

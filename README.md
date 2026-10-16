@@ -34,7 +34,7 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 6. [Motion & micro-interactions](#motion--micro-interactions)
 7. [Marketplace previews](#marketplace-previews)
 8. [Marketing kit: videos & images](#marketing-kit-videos--images)
-9. [Selling on Gumroad](#selling-on-gumroad)
+9. [Selling on Gumroad, Envato and UI8](#selling-on-gumroad-envato-and-ui8)
 10. [Design tokens](#design-tokens)
 11. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
 12. [Components](#components)
@@ -98,10 +98,10 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 ├── scripts/
 │   ├── build_tokens.py          ← regenerates tokens + style guide assets
 │   ├── generate_palette.py      ← OKLCH palette generator (with contrast checks)
-│   └── render_gumroad_images.js ← renders marketing/gumroad/*.png
+│   └── render_listing_images.js ← renders marketing/listings/*
 ├── marketing/
 │   ├── src/                     ← sources for the marketing videos and images
-│   └── gumroad/                 ← Gumroad listing images with device mockups
+│   └── listings/                ← listing images for Gumroad, UI8 and Envato
 ├── figma/
 │   └── README.md                ← page-by-page guide to the Figma file
 └── docs/images/                 ← screenshots used in this README
@@ -349,40 +349,45 @@ To re-render them (for example after changing the brand), see [`marketing/README
 
 ---
 
-## Selling on Gumroad
+## Selling on Gumroad, Envato and UI8
 
-Facet UI is sold on Gumroad and other UI kit marketplaces, and the storefront is the ETKits site ([etkits.vercel.app](https://etkits.vercel.app), the `main` branch).
+Facet UI is sold on **Gumroad**, **Envato Market** and **UI8**. The storefront is the ETKits site ([etkits.vercel.app](https://etkits.vercel.app), the `main` branch), which lists all three stores.
 
 ### Listing images
 
-`marketing/gumroad/` has listing images with device mockups, built from the real template screens:
+`marketing/listings/` has a set of listing images for each store, all rendered from one source (`marketing/listings/mockups.html`) with monitor, laptop and phone mockups built from the real template screens:
 
-| File | Size | Use |
+| Store | Folder | Files |
 |---|---|---|
-| `01-cover.png` | 1920×1080 | Gumroad cover: title, feature checklist, Figma badge, monitor + phone |
-| `02-highlights.png` | 1920×1080 | Product highlights, 6 tiles |
-| `03-templates.png` | 1920×1080 | 10 app templates, 26 screens |
-| `04-thank-you.png` | 1920×1080 | Thank-you image with laptop and feature pills |
-| `05-thumbnail-square.png` | 1200×1200 | Gumroad thumbnail |
-| `facet-ui-gumroad-long.png` | 1280 wide | Long description image (the four boards stacked) |
+| **Gumroad** | `marketing/listings/gumroad/` | 4 × 1920×1080 gallery images (cover, highlights, templates, thank-you), a 1200×1200 thumbnail and `facet-ui-gumroad-long.png` (1280 wide, for the description) |
+| **UI8** | `marketing/listings/ui8/` | 4 × 1600×1200 (4:3) gallery images |
+| **Envato Market** | `marketing/listings/envato/` | `thumbnail-80x80.png`, `preview-590x300.jpg` and 4 × 1920×1080 JPG screenshots |
 
 | | |
 |---|---|
-| ![Cover](marketing/gumroad/01-cover.png) | ![Highlights](marketing/gumroad/02-highlights.png) |
-| ![Templates](marketing/gumroad/03-templates.png) | ![Thank you](marketing/gumroad/04-thank-you.png) |
+| ![Cover](marketing/listings/gumroad/01-cover.png) | ![Highlights](marketing/listings/gumroad/02-highlights.png) |
+| ![Templates](marketing/listings/gumroad/03-templates.png) | ![Thank you](marketing/listings/gumroad/04-thank-you.png) |
 
-Edit `marketing/gumroad/mockups.html` and re-render with `node scripts/render_gumroad_images.js` (see [`marketing/README.md`](marketing/README.md)).
+The sizes follow each store's usual listing format; check the current upload form before submitting. Edit `mockups.html` (or the sizes in `scripts/render_listing_images.js`) and re-render everything with `node scripts/render_listing_images.js` (see [`marketing/README.md`](marketing/README.md)).
 
 ### Keep the kit behind the purchase
 
-- **Figma:** never link the source file publicly. Share it only as *Only people invited*, turn off copying and export for viewers, and give buyers a separate sale copy (or a `.fig` download) through Gumroad.
+| Store | How buyers get the Figma file |
+|---|---|
+| **Gumroad** | Gumroad emails a unique license key; the buyer unlocks the file at [etkits.vercel.app/claim](https://etkits.vercel.app/claim). |
+| **Envato Market** | Each sale has a unique purchase code; the buyer unlocks the file on the same claim page (verified with the Envato author API). |
+| **UI8** | UI8 hosts and delivers the files itself; upload the `.fig`/zip there. |
+
+- **Figma:** never link the master file. Keep it *Only people invited*, turn off copying and export for viewers, and use a separate sale copy per store so a leak can be traced and replaced.
 - **Repo:** keep `desiben/UIKits` private. The ETKits site and the public style guide must not link to it.
 - **Live preview:** [facetui.vercel.app](https://facetui.vercel.app) is public, so treat it as a demo. Everything it serves (CSS, JS, tokens) can be saved from a browser.
-- **Buy buttons:** the store URL is set once, in `ETKITS_BUY_URL` in `assets/kits.js` on `main`.
+- **Envato exclusivity:** selling on Gumroad and UI8 as well means listing on Envato as a *non-exclusive* author.
+
+Claim-page setup (store IDs, tokens and Figma links as Vercel environment variables) is documented in the README on `main`.
 
 ### Licensing
 
-Sell license tiers as Gumroad product versions (for example Personal, Commercial and Team/Extended), turn on Gumroad license keys so each buyer gets a unique key, and ship a `LICENSE.md` in the download that forbids resale and redistribution.
+Each store applies its own license: Gumroad uses yours (sell Personal, Commercial and Team/Extended tiers as product versions and ship a `LICENSE.md` that forbids resale and redistribution), Envato uses its Regular and Extended licenses, and UI8 uses its standard license.
 
 ---
 
@@ -569,7 +574,7 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |
 | `marketing/`, `scripts/render_marketing_*.js` | Sources and render scripts for the marketing kit | ❌ |
-| `marketing/gumroad/`, `scripts/render_gumroad_images.js` | Gumroad listing images and their renderer | ❌ |
+| `marketing/listings/`, `scripts/render_listing_images.js` | Store listing images and their renderer | ❌ |
 
 ---
 
