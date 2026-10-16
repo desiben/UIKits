@@ -80,8 +80,9 @@ button.stage-panel { cursor: pointer; }
 .tabs button[aria-selected="true"] { color: #006fee; border-bottom-color: #006fee; }
 .tabs button:hover { color: var(--fg); }
 .works { margin: 64px 0 0; font-size: 12px; color: var(--dim); }
-.wordmarks { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 36px; }
-.wordmarks li { font-size: 16px; font-weight: 600; letter-spacing: -0.02em; color: #a1a1aa; }
+.logos { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 16px 40px; }
+.logos li { display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 700; letter-spacing: -0.03em; color: #a1a1aa; }
+.logos svg { width: 20px; height: 20px; fill: currentColor; stroke: currentColor; }
 
 /* sections */
 .section { padding: 120px 0 0; }
