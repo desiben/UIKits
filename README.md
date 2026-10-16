@@ -6,9 +6,9 @@
 
 It follows shadcn/ui's component model and naming but has its own visual language: the *Facet cut* and the *signal rail*.
 
-[Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [Living style guide](styleguide/index.html) · [Tokens](tokens/) · [Examples](styleguide/examples/) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facetui.vercel.app)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
 
-![Facet UI cover](docs/images/figma-cover.png)
+![Facet UI cover](FacetUI-marketplace-previews/01-cover.png)
 
 </div>
 
@@ -22,17 +22,18 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 4. [The living style guide](#the-living-style-guide)
 5. [Theming: change purple to any color](#theming-change-purple-to-any-color)
 6. [Motion & micro-interactions](#motion--micro-interactions)
-7. [Design tokens](#design-tokens)
-8. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
-9. [Components](#components)
-10. [Example pages](#example-pages)
-11. [The Figma file](#the-figma-file)
-12. [Accessibility](#accessibility)
-13. [Browser support](#browser-support)
-14. [Regenerating tokens](#regenerating-tokens)
-15. [Project structure](#project-structure)
-16. [Known limitations](#known-limitations)
-17. [Credits and licenses](#credits-and-licenses)
+7. [Marketplace previews](#marketplace-previews)
+8. [Design tokens](#design-tokens)
+9. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
+10. [Components](#components)
+11. [Example pages](#example-pages)
+12. [The Figma file](#the-figma-file)
+13. [Accessibility](#accessibility)
+14. [Browser support](#browser-support)
+15. [Regenerating tokens](#regenerating-tokens)
+16. [Project structure](#project-structure)
+17. [Known limitations](#known-limitations)
+18. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -63,6 +64,8 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 ├── README.md                    ← you are here
 ├── CHANGELOG.md
 ├── THIRD_PARTY_NOTICES.md
+├── facet-micro-interactions.mp4 ← 20-second motion demo
+├── FacetUI-marketplace-previews/ ← 8 marketplace images, 1920×1080
 ├── tokens/
 │   ├── tokens.css               ← CSS custom properties (all themes, brands, densities)
 │   ├── facet.tokens.json        ← W3C Design Tokens (DTCG) format
@@ -97,7 +100,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 There's no build step. Serve the folder with any static server:
 
 ```bash
-git clone -b FacetUI https://github.com/desiben/UIKits.git
+git clone https://github.com/desiben/UIKits.git
 cd UIKits/styleguide
 python3 -m http.server 8000      # or: npx serve .
 # open http://localhost:8000
@@ -135,6 +138,8 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 ## The living style guide
 
+**Live at [facetui.vercel.app](https://facetui.vercel.app)** (deployed automatically from `main` by Vercel, root directory `styleguide`).
+
 `styleguide/index.html` is a documentation site in the style of [ui.shadcn.com/docs/components](https://ui.shadcn.com/docs/components), built with Facet itself.
 
 ![Style guide — Button](docs/images/styleguide-button.png)
@@ -149,6 +154,8 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 | **⌘K / Ctrl K search** | Command palette to jump to any page or toggle the theme |
 | **Theme controls** | Brand picker, density toggle and light/dark switch in the header; persisted per browser |
 | **Brand colors studio** | Pick any color, see the generated ramp and contrast ratios, copy the CSS |
+| **Motion** | Micro-interactions on every component, plus a Motion guide page and a ⚡ on/off toggle |
+| **Showcase** | The marketplace previews and the demo video, on the [Showcase page](https://facetui.vercel.app/#/showcase) |
 | **Responsive** | Works down to 390 px (the sidebar becomes a drawer) |
 
 ---
@@ -233,7 +240,7 @@ Choices are saved in `localStorage` (key `facet-theme`) and restored on load.
 
 Every component reacts to the cursor with a small, springy motion, in the spirit of Kokonut UI, Motion and Animate UI. It's fast enough to feel instant and soft enough to feel alive. The effects come from two optional, dependency-free files: `motion.css` (CSS-only effects) and `motion.js` (cursor-aware effects).
 
-**▶ [Watch the 20-second demo](docs/motion/facet-micro-interactions.mp4)**
+**▶ [Watch the 20-second demo](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4)**. You can also see it on the [live Showcase page](https://facetui.vercel.app/#/showcase), or try every effect yourself on the [Motion page](https://facetui.vercel.app/#/motion).
 
 ![Micro-interactions demo](docs/motion/facet-micro-interactions.gif)
 
@@ -257,7 +264,7 @@ Every component reacts to the cursor with a small, springy motion, in the spirit
 **Using it**
 
 ```html
-<div class="card" data-tilt="6">…</div>              <!-- 3D tilt, max 6° -->
+<div class="card" data-tilt="4">…</div>              <!-- 3D tilt, max 4° -->
 <button class="btn" data-magnetic="0.12">…</button>  <!-- pulls toward the cursor, max 6px -->
 <span data-countup>$248,920</span>                   <!-- counts up on first view -->
 ```
@@ -271,9 +278,24 @@ Facet.motion.refresh(el);    // after injecting new markup (SPA routes, modals)
 
 **Accessibility:** everything is switched off for users with `prefers-reduced-motion`, and with `<html data-motion="off">` (the ⚡ button in the style guide header). Animations only use `transform` and `opacity`, so they never shift layout.
 
-**In Figma:** the 78 interactive component states use Smart Animate with a Gentle spring (320 ms, or 120 ms for press). Hover variants of buttons, icon buttons and chips gain Elevation/2 for a lift. The full spec is in **07 — Documentation → Motion & micro-interactions**. Effects that follow the cursor (spotlight, tilt, magnetic pull, gliding indicators) can't be expressed in Figma prototypes, so they exist only in code.
+**In Figma:** the 78 interactive component states use Smart Animate with a Gentle spring (320 ms, or 120 ms for press). Hover variants of buttons, icon buttons and chips gain Elevation/1 for a lift. The full spec is in **07 — Documentation → Motion & micro-interactions**. Effects that follow the cursor (spotlight, tilt, magnetic pull, gliding indicators) can't be expressed in Figma prototypes, so they exist only in code.
 
 **In React:** the CSS layer works unchanged with shadcn/ui markup. For the JS-driven effects, use `motion` (Framer Motion) with `{ type: "spring", stiffness: 420, damping: 28 }`, which roughly matches `--ease-spring` at 320 ms.
+
+---
+
+## Marketplace previews
+
+Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumroad, UI8 or Creative Market. They're in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews) and on the [live Showcase page](https://facetui.vercel.app/#/showcase). In Figma, they're the "Marketplace previews" section on **00 — Start Here**, set to export at 1x and 2x.
+
+| | |
+|---|---|
+| **Cover**<br>![Cover](FacetUI-marketplace-previews/01-cover.png) | **Components**<br>![Components](FacetUI-marketplace-previews/02-components.png) |
+| **Brands & themes**<br>![Brands & themes](FacetUI-marketplace-previews/03-brands-themes.png) | **Templates**<br>![Templates](FacetUI-marketplace-previews/04-templates.png) |
+| **Light & dark**<br>![Light & dark](FacetUI-marketplace-previews/05-light-dark.png) | **Mobile**<br>![Mobile](FacetUI-marketplace-previews/06-mobile.png) |
+| **AI & signature components**<br>![AI & signature components](FacetUI-marketplace-previews/07-ai-signature.png) | **Tokens & developer handoff**<br>![Tokens & developer handoff](FacetUI-marketplace-previews/08-tokens-handoff.png) |
+
+For the listing video, use [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4) (1280×720, 24 s).
 
 ---
 

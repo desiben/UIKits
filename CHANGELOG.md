@@ -8,8 +8,12 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 - Motion layer: `styleguide/assets/motion.css` + `motion.js`. These add micro-interactions to every component: hover lift and cursor spotlight, press ripple, lively icons, spring switches, check-draw, gliding tab/menu/sidebar indicators, 3D tilt (`data-tilt`), magnetic buttons (`data-magnetic`), count-up KPIs, chart reveal, smooth accordions, staggered menus, and toast progress with exit.
 - Motion tokens: `--duration-instant/slow/slower`, `--ease-spring`, `--ease-in-out`, `--ease-bounce`, `--lift-sm/md`, `--press-scale`.
 - A Motion page in the style guide (principles, live demos, tokens, interaction catalog, React mapping), a Motion note on every component page, and a ⚡ motion toggle in the header.
-- Figma: 78 component interactions now use Smart Animate with a Gentle spring. Hover variants of buttons, icon buttons and chips have Elevation/2. New "Motion & micro-interactions" guide on 07 — Documentation.
-- Marketplace previews: 8 images at 1920×1080 on 00 — Start Here, also in `docs/marketplace/`.
+- Figma: 78 component interactions now use Smart Animate with a Gentle spring. Hover variants of buttons, icon buttons and chips have Elevation/1. New "Motion & micro-interactions" guide on 07 — Documentation.
+- Marketplace previews: 8 images at 1920×1080 on 00 — Start Here, also in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/main/FacetUI-marketplace-previews).
+- Demo video [`facet-micro-interactions.mp4`](https://github.com/desiben/UIKits/blob/main/facet-micro-interactions.mp4), and a Showcase page in the style guide.
+
+### Changed
+- Hover states are subtler: a fainter cursor spotlight (2.5%), a lighter brand tint on borders, 1px lifts, smaller shadows (shadow-1 on buttons, shadow-2 on cards) and a gentler tilt (max 3–4°).
 
 ### Fixed
 - The Accordion docs page rendered as one collapsed block, because of an unescaped `<details>` in its description.
