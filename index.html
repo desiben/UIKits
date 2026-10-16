@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ET-UIKits by ELTouch apps</title>
+<meta name="description" content="ET-UIKits: production-ready UI kits by ELTouch apps. Figma libraries, design tokens and coded components in sync. First release: Facet UI.">
+<meta property="og:title" content="ET-UIKits by ELTouch apps">
+<meta property="og:description" content="Production-ready UI kits: Figma libraries, design tokens and coded components in sync. First release: Facet UI.">
+<meta property="og:image" content="kits/facetui/facet-ui-components-reel-poster.jpg">
+<meta name="theme-color" content="#07070c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2315151f'/%3E%3Crect x='7' y='7' width='8' height='8' rx='2' fill='%238f84ff'/%3E%3Crect x='17' y='7' width='8' height='8' rx='2' fill='%23fff' opacity='.5'/%3E%3Crect x='7' y='17' width='8' height='8' rx='2' fill='%23fff' opacity='.5'/%3E%3Crect x='17' y='17' width='8' height='8' rx='2' fill='%23fff' opacity='.25'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/mona-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#"><b aria-hidden="true"><i></i><i></i><i></i><i></i></b>ET-UIKits <small>by ELTouch apps</small></a>
+    <nav>
+      <a href="#kits">Kits</a>
+      <a href="#included" class="hide-sm">What's included</a>
+      <a href="#roadmap" class="hide-sm">Roadmap</a>
+      <a href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">ET-UIKits</span>
+      <h1>UI kits that<br><span class="grad">ship as code.</span></h1>
+      <p class="lead">ET-UIKits is a growing collection of production-ready design systems by ELTouch apps. Each kit pairs a Figma library with design tokens and coded components, kept in sync so designers and developers start from the same source.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#kits">Explore the kits</a>
+        <a class="btn" href="#showreel" data-reel="facetui">▶ Watch the Facet UI reel</a>
+      </div>
+      <p class="launch"><span class="dot" aria-hidden="true"></span>First release: <a href="#facetui">Facet UI v1.2</a> is available now</p>
+    </div>
+  </section>
+
+  <section id="kits">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">The collection</span>
+          <h2>Kits</h2>
+        </div>
+        <p class="muted" id="kit-count"></p>
+      </div>
+      <div class="kits" id="kit-grid"></div>
+    </div>
+  </section>
+
+  <section id="included">
+    <div class="wrap">
+      <span class="eyebrow">What's included</span>
+      <h2>Three layers in every kit.</h2>
+      <p class="lead">Design and code stay in step, so what you see in Figma is what ships.</p>
+      <div class="pillars">
+        <div class="pillar"><h3>Figma library</h3><p>Components built on Variables, variants and Auto Layout, with light/dark modes, brand themes and ready-made app templates.</p></div>
+        <div class="pillar"><h3>Design tokens</h3><p>Exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset, so the code matches the file.</p></div>
+        <div class="pillar"><h3>Coded components</h3><p>Dependency-free HTML/CSS/JS with live previews and copy-paste snippets, ready to drop into any stack.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <span class="eyebrow">Roadmap</span>
+          <h2>Facet UI is the first. More kits are on the way.</h2>
+          <p class="lead">Each new ET-UIKit follows the same standard: a complete Figma library, tokens and coded components, documented and ready to use.</p>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">Follow on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>ET-UIKits · © ELTouch apps</span>
+    <a href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">github.com/desiben/UIKits</a>
+  </div>
+</footer>
+
+<dialog class="reel" id="reel" aria-label="Showreel">
+  <div class="reel-head">
+    <strong id="reel-title"></strong>
+    <button class="icon-btn" type="button" data-close aria-label="Close">✕</button>
+  </div>
+  <video id="reel-video" controls playsinline></video>
+</dialog>
+
+<script src="assets/kits.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
