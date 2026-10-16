@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-brand="iris" data-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings — Facet UI example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/facet.css">
+  <link rel="stylesheet" href="example.css">
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/facet.js"></script>
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar app-side" aria-label="Main">
+    <div class="workspace"><span class="logo">A</span><b class="t-label-md grow">Acme Inc.</b></div>
+    <div class="sidebar-label">Workspace</div>
+    <a class="sidebar-item" href="dashboard.html"><svg class="icon"><use href="#layout-dashboard"/></svg>Dashboard</a>
+    <a class="sidebar-item" href="#"><svg class="icon"><use href="#users"/></svg>Customers</a>
+    <a class="sidebar-item" href="#"><svg class="icon"><use href="#folder"/></svg>Projects</a>
+    <span class="grow"></span>
+    <a class="sidebar-item" href="settings.html" aria-current="page"><svg class="icon"><use href="#settings"/></svg>Settings</a>
+  </nav>
+  <div class="app-main">
+    <header class="topbar"><nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><a href="#">Acme</a></li><svg class="icon"><use href="#chevron-right"/></svg><li aria-current="page">Settings</li></ol></nav></header>
+    <main class="content">
+      <div class="page-head"><div><h1 class="t-h2">Settings</h1><p class="t-body-sm text-tertiary">Manage your profile and workspace preferences.</p></div></div>
+      <div class="settings-grid">
+        <nav class="settings-nav" aria-label="Settings sections">
+          <a class="sidebar-item" href="#profile" aria-current="page"><svg class="icon"><use href="#user"/></svg>Profile</a>
+          <a class="sidebar-item" href="#appearance"><svg class="icon"><use href="#palette"/></svg>Appearance</a>
+          <a class="sidebar-item" href="#notifications"><svg class="icon"><use href="#bell"/></svg>Notifications</a>
+          <a class="sidebar-item" href="#security"><svg class="icon"><use href="#shield"/></svg>Security</a>
+          <a class="sidebar-item" href="#danger"><svg class="icon"><use href="#alert-triangle"/></svg>Danger zone</a>
+        </nav>
+        <div class="stack" style="--gap:24px">
+          <section class="card card-body" id="profile">
+            <div class="set-section"><div><h2>Profile</h2><p>This is how teammates see you.</p></div>
+              <div class="stack" style="--gap:16px">
+                <div class="row" style="--gap:16px"><span class="avatar avatar-lg av-1">MC</span><button class="btn btn-outline btn-sm"><svg class="icon icon-sm"><use href="#upload-cloud"/></svg>Upload photo</button><button class="btn btn-ghost btn-sm">Remove</button></div>
+                <div class="row" style="--gap:16px;align-items:flex-start"><div class="field grow"><label class="label" for="fn">Full name</label><input class="input" id="fn" value="Maya Chen"></div><div class="field grow"><label class="label" for="ti">Title</label><input class="input" id="ti" value="Design lead"></div></div>
+                <div class="field"><label class="label" for="em">Email</label><input class="input" id="em" type="email" value="maya@acme.co"><span class="help">Used for sign-in and notifications.</span></div>
+                <div class="field"><label class="label" for="bio">Bio</label><textarea class="textarea" id="bio" placeholder="Add context for your teammates"></textarea></div>
+              </div>
+            </div>
+            <div class="row" style="justify-content:flex-end;padding-top:16px"><button class="btn btn-ghost">Cancel</button><button class="btn" data-toast='{"title":"Profile saved"}'>Save changes</button></div>
+          </section>
+
+          <section class="card card-body" id="appearance">
+            <div class="set-section"><div><h2>Appearance</h2><p>Theme, brand color and density for this device.</p></div>
+              <div class="stack" style="--gap:20px">
+                <div class="field"><span class="label">Theme</span><div class="toggle-group" role="group" aria-label="Theme" data-single>
+                  <button class="toggle" data-toggle aria-pressed="true" onclick="Facet.theme.setMode('light')"><svg class="icon icon-sm"><use href="#sun"/></svg>Light</button>
+                  <button class="toggle" data-toggle aria-pressed="false" onclick="Facet.theme.setMode('dark')"><svg class="icon icon-sm"><use href="#moon"/></svg>Dark</button></div></div>
+                <div class="field"><span class="label">Brand color</span><div class="row" id="brand-row" style="--gap:8px"></div><span class="help">Pick a preset or any color — the full palette is generated for you.</span></div>
+                <label class="switch"><input type="checkbox" role="switch" onchange="Facet.theme.setDensity(this.checked?'compact':'comfortable')"> Compact density</label>
+              </div>
+            </div>
+          </section>
+
+          <section class="card card-body" id="notifications">
+            <div class="set-section"><div><h2>Notifications</h2><p>Choose what you hear about.</p></div>
+              <div class="stack" style="--gap:16px">
+                <label class="switch"><input type="checkbox" role="switch" checked> Mentions and replies</label>
+                <label class="switch"><input type="checkbox" role="switch" checked> Weekly digest</label>
+                <label class="switch"><input type="checkbox" role="switch"> Product updates</label>
+                <div class="field" style="max-width:280px"><label class="label" for="ch">Delivery</label><select class="select" id="ch"><option>Email and in-app</option><option>In-app only</option><option>Email only</option></select></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card card-body" id="security">
+            <div class="set-section"><div><h2>Security</h2><p>Protect your account.</p></div>
+              <div class="stack" style="--gap:16px">
+                <div class="alert alert-success"><svg class="icon"><use href="#shield"/></svg><div><div class="alert-title">Two-factor authentication is on</div><div class="alert-desc">Authenticator app · added Sep 2, 2026</div></div></div>
+                <div class="row"><button class="btn btn-outline"><svg class="icon icon-sm"><use href="#lock"/></svg>Change password</button><button class="btn btn-ghost">Sign out of all devices</button></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card card-body danger-zone" id="danger">
+            <div class="set-section"><div><h2 class="text-danger">Danger zone</h2><p>Irreversible actions.</p></div>
+              <div class="row" style="justify-content:space-between"><div><b class="t-label-md">Delete workspace</b><p class="t-body-sm text-tertiary">Removes all projects, files and members.</p></div><button class="btn btn-destructive" data-open="del">Delete workspace</button></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<div class="overlay" id="del" hidden>
+  <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="del-t" aria-describedby="del-d">
+    <div class="dialog-header"><div class="dialog-title" id="del-t">Delete Acme Inc.?</div><div class="dialog-desc" id="del-d">This permanently deletes 48 projects and removes 23 members. Type <b>acme</b> to confirm.</div></div>
+    <div class="dialog-body"><input class="input" aria-label="Type acme to confirm" placeholder="acme" autofocus></div>
+    <div class="dialog-footer"><button class="btn btn-ghost" data-close>Cancel</button><button class="btn btn-destructive" data-close>Delete workspace</button></div>
+  </div>
+</div>
+<script>
+  const row = document.getElementById("brand-row");
+  row.innerHTML = Object.entries(Facet.theme.presets).map(([n,h]) => `<button class="btn btn-outline btn-sm" onclick="Facet.theme.setBrand('${n}')" aria-label="${n}"><span style="width:14px;height:14px;border-radius:50%;background:${h}"></span>${n[0].toUpperCase()+n.slice(1)}</button>`).join("")
+    + `<label class="btn btn-outline btn-sm" style="position:relative">Custom<input type="color" value="#ff5a1f" style="width:20px;height:20px;border:0;padding:0;background:none" oninput="Facet.theme.setCustomBrand(this.value)" aria-label="Custom brand color"></label>`;
+  document.querySelectorAll(".settings-nav a").forEach(a => a.addEventListener("click", () => { document.querySelectorAll(".settings-nav a").forEach(x => x.removeAttribute("aria-current")); a.setAttribute("aria-current","page"); }));
+</script>
+</body>
+</html>
