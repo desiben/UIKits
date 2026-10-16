@@ -1,6 +1,6 @@
 /*
  * UI kit registry. Each kit lives on its own branch of desiben/UIKits;
- * main only holds the ET-UIKits landing page and a showreel per kit in kits/<id>/.
+ * main only holds the ETKits landing page and a showreel per kit in kits/<id>/.
  * To add a kit: drop a poster + short reel in kits/<id>/ and add an entry here.
  */
 window.UIKITS = [

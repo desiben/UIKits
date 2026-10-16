@@ -66,8 +66,10 @@
       el("div", { class: "kit-body" }, [el("h3", { text: "Next kit" }), el("p", { class: "muted", text: "In the works." })])
     ]));
   }
-  document.getElementById("kit-count").textContent =
-    kits.length + (kits.length === 1 ? " kit" : " kits") + " released, more on the way";
+  // Respect reduced motion for the autoplaying hero reel.
+  if (reduceMotion) {
+    document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
+  }
 
   // Full-size showreel dialog.
   var dialog = document.getElementById("reel");

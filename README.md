@@ -1,10 +1,12 @@
-# ET-UIKits
+# ETKits
 
 <sub>by ELTouch apps</sub>
 
-The marketing site for ET-UIKits, the ELTouch apps UI kit collection. The first product is Facet UI. Open `index.html` in a browser, or deploy the repo root as a static site; no build step.
+The marketing site for ETKits, the ELTouch apps UI kit collection. The first product is Facet UI. Open `index.html` in a browser, or deploy the repo root as a static site; no build step.
 
 ## Kits
+
+Live site: **[et-uikits.vercel.app](https://et-uikits.vercel.app)**
 
 | Kit | Branch | Live |
 |---|---|---|
@@ -12,7 +14,7 @@ The marketing site for ET-UIKits, the ELTouch apps UI kit collection. The first 
 
 ## How this repo is organized
 
-- **`main`** holds only the ET-UIKits landing page: `index.html`, `assets/`, and one showreel per kit in `kits/<id>/` (a poster image and a short muted reel).
+- **`main`** holds only the ETKits landing page: `index.html`, `assets/`, and one showreel per kit in `kits/<id>/` (a poster image and a short muted reel).
 - **Each kit has its own branch** holding all of its content: Figma notes, tokens, style guide, marketing and so on. Facet UI lives on [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI), and all Facet UI changes are pushed there, never to `main`.
 
 ## Adding a kit
@@ -24,4 +26,4 @@ The marketing site for ET-UIKits, the ELTouch apps UI kit collection. The first 
 
 ## Credits
 
-Mona Sans by GitHub, under the SIL Open Font License ([`assets/fonts/MONA-SANS-OFL.txt`](assets/fonts/MONA-SANS-OFL.txt)).
+Inter by Rasmus Andersson, loaded from Google Fonts under the SIL Open Font License.
