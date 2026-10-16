@@ -256,3 +256,4 @@ button.stage-panel { cursor: pointer; }
   radial-gradient(45% 55% at 0% 30%, rgb(139 92 246 / .35), transparent 70%),
   radial-gradient(40% 50% at 100% 45%, rgb(99 102 241 / .3), transparent 70%),
   var(--aurora-base); }
+.fine { margin: 12px auto 0; max-width: 440px; font-size: 12.5px; line-height: 1.5; color: var(--muted); }

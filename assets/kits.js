@@ -26,14 +26,17 @@ window.UIKITS = [
       ["10", "app templates"]
     ],
     tags: ["Figma", "Design tokens", "HTML/CSS/JS", "Tailwind preset", "Light & dark", "6 brands", "4 style themes"],
+    // Never link the Figma source or the repo here: buyers get them after purchase.
     links: [
-      { label: "Live style guide", href: "https://facetui.vercel.app", primary: true },
-      { label: "Marketing kit", href: "https://facetui.vercel.app/marketing/" },
-      { label: "Figma", href: "https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi" },
-      { label: "Source", href: "https://github.com/desiben/UIKits/tree/FacetUI" }
+      { label: "Buy on Gumroad", buy: true, primary: true },
+      { label: "Live preview", href: "https://facetui.vercel.app" }
     ]
   }
 ];
+
+/* PLACEHOLDER: paste the Gumroad product URL here. Until it is set, every
+ * "Buy" button scrolls to the #get section instead. */
+window.ETKITS_BUY_URL = "";
 
 /* Placeholder tiles shown after the real kits, so the grid reads as a growing collection. */
 window.UIKITS_COMING_SOON = 2;

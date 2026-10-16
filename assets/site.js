@@ -33,6 +33,7 @@
     }));
     var tags = el("ul", { class: "tags" }, kit.tags.map(function (t) { return el("li", { text: t }); }));
     var links = el("div", { class: "links" }, kit.links.map(function (l) {
+      if (l.buy) return el("a", { class: "btn" + (l.primary ? " btn-primary" : ""), "data-buy": "", href: "#get", text: l.label });
       return el("a", { class: "btn" + (l.primary ? " btn-primary" : ""), href: l.href, target: "_blank", rel: "noopener", text: l.label });
     }));
 
@@ -95,6 +96,13 @@
       segImg.alt = seg.getAttribute("data-alt");
     });
   });
+
+  // Point every "Buy" button at the store once the URL is configured.
+  if (window.ETKITS_BUY_URL) {
+    document.querySelectorAll("[data-buy]").forEach(function (a) {
+      a.href = window.ETKITS_BUY_URL; a.target = "_blank"; a.rel = "noopener";
+    });
+  }
 
   // Theme switcher: light / dark / system (follows the OS setting live).
   var root = document.documentElement;
