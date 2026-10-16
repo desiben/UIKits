@@ -6,7 +6,7 @@ The marketing site for ETKits, the ELTouch apps UI kit collection. The first pro
 
 ## Kits
 
-Live site: **[et-uikits.vercel.app](https://et-uikits.vercel.app)**
+Live site: **[etkits.vercel.app](https://etkits.vercel.app)**
 
 | Kit | Branch | Live |
 |---|---|---|
