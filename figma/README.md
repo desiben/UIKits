@@ -1,6 +1,6 @@
 # Facet UI — Figma file guide
 
-**File:** https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi
+**File:** delivered with your purchase (open the Figma link in your Gumroad receipt).
 
 ## Before you start
 1. Install **Mona Sans** (Google Fonts) so text renders correctly.

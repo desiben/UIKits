@@ -8,7 +8,7 @@
 
 It follows shadcn/ui's component model and naming but has its own visual language: the *Facet cut* and the *signal rail*.
 
-**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · [Figma file](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · **[Buy on ETKits](https://etkits.vercel.app/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
 
 ![Facet UI — the design system with an edge](styleguide/marketing/media/facet-ui-hero.jpg)
 
@@ -34,17 +34,18 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 6. [Motion & micro-interactions](#motion--micro-interactions)
 7. [Marketplace previews](#marketplace-previews)
 8. [Marketing kit: videos & images](#marketing-kit-videos--images)
-9. [Design tokens](#design-tokens)
-10. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
-11. [Components](#components)
-12. [Example pages](#example-pages)
-13. [The Figma file](#the-figma-file)
-14. [Accessibility](#accessibility)
-15. [Browser support](#browser-support)
-16. [Regenerating tokens](#regenerating-tokens)
-17. [Project structure](#project-structure)
-18. [Known limitations](#known-limitations)
-19. [Credits and licenses](#credits-and-licenses)
+9. [Selling on Gumroad](#selling-on-gumroad)
+10. [Design tokens](#design-tokens)
+11. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
+12. [Components](#components)
+13. [Example pages](#example-pages)
+14. [The Figma file](#the-figma-file)
+15. [Accessibility](#accessibility)
+16. [Browser support](#browser-support)
+17. [Regenerating tokens](#regenerating-tokens)
+18. [Project structure](#project-structure)
+19. [Known limitations](#known-limitations)
+20. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -96,7 +97,11 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 │   └── examples/                ← full pages: dashboard, login, settings
 ├── scripts/
 │   ├── build_tokens.py          ← regenerates tokens + style guide assets
-│   └── generate_palette.py      ← OKLCH palette generator (with contrast checks)
+│   ├── generate_palette.py      ← OKLCH palette generator (with contrast checks)
+│   └── render_gumroad_images.js ← renders marketing/gumroad/*.png
+├── marketing/
+│   ├── src/                     ← sources for the marketing videos and images
+│   └── gumroad/                 ← Gumroad listing images with device mockups
 ├── figma/
 │   └── README.md                ← page-by-page guide to the Figma file
 └── docs/images/                 ← screenshots used in this README
@@ -149,7 +154,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 ## The living style guide
 
-**Live at [facetui.vercel.app](https://facetui.vercel.app)** (deployed automatically from `main` by Vercel, root directory `styleguide`).
+**Live at [facetui.vercel.app](https://facetui.vercel.app)** (deployed automatically by Vercel from the `FacetUI` branch, root directory `styleguide`; in the **facetui** Vercel project, Production Branch must be set to `FacetUI`). It is a public preview, so it never links the Figma source file or the private repo.
 
 `styleguide/index.html` is a documentation site in the style of [ui.shadcn.com/docs/components](https://ui.shadcn.com/docs/components), built with Facet itself.
 
@@ -344,6 +349,43 @@ To re-render them (for example after changing the brand), see [`marketing/README
 
 ---
 
+## Selling on Gumroad
+
+Facet UI is sold on Gumroad and other UI kit marketplaces, and the storefront is the ETKits site ([etkits.vercel.app](https://etkits.vercel.app), the `main` branch).
+
+### Listing images
+
+`marketing/gumroad/` has listing images with device mockups, built from the real template screens:
+
+| File | Size | Use |
+|---|---|---|
+| `01-cover.png` | 1920×1080 | Gumroad cover: title, feature checklist, Figma badge, monitor + phone |
+| `02-highlights.png` | 1920×1080 | Product highlights, 6 tiles |
+| `03-templates.png` | 1920×1080 | 10 app templates, 26 screens |
+| `04-thank-you.png` | 1920×1080 | Thank-you image with laptop and feature pills |
+| `05-thumbnail-square.png` | 1200×1200 | Gumroad thumbnail |
+| `facet-ui-gumroad-long.png` | 1280 wide | Long description image (the four boards stacked) |
+
+| | |
+|---|---|
+| ![Cover](marketing/gumroad/01-cover.png) | ![Highlights](marketing/gumroad/02-highlights.png) |
+| ![Templates](marketing/gumroad/03-templates.png) | ![Thank you](marketing/gumroad/04-thank-you.png) |
+
+Edit `marketing/gumroad/mockups.html` and re-render with `node scripts/render_gumroad_images.js` (see [`marketing/README.md`](marketing/README.md)).
+
+### Keep the kit behind the purchase
+
+- **Figma:** never link the source file publicly. Share it only as *Only people invited*, turn off copying and export for viewers, and give buyers a separate sale copy (or a `.fig` download) through Gumroad.
+- **Repo:** keep `desiben/UIKits` private. The ETKits site and the public style guide must not link to it.
+- **Live preview:** [facetui.vercel.app](https://facetui.vercel.app) is public, so treat it as a demo. Everything it serves (CSS, JS, tokens) can be saved from a browser.
+- **Buy buttons:** the store URL is set once, in `ETKITS_BUY_URL` in `assets/kits.js` on `main`.
+
+### Licensing
+
+Sell license tiers as Gumroad product versions (for example Personal, Commercial and Team/Extended), turn on Gumroad license keys so each buyer gets a unique key, and ship a `LICENSE.md` in the download that forbids resale and redistribution.
+
+---
+
 ## Design tokens
 
 Tokens are layered. Components only use the semantic layer and up.
@@ -457,7 +499,7 @@ The Figma file goes further, with **10 templates and 26 desktop and mobile scree
 
 ## The Figma file
 
-**[Open Facet UI in Figma →](https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi)**
+The Figma file is delivered with your purchase: open the Figma link in your Gumroad receipt.
 
 | Page | Contents |
 |---|---|
@@ -527,6 +569,7 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |
 | `marketing/`, `scripts/render_marketing_*.js` | Sources and render scripts for the marketing kit | ❌ |
+| `marketing/gumroad/`, `scripts/render_gumroad_images.js` | Gumroad listing images and their renderer | ❌ |
 
 ---
 
