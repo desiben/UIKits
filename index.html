@@ -8,15 +8,14 @@
 <meta property="og:title" content="ETKits by ELTouch apps">
 <meta property="og:description" content="Production-ready UI kits: Figma libraries, design tokens and coded components in sync. First release: Facet UI.">
 <meta property="og:image" content="kits/facetui/facet-ui-components-reel-poster.jpg">
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%235EA2EF'/%3E%3Cstop offset='1' stop-color='%23b249f8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='10' fill='url(%23g)'/%3E%3Cpath d='M10 10h12v3H13.5v2H20v3h-6.5v2H22v3H10z' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#f4f4f5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='10' fill='%2318181b'/%3E%3Cpath d='M10 10h12v3H13.5v2H20v3h-6.5v2H22v3H10z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="glows" aria-hidden="true"><div class="glow glow-a"></div><div class="glow glow-b"></div></div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -24,11 +23,12 @@
     <nav class="nav-links">
       <a href="#kits">Kits</a>
       <a href="#features">Features</a>
+      <a href="#templates">Templates</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost btn-sm hide-sm" href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-primary btn-sm" href="#facetui">Get Facet UI</a>
+      <a class="link hide-sm" href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-white btn-sm" href="#facetui">Get Facet UI</a>
     </div>
   </div>
 </header>
@@ -37,38 +37,50 @@
   <!-- Hero -->
   <section class="hero">
     <div class="wrap center">
-      <a class="chip" href="#facetui"><span class="chip-tag">New</span>Facet UI v1.2 is out: 56 new components <span aria-hidden="true">→</span></a>
-      <h1>Beautiful UI kits,<br><span class="grad-violet">ready to ship</span><span class="grad-blue">.</span></h1>
-      <p class="lead">ETKits are production-ready design systems by ELTouch apps. Each one pairs a Figma library with design tokens and coded components, kept in sync from the first pixel to production.</p>
-      <div class="cta">
-        <a class="btn btn-primary btn-lg" href="#kits">Explore the kits</a>
-        <button class="btn btn-bordered btn-lg" type="button" data-reel="facetui"><span class="play-dot" aria-hidden="true">▶</span> Watch the reel</button>
+      <a class="kicker" href="#facetui">Facet UI v1.2 is out →</a>
+      <h1>Build products<br><span class="dim">you're proud to ship</span></h1>
+      <p class="sub">Production-ready UI kits by ELTouch apps. Each ETKit pairs a Figma library with design tokens and coded components, kept in sync from the first pixel to production.</p>
+    </div>
+
+    <div class="stage-wrap">
+      <div class="stage">
+        <figure class="float float-left" aria-hidden="true">
+          <figcaption>Figma Variables</figcaption>
+          <img src="kits/facetui/variables.webp" alt="" width="1920" height="1080">
+        </figure>
+        <figure class="float float-main">
+          <figcaption id="stage-caption">Components in motion</figcaption>
+          <div class="stage-media">
+            <button class="stage-panel is-active" type="button" data-panel="reel" data-reel="facetui" aria-label="Play the Facet UI showreel">
+              <video autoplay muted loop playsinline preload="metadata" poster="kits/facetui/facet-ui-components-reel-poster.jpg" aria-hidden="true">
+                <source src="kits/facetui/facet-ui-components-reel.webm" type="video/webm">
+                <source src="kits/facetui/facet-ui-components-reel.mp4" type="video/mp4">
+              </video>
+            </button>
+            <img class="stage-panel" data-panel="themes" src="kits/facetui/themes.webp" alt="Facet UI in several brand themes" width="1920" height="1080">
+            <img class="stage-panel" data-panel="mobile" src="kits/facetui/mobile.webp" alt="Facet UI on mobile screens" width="1920" height="1080">
+            <img class="stage-panel" data-panel="handoff" src="kits/facetui/handoff.webp" alt="Facet UI developer handoff" width="1920" height="1080">
+          </div>
+        </figure>
+        <figure class="float float-right" aria-hidden="true">
+          <figcaption>Mobile ready</figcaption>
+          <img src="kits/facetui/mobile.webp" alt="" width="1920" height="1080">
+        </figure>
       </div>
     </div>
 
-    <div class="wrap">
-      <div class="showcase">
-        <div class="window">
-          <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i><span>facetui.vercel.app</span></div>
-          <button class="window-media" type="button" data-reel="facetui" aria-label="Play the Facet UI showreel">
-            <video autoplay muted loop playsinline preload="metadata" poster="kits/facetui/facet-ui-components-reel-poster.jpg" aria-hidden="true">
-              <source src="kits/facetui/facet-ui-components-reel.webm" type="video/webm">
-              <source src="kits/facetui/facet-ui-components-reel.mp4" type="video/mp4">
-            </video>
-          </button>
-        </div>
+    <div class="wrap center">
+      <div class="tabs" role="tablist" aria-label="Facet UI preview">
+        <button role="tab" aria-selected="true" data-tab="reel" data-caption="Components in motion">Showreel</button>
+        <button role="tab" aria-selected="false" data-tab="themes" data-caption="Light, dark and any brand">Themes</button>
+        <button role="tab" aria-selected="false" data-tab="mobile" data-caption="Mobile screens included">Mobile</button>
+        <button role="tab" aria-selected="false" data-tab="handoff" data-caption="Ships with live code">Handoff</button>
       </div>
-    </div>
-  </section>
+      <div><a class="btn btn-white btn-sm" href="https://facetui.vercel.app" target="_blank" rel="noopener">Open the live style guide</a></div>
 
-  <!-- Stats strip -->
-  <section class="strip">
-    <div class="wrap">
-      <ul class="stats">
-        <li><b>144</b><span>Components</span></li>
-        <li><b>228</b><span>Design variables</span></li>
-        <li><b>10</b><span>App templates</span></li>
-        <li><b>6</b><span>AI agent demos</span></li>
+      <p class="works">Works with the tools you already use</p>
+      <ul class="wordmarks">
+        <li>Figma</li><li>Tailwind CSS</li><li>shadcn/ui</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>W3C DTCG</li>
       </ul>
     </div>
   </section>
@@ -76,51 +88,119 @@
   <!-- Kits -->
   <section id="kits" class="section">
     <div class="wrap">
-      <div class="sec-head center">
-        <span class="kicker">The collection</span>
-        <h2>One standard. <span class="grad-blue">Many kits.</span></h2>
-        <p class="lead">Facet UI is the first ETKit. Every kit that follows ships with the same three layers and the same level of polish.</p>
+      <div class="head center">
+        <span class="kicker">Kits</span>
+        <h2>One standard.<br><span class="dim">Many kits.</span></h2>
+        <p class="sub">Facet UI is the first ETKit. Every kit that follows ships with the same three layers and the same level of polish.</p>
       </div>
       <div class="kits" id="kit-grid"></div>
     </div>
   </section>
 
-  <!-- Bento features -->
+  <!-- Features bento -->
   <section id="features" class="section">
     <div class="wrap">
-      <div class="sec-head center">
+      <div class="head center">
         <span class="kicker">Features</span>
-        <h2>Everything you need <span class="grad-violet">to ship faster.</span></h2>
-        <p class="lead">Design and code stay in step, so what you see in Figma is what ships.</p>
+        <h2>More than components.<br><span class="dim">A complete system.</span></h2>
+        <p class="sub">Design and code stay in step, so what you see in Figma is what ships.</p>
       </div>
       <div class="bento">
-        <article class="tile tile-wide">
-          <div class="tile-copy"><h3>Themes in one click</h3><p>Light and dark modes, brand colors and style themes, all driven by tokens.</p></div>
-          <img src="kits/facetui/themes.webp" alt="Facet UI shown in several brand color themes" width="1920" height="1080">
+        <article class="card card-wide">
+          <header><h3>Themes in one click</h3><p>Light and dark modes, 6 brand colors and 4 style themes, all driven by tokens.</p></header>
+          <img src="kits/facetui/themes.webp" alt="Facet UI in several brand color themes" width="1920" height="1080">
         </article>
-        <article class="tile">
-          <div class="tile-copy"><h3>Figma Variables</h3><p>Every color, size and radius is a variable you can retheme.</p></div>
-          <img src="kits/facetui/variables.webp" alt="Figma variables panel for Facet UI" width="1920" height="1080">
+        <article class="card">
+          <header><h3>Figma Variables</h3><p>228 variables: every color, size and radius can be rethemed.</p></header>
+          <img src="kits/facetui/variables.webp" alt="Figma variables panel" width="1920" height="1080">
         </article>
-        <article class="tile">
-          <div class="tile-copy"><h3>Clean layers</h3><p>Auto Layout throughout, named and organized for handoff.</p></div>
-          <img src="kits/facetui/layers.webp" alt="Organized Figma layer structure" width="1920" height="1080">
-        </article>
-        <article class="tile">
-          <div class="tile-copy"><h3>Mobile ready</h3><p>Responsive components with desktop and mobile previews.</p></div>
-          <img src="kits/facetui/mobile.webp" alt="Facet UI components on mobile screens" width="1920" height="1080">
-        </article>
-        <article class="tile">
-          <div class="tile-copy"><h3>Tokens to code</h3><p>CSS variables, W3C DTCG JSON and a Tailwind preset.</p></div>
+        <article class="card card-dark">
+          <header><h3>Tokens to code</h3><p>CSS variables, W3C DTCG JSON and a Tailwind preset.</p></header>
           <pre class="code" aria-label="Example design tokens"><code><span class="c-k">:root</span> {
   <span class="c-p">--primary</span>: <span class="c-v">#5d4ff3</span>;
   <span class="c-p">--radius</span>: <span class="c-v">12px</span>;
   <span class="c-p">--surface</span>: <span class="c-v">#0f0f17</span>;
 }</code></pre>
         </article>
-        <article class="tile tile-full">
-          <div class="tile-copy"><h3>Developer handoff</h3><p>Copy-paste HTML/CSS/JS, live previews and specs that match the Figma file.</p></div>
-          <img src="kits/facetui/handoff.webp" alt="Developer handoff view with code and specs" width="1920" height="1080">
+        <article class="card">
+          <header><h3>Clean layers</h3><p>Auto Layout throughout, named and organized for handoff.</p></header>
+          <img src="kits/facetui/layers.webp" alt="Organized Figma layers" width="1920" height="1080">
+        </article>
+        <article class="card">
+          <header><h3>AI agent demos</h3><p>6 working demos with tool calls, generative UI and approvals.</p></header>
+          <div class="agent" aria-hidden="true">
+            <div class="bubble bubble-user">Refund order #4821</div>
+            <div class="bubble bubble-ai"><span class="tool">tool · refunds.create</span>Refund of $48.00 is ready. Approve?</div>
+            <div class="agent-actions"><span class="pill pill-dark">Approve</span><span class="pill">Edit</span></div>
+          </div>
+        </article>
+      </div>
+      <div class="center more"><a class="btn btn-white btn-sm" href="https://facetui.vercel.app/#/components" target="_blank" rel="noopener">Browse all components</a></div>
+    </div>
+  </section>
+
+  <!-- Templates panel -->
+  <section id="templates" class="section">
+    <div class="wrap">
+      <div class="aurora">
+        <div class="head center">
+          <span class="kicker">Templates</span>
+          <h2>Start from something real.<br><span class="dim">Not a blank file.</span></h2>
+          <p class="sub">10 app templates and 26 screens, built from the same components and tokens.</p>
+        </div>
+        <div class="center">
+          <div class="segmented" role="tablist" aria-label="Template preview">
+            <button role="tab" aria-selected="true" data-seg="handoff" data-alt="Facet UI dashboard template">Dashboard</button>
+            <button role="tab" aria-selected="false" data-seg="themes" data-alt="Facet UI brand themes">Themes</button>
+            <button role="tab" aria-selected="false" data-seg="mobile" data-alt="Facet UI mobile screens">Mobile</button>
+            <button role="tab" aria-selected="false" data-seg="layers" data-alt="Facet UI Figma layers">Layers</button>
+          </div>
+        </div>
+        <div class="aurora-shot">
+          <img id="seg-img" src="kits/facetui/handoff.webp" alt="Facet UI dashboard template" width="1920" height="1080">
+        </div>
+      </div>
+      <div class="center more"><a class="btn btn-white btn-sm" href="https://facetui.vercel.app/#/examples" target="_blank" rel="noopener">View all templates</a></div>
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <section id="get" class="section">
+    <div class="wrap">
+      <div class="head center">
+        <span class="kicker">Get Facet UI</span>
+        <h2>Three layers.<br><span class="dim">Ship with confidence.</span></h2>
+      </div>
+      <div class="plans">
+        <article class="plan plan-blue">
+          <div class="plan-top">
+            <span class="plan-icon" aria-hidden="true">◆</span>
+            <h3>Figma library</h3>
+            <p>For designers</p>
+            <b>144</b><small>components with variants</small>
+            <a class="btn btn-white btn-block" href="https://www.figma.com/design/tVf9mqBojGDNrUBrGt5hxi" target="_blank" rel="noopener">Open in Figma</a>
+          </div>
+          <ul class="checks"><li>Variables and Auto Layout</li><li>Light and dark modes</li><li>10 app templates, 26 screens</li><li>147 icons</li></ul>
+        </article>
+        <article class="plan plan-violet">
+          <div class="plan-top">
+            <span class="plan-icon" aria-hidden="true">●</span>
+            <h3>Design tokens</h3>
+            <p>For everyone</p>
+            <b>228</b><small>variables exported</small>
+            <a class="btn btn-white btn-block" href="https://github.com/desiben/UIKits/tree/FacetUI/tokens" target="_blank" rel="noopener">Get the tokens</a>
+          </div>
+          <ul class="checks"><li>CSS custom properties</li><li>W3C DTCG JSON</li><li>Tailwind preset</li><li>6 brands, 4 style themes</li></ul>
+        </article>
+        <article class="plan plan-gold">
+          <div class="plan-top">
+            <span class="plan-icon" aria-hidden="true">★</span>
+            <h3>Coded components</h3>
+            <p>For developers</p>
+            <b>6</b><small>working AI agent demos</small>
+            <a class="btn btn-dark btn-block" href="https://facetui.vercel.app" target="_blank" rel="noopener">Open the style guide</a>
+          </div>
+          <ul class="checks"><li>Dependency-free HTML/CSS/JS</li><li>Live previews, copy-paste code</li><li>Charts and motion built in</li><li>Copy Markdown for AI tools</li></ul>
         </article>
       </div>
     </div>
@@ -129,41 +209,16 @@
   <!-- FAQ -->
   <section id="faq" class="section">
     <div class="wrap narrow">
-      <div class="sec-head center">
+      <div class="head center">
         <span class="kicker">FAQ</span>
-        <h2>Questions, answered.</h2>
+        <h2>Frequently asked<br><span class="dim">questions</span></h2>
       </div>
       <div class="faq">
-        <details open>
-          <summary>What is ETKits?</summary>
-          <p>ETKits is a collection of UI kits by ELTouch apps. Each kit is a complete design system: a Figma library, design tokens and a coded component implementation that stay in sync.</p>
-        </details>
-        <details>
-          <summary>What is in Facet UI?</summary>
-          <p>144 Figma components with variants, 228 design variables, 10 app templates, 6 brand themes, 4 style themes, light and dark modes, and a dependency-free HTML/CSS/JS style guide with 6 working AI agent demos.</p>
-        </details>
-        <details>
-          <summary>Which frameworks does it work with?</summary>
-          <p>The coded components are plain HTML, CSS and JavaScript, so they drop into any stack. Tokens are also exported as a Tailwind preset and follow shadcn/ui's component model and naming.</p>
-        </details>
-        <details>
-          <summary>Are more kits coming?</summary>
-          <p>Yes. Facet UI is the first release, and new kits will be added here as they ship.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section">
-    <div class="wrap">
-      <div class="cta-card center">
-        <h2>Start building with <span class="grad-violet">Facet UI</span>.</h2>
-        <p class="lead">Browse the live style guide, then grab the Figma file and tokens.</p>
-        <div class="cta">
-          <a class="btn btn-primary btn-lg" href="https://facetui.vercel.app" target="_blank" rel="noopener">Open the style guide</a>
-          <a class="btn btn-bordered btn-lg" href="https://github.com/desiben/UIKits" target="_blank" rel="noopener">Follow on GitHub</a>
-        </div>
+        <details><summary>What is ETKits?</summary><p>ETKits is a collection of UI kits by ELTouch apps. Each kit is a complete design system: a Figma library, design tokens and a coded component implementation that stay in sync.</p></details>
+        <details><summary>What is in Facet UI?</summary><p>144 Figma components with variants, 228 design variables, 10 app templates, 6 brand themes, 4 style themes, light and dark modes, and a dependency-free HTML/CSS/JS style guide with 6 working AI agent demos.</p></details>
+        <details><summary>Which frameworks does it work with?</summary><p>The coded components are plain HTML, CSS and JavaScript, so they drop into any stack. Tokens are also exported as a Tailwind preset and follow shadcn/ui's component model and naming.</p></details>
+        <details><summary>Does it support dark mode?</summary><p>Yes. Every component has light and dark values through semantic color tokens, in Figma and in code.</p></details>
+        <details><summary>Are more kits coming?</summary><p>Yes. Facet UI is the first release, and new kits will be added here as they ship.</p></details>
       </div>
     </div>
   </section>

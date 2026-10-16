@@ -71,6 +71,31 @@
     document.querySelectorAll("video[autoplay]").forEach(function (v) { v.removeAttribute("autoplay"); v.pause(); });
   }
 
+  // Hero preview tabs: swap the panel shown in the centre stage card.
+  var caption = document.getElementById("stage-caption");
+  var heroVideo = document.querySelector(".stage-panel video");
+  document.querySelectorAll("[data-tab]").forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var name = tab.getAttribute("data-tab");
+      document.querySelectorAll("[data-tab]").forEach(function (t) { t.setAttribute("aria-selected", String(t === tab)); });
+      document.querySelectorAll(".stage-panel").forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute("data-panel") === name);
+      });
+      if (caption) caption.textContent = tab.getAttribute("data-caption");
+      if (heroVideo) { if (name === "reel" && !reduceMotion) heroVideo.play().catch(function () {}); else heroVideo.pause(); }
+    });
+  });
+
+  // Templates segmented control: swap the screenshot.
+  var segImg = document.getElementById("seg-img");
+  document.querySelectorAll("[data-seg]").forEach(function (seg) {
+    seg.addEventListener("click", function () {
+      document.querySelectorAll("[data-seg]").forEach(function (s) { s.setAttribute("aria-selected", String(s === seg)); });
+      segImg.src = "kits/facetui/" + seg.getAttribute("data-seg") + ".webp";
+      segImg.alt = seg.getAttribute("data-alt");
+    });
+  });
+
   // Full-size showreel dialog.
   var dialog = document.getElementById("reel");
   var player = document.getElementById("reel-video");
