@@ -13,7 +13,7 @@
   const lg = (items) => `<div class="chart-legend">${items.map(([n, c]) => `<span><i style="--c:${c}"></i>${n}</span>`).join("")}</div>`;
 
   /* ------------------------------ Charts ------------------------------ */
-  add({ slug: "area-chart", name: "Area Chart", group: "Charts", figma: "Chart / Area · 4 variants",
+  add({ slug: "area-chart", name: "Area Chart", group: "Charts", figma: "Chart · Area · Default · Stacked · Gaps",
     desc: "Shows a trend over time with a filled area. Stack several series to show composition. Hover to see exact values.",
     examples: [
       { title: "Default", layout: "block", html: widget("Monthly recurring revenue", "Last 12 months", chart({ type: "area", labels: months, format: "$compact", series: [{ name: "MRR", data: mrr.map((v) => v * 1000) }] })) },
@@ -24,7 +24,7 @@
     api: [["data-chart", "JSON", "Config: type, labels, series[{name, data, color?}], format, stacked, curve, connectNulls, height"], ["format", "string", "currency · $compact · compact · percent"], ["stacked", "boolean", "Stack area series on top of each other"], ["connectNulls", "boolean", "Bridge gaps (null) instead of breaking the line"]],
     a11y: ["The SVG has role=img and an aria-label — set it with the label option.", "Pair charts with a visible summary (title, key number) so they're not the only source of the data."] });
 
-  add({ slug: "bar-chart", name: "Bar Chart", group: "Charts", figma: "Chart / Bar · grouped · stacked",
+  add({ slug: "bar-chart", name: "Bar Chart", group: "Charts", figma: "Chart · Bar · Default · Grouped · Stacked",
     desc: "Compares values across categories. Use grouped bars to compare series, stacked bars to show totals and parts.",
     examples: [
       { title: "Default", layout: "block", html: widget("Weekly signups", "Last 8 weeks", chart({ type: "bar", labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], series: [{ name: "Signups", data: [420, 510, 470, 640, 590, 720, 680, 810] }] })) },
@@ -35,7 +35,7 @@
     api: [["type", "\"bar\"", "Vertical bars"], ["stacked", "boolean", "Stack series per category"], ["barWidth", "0–1", "Share of each category band used by bars (default 0.62)"]],
     a11y: ["Hovering a bar dims the others; the tooltip lists every series value for that category."] });
 
-  add({ slug: "line-chart", name: "Line Chart", group: "Charts", figma: "Chart / Line · 3 variants",
+  add({ slug: "line-chart", name: "Line Chart", group: "Charts", figma: "Chart/Line · Single · Multiple · Target",
     desc: "Shows how one or more values change over time. Dashed lines work well for targets and forecasts.",
     examples: [
       { title: "Multiple series", layout: "block", html: widget("Active users", "Daily, last 14 days", chart({ type: "line", labels: Array.from({ length: 14 }, (_, k) => "Oct " + (k + 2)), format: "compact", series: [{ name: "Web", data: [3200, 3350, 3290, 3510, 3620, 3580, 3790, 3910, 3870, 4020, 4190, 4150, 4320, 4480] }, { name: "Mobile", data: [2100, 2180, 2260, 2240, 2390, 2470, 2450, 2600, 2710, 2690, 2840, 2950, 3010, 3120] }] }), lg([["Web", "var(--chart-1)"], ["Mobile", "var(--chart-2)"]])) },
@@ -77,7 +77,7 @@
     react: `<RadialChart data={[{ name: "Storage", value: 68 }]} half />`,
     api: [["half", "boolean", "Half-circle gauge"], ["thickness", "number", "Ring thickness"], ["data[].max", "number", "Per-ring maximum (default 100)"]], a11y: ["Show the value as text in the center or next to the chart."] });
 
-  add({ slug: "chart-tooltip", name: "Chart Tooltip", group: "Charts", figma: "Chart / Tooltip · 3 variants",
+  add({ slug: "chart-tooltip", name: "Chart Tooltip", group: "Charts", figma: "Chart Tooltip · 1, 2 or 3 rows",
     desc: "The floating panel that shows exact values under the cursor. Every Facet chart includes it; it's also available as plain markup for custom charts.",
     examples: [{ title: "Static markup", html: `<div class="chart-tooltip on" style="position:static">
   <b>October 2026</b>
@@ -110,7 +110,7 @@
     api: [["widget · widget-header · widget-title · widget-desc · widget-content · widget-footer", "class", "Parts"], ["widget-content.flush", "class", "Edge-to-edge content (tables)"], ["widget-grid", "class", "Responsive grid of widgets"]],
     a11y: ["Use a real heading (h2/h3) for the title if widgets are page sections."] });
 
-  add({ slug: "kpi", name: "KPI", group: "Data display", figma: "KPI · 8 variants",
+  add({ slug: "kpi", name: "KPI", group: "Data display", figma: "KPI · Default · Sparkline · Icon + Footer · Progress",
     desc: "A key number with its label, trend and optional sparkline, progress or footer.",
     examples: [
       { title: "Variants", html: `<div class="card kpi" style="width:260px"><div class="kpi-head"><span class="kpi-label">Monthly recurring revenue</span><button class="btn btn-ghost btn-sm icon-btn" aria-label="More">${i("more-horizontal")}</button></div><div class="kpi-row"><span class="kpi-value">$248,920</span><span class="trend-chip">${i("trending-up")} 12.4%</span></div>${chart({ type: "spark", height: 48, tooltip: false, series: [{ name: "MRR", data: mrr }] }, "margin-top:8px")}</div>
@@ -130,7 +130,7 @@
 </div>` }],
     react: `<KPIGroup>{metrics.map((m) => <KPI key={m.id} {...m} />)}</KPIGroup>`, api: [["kpi-group", "class", "Grid container with joined borders"]], a11y: ["Order KPIs by importance — on mobile they stack in source order."] });
 
-  add({ slug: "item-card", name: "Item Card", group: "Data display", figma: "Item Card · 5 variants × with/without icon",
+  add({ slug: "item-card", name: "Item Card", group: "Data display", figma: "Item Card · 5 variants · Show icon",
     desc: "A horizontal row card with an icon, title, description and an optional trailing action (switch, select, chevron).",
     examples: [
       { title: "Variants", layout: "block", html: `<div class="stack" style="--gap:10px;max-width:440px;margin:auto">
@@ -143,7 +143,7 @@
     react: `<ItemCard variant="secondary"><ItemCard.Icon>…</ItemCard.Icon><ItemCard.Content><ItemCard.Title>…</ItemCard.Title></ItemCard.Content><ItemCard.Action>…</ItemCard.Action></ItemCard>`,
     api: [["data-variant", "default · secondary · tertiary · outline · transparent", "Surface style"], ["a.item-card / [data-pressable]", "element", "Pressable rows get a hover state"]], a11y: ["When the whole card is a link, don't put other buttons inside it."] });
 
-  add({ slug: "item-card-group", name: "Item Card Group", group: "Data display", figma: "Item Card Group · list · joined · grid",
+  add({ slug: "item-card-group", name: "Item Card Group", group: "Data display", figma: "Item Card Group · joined · list · grid",
     desc: "Arranges item cards as a spaced list, a joined list with dividers, or a responsive grid, with an optional section header.",
     examples: [
       { title: "Joined (settings list)", layout: "block", html: `<div class="item-card-group joined" style="max-width:440px;margin:auto">

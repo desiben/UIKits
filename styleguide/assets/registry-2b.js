@@ -134,7 +134,7 @@
     ],
     react: `<PromptSuggestion onClick={() => send(text)}>{text}</PromptSuggestion>`, api: [["prompt-suggestions.cards", "class", "Card layout"]], a11y: ["They're buttons; clicking one fills or sends the prompt."] });
 
-  add({ slug: "code-block", name: "Code Block", group: "AI", figma: "Code Block · numbered · diff",
+  add({ slug: "code-block", name: "Code Block", group: "AI", figma: "Code Block · default · numbered · diff",
     desc: "Syntax-highlighted code with a filename, language tag, copy button, line numbers and highlighted or diff lines.",
     examples: [{ title: "Numbered with highlight", layout: "block", html: `<div class="code-block numbered" style="max-width:640px;margin:auto">
   <div class="code-block-head"><span class="lang">tsx</span>button.tsx<button class="btn btn-ghost btn-sm" data-copy-code>${i("copy", "icon-sm")} Copy</button></div>
@@ -185,7 +185,7 @@
 </div>` }],
     react: `<NumberValue value={248920} format={{ style: "currency", currency: "USD" }} />`, api: [["data-value", "number", "Raw value"], ["data-format", "decimal · currency · compact · percent", "Style"], ["data-currency · data-locale · data-digits · data-sign", "attributes", "Intl options"]], a11y: ["Formatted text is real text, so screen readers read it naturally."] });
 
-  add({ slug: "rating", name: "Rating", group: "Feedback", figma: "Rating · 3 sizes · read-only · half",
+  add({ slug: "rating", name: "Rating", group: "Feedback", figma: "Rating · 3 sizes · 4 values (incl. half)",
     desc: "Star rating built on radio buttons, so it works with the keyboard and in forms. Also a read-only display with half stars.",
     examples: [{ title: "Interactive & read-only", html: `<div class="stack" style="--gap:14px">
   <div class="row"><fieldset class="rating rating-lg" style="border:0;padding:0;margin:0"><legend class="sr-only">Rate your experience</legend>${[1, 2, 3, 4, 5].map((n) => `<input type="radio" name="rate1" id="r1-${n}" value="${n}"${n === 4 ? " checked" : ""}><label for="r1-${n}" aria-label="${n} star${n > 1 ? "s" : ""}">${star}</label>`).join("")}</fieldset><span class="rating-value"></span></div>
@@ -241,7 +241,7 @@
 </div>` }],
     react: `<CellSelect label="Language" items={langs} selectedKey={lang} />`, api: [["cell-select", "class", "Borderless select with chevrons"]], a11y: ["Each select has an aria-label matching the row label."] });
 
-  add({ slug: "cell-slider", name: "Cell Slider", group: "Forms", figma: "Cell / Slider · default · secondary",
+  add({ slug: "cell-slider", name: "Cell Slider", group: "Forms", figma: "Cell · Slider · Slider Secondary",
     desc: "A settings row with a label, live value and a full-width slider.",
     examples: [{ title: "Slider group", layout: "block", html: `<div class="cell-group" data-variant="secondary" style="max-width:440px;margin:auto">
   <div class="cell cell-slider"><div class="cell-top"><span class="cell-label">Volume</span><output>60%</output></div><input class="slider" type="range" min="0" max="100" value="60" data-suffix="%" aria-label="Volume"></div>
@@ -259,7 +259,7 @@
 </div>` }],
     react: `<CellColorPicker label="Accent color" swatches={presets} value={color} onChange={setColor} />`, api: [["cell-swatches button[aria-pressed]", "attribute", "Selected swatch"], ["input[type=color]", "element", "Custom color"]], a11y: ["Swatches are buttons with color names as labels."] });
 
-  add({ slug: "checkbox-button-group", name: "Checkbox Button Group", group: "Forms", figma: "Choice Group / Checkbox · list · grid",
+  add({ slug: "checkbox-button-group", name: "Checkbox Button Group", group: "Forms", figma: "Checkbox Button Group · list · grid",
     desc: "Large, card-style checkboxes for choosing several options — with icons, descriptions and a grid layout.",
     examples: [{ title: "Grid", layout: "block", html: `<fieldset class="choice-group" data-layout="grid" style="border:0;padding:0;margin:0;width:100%">
   <legend class="label" style="margin-bottom:8px">Integrations</legend>
@@ -270,7 +270,7 @@
 </fieldset>` }],
     react: `<CheckboxButtonGroup label="Integrations" value={picked} onChange={setPicked}>…</CheckboxButtonGroup>`, api: [["choice-group[data-layout=grid]", "attribute", "Responsive grid"], ["--cols", "CSS var", "Fixed column count"]], a11y: ["Group in a fieldset with a legend; the native input stays focusable."] });
 
-  add({ slug: "radio-button-group", name: "Radio Button Group", group: "Forms", figma: "Choice Group / Radio · cards · buttons",
+  add({ slug: "radio-button-group", name: "Radio Button Group", group: "Forms", figma: "Radio Button Group · cards · buttons",
     desc: "Card-style radios for picking one option, such as a plan — and a compact button style for short options.",
     examples: [
       { title: "Plans", layout: "block", html: `<fieldset class="choice-group" style="border:0;padding:0;margin:0;max-width:480px;margin-inline:auto"><legend class="label" style="margin-bottom:8px">Plan</legend>
@@ -287,7 +287,7 @@
     examples: [{ title: "In a sentence", layout: "block", html: `<p class="t-body-lg" style="text-align:center">Show <span class="inline-select"><select aria-label="Metric"><option>revenue</option><option>signups</option><option>churn</option></select></span> for <span class="inline-select"><select aria-label="Range"><option>the last 30 days</option><option>this quarter</option><option>this year</option></select></span> grouped by <span class="inline-select"><select aria-label="Group"><option>plan</option><option>region</option></select></span>.</p>` }],
     react: `<InlineSelect items={metrics} selectedKey={metric} aria-label="Metric" />`, api: [["inline-select select", "element", "Native select styled as text"]], a11y: ["Each select needs an aria-label because the sentence isn't its label."] });
 
-  add({ slug: "native-select", name: "Native Select", group: "Forms", figma: "Select / Native · 3 sizes · states",
+  add({ slug: "native-select", name: "Native Select", group: "Forms", figma: "Native Select · 3 sizes · default · disabled · invalid",
     desc: "The browser's own select, styled to match Facet inputs. Best on mobile, where it opens the system picker.",
     examples: [{ title: "Sizes & states", layout: "block", html: `<div class="stack" style="--gap:12px;max-width:320px;margin:auto">
   <div class="field"><label class="label" for="ns1">Country</label><select class="select" id="ns1"><option>United States</option><option>Canada</option><option>Germany</option></select></div>
@@ -298,7 +298,7 @@
 </div>` }],
     react: `<NativeSelect>…</NativeSelect>`, api: [["select · select-sm · select-lg", "class", "Sizes"], ["aria-invalid", "attribute", "Error state"]], a11y: ["Native selects get the platform's accessible picker for free."] });
 
-  add({ slug: "number-stepper", name: "Number Stepper", group: "Forms", figma: "Number Stepper · 2 sizes · pill · ghost",
+  add({ slug: "number-stepper", name: "Number Stepper", group: "Forms", figma: "Number Stepper · 2 sizes · default · pill · ghost",
     desc: "A number input with − and + buttons, min/max/step, and buttons that disable at the limits.",
     examples: [{ title: "Variants", html: `<div class="number-stepper"><button data-step="down" aria-label="Decrease">${i("minus")}</button><input type="number" value="3" min="1" max="10" aria-label="Seats"><button data-step="up" aria-label="Increase">${i("plus")}</button></div>
 <div class="number-stepper pill"><button data-step="down" aria-label="Decrease">${i("minus")}</button><input type="number" value="1" min="1" max="99" aria-label="Quantity"><button data-step="up" aria-label="Increase">${i("plus")}</button></div>
@@ -321,7 +321,7 @@
     react: `<RichTextEditor defaultValue={doc} toolbar={["bold","italic","list","link"]} />`, api: [["[data-cmd]", "bold · italic · underline · strikeThrough · insertUnorderedList · insertOrderedList · link · undo · redo", "Toolbar commands"], ["rte-bubble", "class", "Floating menu on selection"]], a11y: ["The editable area has a label; toolbar buttons expose aria-pressed."] });
 
   /* ------------------------------ Navigation ------------------------------ */
-  add({ slug: "segment", name: "Segment", group: "Navigation", figma: "Segment · 3 sizes · icon · primary",
+  add({ slug: "segment", name: "Segment", group: "Navigation", figma: "Segment · 3 sizes · default · primary · icon",
     desc: "A segmented control for switching views or values. The thumb slides between options; arrow keys move the selection.",
     examples: [{ title: "Variants", layout: "block", html: `<div class="stack" style="--gap:14px;align-items:center">
   <div class="segment" role="radiogroup" aria-label="Range"><button role="radio" aria-checked="false">Day</button><button role="radio" aria-checked="true">Week</button><button role="radio" aria-checked="false">Month</button><button role="radio" aria-checked="false">Year</button></div>
@@ -395,7 +395,7 @@
     examples: [{ title: "Picker", html: `<div class="stack" style="--gap:10px;align-items:center"><div class="emoji-picker" data-target="ep-out"></div><input class="input" id="ep-out" placeholder="Picked emoji appear here" style="width:320px"></div>` }],
     react: `<EmojiPicker onSelect={(e) => insert(e.emoji)} />`, api: [["data-target", "element id", "Insert into this input"], ["facet:emoji", "event", "{emoji, name}"]], a11y: ["Every emoji is a button with its name as the label; search filters by name."] });
 
-  add({ slug: "sheet-pro", name: "Sheet (sides & parts)", group: "Overlays", figma: "Sheet · left · right · bottom",
+  add({ slug: "sheet-pro", name: "Sheet (sides & parts)", group: "Overlays", figma: "Sheet · right · left · bottom",
     desc: "Side panels with a header, scrolling body and footer. Use left for navigation, right for details and forms, bottom (drawer) on mobile.",
     examples: [{ title: "Right sheet (inline demo)", layout: "block", html: `<div class="inline-sheet"><div class="overlay sheet-overlay"><div class="sheet" role="dialog" aria-label="Edit deal">
   <div class="sheet-head"><b class="t-h5 grow">Edit deal</b><button class="btn btn-ghost btn-sm icon-btn" aria-label="Close">${i("x")}</button></div>

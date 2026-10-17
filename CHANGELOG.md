@@ -2,6 +2,17 @@
 
 All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
+## [1.2.1] — 2026-10-17
+
+### Figma
+- Every v1.2 component now has the variants its style-guide examples show. New variant sets: Chart · Area (Default, Stacked, Gaps), Chart · Bar (Default, Grouped, Stacked), Chart/Line (Single, Multiple, Target), Chart Tooltip (1–3 rows), KPI (Default, Sparkline, Icon + Footer, Progress), Item Card Group (Joined, List, Grid), Floating TOC (Collapsed, Open), Holo Card (Membership, Credit), Code Block (Default, Numbered, Diff), Resizable (Horizontal, Vertical), Checkbox Button Group (List, Grid), Radio Button Group (Cards, Buttons), Rich Text Editor (Toolbar, Bubble), Context Menu (Default, Checkable, Submenu).
+- New axes on existing sets: Rating Size (SM, MD, LG), Cell Slider Secondary, Native Select State (Default, Disabled, Invalid), Number Stepper Style (Default, Pill, Ghost), Segment Size and Primary style, App Layout Layout (Sidebar, Inset, Aside), Sheet Side Bottom, Menu Item Type Submenu, and a Show icon property on Item Card.
+- Original components were kept as the default variant, so existing instances stay linked.
+- Removed 56 stray layers from the Components page.
+
+### Changed
+- Style guide "Figma" labels now name the exact Figma component and variants.
+
 ## [1.2.0] — 2026-10-16
 
 ### Added
