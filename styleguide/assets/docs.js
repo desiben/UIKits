@@ -48,7 +48,7 @@
   const CATS = ["Actions", "Forms", "Data display", "Charts", "AI", "Feedback", "Layout", "Navigation", "Overlays"];
   const CAT_ICON = { Actions: "mouse-pointer-click", Forms: "text-cursor", "Data display": "layout-grid", Charts: "bar-chart-3", AI: "sparkles", Feedback: "star", Layout: "panel-left", Navigation: "navigation", Overlays: "layers" };
   R.sort((a, b) => CATS.indexOf(a.group) - CATS.indexOf(b.group) || a.name.localeCompare(b.name));
-  PAGES.push({ group: "Components", items: [["components", "All components", "v1.2"]] });
+  PAGES.push({ group: "Components", items: [["components", "All components", "v1.3"]] });
   CATS.forEach((g) => { const items = R.filter((c) => c.group === g); if (items.length) PAGES.push({ group: g, items: items.map((c) => ["components/" + c.slug, c.name, c.isNew ? "New" : ""]) }); });
   PAGES.push({ group: "AI agents", items: [["agents", "Agent examples", "New"]].concat(AGENTS.map((a) => ["agents/" + a.id, a.name])) });
   PAGES.push({ group: "Examples", items: [["examples", "All examples"], ["examples/dashboard", "Dashboard"], ["examples/login", "Login"], ["examples/settings", "Settings"]] });
@@ -346,7 +346,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     timeline: ["Reveal / live", "Items rise in sequence; AI nodes pulse; unread notifications ping."],
     pricing: ["Idle / hover", "The featured plan has a slowly rotating gradient border; cards lift on hover."],
   };
-  P.components = () => page("Components", "Components", `${R.length} documented components in ${CATS.length} categories — ${R.filter((c) => c.isNew).length} of them new in v1.2. Every one is a real Figma component with Variables, and a working HTML/CSS version here. Each card is a live, scaled-down preview.`,
+  P.components = () => page("Components", "Components", `${R.length} documented components in ${CATS.length} categories — ${R.filter((c) => c.isNew && !c.since).length} new in v1.2 and ${R.filter((c) => c.since === "1.3").length} in v1.3, so every shadcn/ui component has a Facet counterpart. Every one is a real Figma component with Variables, and a working HTML/CSS version here. Each card is a live, scaled-down preview.`,
     `<div class="ov-filter"><div class="input-group" style="max-width:320px;flex:1"><svg class="icon"><use href="#search"/></svg><input class="input" id="ov-q" placeholder="Filter components…" aria-label="Filter components"></div><div class="row ov-chips">${CATS.map((g) => `<a class="chip" href="javascript:void 0" data-scroll="cat-${g.replace(/\W+/g, "-")}">${i(CAT_ICON[g], "icon-sm")} ${g}</a>`).join("")}</div></div>` +
     CATS.map((g) => { const items = R.filter((c) => c.group === g); if (!items.length) return ""; return `<h2 id="cat-${g.replace(/\W+/g, "-")}">${g} <span class="badge">${items.length}</span></h2><div class="ov-grid">${items.map((c) => `<a class="ov-card" href="#/components/${c.slug}" data-name="${c.name.toLowerCase()} ${g.toLowerCase()}"><div class="ov-thumb" aria-hidden="true" inert><div class="ov-inner">${c.examples[0].html}</div></div><div class="ov-meta"><b>${c.name}</b>${c.isNew ? '<span class="badge badge-accent">New</span>' : ""}<span class="ov-count">${c.examples.length} example${c.examples.length > 1 ? "s" : ""}</span></div></a>`).join("")}</div>`; }).join(""),
     `<span class="badge badge-outline">${i("layers", "icon-sm")} ${R.length} documented · 144 in Figma</span><button class="badge badge-outline" data-copy-md style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>`);
@@ -359,7 +359,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
       `<h2 id="react">React (shadcn/ui + Facet preset)</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
-      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? '<span class="badge badge-accent">New in v1.2</span>' : ""}`);
+      `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? `<span class="badge badge-accent">New in v${c.since || "1.2"}</span>` : ""}`);
   });
 
   /* ---------- router ---------- */
@@ -368,7 +368,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     const fn = P[id] || P.introduction; const cur = P[id] ? id : "introduction";
     const main = $(".docs-main"); main.innerHTML = fn();
     const idx = FLAT.findIndex((f) => f.id === cur), prev = FLAT[idx - 1], next = FLAT[idx + 1];
-    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav><p class="doc-credit">Facet UI v1.2 · by ELTouch apps</p>`);
+    main.querySelector("article").insertAdjacentHTML("beforeend", `<nav class="pager">${prev ? `<a href="#/${prev.id}"><small>Previous</small>${prev.label}</a>` : ""}${next ? `<a href="#/${next.id}"><small>Next</small>${next.label}</a>` : ""}</nav><p class="doc-credit">Facet UI v1.3 · by ELTouch apps</p>`);
     renderSide(cur); toc(); Facet.enhance(main); if (Facet.motion) Facet.motion.refresh(document); document.body.classList.remove("nav-open");
     document.title = (FLAT[idx] ? FLAT[idx].label + " — " : "") + "Facet UI";
     window.scrollTo(0, 0);

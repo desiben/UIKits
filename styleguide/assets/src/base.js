@@ -152,7 +152,7 @@
     }
     // Dropdowns
     const trig = t.closest("[data-dropdown-trigger]");
-    document.querySelectorAll('.dropdown[data-open="true"]').forEach((d) => { if (!trig || !d.contains(trig)) { d.dataset.open = "false"; const b = d.querySelector("[data-dropdown-trigger]"); if (b) b.setAttribute("aria-expanded", "false"); } });
+    document.querySelectorAll('.dropdown[data-open="true"]').forEach((d) => { if ((!trig || !d.contains(trig)) && !(d.contains(t) && !t.closest(".menu-item"))) { d.dataset.open = "false"; const b = d.querySelector("[data-dropdown-trigger]"); if (b) b.setAttribute("aria-expanded", "false"); } });
     if (trig) { const d = trig.closest(".dropdown"); const open = d.dataset.open !== "true"; d.dataset.open = open; trig.setAttribute("aria-expanded", open); if (open) { const first = d.querySelector(".menu-item"); if (first) first.focus(); } }
     if (t.closest(".dropdown .menu-item")) { const d = t.closest(".dropdown"); d.dataset.open = "false"; }
     // Overlays
@@ -178,7 +178,7 @@
     }
     const menu = e.target.closest(".menu");
     if (menu && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
-      e.preventDefault(); const items = [...menu.querySelectorAll(".menu-item:not([aria-disabled='true'])")]; const i = items.indexOf(document.activeElement);
+      e.preventDefault(); const items = [...menu.querySelectorAll(".menu-item:not([aria-disabled='true']):not([hidden])")]; const i = items.indexOf(document.activeElement);
       items[(i + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length].focus();
     }
   });
