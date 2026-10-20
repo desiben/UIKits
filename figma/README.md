@@ -1,6 +1,6 @@
 # Facet UI — Figma file guide
 
-**File:** delivered with your purchase (open the Figma link in your Gumroad receipt).
+**File:** delivered with your purchase. Enter your purchase code at [etkits.vercel.app/claim](https://etkits.vercel.app/claim) to open it.
 
 ## Before you start
 1. Install **Mona Sans** (Google Fonts) so text renders correctly.
@@ -13,7 +13,7 @@
 | 00 — Start Here | Read the principles and inventory; status reflects what exists in the file. |
 | 01 — Foundations | Color ramps, type scale, spacing, radius, elevation, icons. |
 | 02 — Design Tokens | Theme matrix, density, CSS reference, **brand color examples** (6 modes side by side). |
-| 03 — Components | 144 components (78 variant sets, 504 variants) and 147 icons. Each has variant properties (Variant, Size, State…), boolean and text props and icon swaps. |
+| 03 — Components | 158 components (105 variant sets, 622 variants) and 147 icons. Each has variant properties (Variant, Size, State…), boolean and text props and icon swaps. |
 | 04 — Patterns | Ready-made sections (app shell, filter bar, auth forms, AI dock, marketing). |
 | 05 — Templates | 10 annotated apps, desktop + mobile. Duplicate a screen to start a new design. |
 | 06 — Playground | Sandboxes + theme lab + **prototype flows** (press Present). |

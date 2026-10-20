@@ -62,7 +62,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 
 | Layer | What it is | Who uses it |
 |---|---|---|
-| **Figma library** | 9 pages, 144 components (78 variant sets, 500+ variants), 147 icons, 4 style themes, 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
+| **Figma library** | 9 pages, 158 components (105 variant sets, 622 variants), 147 icons, 4 style themes, 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
 | **Design tokens** | 228 Figma variables exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset | Designers and developers |
 | **Living style guide** | A dependency-free HTML/CSS/JS reference implementation with live previews, copy-paste code and a theme studio | Developers |
 
@@ -520,7 +520,7 @@ The Figma file is delivered with your purchase: open the Figma link in your Gumr
 | **00 — Start Here** | Cover, design directions explored, principles, inventory and build status, getting started |
 | **01 — Foundations** | Color ramps, typography, spacing, radius, elevation, iconography |
 | **02 — Design Tokens** | Theme matrix (brand × light/dark), density comparison, CSS reference, brand-color examples |
-| **03 — Components** | 144 components, 78 variant sets, 504 variants, 147 Lucide icon components |
+| **03 — Components** | 158 components, 105 variant sets, 622 variants, 147 Lucide icon components |
 | **04 — Patterns** | 23 patterns: app shell, filter bar, KPI row, table toolbar, auth forms, onboarding, AI dock, marketing sections |
 | **05 — Templates** | 10 apps, 26 screens (desktop and mobile), annotated |
 | **06 — Playground** | Desktop and mobile sandboxes, theme lab, component tray, **clickable prototype flows** |
@@ -607,6 +607,6 @@ Facet aims to be honest about what isn't finished:
 - **Marketing kit:** rendered with Playwright and ffmpeg from the sources in `marketing/`.
 - **Inspiration:** the component inventory and API conventions of [shadcn/ui](https://ui.shadcn.com) (MIT). Facet does not copy shadcn's code or visual design.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Choose and add a `LICENSE` file for Facet UI itself before distributing it publicly.
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Facet UI itself is sold under [LICENSE.md](LICENSE.md) (Personal, Commercial and Team). Buyers start with [START-HERE.md](START-HERE.md).
 
 <div align="center"><sub>Facet UI v1.1 · by ELTouch apps · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
