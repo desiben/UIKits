@@ -1,5 +1,5 @@
 /* =========================================================================
-   Facet UI — motion runtime (micro-interactions) v1.1. No dependencies.
+   Facet UI v1.3 — motion runtime (micro-interactions, since v1.1). No dependencies.
    Load after facet.js:  <script src="assets/motion.js" defer></script>
    Pointer spotlight (--mx/--my), tilt ([data-tilt]), magnetic ([data-magnetic]),
    press ripples, sliding indicators (tabs, pills, menus, sidebars),

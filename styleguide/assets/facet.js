@@ -1,5 +1,5 @@
 /* =========================================================================
-   Facet UI — runtime (v1.0). No dependencies.
+   Facet UI v1.3 — runtime (core since v1.0). No dependencies.
    - Facet.theme  : light/dark, brand presets, density, custom brand from any color
    - Facet.ui     : progressive enhancement for tabs, menus, dialogs, toggles, OTP, toasts
    Usage: <script src="assets/facet.js" defer></script>

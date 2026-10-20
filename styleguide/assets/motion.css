@@ -1,5 +1,5 @@
 /* =========================================================================
-   Facet UI — motion layer (micro-interactions) v1.1
+   Facet UI v1.3 — motion layer (micro-interactions, since v1.1)
    Load AFTER facet.css. Pair with motion.js for pointer-aware effects
    (spotlight, tilt, magnetic, sliding indicators, ripple, count-up, reveal).
    Principles: fast (80–320ms), springy on state change, never blocks input,

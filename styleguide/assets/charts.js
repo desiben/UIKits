@@ -1,5 +1,5 @@
 /* =========================================================================
-   Facet UI — charts (v1.2). No dependencies. ~9 KB.
+   Facet UI v1.3 — charts (since v1.2). No dependencies. ~9 KB.
    Declarative: <div class="chart" data-chart='{"type":"area", ...}'></div>
    Types: area · line · bar · composed · pie (donut) · radar · radial · spark
    Colors default to the chart/1–6 tokens, so charts follow brand + light/dark.

@@ -32,7 +32,7 @@
     <div class="glow lime" style="width:500px;height:400px;left:1400px;top:760px"></div>
     <div class="center"><span class="mark"><b></b>Facet UI</span>
       <h2 class="h1">Ship SaaS UI <span class="grad">faster.</span></h2>
-      <p class="sub">Figma UI kit · 88 components · 10 templates · tokens &amp; code</p>
+      <p class="sub">Figma UI kit · 158 components · 10 templates · tokens &amp; code</p>
       <span class="url">facetui.vercel.app</span>
       <span class="by">Made by ELTouch apps</span></div>`);
 

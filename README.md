@@ -63,7 +63,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 | Layer | What it is | Who uses it |
 |---|---|---|
 | **Figma library** | 9 pages, 158 components (105 variant sets, 622 variants), 147 icons, 4 style themes, 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
-| **Design tokens** | 228 Figma variables exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset | Designers and developers |
+| **Design tokens** | 246 Figma variables exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset | Designers and developers |
 | **Living style guide** | A dependency-free HTML/CSS/JS reference implementation with live previews, copy-paste code and a theme studio | Developers |
 
 **Highlights**
@@ -609,4 +609,4 @@ Facet aims to be honest about what isn't finished:
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Facet UI itself is sold under [LICENSE.md](LICENSE.md) (Personal, Commercial and Team). Buyers start with [START-HERE.md](START-HERE.md).
 
-<div align="center"><sub>Facet UI v1.1 · by ELTouch apps · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
+<div align="center"><sub>Facet UI v1.3 · by ELTouch apps · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
