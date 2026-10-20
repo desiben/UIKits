@@ -14,6 +14,10 @@ Every component in the shadcn/ui list now has a Facet counterpart in Figma and i
   - AI: Bubble (5 variants × Start/End), Marker (Date, Status, Unread, Pill), Trace Item (Done, Running, Error, Pending), Message Scroller (At bottom, Scrolled up).
 - `src/v13.css` and `src/v13.js` (built into `facet.css` / `facet.js`). `Facet.sonner()` with `success`, `error`, `info`, `warning`, `loading`, `promise` and `dismiss`.
 
+- FacetUI-Templates: 36 pre-made blocks (54 variants) built from Facet components — dashboards, marketing sections, e-commerce, forms and system states.
+  - Code: `styleguide/templates/` — a living page with a brand-color picker (six presets or any color), light/dark, four styles, motion on/off and replay, desktop/mobile preview and copy-paste HTML for every variant. Photos from Unsplash.
+  - Figma: new page "09 — FacetUI-Templates" with all 36 blocks. Switch the Brand and Color modes on the wrapper frame to re-theme every block at once. Image slots are named `Image · unsplash/<id>`.
+
 ### Changed
 - Dropdowns stay open for clicks inside the menu (such as a combobox search box), and arrow keys skip filtered-out options.
 - "New in v1.x" badges show the release a component arrived in.
