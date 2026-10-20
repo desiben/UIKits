@@ -8,7 +8,7 @@
 :root { --tp-max: 1180px; --tp-ease: cubic-bezier(.2, .8, .2, 1); --tp-spring: cubic-bezier(.34, 1.4, .64, 1); }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body.tp-page { margin: 0; background: var(--bg-canvas); color: var(--text-primary); font: var(--text-body-md); }
-.tp-page a { color: inherit; }
+.tp-page a:not(.btn) { color: inherit; }
 .tp-page img { display: block; max-width: 100%; }
 .tp-page h1, .tp-page h2, .tp-page h3, .tp-page h4, .tp-page p { margin: 0; }
 
