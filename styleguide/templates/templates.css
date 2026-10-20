@@ -52,10 +52,10 @@ body.tp-page { margin: 0; background: var(--bg-canvas); color: var(--text-primar
 .tp-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 22px 18px; padding: 18px 0 40px; }
 .tp-card { display: block; text-decoration: none; color: inherit; }
 .tp-card[hidden] { display: none; }
-.tp-thumb { position: relative; aspect-ratio: 16 / 11; overflow: hidden; border-radius: 22px 8px 22px 22px; background: linear-gradient(160deg, var(--brand-50), color-mix(in srgb, var(--brand-100) 70%, var(--bg-canvas))); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-500) 12%, transparent); transition: transform .45s var(--tp-ease), box-shadow .45s; }
-[data-theme="dark"] .tp-thumb { background: linear-gradient(160deg, color-mix(in srgb, var(--brand-900) 60%, var(--bg-canvas)), var(--bg-canvas)); }
+.tp-thumb { position: relative; aspect-ratio: 16 / 11; overflow: hidden; border-radius: 22px 8px 22px 22px; background: var(--bg-subtle); box-shadow: inset 0 0 0 1px var(--border-subtle); transition: transform .45s var(--tp-ease), box-shadow .45s; }
+[data-theme="dark"] .tp-thumb { background: var(--bg-subtle); }
 .tp-thumb-inner { position: absolute; left: 50%; top: 18px; width: 1200px; transform-origin: top center; transform: translateX(-50%) scale(var(--s, .2)); pointer-events: none; border-radius: 18px; overflow: hidden; background: var(--bg-canvas); box-shadow: 0 30px 60px -20px rgb(15 23 42 / .35); }
-.tp-card:hover .tp-thumb { transform: translateY(-4px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--brand-500) 30%, transparent), 0 24px 44px -24px color-mix(in srgb, var(--brand-700) 60%, transparent); }
+.tp-card:hover .tp-thumb { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--border-default), 0 24px 44px -24px rgb(15 23 42 / .35); }
 .tp-card:hover .tp-thumb-inner { transform: translateX(-50%) scale(calc(var(--s, .2) * 1.04)); transition: transform .6s var(--tp-ease); }
 .tp-card b { display: flex; align-items: center; gap: 8px; margin-top: 12px; font: var(--text-label-lg); }
 .tp-card b .num { font: var(--text-code-sm); color: var(--text-tertiary); }
