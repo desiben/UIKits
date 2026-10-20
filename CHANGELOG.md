@@ -2,6 +2,22 @@
 
 All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
+## [1.3.0] — 2026-10-20
+
+Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.
+
+### Added
+- Style guide: 17 new components, each with live examples, a React (shadcn/ui) snippet, API and accessibility notes: Aspect Ratio, Button Group, Input Group, Label, Collapsible, Scroll Area, Sonner, Bubble, Marker, Message Scroller, Questionnaire, Trace, Combobox, Select, Textarea, Menubar and Navigation Menu (109 documented components in total).
+- Figma: 13 new variant sets (57 variants) plus a composed Trace, in three new groups on the Components page:
+  - Forms & Actions: Label (Default, Required, Optional, Disabled), Button Group (Outline, Split, With Input, Vertical), Input Group (Icon + Text × Default/Focus/Error, Prefix + Suffix, Button, Textarea), Q Option, Questionnaire (Single, Multiple, Freeform, Summary).
+  - Layout & Feedback: Aspect Ratio (16:9, 4:3, 1:1, 9:16), Collapsible (Closed, Open), Scroll Area (Vertical, Horizontal), Sonner (7 types, Stack, Expanded).
+  - AI: Bubble (5 variants × Start/End), Marker (Date, Status, Unread, Pill), Trace Item (Done, Running, Error, Pending), Message Scroller (At bottom, Scrolled up).
+- `src/v13.css` and `src/v13.js` (built into `facet.css` / `facet.js`). `Facet.sonner()` with `success`, `error`, `info`, `warning`, `loading`, `promise` and `dismiss`.
+
+### Changed
+- Dropdowns stay open for clicks inside the menu (such as a combobox search box), and arrow keys skip filtered-out options.
+- "New in v1.x" badges show the release a component arrived in.
+
 ## [1.2.1] — 2026-10-17
 
 ### Figma

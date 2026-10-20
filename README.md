@@ -16,6 +16,13 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 
 ---
 
+## What's new in v1.3
+
+- **Full shadcn/ui coverage.** Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.
+- **17 new style-guide components:** Aspect Ratio, Button Group, Input Group, Label, Collapsible, Scroll Area, Sonner (stacked toasts), Bubble, Marker, Message Scroller, Questionnaire, Trace, Combobox, Select, Textarea, Menubar and Navigation Menu.
+- **13 new Figma variant sets (57 variants)** on the Components page, plus a composed Trace: Label, Button Group, Input Group, Q Option, Questionnaire, Aspect Ratio, Collapsible, Scroll Area, Sonner, Bubble, Marker, Trace Item and Message Scroller. All are bound to Facet variables and text styles, and built from existing Button, Icon Button, Input, Kbd and Badge instances.
+- **`Facet.sonner()`** for stacked toasts, with types, actions and `Facet.sonner.promise()`.
+
 ## What's new in v1.2
 
 - **56 new components** across Charts, Data display, AI, Feedback, Forms, Layout, Navigation and Overlays — built in Figma (Variables, variants) and live on the site with a **Desktop / Mobile preview toggle** on every example.
@@ -465,13 +472,15 @@ Each Figma component maps to a class-based HTML implementation and a shadcn/ui R
 
 | Category | Components (✅ = in the HTML style guide) |
 |---|---|
-| **Actions** | Button ✅ · Icon Button ✅ · Toggle ✅ · Toggle Group ✅ |
-| **Forms** | Input ✅ · Field ✅ · Textarea ✅ · Select ✅ · Checkbox ✅ · Radio ✅ · Switch ✅ · Slider ✅ · Input OTP ✅ · Dropzone ✅ · Combobox · Date Picker · Date Range Picker · Time Picker · Attachment |
+| **Actions** | Button ✅ · Button Group ✅ · Icon Button ✅ · Toggle ✅ · Toggle Group ✅ |
+| **Forms** | Input ✅ · Input Group ✅ · Label ✅ · Field ✅ · Textarea ✅ · Select ✅ · Native Select ✅ · Checkbox ✅ · Radio ✅ · Switch ✅ · Slider ✅ · Input OTP ✅ · Dropzone ✅ · Combobox ✅ · Questionnaire ✅ · Date Picker · Date Range Picker · Time Picker |
 | **Data display** | Badge ✅ · Avatar ✅ · Avatar Group ✅ · Kbd ✅ · Spinner ✅ · Skeleton ✅ · Separator ✅ · Progress ✅ · Card ✅ · KPI Card ✅ · Data Table ✅ · Calendar ✅ · Charts (bar ✅, area, donut, tooltip, legend ✅) |
-| **Feedback** | Alert ✅ · Toast ✅ · Empty State ✅ · Tooltip ✅ |
-| **Overlays** | Dialog ✅ · Alert Dialog ✅ · Sheet ✅ · Drawer ✅ · Dropdown Menu ✅ · Popover ✅ · Hover Card ✅ · Accordion ✅ · Context Menu · Menubar |
-| **Navigation** | Tabs ✅ · Breadcrumb ✅ · Pagination ✅ · Chip ✅ · Link ✅ · Stepper ✅ · Sidebar ✅ · Navigation Menu |
-| **Signature** | Command Palette ✅ · Prompt Composer ✅ · Message ✅ · Kanban ✅ · Activity Timeline ✅ · Notification Center ✅ · Pricing Card ✅ · AI Copilot Panel · Source Card · Code Block · Tree · Filter Builder · Workflow Builder · Resource Planner · Expandable Data Card |
+| **Feedback** | Alert ✅ · Toast ✅ · Sonner ✅ · Empty State ✅ · Tooltip ✅ |
+| **Layout** | Aspect Ratio ✅ · Collapsible ✅ · Scroll Area ✅ · Resizable ✅ |
+| **AI** | Bubble ✅ · Marker ✅ · Message Scroller ✅ · Trace ✅ · Chain of Thought ✅ · Attachment ✅ |
+| **Overlays** | Dialog ✅ · Alert Dialog ✅ · Sheet ✅ · Drawer ✅ · Dropdown Menu ✅ · Popover ✅ · Hover Card ✅ · Accordion ✅ · Context Menu ✅ · Menubar ✅ |
+| **Navigation** | Tabs ✅ · Breadcrumb ✅ · Pagination ✅ · Chip ✅ · Link ✅ · Stepper ✅ · Sidebar ✅ · Navigation Menu ✅ |
+| **Signature** | Command Palette ✅ · Prompt Composer ✅ · Message ✅ · Kanban ✅ · Activity Timeline ✅ · Notification Center ✅ · Pricing Card ✅ · AI Copilot Panel · Source Card · Code Block ✅ · Tree · Filter Builder · Workflow Builder · Resource Planner · Expandable Data Card |
 
 Components without a ✅ exist in Figma, fully tokenized, but don't yet have an HTML reference implementation. In React, use the shadcn/ui component with the Tailwind preset.
 
@@ -584,7 +593,7 @@ Facet aims to be honest about what isn't finished:
 
 1. **`border/input` contrast is 2.5:1** against white. That's below WCAG 1.4.11's 3:1 for control boundaries. Labels and placeholders carry the meaning, but if your audit requires 3:1, change `--border-input` to `var(--ink-500)`.
 2. **Code and Data text styles use Mona Sans**, not a true monospace, to keep the kit to one family. Swap `--font-mono` if you show a lot of code.
-3. **The HTML style guide documents 92 of the 144 Figma components.** The rest (e.g. Workflow Builder, Resource Planner, Combobox, Navigation Menu) are Figma-only for now.
+3. **The HTML style guide documents 109 components.** A few Figma components (e.g. Workflow Builder, Resource Planner, Date Range Picker) are Figma-only for now.
 4. **The HTML is a reference implementation, not a React package.** Focus-trapping in dialogs and the full calendar keyboard model are simplified. For production React apps, use shadcn/ui (Radix) with the Facet preset.
 5. **The Figma prototype covers two flows.** The remaining template screens are static.
 6. **Mona Sans loads from Google Fonts.** Offline, it falls back to the system UI font.

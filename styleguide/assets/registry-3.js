@@ -6,7 +6,7 @@
   const FRAMEWORKS = [["next", "Next.js"], ["remix", "Remix"], ["astro", "Astro"], ["nuxt", "Nuxt"], ["svelte", "SvelteKit"], ["solid", "SolidStart"]];
 
   /* ------------------------------ Actions ------------------------------ */
-  add({ slug: "button-group", name: "Button Group", group: "Actions", figma: "Button Group · horizontal · vertical · split · with input",
+  add({ slug: "button-group", name: "Button Group", group: "Actions", figma: "Button Group · Outline · Split · With Input · Vertical",
     desc: "Joins related buttons into one control: shared borders, one outer corner shape. Works with outline, solid and ghost buttons, a split dropdown, text addons and inputs.",
     examples: [
       { title: "Outline group", html: `<div class="btn-group" role="group" aria-label="Message actions"><button class="btn btn-outline btn-sm">${i("archive", "icon-sm")} Archive</button><button class="btn btn-outline btn-sm">Report</button><button class="btn btn-outline btn-sm">Snooze</button><button class="btn btn-outline btn-sm icon-btn" aria-label="More">${i("ellipsis", "icon-sm")}</button></div>` },
@@ -23,7 +23,7 @@
     a11y: ["Give the wrapper role=\"group\" and an aria-label.", "Icon-only buttons need their own aria-label."] });
 
   /* ------------------------------ Forms ------------------------------ */
-  add({ slug: "input-group", name: "Input Group", group: "Forms", figma: "Input Group · prefix · suffix · button · textarea",
+  add({ slug: "input-group", name: "Input Group", group: "Forms", figma: "Input Group · Icon + Text · Prefix + Suffix · Button · Textarea",
     desc: "One bordered control that holds an input plus addons: icons, text, kbd hints, inline buttons, or a toolbar above or below a textarea. Focus rings the whole group.",
     examples: [
       { title: "Addons", html: `<div class="stack" style="--gap:12px;width:340px">
@@ -50,7 +50,7 @@
     api: [["input-shell", "class", "Bordered wrapper; put a bare input or textarea inside"], ["input-shell-addon", "class", "Icon, text, kbd or buttons"], ["data-tone=\"muted\"", "addon", "Filled prefix/suffix segment"], ["data-block + data-align=\"block-start|block-end\"", "attribute", "Toolbar above or below a textarea"], ["data-invalid / data-disabled", "attribute", "States"]],
     a11y: ["The inner input still needs a label (visible or aria-label).", "Icon-only addon buttons need an aria-label."] });
 
-  add({ slug: "label", name: "Label", group: "Forms", figma: "Label · default · required · optional · disabled",
+  add({ slug: "label", name: "Label", group: "Forms", figma: "Label · Default · Required · Optional · Disabled",
     desc: "Accessible text for a control. Clicking it focuses or toggles the control. Shows required and optional markers and dims with a disabled control.",
     examples: [{ title: "Labels", html: `<div class="stack" style="--gap:16px;width:300px">
   <div class="field"><label class="label" for="lb1">Email <span class="req" aria-hidden="true">*</span></label><input class="input" id="lb1" type="email" placeholder="you@company.com" required></div>
@@ -78,7 +78,7 @@
     api: [["dropdown[data-select]", "wrapper", "Turns a dropdown into a select"], ["data-multiple", "attribute", "Multi-select; the menu stays open"], ["select-trigger > .value[data-placeholder]", "class", "Shows the selection or placeholder"], ["menu-item[role=option][aria-selected]", "option", "Option + selected state"], ["facet:change", "event", "detail.value"]],
     a11y: ["Trigger has aria-haspopup=\"listbox\"; options use role=\"option\" with aria-selected.", "Arrow keys move, Enter selects, Escape closes."] });
 
-  add({ slug: "combobox", name: "Combobox", group: "Forms", figma: "Combobox · Closed · Open · Empty · Multiple",
+  add({ slug: "combobox", name: "Combobox", group: "Forms", figma: "Select · Combobox · Open",
     desc: "A select with a search box: type to filter, Enter to pick the first match. Shows an empty state when nothing matches. Works single or multiple.",
     examples: [
       { title: "Single", html: `<div class="dropdown" data-select data-combobox style="width:260px;margin-bottom:300px"><button class="select-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Framework"><span class="value" data-placeholder="Select framework…"></span>${i("chevrons-up-down")}</button><div class="menu listbox" role="listbox"><div class="combobox-search">${i("search")}<input placeholder="Search framework…" aria-label="Search framework" role="combobox" aria-autocomplete="list"></div>${FRAMEWORKS.map(([v, l]) => opt(v, l)).join("")}<div class="combobox-empty">No framework found.</div></div></div>` },
@@ -90,7 +90,7 @@
     api: [["dropdown[data-select][data-combobox]", "wrapper", "Select + search"], ["combobox-search", "class", "Search field at the top of the list"], ["combobox-empty", "class", "Shown when nothing matches"], ["combobox-chips", "class", "Chips for multiple selection"]],
     a11y: ["The search input gets role=\"combobox\" and aria-autocomplete=\"list\".", "↓ from the search moves into the list; Enter picks the first match."] });
 
-  add({ slug: "textarea", name: "Textarea", group: "Forms", figma: "Textarea · Default · Focus · Filled · Error · Disabled",
+  add({ slug: "textarea", name: "Textarea", group: "Forms", figma: "Textarea · Default · Focus · Error · Disabled",
     desc: "Multi-line text input with an optional character counter and auto-grow. Uses the same border, focus and error tokens as Input.",
     examples: [{ title: "Textarea", html: `<div class="stack" style="--gap:16px;width:360px">
   <div class="field"><label class="label" for="ta1">Bio</label><div class="textarea-wrap"><textarea class="textarea" id="ta1" maxlength="160" placeholder="Tell us a little about yourself"></textarea><span class="textarea-count" aria-live="polite"></span></div><span class="help">Shown on your public profile.</span></div>
@@ -102,7 +102,7 @@
     api: [["textarea", "class", "Base"], ["textarea-wrap + textarea-count", "class", "Live counter (uses maxlength)"], ["data-autosize", "attribute", "Grows with content"], ["aria-invalid", "attribute", "Error state"]],
     a11y: ["Link help and error text with aria-describedby.", "The counter is aria-live so screen readers hear the limit."] });
 
-  add({ slug: "questionnaire", name: "Questionnaire", group: "Forms", figma: "Questionnaire · Single · Multiple · Freeform · Summary",
+  add({ slug: "questionnaire", name: "Questionnaire", group: "Forms", figma: "Questionnaire · Q Option · Single · Multiple · Freeform · Summary",
     desc: "A multi-step question flow for agent clarifications, onboarding and surveys: single or multiple choice, an Other field, freeform answers, skippable steps, number-key shortcuts and a summary.",
     examples: [{ title: "Agent clarification", html: `<div class="questionnaire" tabindex="-1">
   <div class="q-head"><span class="q-count">1 of 3</span><div class="progress" role="presentation"><div style="width:33%"></div></div><span>${i("sparkles", "icon-sm")} Facet AI</span></div>
@@ -144,7 +144,7 @@
     api: [["aspect-ratio", "class", "Frame"], ["--ratio", "CSS var", "e.g. 16/9 (default), 4/3, 1"], ["figcaption", "child", "Optional overlay caption"]],
     a11y: ["Images still need alt text; decorative ones use alt=\"\"."] });
 
-  add({ slug: "collapsible", name: "Collapsible", group: "Layout", figma: "Collapsible · closed · open",
+  add({ slug: "collapsible", name: "Collapsible", group: "Layout", figma: "Collapsible · Closed · Open",
     desc: "Shows and hides one region with a trigger. Built on <details>, so it works without JavaScript. Use Accordion for a set of sections.",
     examples: [{ title: "Collapsible", html: `<details class="collapsible" style="width:340px" open>
   <summary><span>@peduarte starred 3 repositories</span><span class="collapsible-trigger btn btn-ghost btn-sm icon-btn" aria-hidden="true">${i("chevrons-up-down", "icon-sm")}</span></summary>
@@ -158,7 +158,7 @@
     api: [["details.collapsible", "element", "Wrapper; add open to start expanded"], ["collapsible-trigger", "class", "Icon that flips when open"], ["collapsible-content", "class", "The hidden region"]],
     a11y: ["<summary> is a native button: Enter and Space toggle it and the expanded state is announced."] });
 
-  add({ slug: "scroll-area", name: "Scroll Area", group: "Layout", figma: "Scroll Area · vertical · horizontal",
+  add({ slug: "scroll-area", name: "Scroll Area", group: "Layout", figma: "Scroll Area · Vertical · Horizontal",
     desc: "A bounded scroll region with slim, themed scrollbars on every browser and optional edge fades. Native scrolling, so touch, wheel and keyboard all work.",
     examples: [
       { title: "Vertical", html: `<div class="scroll-area" style="height:240px;width:220px" tabindex="0" aria-label="Tags"><div class="scroll-area-viewport"><b class="t-label-sm">Tags</b><div class="scroll-area-list" style="margin-top:8px">${Array.from({ length: 30 }, (_, k) => `<div>v1.2.0-beta.${30 - k}</div>`).join("")}</div></div></div>` },
@@ -169,7 +169,7 @@
 
   /* ------------------------------ Feedback ------------------------------ */
   const snr = (o, label, cls = "btn-outline") => `<button class="btn ${cls} btn-sm" data-sonner="${JSON.stringify({ target: "sonner-demo", ...o }).replace(/"/g, "&quot;").replace(/'/g, "&#39;")}">${label}</button>`;
-  add({ slug: "sonner", name: "Sonner", group: "Feedback", figma: "Sonner · Default · Success · Error · Info · Warning · Loading · Action · Stack",
+  add({ slug: "sonner", name: "Sonner", group: "Feedback", figma: "Sonner · Default · Success · Error · Info · Warning · Loading · Action · Stack · Expanded",
     desc: "Stacked toasts: new ones slide in front, older ones tuck behind, hover to fan the stack out. Types, actions and promise toasts that go from loading to done.",
     examples: [{ title: "Try it", html: `<div class="stack" style="--gap:16px;align-items:center;width:100%">
   <div class="row" style="flex-wrap:wrap;justify-content:center;gap:8px">${snr({ title: "Event created", description: "Sunday, Dec 03 at 9:00 AM" }, "Default")}${snr({ title: "Invoice paid", type: "success" }, "Success")}${snr({ title: "Couldn't sync", description: "Check your connection.", type: "error" }, "Error")}${snr({ title: "New version available", type: "info" }, "Info")}${snr({ title: "Storage almost full", type: "warning" }, "Warning")}${snr({ title: "Message archived", action: "Undo" }, "Action")}${snr({ title: "Saving changes…", promise: "resolve", success: "Changes saved", error: "Save failed" }, "Promise", "btn")}</div>
@@ -212,7 +212,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
     api: [["marker", "class", "Line + centered label (date break)"], ["data-variant", "attribute", "status · unread · pill"], ["marker-pill", "class", "Pill label for the pill variant"]],
     a11y: ["Use role=\"separator\" on breaks; status markers are plain text so they're read in order."] });
 
-  add({ slug: "message-scroller", name: "Message Scroller", group: "AI", figma: "Message Scroller · at bottom · scrolled up · new messages",
+  add({ slug: "message-scroller", name: "Message Scroller", group: "AI", figma: "Message Scroller · At bottom · Scrolled up",
     desc: "The scroll container for a conversation: sticks to the bottom while replies stream, anchors each new turn to the top, restores history without jumping, counts unread messages, jumps to any message and reports when messages are seen.",
     examples: [{ title: "Conversation", layout: "block", html: `<div class="stack" style="--gap:10px;max-width:560px;margin:auto">
   <div class="card" style="height:380px;padding:0;overflow:hidden"><div class="message-scroller" id="ms-demo">
@@ -258,7 +258,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   /* ------------------------------ Navigation ------------------------------ */
   const mi = (ic, label, sc = "") => `<button class="menu-item" role="menuitem">${ic ? i(ic) : ""}${label}${sc ? `<span class="shortcut">${sc}</span>` : ""}</button>`;
   const mb = (label, items) => `<div class="dropdown"><button class="menubar-trigger" data-dropdown-trigger aria-haspopup="menu" aria-expanded="false" role="menuitem">${label}</button><div class="menu" role="menu">${items}</div></div>`;
-  add({ slug: "menubar", name: "Menubar", group: "Navigation", figma: "Menubar · closed · open",
+  add({ slug: "menubar", name: "Menubar", group: "Navigation", figma: "Menubar",
     desc: "A desktop-app style menu bar. Click a menu to open it, then hover or use ←/→ to move between menus. Supports shortcuts, checkable items and separators.",
     examples: [{ title: "Menubar", html: `<div class="menubar" role="menubar" aria-label="Editor" style="margin-bottom:240px">
   ${mb("File", mi("file", "New tab", "⌘T") + mi("", "New window", "⌘N") + mi("", "New incognito window") + '<div class="menu-sep"></div>' + mi("", `Share ${i("chevron-right", "sub-arrow")}`) + '<div class="menu-sep"></div>' + mi("", "Print…", "⌘P"))}
