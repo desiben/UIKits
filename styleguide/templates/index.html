@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-brand="cobalt" data-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FacetUI-Templates — 36 blocks built with Facet UI</title>
+  <meta name="description" content="36 pre-made page blocks — heroes, pricing, dashboards, e-commerce, forms and system states — built from Facet UI v1.3 components, with live motion and a theme you can change.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/facet.css">
+  <link rel="stylesheet" href="../assets/motion.css">
+  <link rel="stylesheet" href="templates.css">
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/facet.js"></script>
+  <script src="../assets/charts.js"></script>
+  <script src="../assets/motion.js" defer></script>
+</head>
+<body class="tp-page" id="top">
+
+<header class="tp-bar" aria-label="Theme">
+  <a class="tp-brand" href="../"><span class="logo"><svg class="icon icon-sm"><use href="#layers"/></svg></span>FacetUI-Templates <small>v1.3</small></a>
+  <span class="spacer"></span>
+  <div class="tp-ctrl" role="group" aria-label="Brand color"><span>Color</span>
+    <button class="tp-swatch" style="--c:#5d4ff3" data-brand-set="iris" aria-label="Iris"></button>
+    <button class="tp-swatch" style="--c:#0072c5" data-brand-set="cobalt" aria-label="Cobalt"></button>
+    <button class="tp-swatch" style="--c:#00817c" data-brand-set="lagoon" aria-label="Lagoon"></button>
+    <button class="tp-swatch" style="--c:#00864c" data-brand-set="forest" aria-label="Forest"></button>
+    <button class="tp-swatch" style="--c:#be4000" data-brand-set="ember" aria-label="Ember"></button>
+    <button class="tp-swatch" style="--c:#c02b6c" data-brand-set="rose" aria-label="Rose"></button>
+    <label class="tp-picker" id="tp-picker" title="Any color"><input type="color" id="tp-color" value="#7c3aed" aria-label="Pick any brand color"></label>
+    <code class="tp-hex" id="tp-hex"></code>
+  </div>
+  <div class="segment sm" role="radiogroup" aria-label="Mode"><button role="radio" aria-checked="true" data-mode-set="light" aria-label="Light"><svg class="icon icon-sm"><use href="#sun"/></svg></button><button role="radio" aria-checked="false" data-mode-set="dark" aria-label="Dark"><svg class="icon icon-sm"><use href="#moon"/></svg></button></div>
+  <div class="segment sm tp-ctrl tp-hide-md" role="radiogroup" aria-label="Style"><button role="radio" aria-checked="true" data-style-set="default">Default</button><button role="radio" aria-checked="false" data-style-set="soft">Soft</button><button role="radio" aria-checked="false" data-style-set="glass">Glass</button><button role="radio" aria-checked="false" data-style-set="mono">Mono</button></div>
+  <button class="btn btn-ghost btn-sm" id="tp-motion" aria-pressed="true" title="Motion on/off"><svg class="icon icon-sm"><use href="#zap"/></svg><span class="tp-hide-md">Motion</span></button>
+  <button class="btn btn-outline btn-sm" id="tp-replay"><svg class="icon icon-sm"><use href="#rotate-ccw"/></svg>Replay</button>
+</header>
+
+<main class="tp-shell">
+  <section class="tp-intro">
+    <span class="tp-eyebrow">Facet UI v1.3 · Templates</span>
+    <h1>Blocks <span class="grad">&amp; templates.</span></h1>
+    <p>Pre-made page blocks built only from Facet UI components and tokens. Pick a color above — every block, chart and button follows. Everything moves, and everything is copy-paste HTML.</p>
+    <div class="row"><a class="btn btn-lg" href="#hero">Browse blocks <svg class="icon"><use href="#arrow-down"/></svg></a><a class="btn btn-outline btn-lg" href="../">Component docs</a></div>
+    <div class="tp-meta"><div><b id="tp-count">36</b>Blocks</div><div><b id="tp-vcount">55</b>Variants</div><div><b>158</b>Facet components</div><div><b>∞</b>Brand colors</div></div>
+  </section>
+
+  <div class="tp-filter">
+    <div class="input-group"><svg class="icon"><use href="#search"/></svg><input class="input" id="tp-search" placeholder="Search blocks…" aria-label="Search blocks"></div>
+    <div class="row" id="tp-cats" role="group" aria-label="Category"></div>
+    <span class="t-body-sm text-tertiary" id="tp-results" style="margin-left:auto"></span>
+  </div>
+
+  <div class="tp-gallery" id="tp-gallery"></div>
+  <div id="tp-blocks"></div>
+
+  <a class="tp-endcta" href="../#/figma">
+    <span class="bg"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&h=300&q=60" alt="" loading="lazy" onerror="this.remove()"></span>
+    <span class="grow"><b>Built for teams who think in systems</b><span>Every block is in the Figma file too, on the FacetUI-Templates page.</span></span>
+    <span class="btn btn-lg tp-white">Get Facet UI</span>
+  </a>
+  <footer class="tp-pagefoot">FacetUI-Templates · Facet UI v1.3 by ELTouch apps · Photos from <a href="https://unsplash.com" rel="noopener">Unsplash</a> (Unsplash License) · Company names and logos are fictional.</footer>
+</main>
+
+<script src="blocks-a.js"></script>
+<script src="blocks-b.js"></script>
+<script src="templates.js"></script>
+</body>
+</html>
