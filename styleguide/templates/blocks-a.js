@@ -19,6 +19,8 @@
   const src = (k, w = 800, h = 600) => `https://images.unsplash.com/photo-${U[k] || k}?auto=format&fit=crop&w=${w}&h=${h}&q=70`;
   // Image box: gradient background, the photo on top; a failed photo is removed so the gradient shows.
   const img = (k, alt = "", w = 800, h = 600, cls = "", style = "", extra = "") => `<div class="tp-img ${cls}"${style ? ` style="${style}"` : ""}><img src="${src(k, w, h)}" alt="${alt}" loading="lazy" onerror="this.remove()">${extra}</div>`;
+  // Full-bleed photo layer under a section; --veil tints it so text stays legible. Zooms slowly (Ken Burns).
+  const bg = (k, veil = "", w = 1800, h = 1100) => `<div class="tp-bgimg"${veil ? ` style="--veil:${veil}"` : ""} aria-hidden="true"><img src="${src(k, w, h)}" alt="" loading="lazy" onerror="this.remove()"></div>`;
   const av = (k, size = 40) => `<div class="tp-img round" style="width:${size}px;height:${size}px;flex:none"><img src="${src(k, size * 3, size * 3)}" alt="" loading="lazy" onerror="this.remove()"></div>`;
   const avs = (ks, size = 32) => `<span class="row" style="--gap:0">${ks.map((k, n) => `<span style="margin-left:${n ? -10 : 0}px;border:2px solid var(--bg-canvas);border-radius:50%;display:inline-flex">${av(k, size)}</span>`).join("")}</span>`;
   // Fictional company logos (simple geometric marks).
@@ -54,8 +56,9 @@
     <h1 class="tp-h1" data-anim="up" style="--d:1">Analytics your team will <span class="tp-word tp-grad"><span class="on">actually use.</span><span>trust.</span><span>love.</span></span></h1>
     <p class="tp-lead" data-anim="up" style="--d:2">One workspace for revenue, product and support metrics, with answers in plain English. Set up in minutes, no SQL required.</p>
     <div class="tp-ctas" data-anim="up" style="--d:3"><a class="btn btn-lg" href="#" data-magnetic>Start free trial ${i("arrow-right")}</a><a class="btn btn-outline btn-lg" href="#">${i("play")} Watch demo</a></div>
+    <div class="tp-proof" data-anim="up" style="--d:4;justify-content:center">${avs(["p1", "p2", "p3", "p4", "p6"], 34)}<div style="text-align:left"><span class="tp-stars">★★★★★</span><div>Loved by <b>12,000+</b> teams</div></div></div>
   </div>
-  <div class="tp-hero-mock" data-anim="flip" style="--d:4">
+  <div class="tp-hero-mock" data-anim="flip" style="--d:5">
     <div class="tp-hero-float tp-float card kpi tp-hide-sm" style="left:-48px;top:110px;width:210px;padding:14px"><span class="kpi-label">Conversion</span><div class="kpi-row"><span class="kpi-value" data-countup="4.8">4.8</span><span class="trend-chip">${i("trending-up")} 0.6%</span></div></div>
     <div class="tp-hero-float tp-float b card tp-hide-sm" style="right:-40px;bottom:70px;width:250px;padding:12px;display:flex;gap:10px;align-items:center">${av("p1", 36)}<div><b class="t-label-sm">Maya closed Globex</b><div class="t-body-xs text-tertiary">$86,400 ARR · just now</div></div></div>
     <div class="inner">${mini()}</div>
@@ -78,7 +81,7 @@
     </div>
   </div>
 </section>` },
-      { name: "Dark with email capture", html: `<section class="tp-sec ink tp-center" style="padding-top:0">
+      { name: "Dark with email capture", html: `<section class="tp-sec ink tp-center" style="padding-top:0">${bg("w5", "radial-gradient(70% 90% at 50% 30%, rgb(11 11 18 / .62), rgb(11 11 18 / .94))")}
   <div class="tp-glow" style="width:640px;height:520px;left:50%;top:40px;translate:-50% 0;opacity:.45"></div><div class="tp-dots" style="--text-primary:#fff;opacity:.35"></div>
   ${nav(true, "Join waitlist")}
   <div class="tp-narrow" style="padding:72px 0 24px;position:relative">
@@ -87,6 +90,45 @@
     <p class="tp-lead" data-anim="up" style="--d:2">AI that turns customer feedback into prioritised, scoped tickets — and keeps everyone in the loop.</p>
     <form class="tp-capture" data-anim="up" style="--d:3;background:#15151f;border-color:rgb(255 255 255 / .12)" data-success="You're on the list — see you soon!"><input type="email" placeholder="you@company.com" aria-label="Email" required><button class="btn" type="submit">Join waitlist</button></form>
     <p class="t-body-xs" style="margin-top:12px;color:#8a8a99">No spam. Unsubscribe anytime.</p>
+    <div class="tp-proof" data-anim="up" style="--d:4;justify-content:center;color:#b9b9c6">${avs(["p5", "p7", "p8", "p2"], 30)}<span>Join product teams at Northwind, Globex and Hooli</span></div>
+  </div>
+</section>` },
+      { name: "Full-bleed photo", html: `<section class="tp-sec ink tp-hero-photo" style="padding-top:0">${bg("w3", "linear-gradient(90deg, rgb(8 8 14 / .9) 0%, rgb(8 8 14 / .6) 52%, rgb(8 8 14 / .2))")}
+  ${nav(true)}
+  <div class="tp-wrap tp-g2" style="padding:72px 0 40px;align-items:end">
+    <div>
+      <span class="tp-eyebrow" data-anim="right">Remote-first since 2019</span>
+      <h1 class="tp-h1" data-anim="blur" style="--d:1">Where great teams <span class="tp-grad">do their best work.</span></h1>
+      <p class="tp-lead" data-anim="up" style="--d:2">Plan, decide and ship from one calm workspace — trusted by 12,000 teams in 90 countries.</p>
+      <div class="tp-ctas" data-anim="up" style="--d:3"><a class="btn btn-lg tp-white" href="#" data-magnetic>Start for free ${i("arrow-right")}</a><a class="btn btn-lg tp-glass" href="#">${i("play")} Watch the film</a></div>
+      <div class="tp-proof" data-anim="up" style="--d:4">${avs(["p2", "p3", "p5", "p7"], 34)}<div><span class="tp-stars">★★★★★</span><div>4.9 from 2,300 reviews</div></div></div>
+    </div>
+    <div class="tp-glass-card tp-float" data-anim="left" style="--d:3">
+      <div class="row" style="justify-content:space-between"><b class="t-label-md">This sprint</b><span class="badge badge-success"><span class="dot"></span>On track</span></div>
+      <b class="big"><span data-countup="94">94</span>%</b><span class="t-body-xs" style="opacity:.75">of tasks shipped on time</span>
+      <div class="bar"><i style="--w:94%"></i></div>
+      <div class="row" style="--gap:10px">${av("p8", 30)}<span class="t-body-xs"><b>Jonas</b> shipped the Q4 plan · 2m ago</span></div>
+    </div>
+  </div>
+  <div class="tp-scrollcue" aria-hidden="true">${i("arrow-down", "icon-sm")} Scroll</div>
+</section>` },
+      { name: "Commerce with product photography", html: `<section class="tp-sec tp-hero-shop" style="padding-top:0">
+  <div class="tp-glow" style="width:520px;height:460px;right:6%;top:80px;opacity:.35"></div>
+  ${nav(false, "Shop now")}
+  <div class="tp-wrap tp-g2" style="padding-top:40px;align-items:center">
+    <div>
+      <span class="badge badge-accent" data-anim="down">New season · up to 30% off</span>
+      <h1 class="tp-h1" data-anim="right" style="--d:1;margin-top:16px">Everyday gear, <span class="tp-grad">beautifully made.</span></h1>
+      <p class="tp-lead" data-anim="right" style="--d:2">Headphones, watches and sneakers made to last — free shipping over $100 and 30-day returns.</p>
+      <div class="tp-ctas" data-anim="right" style="--d:3"><a class="btn btn-lg" href="#" data-magnetic>Shop the collection ${i("arrow-right")}</a><a class="btn btn-lg btn-ghost" href="#">View lookbook</a></div>
+      <div class="tp-perks" data-anim="up" style="--d:4">${[["truck", "Free shipping"], ["rotate-ccw", "30-day returns"], ["shield-check", "2-year warranty"]].map(([ic, t]) => `<span>${i(ic, "icon-sm")}${t}</span>`).join("")}</div>
+    </div>
+    <div class="tp-shop-stage" data-anim="zoom" style="--d:2">
+      ${img("g1", "Aero Headphones", 900, 1000, "zoom main")}
+      <div class="tp-shop-tag tp-float" style="left:-28px;top:44px">${img("g2", "Meridian Watch", 160, 160)}<div><b>Meridian Watch</b><span>$189</span></div><button class="btn btn-sm icon-btn" aria-label="Add Meridian Watch to bag" data-add="Meridian Watch" data-price="189">${i("plus", "icon-sm")}</button></div>
+      <div class="tp-shop-tag tp-float b" style="right:-24px;bottom:56px">${img("g3", "Pulse Runner", 160, 160)}<div><b>Pulse Runner</b><span>$129 <s>$159</s></span></div><button class="btn btn-sm icon-btn" aria-label="Add Pulse Runner to bag" data-add="Pulse Runner" data-price="129">${i("plus", "icon-sm")}</button></div>
+      <span class="tp-shop-price">Aero Headphones<b>$249</b></span>
+    </div>
   </div>
 </section>` }] });
 
@@ -138,7 +180,7 @@
   <div class="tp-g2" style="align-items:end"><div><span class="tp-eyebrow">By the numbers</span><h2 class="tp-h2">Trusted at scale.</h2></div><p class="tp-lead">From two-person startups to public companies, Lumen keeps 40,000 teams on the same page.</p></div>
   <div class="tp-stats" data-anim="up">${[["99.9", "%", "Uptime SLA", "99%"], ["10", "M+", "Events per minute", "82%"], ["40", "k", "Teams worldwide", "64%"], ["4", " min", "Median support reply", "35%"]].map(([n, s, l, w]) => `<div><b><span data-countup="${n}">${n}</span>${s}</b><span>${l}</span><div class="bar"><i style="--w:${w}"></i></div></div>`).join("")}</div>
 </div></section>` },
-      { name: "Brand band", html: `<section class="tp-sec brand tp-center"><div class="tp-dots" style="--text-primary:#fff;opacity:.4"></div><div class="tp-wrap" style="position:relative">
+      { name: "Brand band", html: `<section class="tp-sec brand tp-center">${bg("w2", "linear-gradient(135deg, color-mix(in srgb, var(--brand-700) 88%, transparent), color-mix(in srgb, var(--brand-950) 92%, transparent))")}<div class="tp-dots" style="--text-primary:#fff;opacity:.4"></div><div class="tp-wrap" style="position:relative">
   <h2 class="tp-h2" data-anim="up">Numbers that speak for themselves.</h2>
   <div class="tp-g4 tp-mt">${[["2.4", "B", "Rows analysed daily"], ["180", "+", "Countries"], ["4.9", "/5", "G2 rating"], ["32", "%", "Avg. time saved"]].map(([n, s, l], k) => `<div data-anim="zoom" style="--d:${k}"><b style="font:700 56px/1 var(--font-sans);letter-spacing:-.04em"><span data-countup="${n}">${n}</span>${s}</b><div class="t-body-md" style="opacity:.8;margin-top:8px">${l}</div></div>`).join("")}</div>
 </div></section>` }] });
@@ -163,7 +205,7 @@
     variants: [
       { name: "Three steps", html: `<section class="tp-sec"><div class="tp-wrap tp-center">
   <span class="tp-eyebrow">How it works</span><h2 class="tp-h2">From signup to insight in three steps.</h2>
-  <div class="tp-steps" data-anim="up"><span class="line-fill"></span>${[["Connect", "Plug in Stripe, HubSpot, Postgres or any of 80+ sources."], ["Ask", "Type a question. Lumen writes the query and draws the chart."], ["Share", "Pin it to a dashboard, schedule a digest or embed it anywhere."]].map(([t, d], k) => `<div class="tp-step" data-anim="up" style="--d:${k + 1}"><span class="n">${k + 1}</span><h4>${t}</h4><p>${d}</p></div>`).join("")}</div>
+  <div class="tp-steps" data-anim="up"><span class="line-fill"></span>${[["Connect", "Plug in Stripe, HubSpot, Postgres or any of 80+ sources."], ["Ask", "Type a question. Lumen writes the query and draws the chart."], ["Share", "Pin it to a dashboard, schedule a digest or embed it anywhere."]].map(([t, d], k) => `<div class="tp-step" data-anim="up" style="--d:${k + 1}"><span class="n">${k + 1}</span><h4>${t}</h4><p>${d}</p>${img(["w4", "t1", "w7"][k], t, 640, 420, "zoom", "aspect-ratio:3/2;margin-top:18px")}</div>`).join("")}</div>
 </div></section>` },
       { name: "Vertical with image", html: `<section class="tp-sec alt"><div class="tp-wrap tp-vsteps">
   <div><span class="tp-eyebrow">Onboarding</span><h2 class="tp-h2">Live in an afternoon.</h2><div class="tp-mt-s">${[["Create your workspace", "Invite your team with Google or SSO."], ["Connect data", "OAuth to your tools — read-only, encrypted."], ["Pick a template", "Start from 40+ dashboards made by experts."], ["Go live", "Share a link or embed on your site."]].map(([t, d], k) => `<div class="tp-vstep" data-anim="right" style="--d:${k}"><span class="n">${k + 1}</span><div><h4>${t}</h4><p>${d}</p></div></div>`).join("")}</div></div>
@@ -175,10 +217,10 @@
     variants: [
       { name: "Product roadmap", html: `<section class="tp-sec"><div class="tp-wrap">
   <div class="tp-g2" style="align-items:end"><div><span class="tp-eyebrow">Roadmap</span><h2 class="tp-h2">What we're building.</h2></div><p class="tp-lead">Vote on what matters to you — we ship weekly.</p></div>
-  <div class="tp-roadmap">${[["Shipped", "badge-success", [["AI digests", "Weekly summaries in Slack"], ["Dark mode", "Every screen, every chart"]]], ["In progress", "badge-brand", [["Embeds v2", "Theming + row-level security"], ["Mobile app", "iOS beta in TestFlight"]]], ["Next", "badge-warning", [["Forecasting", "Seasonality-aware predictions"]]], ["Exploring", "badge-outline", [["Data apps", "Build tools on top of charts"], ["Offline mode", "Cached dashboards"]]]].map(([h, b, items], k) => `<div class="col" data-anim="up" style="--d:${k}"><header>${h}<span class="badge ${b}">${items.length}</span></header>${items.map(([t, d]) => `<div class="item"><b>${t}</b>${d}<div class="row" style="margin-top:10px;justify-content:space-between"><span class="t-caption text-tertiary">${["Q3 2026", "Q4 2026", "Q1 2027", "Later"][k]}</span><button class="btn btn-ghost btn-sm" data-vote>${i("thumbs-up", "icon-sm")} <span>${12 + k * 7}</span></button></div></div>`).join("")}</div>`).join("")}</div>
+  <div class="tp-roadmap">${[["Shipped", "badge-success", [["AI digests", "Weekly summaries in Slack"], ["Dark mode", "Every screen, every chart"]]], ["In progress", "badge-brand", [["Embeds v2", "Theming + row-level security"], ["Mobile app", "iOS beta in TestFlight"]]], ["Next", "badge-warning", [["Forecasting", "Seasonality-aware predictions"]]], ["Exploring", "badge-outline", [["Data apps", "Build tools on top of charts"], ["Offline mode", "Cached dashboards"]]]].map(([h, b, items], k) => `<div class="col" data-anim="up" style="--d:${k}"><header>${h}<span class="badge ${b}">${items.length}</span></header>${items.map(([t, d]) => `<div class="item"><b>${t}</b>${d}<div class="row" style="margin-top:10px;justify-content:space-between"><span class="row" style="--gap:6px">${av(["p1", "p2", "p3", "p4", "p6", "p8", "p5"][(k * 2 + t.length) % 7], 22)}<span class="t-caption text-tertiary">${["Q3 2026", "Q4 2026", "Q1 2027", "Later"][k]}</span></span><button class="btn btn-ghost btn-sm" data-vote>${i("thumbs-up", "icon-sm")} <span>${12 + k * 7}</span></button></div></div>`).join("")}</div>`).join("")}</div>
 </div></section>` },
       { name: "Company history", html: `<section class="tp-sec alt"><div class="tp-wrap tp-center"><span class="tp-eyebrow">Our story</span><h2 class="tp-h2">Seven years of building.</h2>
-  <div class="tp-history" style="text-align:initial">${[["2019", "Founded in a garage", "Two engineers, one whiteboard, zero dashboards."], ["2021", "Series A", "$18M to make analytics conversational."], ["2023", "40,000 teams", "Lumen becomes the default for SaaS ops."], ["2026", "Lumen AI", "Every chart now explains itself."]].map(([y, t, d], k) => `<div class="ev" data-anim="${k % 2 ? "left" : "right"}"><span class="yr">${y}</span><h4>${t}</h4><p>${d}</p></div>`).join("")}</div>
+  <div class="tp-history" style="text-align:initial">${[["2019", "Founded in a garage", "Two engineers, one whiteboard, zero dashboards.", "w8"], ["2021", "Series A", "$18M to make analytics conversational.", "w2"], ["2023", "40,000 teams", "Lumen becomes the default for SaaS ops.", "w3"], ["2026", "Lumen AI", "Every chart now explains itself.", "t4"]].map(([y, t, d, ph], k) => `<div class="ev" data-anim="${k % 2 ? "left" : "right"}"><span class="yr">${y}</span><h4>${t}</h4><p>${d}</p>${img(ph, t, 640, 360, "zoom", "aspect-ratio:16/9;margin-top:14px")}</div>`).join("")}</div>
 </div></section>` }] });
 
   /* ---------------- 11 Testimonials ---------------- */
@@ -198,7 +240,7 @@
   TPL.push({ slug: "cta", n: 16, name: "Call to Action Banners", cat: "Marketing", desc: "High-contrast conversion blocks: a photo pill banner and a glowing brand box.",
     variants: [
       { name: "Photo pill", html: `<section class="tp-sec tight"><div class="tp-wrap"><div class="tp-cta-pill" data-anim="zoom">${img("w4", "", 1400, 400)}<div class="grow"><b>Built for teams who think in systems</b><span style="display:block;margin-top:4px">Used by 40,000+ teams worldwide</span></div><a class="btn btn-lg tp-white" href="#" data-magnetic>Start free ${i("arrow-right")}</a></div></div></section>` },
-      { name: "Brand box", html: `<section class="tp-sec"><div class="tp-wrap"><div class="tp-cta-box" data-anim="up"><div class="tp-dots"></div><div style="position:relative"><h2 class="tp-h2">Ready to see your data clearly?</h2><p class="tp-lead">Start free for 14 days. No credit card, cancel anytime.</p><div class="tp-ctas" style="justify-content:center"><a class="btn btn-lg tp-white" href="#" data-magnetic>Start free trial</a><a class="btn btn-lg btn-outline" href="#">Book a demo</a></div></div></div></div></section>` }] });
+      { name: "Brand box", html: `<section class="tp-sec"><div class="tp-wrap"><div class="tp-cta-box" data-anim="up">${bg("w7", "linear-gradient(180deg, color-mix(in srgb, var(--brand-700) 78%, transparent), color-mix(in srgb, var(--brand-950) 94%, transparent))")}<div class="tp-dots"></div><div style="position:relative"><h2 class="tp-h2">Ready to see your data clearly?</h2><p class="tp-lead">Start free for 14 days. No credit card, cancel anytime.</p><div class="tp-ctas" style="justify-content:center"><a class="btn btn-lg tp-white" href="#" data-magnetic>Start free trial</a><a class="btn btn-lg btn-outline" href="#">Book a demo</a></div><div class="tp-proof" style="justify-content:center;color:rgb(255 255 255 / .85)">${avs(["p1", "p4", "p6", "p8"], 30)}<span>Join 40,000+ teams</span></div></div></div></div></section>` }] });
 
   /* ---------------- 08 Pricing ---------------- */
   const tiers = [["Starter", "For individuals", 0, 0, ["5 dashboards", "7-day history", "Community support"], ""], ["Growth", "For growing teams", 29, 23, ["Unlimited dashboards", "AI copilot", "1-year history", "Slack digests"], "featured"], ["Scale", "For larger orgs", 79, 63, ["Everything in Growth", "SSO & SCIM", "Row-level security", "Priority support"], ""]];
@@ -208,6 +250,7 @@
   <span class="tp-eyebrow">Pricing</span><h2 class="tp-h2">Simple pricing that scales.</h2><p class="tp-lead">Start free. Upgrade when your team does.</p>
   <div class="tp-row" style="justify-content:center;margin-top:24px"><div class="segment primary" role="radiogroup" aria-label="Billing" data-billing><button role="radio" aria-checked="true" data-cycle="m">Monthly</button><button role="radio" aria-checked="false" data-cycle="y">Yearly</button></div><span class="badge badge-success tp-save" hidden>Save 20%</span></div>
   <div class="tp-pricing" style="text-align:left">${tiers.map(([n, s, m, y, f, cls], k) => `<div class="card pricing ${cls}" data-tilt="3" data-anim="up" style="--d:${k}"><div class="row" style="justify-content:space-between"><b class="t-h4">${n}</b>${cls ? '<span class="badge badge-accent">Most popular</span>' : ""}</div><p class="t-body-sm text-tertiary">${s}</p><div class="price tp-price">$<span class="amt" data-m="${m}" data-y="${y}">${m}</span><small> /user/mo</small></div><button class="btn ${cls ? "" : "btn-outline"} btn-block">${m ? "Start free trial" : "Get started"}</button><ul>${f.map((x) => `<li>${i("check")}${x}</li>`).join("")}</ul></div>`).join("")}</div>
+  <figure class="tp-price-quote" data-anim="up" style="--d:3">${av("p3", 48)}<blockquote>“Lumen paid for itself in the first month. Our forecast meeting went from an hour to ten minutes.”<cite>Priya Shah · VP Sales, Hooli</cite></blockquote></figure>
 </div></section>` },
       { name: "Comparison table", html: `<section class="tp-sec alt"><div class="tp-wrap"><div class="tp-center"><h2 class="tp-h2">Compare plans</h2></div>
   <div style="overflow:auto"><table class="tp-compare"><thead><tr><th></th>${tiers.map(([n, s, m], k) => `<th class="${k === 1 ? "hl" : ""}">${n}<small>$${m}/user/mo</small><button class="btn btn-sm ${k === 1 ? "" : "btn-outline"}">Choose</button></th>`).join("")}</tr></thead><tbody>
@@ -224,7 +267,8 @@
       { name: "Centered with search", html: `<section class="tp-sec alt tp-faq" data-faq><div class="tp-narrow tp-center"><h2 class="tp-h2">How can we help?</h2>
   <div class="input-group" style="margin:24px auto 0;max-width:460px">${i("search")}<input class="input input-lg" placeholder="Search questions…" aria-label="Search FAQ" data-faq-search></div>
   <div class="row" style="justify-content:center;margin:16px 0 8px">${["All", "Billing", "Security", "Integrations"].map((c, k) => `<button class="chip" aria-pressed="${!k}">${c}</button>`).join("")}</div>
-  <div style="text-align:left">${acc(-1)}</div><p class="t-body-sm text-tertiary" data-faq-empty hidden style="margin-top:20px">No questions match your search.</p></div></section>` }] });
+  <div style="text-align:left">${acc(-1)}</div><p class="t-body-sm text-tertiary" data-faq-empty hidden style="margin-top:20px">No questions match your search.</p>
+  <div class="tp-faq-help" style="margin-top:28px;text-align:left;display:flex;align-items:center;gap:16px;flex-wrap:wrap">${avs(["p6", "p1", "p5"], 36)}<div style="flex:1;min-width:200px"><b class="t-label-md">Still have questions?</b><p class="t-body-sm text-secondary">Lena, Ana and David from support reply in about 4 minutes.</p></div><button class="btn btn-sm">${i("message-square")} Chat with us</button></div></div></section>` }] });
 
   /* ---------------- 07 Footer ---------------- */
   const cols = [["Product", ["Features", "Pricing", "Integrations", "Changelog", "Roadmap"]], ["Company", ["About", "Careers", "Press", "Contact"]], ["Resources", ["Docs", "Guides", "Templates", "Community"]], ["Legal", ["Privacy", "Terms", "Security", "Cookies"]]];
@@ -232,10 +276,10 @@
   TPL.push({ slug: "footer", n: 7, name: "Footer", cat: "Marketing", desc: "Sitemap, social links, newsletter opt-in and legal — light with newsletter, or dark with a giant wordmark.",
     variants: [
       { name: "Sitemap + newsletter", html: `<footer class="tp-footer"><div class="tp-wrap"><div class="tp-footer-grid">
-  <div><a class="tp-logo" style="color:var(--text-primary)" href="#">${MARKS.Initech}Lumen</a><p class="t-body-sm text-secondary" style="margin:14px 0 18px;max-width:280px">Analytics your team will actually use. Made with care in Lisbon & Toronto.</p><form class="row" data-success="Subscribed!" style="--gap:8px;flex-wrap:nowrap"><input class="input input-sm" type="email" placeholder="you@company.com" aria-label="Email" required><button class="btn btn-sm" type="submit">Subscribe</button></form></div>
+  <div><a class="tp-logo" style="color:var(--text-primary)" href="#">${MARKS.Initech}Lumen</a><p class="t-body-sm text-secondary" style="margin:14px 0 18px;max-width:280px">Analytics your team will actually use. Made with care in Lisbon & Toronto.</p><form class="row" data-success="Subscribed!" style="--gap:8px;flex-wrap:nowrap"><input class="input input-sm" type="email" placeholder="you@company.com" aria-label="Email" required><button class="btn btn-sm" type="submit">Subscribe</button></form><div class="tp-footer-photos">${img("n5", "Lisbon office", 360, 220, "zoom")}${img("n6", "Toronto office", 360, 220, "zoom")}</div></div>
   ${cols.map(([h, ls]) => `<div><h5>${h}</h5><ul>${ls.map((l) => `<li><a href="#">${l}</a></li>`).join("")}</ul></div>`).join("")}
 </div><div class="tp-footer-bottom"><span>© 2026 Lumen Inc. All rights reserved.</span><span class="row"><span class="badge badge-success"><span class="dot"></span>All systems normal</span>${social}</span></div></div></footer>` },
-      { name: "Dark with wordmark", html: `<footer class="tp-footer tp-sec ink" style="padding-bottom:0"><div class="tp-wrap"><div class="tp-footer-grid"><div><h3 class="tp-h3" style="max-width:260px">Let's build something people love.</h3><a class="btn tp-white" href="#" style="margin-top:18px">Contact sales ${i("arrow-right")}</a></div>${cols.map(([h, ls]) => `<div><h5>${h}</h5><ul>${ls.map((l) => `<li><a href="#">${l}</a></li>`).join("")}</ul></div>`).join("")}</div>
+      { name: "Dark with wordmark", html: `<footer class="tp-footer tp-sec ink" style="padding-bottom:0">${bg("n6", "linear-gradient(180deg, rgb(11 11 18 / .97) 0%, rgb(11 11 18 / .88) 55%, rgb(11 11 18 / .55))")}<div class="tp-wrap"><div class="tp-footer-grid"><div><h3 class="tp-h3" style="max-width:260px">Let's build something people love.</h3><a class="btn tp-white" href="#" style="margin-top:18px">Contact sales ${i("arrow-right")}</a></div>${cols.map(([h, ls]) => `<div><h5>${h}</h5><ul>${ls.map((l) => `<li><a href="#">${l}</a></li>`).join("")}</ul></div>`).join("")}</div>
   <div class="tp-footer-bottom"><span>© 2026 Lumen Inc.</span>${social}</div><div class="tp-wordmark" data-anim="up">Lumen</div></div></footer>` }] });
 
   /* ---------------- 12 Mega Menus ---------------- */
@@ -279,7 +323,8 @@
     variants: [{ name: "Form + map", html: `<section class="tp-sec"><div class="tp-wrap tp-contact">
   <div><span class="tp-eyebrow">Contact</span><h2 class="tp-h2">Let's talk.</h2><p class="tp-lead">Tell us about your team and we'll get back within one business day.</p>
     <div class="info">${[["mail", "Email", "hello@lumen.app"], ["phone", "Phone", "+1 (415) 555-0132"], ["map-pin", "Office", "55 Market St, San Francisco"]].map(([ic, t, d]) => `<div><span class="tp-ico">${i(ic)}</span><span><b>${t}</b><span>${d}</span></span></div>`).join("")}</div>
-    <div class="map"><div class="map-layer" style="position:absolute;inset:0"><svg class="map-base" viewBox="0 0 720 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path class="water" d="M0 230 C120 210 180 260 300 250 S520 200 720 240 V320 H0Z"/><rect class="park" x="430" y="40" width="150" height="90" rx="18"/><path class="road" d="M-10 150 H730"/><path class="road" d="M260 -10 V330"/><path class="road minor" d="M-10 70 C200 60 420 110 730 90"/></svg><span class="map-pin" style="left:40%;top:45%">${i("map-pin")}</span></div></div>
+    <div class="tp-contact-team">${avs(["p1", "p2", "p6"], 32)}<span class="t-body-sm text-secondary">Talk to <b>Maya</b>, <b>Sam</b> or <b>Lena</b> — real people, no bots.</span></div>
+    <div class="map tp-photo-map">${bg("n5", "linear-gradient(180deg, transparent 40%, rgb(0 0 0 / .45))", 900, 420)}<span class="map-pin" style="left:46%;top:42%">${i("map-pin")}</span><span class="tp-map-label">${i("map-pin", "icon-sm")} 55 Market St · 12 min from SFO</span></div>
   </div>
   <form data-validate novalidate>
     <div class="two"><div class="field"><label class="label" for="cf-n">Full name <span class="req">*</span></label><input class="input" id="cf-n" required placeholder="Maya Rodriguez"><span class="help" hidden>Please enter your name.</span></div><div class="field"><label class="label" for="cf-e">Work email <span class="req">*</span></label><input class="input" id="cf-e" type="email" required placeholder="maya@company.com"><span class="help" hidden>Enter a valid email.</span></div></div>
@@ -294,7 +339,7 @@
   /* ---------------- 23 Newsletter ---------------- */
   TPL.push({ slug: "newsletter", n: 23, name: "Newsletter / Lead Capture", cat: "Forms", desc: "Inline card and a dark split card with a photo; both validate and celebrate on submit.",
     variants: [
-      { name: "Inline card", html: `<section class="tp-sec tight"><div class="tp-wrap"><div class="tp-news-card" data-anim="up"><div><span class="tp-eyebrow">Newsletter</span><h3 class="tp-h3" style="margin-top:8px">The Monday metric — one chart, every week.</h3><p class="t-body-sm text-secondary" style="margin-top:6px">Join 38,000 operators. Unsubscribe anytime.</p></div><form data-success="You're in! Check your inbox." novalidate><input class="input input-lg" type="email" required placeholder="you@company.com" aria-label="Email"><button class="btn btn-lg" type="submit">Subscribe</button></form></div></div></section>` },
+      { name: "Inline card", html: `<section class="tp-sec tight"><div class="tp-wrap"><div class="tp-news-card" data-anim="up"><div><span class="tp-eyebrow">Newsletter</span><h3 class="tp-h3" style="margin-top:8px">The Monday metric — one chart, every week.</h3><div class="tp-proof" style="margin-top:12px">${avs(["p2", "p4", "p6", "p8"], 28)}<span>Join 38,000 operators. Unsubscribe anytime.</span></div></div><form data-success="You're in! Check your inbox." novalidate><input class="input input-lg" type="email" required placeholder="you@company.com" aria-label="Email"><button class="btn btn-lg" type="submit">Subscribe</button></form></div></div></section>` },
       { name: "Dark split with photo", html: `<section class="tp-sec tight"><div class="tp-wrap"><div class="tp-news-split" data-anim="zoom">${img("n4", "", 900, 700)}<div><span class="tp-eyebrow" style="color:var(--brand-300)">Free guide</span><h3 class="tp-h2" style="font-size:34px">Get the 2026 SaaS Metrics Report</h3><p class="t-body-md" style="color:#b9b9c6;margin-top:10px">Benchmarks from 4,000 companies, in your inbox.</p><form class="row" style="margin-top:20px;flex-wrap:nowrap" data-success="Report on its way ✉️" novalidate><input class="input input-lg" type="email" required placeholder="Work email" aria-label="Work email"><button class="btn btn-lg" type="submit">Send it</button></form></div></div></div></section>` }] });
 
   /* ---------------- 26 Team ---------------- */
@@ -331,5 +376,5 @@
   <div class="tp-g2 tp-mt">${[["n6", "Company update", "Lumen opens a Lisbon office", "Our second hub brings us closer to European customers."], ["w4", "Announcement", "SOC 2 Type II, achieved", "An independent audit of our security controls, now public."]].map(([p, c, t, d], k) => `<a class="tp-post" href="#" data-anim="up" style="--d:${k}">${img(p, t, 900, 500, "zoom")}<span class="badge badge-brand" style="align-self:flex-start">${c}</span><h3>${t}</h3><p>${d}</p></a>`).join("")}</div>
 </div></section>` }] });
 
-  window.TP_HELPERS = { i, img, av, avs, src, logo, MARKS, U, mini };
+  window.TP_HELPERS = { i, img, bg, av, avs, src, logo, MARKS, U, mini };
 })();

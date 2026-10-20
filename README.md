@@ -526,7 +526,7 @@ The Figma file is delivered with your purchase: open the Figma link in your Gumr
 | **06 — Playground** | Desktop and mobile sandboxes, theme lab, component tray, **clickable prototype flows** |
 | **07 — Documentation** | 20 component doc cards (anatomy, properties, a11y, React code, do/don't) and a customization guide |
 | **08 — Changelog** | Version history and known limitations |
-| **09 — FacetUI-Templates** | 36 pre-made blocks (54 variants): heroes, pricing, dashboards, e-commerce, forms, system states. Switch Brand/Color modes on the wrapper frame to re-theme them all. Live version: `styleguide/templates/` |
+| **09 — FacetUI-Templates** | 36 pre-made blocks (56 variants): heroes, pricing, dashboards, e-commerce, forms, system states. Switch Brand/Color modes on the wrapper frame to re-theme them all. Live version: `styleguide/templates/` |
 
 **Prototype:** open *06 — Playground* and press **Present**. There are two flows: *Auth → Onboarding → Dashboard* and *Settings sections*. Interactive components (button, tabs, checkbox, switch, toggle, chip, accordion, menu item, sidebar item, input) have 78 hover, press and toggle states wired.
 

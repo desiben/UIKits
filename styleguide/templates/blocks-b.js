@@ -1,7 +1,7 @@
 /* FacetUI-Templates — block registry, part B: app, system & e-commerce blocks. */
 (function () {
   const TPL = (window.TPL = window.TPL || []);
-  const { i, img, av, avs, src, mini } = window.TP_HELPERS;
+  const { i, img, bg, av, avs, src, mini } = window.TP_HELPERS;
 
   /* ---------------- 01 Dashboard ---------------- */
   TPL.push({ slug: "dashboard", n: 1, name: "Dashboard", cat: "App", desc: "Analytics hubs with KPIs that count up, live charts, a deals table and quick actions.",
@@ -38,7 +38,7 @@
   /* ---------------- 03 404 ---------------- */
   TPL.push({ slug: "page-404", n: 3, name: "404 Page", cat: "System", desc: "Friendly error states with search and helpful links; the giant 404 glitches every few seconds.",
     variants: [
-      { name: "Centered with links", html: `<section class="tp-sec tp-center"><div class="tp-dots"></div><div class="tp-narrow" style="position:relative">
+      { name: "Centered with links", html: `<section class="tp-sec tp-center">${bg("n2", "linear-gradient(180deg, color-mix(in srgb, var(--bg-canvas) 55%, transparent), color-mix(in srgb, var(--bg-canvas) 88%, transparent) 45%, var(--bg-canvas) 80%)")}<div class="tp-dots"></div><div class="tp-narrow" style="position:relative">
   <span class="tp-404 tp-404-ghost" data-anim="blur">404</span>
   <h2 class="tp-h2" data-anim="up" style="--d:1">Oops! You're lost.</h2><p class="tp-lead" data-anim="up" style="--d:2">The page you're looking for moved, or never existed. Let's get you back on track.</p>
   <div class="input-group" data-anim="up" style="--d:3;margin:24px auto 0;max-width:420px">${i("search")}<input class="input input-lg" placeholder="Search the docs…" aria-label="Search"><span class="kbd">⌘K</span></div>
