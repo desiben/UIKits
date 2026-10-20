@@ -10,7 +10,7 @@ Live: **[etkits.vercel.app](https://etkits.vercel.app)**. It is a static site wi
 
 | Kit | Branch | Live preview | Stores |
 |---|---|---|---|
-| **Facet UI** v1.2 | [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI) | [facetui.vercel.app](https://facetui.vercel.app) | Gumroad, Envato Market, UI8 (set in `ETKITS_STORES`) |
+| **Facet UI** v1.3 | [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI) | [facetui.vercel.app](https://facetui.vercel.app) | Gumroad, Envato Market, UI8 (set in `ETKITS_STORES`) |
 
 ## What's on the page
 

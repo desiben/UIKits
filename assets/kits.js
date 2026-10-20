@@ -7,7 +7,7 @@ window.UIKITS = [
   {
     id: "facetui",
     name: "Facet UI",
-    version: "v1.2",
+    version: "v1.3",
     status: "available",
     label: "Product 01 · First release",
     tagline: "The design system with an edge.",
@@ -20,8 +20,8 @@ window.UIKITS = [
       { src: "kits/facetui/facet-ui-components-reel.mp4", type: "video/mp4" }
     ],
     stats: [
-      ["144", "components"],
-      ["228", "variables"],
+      ["158", "components"],
+      ["246", "variables"],
       ["6", "AI agent demos"],
       ["10", "app templates"]
     ],
