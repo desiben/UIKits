@@ -460,6 +460,7 @@ pnpm, yarn and bun work too: `pnpm dlx facetui@latest …`, `yarn dlx facetui@la
 |---|---|---|
 | `GUMROAD_PRODUCT_ID` | yes | Gumroad product ID used to verify license keys |
 | `FACET_EXTRA_KEYS` | no | Comma-separated extra keys (press, testers) |
+| `FACET_BLOCKED_KEYS` | no | Comma-separated keys to refuse (for example a key shared publicly). Refunded, charged-back and disputed purchases, and keys you disable in Gumroad, are refused automatically |
 
 **Code in the style guide.** Live demos are public; copyable code is for buyers. `styleguide/assets/license.js` shows an *Unlock code* dialog, checks the key against `/r/docs-snippets.json` (same license check as the CLI) and remembers it in the browser. The React markup snippets live in `react/registry/docs-snippets.json` and are served only through that gated item. Vercel builds the public site with `styleguide/build-public.mjs` (minified CSS/JS with a license banner, no `api/`, `assets/src` or build files). The buyer zip adds `assets/buyer.js`, so its style guide is unlocked offline.
 

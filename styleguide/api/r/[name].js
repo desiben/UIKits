@@ -2,6 +2,7 @@
 // GET /r/<name>.json  (rewritten to /api/r/<name>)  with  Authorization: Bearer <Gumroad license key>
 // Used by the facetui CLI (cli/). /r/index.json lists every item.
 // Env: GUMROAD_PRODUCT_ID (required)  ·  FACET_EXTRA_KEYS (optional, comma-separated keys for testers/press)
+//      FACET_BLOCKED_KEYS (optional, comma-separated keys to refuse, e.g. a leaked key)
 const fs = require("fs")
 const path = require("path")
 
@@ -12,7 +13,10 @@ const DOCS = "https://facetui.vercel.app/react/#install"
 const TTL_MS = 10 * 60 * 1000
 const verified = new Map() // key -> expiry timestamp (per warm instance)
 
+const list = (v) => String(v || "").split(",").map((s) => s.trim()).filter(Boolean)
+
 async function isValidKey(key) {
+  if (list(process.env.FACET_BLOCKED_KEYS).includes(key)) return false
   const extra = (process.env.FACET_EXTRA_KEYS || "").split(",").map((s) => s.trim()).filter(Boolean)
   if (extra.includes(key)) return true
   const until = verified.get(key)
