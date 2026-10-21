@@ -4,7 +4,9 @@
 const fs = require("fs")
 const path = require("path")
 
-const REGISTRY_DIR = path.join(process.cwd(), "api", "_registry")
+const REGISTRY_DIR = [path.join(__dirname, "..", "_registry"), path.join(process.cwd(), "api", "_registry")].find((d) =>
+  fs.existsSync(d),
+)
 const DOCS = "https://facetui.vercel.app/react/#install"
 const TTL_MS = 10 * 60 * 1000
 const verified = new Map() // key -> expiry timestamp (per warm instance)
@@ -38,6 +40,7 @@ function fail(res, status, error) {
 module.exports = async function handler(req, res) {
   const name = String((req.query && req.query.name) || "").replace(/\.json$/, "")
   if (!/^[a-z0-9-]+$/.test(name)) return fail(res, 400, "Unknown item.")
+  if (!REGISTRY_DIR) return fail(res, 500, "Registry is not available.")
   const file = path.join(REGISTRY_DIR, `${name}.json`)
   if (!fs.existsSync(file)) return fail(res, 404, `No Facet UI item called "${name}".`)
   const auth = String(req.headers.authorization || "")
