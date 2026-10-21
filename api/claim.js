@@ -14,6 +14,8 @@
 //   FIGMA_DELIVERY_URL          Figma duplicate link for the sale copy
 //   FIGMA_DELIVERY_URL_GUMROAD / FIGMA_DELIVERY_URL_ENVATO
 //   DOWNLOAD_URL                optional: code + tokens download
+// Revocation:
+//   BLOCKED_KEYS                optional: comma-separated codes to refuse
 //
 // UI8 has no public verification API: UI8 buyers download from UI8 directly.
 //
@@ -121,6 +123,11 @@ module.exports = async function handler(req, res) {
   const key = String(readKey(req) || "").trim();
   if (!KEY_PATTERN.test(key)) {
     return send(res, 400, { ok: false, error: "That doesn't look like a purchase code. Please check it and try again." });
+  }
+  // Keys you have revoked yourself (e.g. one shared publicly), comma separated.
+  const blocked = String(process.env.BLOCKED_KEYS || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+  if (blocked.includes(key.toLowerCase())) {
+    return send(res, 403, { ok: false, error: "This purchase code has been disabled. Contact support if you think this is a mistake." });
   }
 
   try {
