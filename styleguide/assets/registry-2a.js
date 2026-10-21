@@ -20,7 +20,7 @@
       { title: "Stacked", layout: "block", html: widget("Revenue by source", "New vs. expansion", chart({ type: "area", stacked: true, labels: months, format: "$compact", series: [{ name: "New", data: mrr.map((v) => v * 700) }, { name: "Expansion", data: exp.map((v) => v * 1000) }] }), lg([["New", "var(--chart-1)"], ["Expansion", "var(--chart-2)"]])) },
       { title: "Gaps & straight lines", layout: "block", html: widget("Uptime checks", "Missing points are left as gaps", chart({ type: "area", curve: false, labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], format: "percent", max: 100, series: [{ name: "Uptime", data: [99.2, 99.8, null, 98.9, 99.6, 99.9, 99.7], color: "var(--chart-5)" }] })) },
     ],
-    react: `<AreaChart data={rows} labels="month" series={[{ key: "mrr", name: "MRR" }]} format="$compact" stacked={false} />`,
+    react: "",
     api: [["data-chart", "JSON", "Config: type, labels, series[{name, data, color?}], format, stacked, curve, connectNulls, height"], ["format", "string", "currency · $compact · compact · percent"], ["stacked", "boolean", "Stack area series on top of each other"], ["connectNulls", "boolean", "Bridge gaps (null) instead of breaking the line"]],
     a11y: ["The SVG has role=img and an aria-label — set it with the label option.", "Pair charts with a visible summary (title, key number) so they're not the only source of the data."] });
 
@@ -31,7 +31,7 @@
       { title: "Grouped", layout: "block", html: widget("Revenue vs. expenses", "2026, in USD", chart({ type: "bar", labels: months.slice(4), format: "$compact", series: [{ name: "Revenue", data: [171, 183, 190, 204, 212, 226, 238, 249].map((v) => v * 1000) }, { name: "Expenses", data: [120, 131, 128, 140, 151, 149, 160, 158].map((v) => v * 1000), color: "var(--chart-6)" }] }), lg([["Revenue", "var(--chart-1)"], ["Expenses", "var(--chart-6)"]])) },
       { title: "Stacked", layout: "block", html: widget("Tickets by channel", "This week", chart({ type: "bar", stacked: true, labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], series: [{ name: "Email", data: [42, 51, 46, 58, 49, 22, 18] }, { name: "Chat", data: [31, 36, 40, 44, 39, 17, 14] }, { name: "Phone", data: [12, 15, 11, 16, 13, 4, 3] }] }), lg([["Email", "var(--chart-1)"], ["Chat", "var(--chart-2)"], ["Phone", "var(--chart-3)"]])) },
     ],
-    react: `<BarChart data={rows} labels="week" series={[{ key: "signups" }]} stacked />`,
+    react: "",
     api: [["type", "\"bar\"", "Vertical bars"], ["stacked", "boolean", "Stack series per category"], ["barWidth", "0–1", "Share of each category band used by bars (default 0.62)"]],
     a11y: ["Hovering a bar dims the others; the tooltip lists every series value for that category."] });
 
@@ -41,14 +41,14 @@
       { title: "Multiple series", layout: "block", html: widget("Active users", "Daily, last 14 days", chart({ type: "line", labels: Array.from({ length: 14 }, (_, k) => "Oct " + (k + 2)), format: "compact", series: [{ name: "Web", data: [3200, 3350, 3290, 3510, 3620, 3580, 3790, 3910, 3870, 4020, 4190, 4150, 4320, 4480] }, { name: "Mobile", data: [2100, 2180, 2260, 2240, 2390, 2470, 2450, 2600, 2710, 2690, 2840, 2950, 3010, 3120] }] }), lg([["Web", "var(--chart-1)"], ["Mobile", "var(--chart-2)"]])) },
       { title: "With target and dots", layout: "block", html: widget("Net revenue retention", "Quarterly", chart({ type: "line", labels: ["Q1 25", "Q2 25", "Q3 25", "Q4 25", "Q1 26", "Q2 26", "Q3 26"], format: "percent", series: [{ name: "NRR", data: [104, 107, 106, 111, 114, 116, 118], dots: true }, { name: "Target", data: [110, 110, 110, 110, 115, 115, 115], dashed: true, color: "var(--chart-6)" }] })) },
     ],
-    react: `<LineChart data={rows} series={[{ key: "nrr", dots: true }, { key: "target", dashed: true }]} />`,
+    react: "",
     api: [["series[].dashed", "boolean", "Dashed stroke for targets/forecasts"], ["series[].dots", "boolean", "Show a dot on every point"], ["curve", "boolean", "Smooth curves (default) or straight segments"]],
     a11y: ["Don't rely on color alone: dashed vs. solid separates targets from actuals."] });
 
   add({ slug: "composed-chart", name: "Composed Chart", group: "Charts", figma: "Chart / Composed",
     desc: "Combines bars and lines on the same axes — for example volume as bars and a rate or average as a line.",
     examples: [{ title: "Bars + line", layout: "block", html: widget("Orders and conversion", "Last 8 weeks", chart({ type: "composed", labels: ["W1", "W2", "W3", "W4", "W5", "W6", "W7", "W8"], series: [{ name: "Orders", data: [320, 410, 380, 520, 470, 610, 580, 690], type: "bar" }, { name: "Avg. order (×10)", data: [410, 420, 405, 440, 452, 470, 468, 492], type: "line", color: "var(--chart-4)", dots: true }] }), lg([["Orders", "var(--chart-1)"], ["Avg. order", "var(--chart-4)"]])) }],
-    react: `<ComposedChart data={rows}><Bar dataKey="orders" /><Line dataKey="aov" /></ComposedChart>`,
+    react: "",
     api: [["series[].type", "\"bar\" | \"line\" | \"area\"", "Per-series mark type"]],
     a11y: ["Explain both measures in the widget description when they use different units."] });
 
@@ -58,14 +58,14 @@
       { title: "Donut", layout: "block", html: widget("Revenue by plan", "October 2026", chart({ type: "pie", format: "$compact", centerSub: "MRR", data: [{ name: "Scale", value: 114500 }, { name: "Growth", value: 69700 }, { name: "Starter", value: 39800 }, { name: "Add-ons", value: 24900 }] })) },
       { title: "Pie", layout: "block", html: widget("Traffic sources", "Last 30 days", chart({ type: "pie", donut: false, size: 200, data: [{ name: "Organic", value: 46 }, { name: "Direct", value: 24 }, { name: "Referral", value: 18 }, { name: "Paid", value: 12 }] })) },
     ],
-    react: `<PieChart data={plans} donut centerSub="MRR" format="$compact" />`,
+    react: "",
     api: [["data", "[{name, value, color?}]", "Slices"], ["donut", "boolean", "Donut (default) or full pie"], ["centerLabel / centerSub", "string", "Text in the middle of the donut"]],
     a11y: ["The legend shows the percentage of each slice as text."] });
 
   add({ slug: "radar-chart", name: "Radar Chart", group: "Charts", figma: "Chart / Radar",
     desc: "Compares several qualities at once — plan features, skill profiles, product scores.",
     examples: [{ title: "Two series", layout: "block", html: widget("Plan comparison", "Scores out of 100", chart({ type: "radar", max: 100, labels: ["Speed", "Security", "Support", "Integrations", "Analytics", "Price"], series: [{ name: "Growth", data: [72, 80, 64, 70, 58, 86] }, { name: "Scale", data: [90, 96, 92, 88, 90, 60] }] })) }],
-    react: `<RadarChart labels={axes} series={[{ name: "Growth", data }]} max={100} />`,
+    react: "",
     api: [["labels", "string[]", "Axes"], ["max", "number", "Outer ring value"]], a11y: ["Keep axis labels short so they fit around the chart on mobile."] });
 
   add({ slug: "radial-chart", name: "Radial Chart", group: "Charts", figma: "Chart / Radial · Gauge",
@@ -74,7 +74,7 @@
       { title: "Rings", layout: "block", html: widget("Quarterly goals", "Progress toward target", chart({ type: "radial", format: "percent", data: [{ name: "Revenue", value: 82 }, { name: "Pipeline", value: 64 }, { name: "Retention", value: 91 }] })) },
       { title: "Half gauge", layout: "block", html: `<div class="card card-body" style="width:300px;margin:auto">${chart({ type: "radial", half: true, size: 240, format: "percent", centerSub: "Storage used", data: [{ name: "Storage", value: 68 }] })}<div class="row" style="justify-content:space-between;margin-top:4px" ><span class="t-body-xs text-tertiary">68 GB of 100 GB</span><a class="link t-label-sm" href="#">Upgrade</a></div></div>` },
     ],
-    react: `<RadialChart data={[{ name: "Storage", value: 68 }]} half />`,
+    react: "",
     api: [["half", "boolean", "Half-circle gauge"], ["thickness", "number", "Ring thickness"], ["data[].max", "number", "Per-ring maximum (default 100)"]], a11y: ["Show the value as text in the center or next to the chart."] });
 
   add({ slug: "chart-tooltip", name: "Chart Tooltip", group: "Charts", figma: "Chart Tooltip · 1, 2 or 3 rows",
@@ -85,7 +85,7 @@
   <div><i style="--c:var(--chart-2)"></i>Expansion<span>$68,100</span></div>
   <div><i style="--c:var(--chart-6)"></i>Churned<span>−$4,900</span></div>
 </div>` }, { title: "On a chart (hover)", layout: "block", html: widget("Hover the chart", "Crosshair, dots and tooltip follow the pointer", chart({ type: "area", labels: months, format: "$compact", series: [{ name: "Revenue", data: mrr.map((v) => v * 1000) }, { name: "Expansion", data: exp.map((v) => v * 1000) }] })) }],
-    react: `<ChartTooltip label="October 2026" items={[{ name: "Revenue", value: 238400 }]} />`,
+    react: "",
     api: [["tooltip", "boolean", "Set false in a chart config to hide it"], [".chart-tooltip.on", "class", "Visible state"]], a11y: ["Tooltips are a convenience — key numbers should also be visible without hovering."] });
 
   /* ------------------------------ Data display ------------------------------ */
@@ -106,7 +106,7 @@
   </tbody></table></div>
 </div>` },
     ],
-    react: `<Widget><Widget.Header><Widget.Title>Revenue</Widget.Title><Widget.Legend>…</Widget.Legend></Widget.Header><Widget.Content>…</Widget.Content></Widget>`,
+    react: "",
     api: [["widget · widget-header · widget-title · widget-desc · widget-content · widget-footer", "class", "Parts"], ["widget-content.flush", "class", "Edge-to-edge content (tables)"], ["widget-grid", "class", "Responsive grid of widgets"]],
     a11y: ["Use a real heading (h2/h3) for the title if widgets are page sections."] });
 
@@ -117,7 +117,7 @@
 <div class="card kpi" style="width:260px"><div class="kpi-head"><span class="kpi-icon" data-status="success">${i("users")}</span><span class="kpi-label">Active customers</span></div><div class="kpi-row"><span class="kpi-value">1,284</span><span class="trend-chip">${i("trending-up")} 3.1%</span></div><div class="kpi-footer"><span>vs. last month</span><span>+39</span></div></div>
 <div class="card kpi" style="width:260px"><div class="kpi-head"><span class="kpi-icon" data-status="warning">${i("gauge")}</span><span class="kpi-label">Quota attainment</span></div><div class="kpi-row"><span class="kpi-value">72%</span><span class="trend-chip" data-trend="neutral">${i("minus")} 0.0%</span></div><div class="progress progress-sm kpi-progress"><span style="--value:72%"></span></div></div>` },
     ],
-    react: `<KPI><KPI.Header><KPI.Title>MRR</KPI.Title><KPI.Actions /></KPI.Header><KPI.Value value={248920} /><KPI.Trend value={12.4} /><KPI.Chart data={mrr} /></KPI>`,
+    react: "",
     api: [["kpi-head · kpi-icon[data-status] · kpi-row · kpi-value · kpi-footer · kpi-progress", "class", "Parts"], ["chart type spark", "chart", "Sparkline with no axes"]], a11y: ["Don't encode trend only with color — the chip shows an arrow and a sign."] });
 
   add({ slug: "kpi-group", name: "KPI Group", group: "Data display", figma: "KPI Group · 2–5 items",
@@ -128,7 +128,7 @@
   <div class="kpi"><span class="kpi-label">Net retention</span><div class="kpi-row"><span class="kpi-value">118%</span><span class="trend-chip">${i("trending-up")} 2 pt</span></div></div>
   <div class="kpi"><span class="kpi-label">Churn</span><div class="kpi-row"><span class="kpi-value">2.4%</span><span class="trend-chip" data-trend="down">${i("trending-up")} 0.3 pt</span></div></div>
 </div>` }],
-    react: `<KPIGroup>{metrics.map((m) => <KPI key={m.id} {...m} />)}</KPIGroup>`, api: [["kpi-group", "class", "Grid container with joined borders"]], a11y: ["Order KPIs by importance — on mobile they stack in source order."] });
+    react: "", api: [["kpi-group", "class", "Grid container with joined borders"]], a11y: ["Order KPIs by importance — on mobile they stack in source order."] });
 
   add({ slug: "item-card", name: "Item Card", group: "Data display", figma: "Item Card · 5 variants · Show icon",
     desc: "A horizontal row card with an icon, title, description and an optional trailing action (switch, select, chevron).",
@@ -140,7 +140,7 @@
   <div class="item-card" data-variant="transparent"><div class="item-card-content"><span class="item-card-title">Title only, no icon</span></div><div class="item-card-action"><select class="select select-sm" style="width:auto" aria-label="Frequency"><option>Weekly</option><option>Daily</option></select></div></div>
 </div>` },
     ],
-    react: `<ItemCard variant="secondary"><ItemCard.Icon>…</ItemCard.Icon><ItemCard.Content><ItemCard.Title>…</ItemCard.Title></ItemCard.Content><ItemCard.Action>…</ItemCard.Action></ItemCard>`,
+    react: "",
     api: [["data-variant", "default · secondary · tertiary · outline · transparent", "Surface style"], ["a.item-card / [data-pressable]", "element", "Pressable rows get a hover state"]], a11y: ["When the whole card is a link, don't put other buttons inside it."] });
 
   add({ slug: "item-card-group", name: "Item Card Group", group: "Data display", figma: "Item Card Group · joined · list · grid",
@@ -157,7 +157,7 @@
   ${[["database", "Postgres", "Synced 2 min ago"], ["cloud", "S3 bucket", "3 folders"], ["git-branch", "GitHub", "facet/ui"], ["message-square", "Slack", "2 channels"]].map(([ic, t, d]) => `<a class="item-card" href="#"><span class="item-card-icon brand">${i(ic)}</span><div class="item-card-content"><span class="item-card-title">${t}</span><span class="item-card-desc">${d}</span></div></a>`).join("\n  ")}
 </div>` },
     ],
-    react: `<ItemCardGroup layout="joined" title="Notifications">…</ItemCardGroup>`, api: [["item-card-group", "class", "Spaced list"], [".joined", "class", "One card with dividers"], [".grid", "class", "Responsive grid"]], a11y: ["Use a list (ul/li) when the group is a navigational list."] });
+    react: "", api: [["item-card-group", "class", "Spaced list"], [".joined", "class", "One card with dividers"], [".grid", "class", "Responsive grid"]], a11y: ["Use a list (ul/li) when the group is a navigational list."] });
 
   add({ slug: "list-view", name: "List View", group: "Data display", figma: "List View · List Row",
     desc: "A selectable list of rows with a leading avatar or icon, two lines of text and trailing metadata — for inboxes, files and people.",
@@ -167,7 +167,7 @@
   <div class="list-row" data-interactive><span class="avatar av-3">JR</span><div class="list-main"><b>Jonas Richter</b><span>Re: Security review for Globex</span></div><span class="list-meta hide-sm">Yesterday</span></div>
   <div class="list-row" data-interactive><span class="avatar av-4">AK</span><div class="list-main"><b>Aiko Kato</b><span>Design sync notes and next steps</span></div><span class="list-meta hide-sm">Mon</span></div>
 </div>` }],
-    react: `<ListView selectionMode="single">{threads.map((t) => <ListView.Item key={t.id}>…</ListView.Item>)}</ListView>`, api: [["list-row[aria-selected]", "attribute", "Selected row with the signal rail"], [".hide-sm", "class", "Hidden when the list is under 420px wide"]], a11y: ["Use role=listbox with aria-selected for single-select lists."] });
+    react: "", api: [["list-row[aria-selected]", "attribute", "Selected row with the signal rail"], [".hide-sm", "class", "Hidden when the list is under 420px wide"]], a11y: ["Use role=listbox with aria-selected for single-select lists."] });
 
   add({ slug: "agenda", name: "Agenda", group: "Data display", figma: "Agenda · Day · Event",
     desc: "A day-by-day list of events with times, colored categories and the current event highlighted.",
@@ -181,7 +181,7 @@
     <div class="agenda-event" data-tone="rose"><time>All day</time><div style="min-width:0"><b>Offsite — Lisbon</b><span>Leadership team</span></div></div>
   </div></div>
 </div>` }],
-    react: `<Agenda days={days} renderEvent={(e) => <Agenda.Event {...e} />} />`, api: [["agenda-event[data-tone]", "lime · amber · rose · blue", "Category color (rail)"], [".now", "class", "Highlights the current event"]], a11y: ["Use <time datetime> for event times."] });
+    react: "", api: [["agenda-event[data-tone]", "lime · amber · rose · blue", "Category color (rail)"], [".now", "class", "Highlights the current event"]], a11y: ["Use <time datetime> for event times."] });
 
   add({ slug: "action-bar", name: "Action Bar", group: "Data display", figma: "Action Bar",
     desc: "A floating bar that appears when items are selected and offers bulk actions. On small screens labels collapse to icons.",
@@ -193,7 +193,7 @@
   <button class="btn btn-destructive btn-sm">${i("trash-2")} <span class="label-text">Delete</span></button>
   <button class="btn btn-ghost btn-sm icon-btn" aria-label="Clear selection">${i("x")}</button>
 </div>` }],
-    react: `<ActionBar isOpen={selected.size > 0} count={selected.size}>…</ActionBar>`, api: [[".floating", "class", "Sticks to the bottom of the scroll area and rises in"]], a11y: ["Announce the selection count with aria-live=polite.", "Escape should clear the selection."] });
+    react: "", api: [[".floating", "class", "Sticks to the bottom of the scroll area and rises in"]], a11y: ["Announce the selection count with aria-live=polite.", "Escape should clear the selection."] });
 
   add({ slug: "carousel", name: "Carousel", group: "Data display", figma: "Carousel · Slide · Dots",
     desc: "Swipeable slides with scroll-snap, arrow buttons and dots. Add data-peek to show part of the next slide on wider screens.",
@@ -208,7 +208,7 @@
   <button class="btn btn-outline btn-sm icon-btn carousel-nav next" aria-label="Next">${i("chevron-right")}</button>
   <div class="carousel-dots"></div>
 </div>` }],
-    react: `<Carousel opts={{ align: "start" }}><Carousel.Content>…</Carousel.Content><Carousel.Previous /><Carousel.Next /></Carousel>`, api: [["data-peek", "attribute", "46% slides from 640px"], ["data-autoplay", "ms", "Advance automatically (pauses on hover)"]], a11y: ["Don't autoplay content people need to read.", "Arrow buttons have labels; dots are buttons."] });
+    react: "", api: [["data-peek", "attribute", "46% slides from 640px"], ["data-autoplay", "ms", "Advance automatically (pauses on hover)"]], a11y: ["Don't autoplay content people need to read.", "Arrow buttons have labels; dots are buttons."] });
 
   add({ slug: "data-grid", name: "Data Grid", group: "Data display", figma: "Data Grid · Cell · Header",
     desc: "A spreadsheet-like grid: select a cell, move with arrow keys, press Enter or double-click to edit. Totals recalculate. Sticky header and first column.",
@@ -222,7 +222,7 @@
     <tr><td class="rownum">Σ</td><td><b>Total</b></td><td class="num formula" data-sum="2" data-prefix="$"></td><td class="num formula" data-sum="3"></td><td></td><td></td></tr>
   </tbody></table>
 </div>` }],
-    react: `<DataGrid columns={cols} rows={rows} onCellEdit={save} pinnedColumns={1} />`, api: [["td[data-edit]", "attribute", "Editable cell"], ["td[data-sum]", "column index", "Live total of a column"], [".fx", "class", "Formula bar mirrors the selected cell"]], a11y: ["Use role=grid with aria-rowindex/colindex for large production grids.", "Arrow keys move, Enter/F2 edits, Escape cancels."] });
+    react: "", api: [["td[data-edit]", "attribute", "Editable cell"], ["td[data-sum]", "column index", "Live total of a column"], [".fx", "class", "Formula bar mirrors the selected cell"]], a11y: ["Use role=grid with aria-rowindex/colindex for large production grids.", "Arrow keys move, Enter/F2 edits, Escape cancels."] });
 
   add({ slug: "file-tree", name: "File Tree", group: "Data display", figma: "File Tree · Folder · File",
     desc: "A nested, collapsible tree of folders and files with indent guides, selection and status dots.",
@@ -238,7 +238,7 @@
     <li><div class="ft-row">${i("file-text")}README.md</div></li>
   </ul>
 </div>` }],
-    react: `<FileTree items={tree} selectedKey="button.tsx" onSelect={open} />`, api: [["details/summary.ft-row", "element", "Folder (native open/close)"], ["ft-row[aria-selected]", "attribute", "Selected item"], [".ft-dot / .meta", "class", "Status dot / trailing metadata"]], a11y: ["For large trees use role=tree with arrow-key navigation."] });
+    react: "", api: [["details/summary.ft-row", "element", "Folder (native open/close)"], ["ft-row[aria-selected]", "attribute", "Selected item"], [".ft-dot / .meta", "class", "Status dot / trailing metadata"]], a11y: ["For large trees use role=tree with arrow-key navigation."] });
 
   add({ slug: "floating-toc", name: "Floating TOC", group: "Data display", figma: "Floating TOC · collapsed · open",
     desc: "A minimal table of contents: short bars mark each heading and expand into a panel on hover or focus. The active heading follows the scroll.",
@@ -249,13 +249,13 @@
   </nav>
   <div class="t-body-sm text-tertiary" style="max-width:360px">Hover or tab into the bars on the left. In a real page each link points at a heading id, and the active bar follows the scroll position.</div>
 </div>` }],
-    react: `<FloatingTOC items={headings} />`, api: [["a.lvl-2", "class", "Second-level heading"], ["a.on", "class", "Active heading"]], a11y: ["The panel opens on keyboard focus, not only on hover."] });
+    react: "", api: [["a.lvl-2", "class", "Second-level heading"], ["a.on", "class", "Active heading"]], a11y: ["The panel opens on keyboard focus, not only on hover."] });
 
   add({ slug: "holo-card", name: "Holo Card", group: "Data display", figma: "Holo Card · membership · credit",
     desc: "A card that tilts in 3D with a holographic glare that follows the pointer — for memberships, passes and collectibles. Flat when motion is reduced.",
     examples: [{ title: "Membership & card", html: `<div class="holo-card"><div class="holo-surface"><span class="holo-inset"></span><div class="row" style="justify-content:space-between"><b class="t-label-lg">Facet Pro</b><span class="badge badge-accent">Founding member</span></div><div><div class="t-caption" style="opacity:.75">Member since 2026</div><div class="holo-num">MAYA RODRIGUEZ</div></div></div></div>
 <div class="holo-card" style="--holo-bg:linear-gradient(135deg,#0b2e2b,#0f6b64 50%,#06201e)"><div class="holo-surface"><span class="holo-inset"></span><div class="row" style="justify-content:space-between"><span class="holo-chip"></span><b class="t-label-md">Northwind Bank</b></div><div><div class="holo-num">4242 •••• •••• 9018</div><div class="row" style="justify-content:space-between;margin-top:8px"><span class="t-caption" style="opacity:.8">M. RODRIGUEZ</span><span class="t-caption" style="opacity:.8">08/28</span></div></div></div></div>` }],
-    react: `<HoloCard gradient="…"><HoloCard.Content>…</HoloCard.Content></HoloCard>`, api: [["--holo-bg", "CSS var", "Card background gradient"], ["data-static", "attribute", "Turns off tilt and glare"], ["data-tilt", "number", "Max tilt in degrees (default 14)"]], a11y: ["Keep text contrast high — the glare is decorative only.", "Respects prefers-reduced-motion."] });
+    react: "", api: [["--holo-bg", "CSS var", "Card background gradient"], ["data-static", "attribute", "Turns off tilt and glare"], ["data-tilt", "number", "Max tilt in degrees (default 14)"]], a11y: ["Keep text contrast high — the glare is decorative only.", "Respects prefers-reduced-motion."] });
 
   add({ slug: "map", name: "Map", group: "Data display", figma: "Map · Pin · Popup · Controls",
     desc: "A lightweight, illustrative map surface with pins, a popup, an animated route and zoom controls. Swap the base for real tiles (Mapbox, MapLibre) in production.",
@@ -272,5 +272,5 @@
   <div class="map-controls"><button data-zoom="in" aria-label="Zoom in">${i("plus")}</button><button data-zoom="out" aria-label="Zoom out">${i("minus")}</button></div>
   <span class="map-chip">${i("navigation", "icon-sm")} 14 min · Fastest route</span>
 </div>` }],
-    react: `<Map center={sf} zoom={12}><Map.Marker coords={hq} /><Map.Route path={route} /></Map>`, api: [["map-pin[data-popup]", "id", "Toggles the popup"], ["map-controls [data-zoom]", "in | out", "Zoom the map layer"], [".route", "class", "Animated dashed route"]], a11y: ["Provide the same information as text (address, ETA) next to the map."] });
+    react: "", api: [["map-pin[data-popup]", "id", "Toggles the popup"], ["map-controls [data-zoom]", "in | out", "Zoom the map layer"], [".route", "class", "Animated dashed route"]], a11y: ["Provide the same information as text (address, ETA) next to the map."] });
 })();

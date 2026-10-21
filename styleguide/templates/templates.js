@@ -23,6 +23,10 @@
   /* ---------- build: gallery + sections ---------- */
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const thumbHTML = (html) => html.replace(/<a\b/g, "<span").replace(/<\/a>/g, "</span>").replace(/<(button|form|input|select|textarea)\b/g, (m, t) => "<" + t + " tabindex=\"-1\"").replace(/\sid="[^"]*"/g, "").replace(/\sdata-(feed|wizard|catalog|pdp|cart|table|skel|cookie|video|slider|tabshow|pricing|mega|faq|sticky-demo)\b/g, "");
+  // The live previews are public; the HTML is for buyers (assets/license.js).
+  const LIC = window.FacetLicense || { unlocked: false, lockedHTML: () => "" };
+  const copyBtn = () => LIC.unlocked ? `<button class="btn btn-ghost btn-sm" data-copy>${i("copy", "icon-sm")} Copy</button>` : `<button class="btn btn-ghost btn-sm" data-unlock>${i("lock", "icon-sm")} Unlock HTML</button>`;
+  const codeHTML = (v) => LIC.unlocked ? `<pre class="tp-code"><code>${esc(v.html.trim())}</code></pre>` : `<div class="tp-code tp-locked">${LIC.lockedHTML("The HTML")}</div>`;
   const nVariants = blocks.reduce((a, b) => a + b.variants.length, 0);
   $("#tp-count").textContent = blocks.length; $("#tp-vcount").textContent = nVariants;
 
@@ -32,8 +36,8 @@
     ${b.variants.map((v, k) => `<div class="tp-variant" data-view="preview"><div class="tp-vbar"><b>${v.name}</b><span class="badge badge-outline">${k + 1}/${b.variants.length}</span><span class="grow"></span>
       <span class="seg" role="group" aria-label="Device"><button aria-pressed="true" data-device="desktop" aria-label="Desktop">${i("monitor", "icon-sm")}</button><button aria-pressed="false" data-device="mobile" aria-label="Mobile">${i("smartphone", "icon-sm")}</button></span>
       <span class="seg" role="group" aria-label="View"><button aria-pressed="true" data-view="preview">Preview</button><button aria-pressed="false" data-view="code">HTML</button></span>
-      <button class="btn btn-ghost btn-sm" data-copy>${i("copy", "icon-sm")} Copy</button><button class="btn btn-ghost btn-sm icon-btn" data-replay aria-label="Replay animations">${i("rotate-ccw", "icon-sm")}</button></div>
-      <div class="tp-frame" data-device="desktop"><div class="tp-canvas">${v.html}</div></div><pre class="tp-code"><code>${esc(v.html.trim())}</code></pre></div>`).join("")}</section>`).join("");
+      ${copyBtn()}<button class="btn btn-ghost btn-sm icon-btn" data-replay aria-label="Replay animations">${i("rotate-ccw", "icon-sm")}</button></div>
+      <div class="tp-frame" data-device="desktop"><div class="tp-canvas">${v.html}</div></div>${codeHTML(v)}</div>`).join("")}</section>`).join("");
 
   // Thumbnails: scale the 1200px-wide first variant into each card.
   function fitThumbs() { $$(".tp-thumb").forEach((t) => { const s = (t.clientWidth - 36) / 1200, inner = t.firstElementChild, h = inner.offsetHeight * s; t.style.setProperty("--s", s); inner.style.top = Math.max(18, (t.clientHeight - h) / 2) + "px"; }); }
@@ -75,6 +79,14 @@
   /* ---------- variant toolbar ---------- */
   on("click", ".tp-vbar [data-device]", (e, b) => { const v = b.closest(".tp-variant"); $$("[data-device]", b.parentElement).forEach((x) => x.setAttribute("aria-pressed", x === b)); $(".tp-frame", v).dataset.device = b.dataset.device; setTimeout(() => Facet.charts && Facet.charts.refresh(v), 600); });
   on("click", ".tp-vbar [data-view]", (e, b) => { const v = b.closest(".tp-variant"); $$("[data-view]", b.parentElement).forEach((x) => x.setAttribute("aria-pressed", x === b)); v.dataset.view = b.dataset.view; });
+  document.addEventListener("facet:license", () => {
+    const vs = blocks.flatMap((b) => b.variants);
+    $$(".tp-variant").forEach((el, k) => {
+      const v = vs[k]; if (!v) return;
+      const old = $(".tp-code", el); if (old) old.outerHTML = codeHTML(v);
+      const b = $("[data-unlock], [data-copy]", $(".tp-vbar", el)); if (b) b.outerHTML = copyBtn();
+    });
+  });
   on("click", "[data-copy]", (e, b) => { const code = $(".tp-code", b.closest(".tp-variant")).textContent; (navigator.clipboard ? navigator.clipboard.writeText(code) : Promise.reject()).then(() => toast("HTML copied", { type: "success", duration: 1800 })).catch(() => {}); });
   on("click", "[data-replay]", (e, b) => replay(b.closest(".tp-variant")));
 

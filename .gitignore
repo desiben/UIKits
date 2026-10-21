@@ -6,3 +6,5 @@ __pycache__/
 .idea/
 styleguide/.DS_Store
 dist/
+styleguide/public-build/
+styleguide/assets/buyer.js

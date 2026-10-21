@@ -64,13 +64,15 @@
 
   /* ---------- page helpers ---------- */
   const page = (crumb, title, lead, body, meta = "") => `<article><div class="crumbs">${crumb}</div><h1 class="doc-title">${title}</h1><p class="doc-lead">${lead}</p>${meta ? `<div class="doc-meta">${meta}</div>` : '<div style="height:24px"></div>'}${body}</article>`;
+  // Copyable code is for buyers (see assets/license.js); the live previews stay public.
+  const LIC = window.FacetLicense || { unlocked: false, data: null, open() {}, lockedHTML: () => "" };
   const example = (ex, k) => {
     const id = "ex" + k + Math.random().toString(36).slice(2, 6);
-    const code = tidy(ex.html.trim());
+    const code = LIC.unlocked ? tidy(ex.html.trim()) : "";
     return `<h3 id="${id}">${ex.title}</h3><div class="example">
-      <div class="example-bar"><div class="seg" role="tablist"><button role="tab" aria-selected="true" data-view="p">Preview</button><button role="tab" aria-selected="false" data-view="c">HTML</button></div><div class="seg vp" role="group" aria-label="Viewport"><button aria-selected="true" data-vp="desktop" aria-label="Desktop">${i("monitor", "icon-sm")}</button><button aria-selected="false" data-vp="mobile" aria-label="Mobile">${i("smartphone", "icon-sm")}</button></div><span class="spacer"></span><button class="copy" data-copy-ex>${i("copy", "icon-sm")} <span class="label-text">Copy HTML</span></button></div>
+      <div class="example-bar"><div class="seg" role="tablist"><button role="tab" aria-selected="true" data-view="p">Preview</button><button role="tab" aria-selected="false" data-view="c">HTML</button></div><div class="seg vp" role="group" aria-label="Viewport"><button aria-selected="true" data-vp="desktop" aria-label="Desktop">${i("monitor", "icon-sm")}</button><button aria-selected="false" data-vp="mobile" aria-label="Mobile">${i("smartphone", "icon-sm")}</button></div><span class="spacer"></span>${LIC.unlocked ? `<button class="copy" data-copy-ex>${i("copy", "icon-sm")} <span class="label-text">Copy HTML</span></button>` : `<button class="copy" data-unlock>${i("lock", "icon-sm")} <span class="label-text">Unlock HTML</span></button>`}</div>
       <div class="preview-wrap" data-pane="p"><div class="preview ${ex.layout || ""}">${ex.html}</div></div>
-      <pre class="code" data-pane="c" hidden><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, "html")}</code></pre></div>`;
+      ${LIC.unlocked ? `<pre class="code" data-pane="c" hidden><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, "html")}</code></pre>` : `<div data-pane="c" hidden>${LIC.lockedHTML("The HTML")}</div>`}</div>`;
   };
 
   /* ---------- pages ---------- */
@@ -101,7 +103,7 @@
     <p><b>1.</b> In your React project (Next.js, Vite, React Router, Astro or TanStack Start), set up Facet. This adds Tailwind CSS v4 if needed, the <code>@/</code> import alias and the Facet theme. It asks once for the license key from your Gumroad receipt and saves it to <code>.env.local</code>.</p>${install("init")}
     <p><b>2.</b> Add any components, or everything at once:</p>${install("add button dialog tabs")}${install("add --all")}
     <p>Wrap your app in <code>&lt;FacetMotion&gt;</code> (from <code>@/lib/motion</code>) once so every animation respects the OS "reduce motion" setting.</p>
-    <h2 id="html">1 · Plain HTML / any framework</h2><p>Copy <code>styleguide/assets/</code> into your project and include:</p>
+    <h2 id="html">1 · Plain HTML / any framework</h2><p>Copy <code>styleguide/assets/</code> from your Facet UI download into your project and include:</p>
     ${codeBlock(`<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/tokens.css">
@@ -367,14 +369,14 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     `<div class="ov-filter"><div class="input-group" style="max-width:320px;flex:1"><svg class="icon"><use href="#search"/></svg><input class="input" id="ov-q" placeholder="Filter components…" aria-label="Filter components"></div><div class="row ov-chips">${CATS.map((g) => `<a class="chip" href="javascript:void 0" data-scroll="cat-${g.replace(/\W+/g, "-")}">${i(CAT_ICON[g], "icon-sm")} ${g}</a>`).join("")}</div></div>` +
     CATS.map((g) => { const items = R.filter((c) => c.group === g); if (!items.length) return ""; return `<h2 id="cat-${g.replace(/\W+/g, "-")}">${g} <span class="badge">${items.length}</span></h2><div class="ov-grid">${items.map((c) => `<a class="ov-card" href="#/components/${c.slug}" data-name="${c.name.toLowerCase()} ${g.toLowerCase()}"><div class="ov-thumb" aria-hidden="true" inert><div class="ov-inner">${c.examples[0].html}</div></div><div class="ov-meta"><b>${c.name}</b>${c.isNew ? '<span class="badge badge-accent">New</span>' : ""}<span class="ov-count">${c.examples.length} example${c.examples.length > 1 ? "s" : ""}</span></div></a>`).join("")}</div>`; }).join(""),
     `<span class="badge badge-outline">${i("layers", "icon-sm")} ${R.length} documented · 144 in Figma</span><button class="badge badge-outline" data-copy-md style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>`);
-  const md = (c) => `# ${c.name}\n\n${c.desc}\n\nCategory: ${c.group} · Figma: ${c.figma}\n\n` + c.examples.map((e) => `## ${e.title}\n\n\`\`\`html\n${tidy(e.html.trim())}\n\`\`\`\n`).join("\n") + `\n## React\n\n\`\`\`tsx\n${c.react}\n\`\`\`\n\n## API\n\n| Name | Type | Description |\n|---|---|---|\n` + c.api.map(([a, b, d]) => `| \`${a}\` | ${b} | ${d} |`).join("\n") + `\n\n## Accessibility\n\n` + c.a11y.map((x) => `- ${x}`).join("\n") + "\n";
+  const md = (c) => `# ${c.name}\n\n${c.desc}\n\nCategory: ${c.group} · Figma: ${c.figma}\n\n` + c.examples.map((e) => `## ${e.title}\n\n\`\`\`html\n${tidy(e.html.trim())}\n\`\`\`\n`).join("\n") + `\n## React\n\n\`\`\`tsx\n${(LIC.data && LIC.data.react && LIC.data.react[c.slug]) || ""}\n\`\`\`\n\n## API\n\n| Name | Type | Description |\n|---|---|---|\n` + c.api.map(([a, b, d]) => `| \`${a}\` | ${b} | ${d} |`).join("\n") + `\n\n## Accessibility\n\n` + c.a11y.map((x) => `- ${x}`).join("\n") + "\n";
   window.FACET_MD = md;
   R.forEach((c) => {
     P["components/" + c.slug] = () => page(`Components ${i("chevron-right", "icon-sm")} ${c.group}`, c.name, c.desc,
       c.examples.map(example).join("") +
       (MOTION[c.slug] ? `<h2 id="motion">Motion</h2><div class="callout">${i("zap")}<div><b>${MOTION[c.slug][0]}.</b> ${MOTION[c.slug][1]} Turned off automatically for reduced-motion users. <a href="#/motion">Motion guide</a></div></div>` : "") +
       `<h2 id="react-animated">React · animated</h2><p>Install the animated React version with the Facet CLI. <a href="react/#${c.slug}">See it live</a> · <a href="#/installation">First-time setup</a></p>${install(`add ${c.slug}`)}
-       <h2 id="react">React markup</h2>${codeBlock(c.react, "js")}
+       <h2 id="react">React markup</h2>${LIC.unlocked && LIC.data && LIC.data.react && LIC.data.react[c.slug] ? codeBlock(LIC.data.react[c.slug], "js") : LIC.lockedHTML("The React markup")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
       `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? `<span class="badge badge-accent">New in v${c.since || "1.2"}</span>` : ""}`);
@@ -508,6 +510,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     if (vp) { const ex = vp.closest(".example"); ex.querySelectorAll("[data-vp]").forEach((x) => x.setAttribute("aria-selected", x === vp)); ex.classList.toggle("is-mobile", vp.dataset.vp === "mobile"); requestAnimationFrame(() => { if (Facet.ui) Facet.ui.refresh(ex); if (Facet.charts) ex.querySelectorAll(".chart[data-chart]").forEach((c) => Facet.charts.render(c, c._chart)); }); }
     // copy markdown
     const cm = e.target.closest("[data-copy-md]");
+    if (cm && cm.dataset.copyMd && !LIC.unlocked) { LIC.open(); return; }
     if (cm) { const slug = cm.dataset.copyMd; const txt = slug ? window.FACET_MD(R.find((c) => c.slug === slug)) : `# Facet UI components\n\n` + CATS.map((g) => `## ${g}\n\n` + R.filter((c) => c.group === g).map((c) => `- **${c.name}** — ${c.desc}`).join("\n")).join("\n\n"); (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => Facet.toast({ title: "Markdown copied", description: "Paste it into your AI assistant or docs.", timeout: 2200 })).catch(() => {}); }
     // style themes
     const st = e.target.closest("[data-style-pick]"); if (st) T.setStyle(st.dataset.stylePick);
@@ -529,6 +532,16 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     if (e.target.id === "icon-q" || e.target.id === "icon-cat") filterIcons();
   });
   document.addEventListener("facet:theme", syncHeader);
+  document.addEventListener("facet:license", () => { const y = window.scrollY; route(); window.scrollTo(0, y); syncLicense(); });
+  function syncLicense() {
+    const b = $("#license-btn"); if (!b) return;
+    b.hidden = !!LIC.buyerCopy;
+    b.innerHTML = LIC.unlocked ? `${i("badge-check", "icon-sm")}<span class="label-text">Licensed</span>` : `${i("lock", "icon-sm")}<span class="label-text">Unlock code</span>`;
+    b.toggleAttribute("data-unlock", !LIC.unlocked);
+    b.setAttribute("aria-label", LIC.unlocked ? "Licensed. Click to forget the license key on this browser" : "Unlock the code with your license key");
+  }
+  syncLicense();
+  document.addEventListener("click", (e) => { if (e.target.closest("#license-btn") && LIC.unlocked && !LIC.buyerCopy && confirm("Forget the license key on this browser?")) LIC.signOut(); });
 
   /* ---------- ⌘K search ---------- */
   const cmd = $("#cmdk"), q = $("#cmdk-q"), list = $("#cmdk-list");

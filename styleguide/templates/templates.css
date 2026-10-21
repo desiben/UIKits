@@ -711,3 +711,4 @@ form.done > :not(.tp-sent) { display: none; } form.done .tp-sent { display: bloc
   --brand-300: #d4d4dc; --brand-400: #a1a1ab; --brand-500: #52525b; --brand-600: #3f3f46; --brand-700: #27272a; --brand-800: #18181b; --brand-900: #111113; --brand-950: #09090b;
 }
 [data-style="mono"] :is(.tp-cta-box, .tp-sec.brand, .tp-sec.ink) .btn-outline { border-color: rgb(255 255 255 / .5); }
+.tp-code.tp-locked { background: none; padding: 0 16px 16px; max-height: none; }

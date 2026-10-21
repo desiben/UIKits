@@ -89,7 +89,9 @@ const all = [
   lib("motion", "Facet motion presets", "Springs, easings and variants shared by every Facet component, plus <FacetMotion> for reduced-motion support.", "lib/motion.tsx", ["motion"], ["theme"]),
   ...items,
   { name: "all", type: "bundle", title: "Everything", description: "Every Facet UI React component in one command.", dependencies: [], requires: items.map((i) => i.name) },
+  // Code shown in the style guide once a buyer unlocks it (not installable).
+  { name: "docs-snippets", type: "docs", title: "Style guide code", description: "React markup for every style guide component page.", ...JSON.parse(readFileSync(join(root, "registry/docs-snippets.json"), "utf8")) },
 ]
 for (const it of all) writeFileSync(join(outDir, `${it.name}.json`), JSON.stringify(it) + "\n")
-writeFileSync(join(outDir, "index.json"), JSON.stringify({ name: "facet", version: pkg.version, items: all.map(({ name, type, title, description, category }) => ({ name, type, title, description, ...(category ? { category } : {}) })) }) + "\n")
+writeFileSync(join(outDir, "index.json"), JSON.stringify({ name: "facet", version: pkg.version, items: all.filter((it) => it.type !== "docs").map(({ name, type, title, description, category }) => ({ name, type, title, description, ...(category ? { category } : {}) })) }) + "\n")
 console.log(`registry: ${all.length} items (${items.length} components) -> ${outDir}`)

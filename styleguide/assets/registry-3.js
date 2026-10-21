@@ -13,12 +13,7 @@
       { title: "Split button", html: `<div class="btn-group" role="group" aria-label="Save"><button class="btn btn-sm">Save changes</button><div class="dropdown dropdown-end"><button class="btn btn-sm icon-btn" data-dropdown-trigger aria-haspopup="menu" aria-expanded="false" aria-label="More save options">${i("chevron-down", "icon-sm")}</button><div class="menu" role="menu"><button class="menu-item" role="menuitem">${i("copy")} Save as copy</button><button class="menu-item" role="menuitem">${i("file-text")} Save as draft</button><button class="menu-item" role="menuitem">${i("clock")} Schedule…</button></div></div></div>` },
       { title: "With text and input", html: `<div class="stack" style="--gap:12px;align-items:flex-start"><div class="btn-group"><span class="btn-group-text">https://</span><input class="input input-sm" style="width:200px" value="facet.dev" aria-label="Domain"><button class="btn btn-outline btn-sm">${i("copy", "icon-sm")} Copy</button></div><div class="btn-group" role="group" aria-label="Quantity"><button class="btn btn-outline btn-sm icon-btn" aria-label="Decrease">${i("minus", "icon-sm")}</button><span class="btn-group-text" style="min-width:44px;justify-content:center;background:var(--bg-surface)">12</span><button class="btn btn-outline btn-sm icon-btn" aria-label="Increase">${i("plus", "icon-sm")}</button></div></div>` },
       { title: "Vertical", html: `<div class="btn-group btn-group-vertical" role="group" aria-label="Alignment" style="width:160px"><button class="btn btn-outline btn-sm">${i("align-left", "icon-sm")} Left</button><button class="btn btn-outline btn-sm">${i("text-cursor", "icon-sm")} Center</button><button class="btn btn-outline btn-sm">${i("list", "icon-sm")} Justify</button></div>` }],
-    react: `<ButtonGroup aria-label="Message actions">
-  <Button variant="outline">Archive</Button>
-  <Button variant="outline">Report</Button>
-  <ButtonGroupSeparator />
-  <Button variant="outline" size="icon" aria-label="More"><MoreHorizontal /></Button>
-</ButtonGroup>`,
+    react: "",
     api: [["btn-group", "class", "Horizontal group (default)"], ["btn-group-vertical", "modifier", "Stack vertically"], ["btn-group-text", "class", "Static text addon"], ["btn-group-sep", "class", "Separator between solid buttons"]],
     a11y: ["Give the wrapper role=\"group\" and an aria-label.", "Icon-only buttons need their own aria-label."] });
 
@@ -42,11 +37,7 @@
   <textarea placeholder="Ask, search or make anything…" aria-label="Prompt"></textarea>
   <span class="input-shell-addon" data-align="block-end"><button class="btn btn-ghost btn-sm icon-btn" aria-label="Attach">${i("paperclip", "icon-sm")}</button><button class="btn btn-ghost btn-sm">${i("sparkles", "icon-sm")} Auto</button><span class="grow"></span><span class="t-caption text-tertiary">52% used</span><button class="btn btn-sm icon-btn" aria-label="Send">${i("arrow-up", "icon-sm")}</button></span>
 </div>` }],
-    react: `<InputGroup>
-  <InputGroupAddon><Search /></InputGroupAddon>
-  <InputGroupInput placeholder="Search…" />
-  <InputGroupAddon align="inline-end"><InputGroupButton>Search</InputGroupButton></InputGroupAddon>
-</InputGroup>`,
+    react: "",
     api: [["input-shell", "class", "Bordered wrapper; put a bare input or textarea inside"], ["input-shell-addon", "class", "Icon, text, kbd or buttons"], ["data-tone=\"muted\"", "addon", "Filled prefix/suffix segment"], ["data-block + data-align=\"block-start|block-end\"", "attribute", "Toolbar above or below a textarea"], ["data-invalid / data-disabled", "attribute", "States"]],
     a11y: ["The inner input still needs a label (visible or aria-label).", "Icon-only addon buttons need an aria-label."] });
 
@@ -58,7 +49,7 @@
   <label class="check"><input type="checkbox" checked> <span>Accept terms and conditions</span></label>
   <div class="field"><label class="label" data-disabled="true" for="lb3">Workspace ID</label><input class="input" id="lb3" value="ws_8f2a91" disabled></div>
 </div>` }],
-    react: `<Label htmlFor="email">Email</Label>\n<Input id="email" type="email" />`,
+    react: "",
     api: [["label", "class", "Label text"], ["req · opt", "child class", "Required / optional marker"], ["label-row", "class", "Inline label around a checkbox, radio or switch"], ["data-disabled", "attribute", "Dims the label"]],
     a11y: ["Connect with for/id or wrap the control.", "Mark required fields with the required attribute too — the asterisk is visual only."] });
 
@@ -69,12 +60,7 @@
 <div class="dropdown" data-select style="width:100%"><button class="select-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Plan"><span class="value"></span>${i("chevrons-up-down")}</button><div class="menu listbox" role="listbox">${opt("free", "Free", false, "user")}${opt("pro", "Pro", true, "zap")}${opt("team", "Team", false, "users")}${opt("ent", "Enterprise", false, "building-2")}</div></div>
 <button class="select-trigger" disabled aria-label="Region"><span class="value">EU (Frankfurt)</span>${i("chevrons-up-down")}</button></div>` },
       { title: "Multiple", html: `<div class="dropdown" data-select data-multiple style="width:300px;margin-bottom:220px"><button class="select-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Labels"><span class="value" data-placeholder="Add labels"></span>${i("chevrons-up-down")}</button><div class="menu listbox" role="listbox" aria-multiselectable="true">${opt("bug", "Bug", true)}${opt("feature", "Feature", true)}${opt("docs", "Docs")}${opt("design", "Design")}${opt("perf", "Performance")}</div></div>` }],
-    react: `<Select defaultValue="pro">
-  <SelectTrigger><SelectValue placeholder="Select a plan" /></SelectTrigger>
-  <SelectContent>
-    <SelectGroup><SelectLabel>Plans</SelectLabel><SelectItem value="free">Free</SelectItem><SelectItem value="pro">Pro</SelectItem></SelectGroup>
-  </SelectContent>
-</Select>`,
+    react: "",
     api: [["dropdown[data-select]", "wrapper", "Turns a dropdown into a select"], ["data-multiple", "attribute", "Multi-select; the menu stays open"], ["select-trigger > .value[data-placeholder]", "class", "Shows the selection or placeholder"], ["menu-item[role=option][aria-selected]", "option", "Option + selected state"], ["facet:change", "event", "detail.value"]],
     a11y: ["Trigger has aria-haspopup=\"listbox\"; options use role=\"option\" with aria-selected.", "Arrow keys move, Enter selects, Escape closes."] });
 
@@ -83,10 +69,7 @@
     examples: [
       { title: "Single", html: `<div class="dropdown" data-select data-combobox style="width:260px;margin-bottom:300px"><button class="select-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Framework"><span class="value" data-placeholder="Select framework…"></span>${i("chevrons-up-down")}</button><div class="menu listbox" role="listbox"><div class="combobox-search">${i("search")}<input placeholder="Search framework…" aria-label="Search framework" role="combobox" aria-autocomplete="list"></div>${FRAMEWORKS.map(([v, l]) => opt(v, l)).join("")}<div class="combobox-empty">No framework found.</div></div></div>` },
       { title: "Multiple with chips", html: `<div class="dropdown" data-select data-combobox data-multiple style="width:340px;margin-bottom:280px"><button class="select-trigger" data-dropdown-trigger aria-haspopup="listbox" aria-expanded="false" aria-label="Assignees" style="height:auto;min-height:var(--control-height-md);padding-top:5px;padding-bottom:5px"><span class="combobox-chips"></span><span class="value" data-placeholder="Assign people…"></span>${i("chevrons-up-down")}</button><div class="menu listbox" role="listbox" aria-multiselectable="true"><div class="combobox-search">${i("search")}<input placeholder="Search people…" aria-label="Search people"></div>${[["ada", "Ada Lovelace", true], ["grace", "Grace Hopper", true], ["alan", "Alan Turing"], ["linus", "Linus Torvalds"], ["margaret", "Margaret Hamilton"]].map(([v, l, s]) => opt(v, l, s, "user")).join("")}<div class="combobox-empty">No people found.</div></div></div>` }],
-    react: `<Combobox items={frameworks} value={value} onValueChange={setValue}>
-  <ComboboxInput placeholder="Select framework…" />
-  <ComboboxContent><ComboboxEmpty>No framework found.</ComboboxEmpty><ComboboxList>{(item) => <ComboboxItem value={item}>{item.label}</ComboboxItem>}</ComboboxList></ComboboxContent>
-</Combobox>`,
+    react: "",
     api: [["dropdown[data-select][data-combobox]", "wrapper", "Select + search"], ["combobox-search", "class", "Search field at the top of the list"], ["combobox-empty", "class", "Shown when nothing matches"], ["combobox-chips", "class", "Chips for multiple selection"]],
     a11y: ["The search input gets role=\"combobox\" and aria-autocomplete=\"list\".", "↓ from the search moves into the list; Enter picks the first match."] });
 
@@ -98,7 +81,7 @@
   <div class="field" data-invalid="true"><label class="label" for="ta3">Reason</label><textarea class="textarea" id="ta3" aria-invalid="true" aria-describedby="ta3h">x</textarea><span class="help" id="ta3h">Please give at least 20 characters.</span></div>
   <textarea class="textarea" disabled aria-label="Disabled">Locked by an admin.</textarea>
 </div>` }],
-    react: `<Textarea placeholder="Tell us a little about yourself" maxLength={160} />`,
+    react: "",
     api: [["textarea", "class", "Base"], ["textarea-wrap + textarea-count", "class", "Live counter (uses maxlength)"], ["data-autosize", "attribute", "Grows with content"], ["aria-invalid", "attribute", "Error state"]],
     a11y: ["Link help and error text with aria-describedby.", "The counter is aria-live so screen readers hear the limit."] });
 
@@ -121,13 +104,7 @@
   <div class="q-foot"><button class="btn btn-ghost btn-sm" data-q-back>Back</button><span class="grow hint hide-sm">Press 1–4 to choose · Enter to continue</span><button class="btn btn-ghost btn-sm" data-q-skip>Skip</button><button class="btn btn-sm" data-q-next>Next</button></div>
   <div class="q-summary"><div class="row" style="gap:8px">${i("circle-check")} <b class="t-label-md">Thanks — drafting your report</b></div><dl></dl><button class="btn btn-outline btn-sm" style="margin-top:16px" data-q-restart>Start over</button></div>
 </div>` }],
-    react: `<Questionnaire onSubmit={(answers) => run(answers)}>
-  <Question id="audience" required title="Who is this report for?">
-    <Option value="exec">Executives</Option><Option value="sales">Sales team</Option><OptionOther />
-  </Question>
-  <Question id="include" multiple title="What should I include?">…</Question>
-  <Question id="notes" freeform title="Anything else?" />
-</Questionnaire>`,
+    react: "",
     api: [["questionnaire > q-step", "class", "One step per question"], ["data-required", "step", "Hides Skip, Next waits for an answer"], ["data-key", "step", "Key used in the summary and facet:submit detail"], ["value=\"__other\" + q-other", "option", "Other with free text"], ["data-q-next · data-q-back · data-q-skip", "attribute", "Footer controls"], ["facet:submit", "event", "{ key: answers[] }"]],
     a11y: ["Options are real radios/checkboxes inside labels, so screen readers announce the group.", "Number keys 1–9 pick options; Enter continues."] });
 
@@ -140,7 +117,7 @@
   <figure class="aspect-ratio" style="--ratio:1;margin:0"><div class="aspect-fill" style="filter:hue-rotate(90deg)">1 : 1</div><figcaption>Avatar</figcaption></figure>
   <figure class="aspect-ratio" style="--ratio:9/16;margin:0"><div class="aspect-fill" style="filter:hue-rotate(160deg)">9 : 16</div><figcaption>Story</figcaption></figure>
 </div>` }],
-    react: `<AspectRatio ratio={16 / 9}><img src="/cover.jpg" alt="Cover" className="object-cover" /></AspectRatio>`,
+    react: "",
     api: [["aspect-ratio", "class", "Frame"], ["--ratio", "CSS var", "e.g. 16/9 (default), 4/3, 1"], ["figcaption", "child", "Optional overlay caption"]],
     a11y: ["Images still need alt text; decorative ones use alt=\"\"."] });
 
@@ -151,10 +128,7 @@
   <div class="collapsible-row">@radix-ui/primitives</div>
   <div class="collapsible-content"><div class="collapsible-row">@radix-ui/colors</div><div class="collapsible-row">@stitches/react</div></div>
 </details>` }],
-    react: `<Collapsible open={open} onOpenChange={setOpen}>
-  <CollapsibleTrigger asChild><Button variant="ghost" size="icon"><ChevronsUpDown /></Button></CollapsibleTrigger>
-  <CollapsibleContent>…</CollapsibleContent>
-</Collapsible>`,
+    react: "",
     api: [["details.collapsible", "element", "Wrapper; add open to start expanded"], ["collapsible-trigger", "class", "Icon that flips when open"], ["collapsible-content", "class", "The hidden region"]],
     a11y: ["<summary> is a native button: Enter and Space toggle it and the expanded state is announced."] });
 
@@ -163,7 +137,7 @@
     examples: [
       { title: "Vertical", html: `<div class="scroll-area" style="height:240px;width:220px" tabindex="0" aria-label="Tags"><div class="scroll-area-viewport"><b class="t-label-sm">Tags</b><div class="scroll-area-list" style="margin-top:8px">${Array.from({ length: 30 }, (_, k) => `<div>v1.2.0-beta.${30 - k}</div>`).join("")}</div></div></div>` },
       { title: "Horizontal with fade", html: `<div class="scroll-area scroll-area-x" data-fade style="width:min(100%,460px)" tabindex="0" aria-label="Artwork"><div class="scroll-area-viewport">${["Ornella Binni", "Tom Byrom", "Vladimir Malyavko", "Ada Lin", "Kenji Ito"].map((n, k) => `<figure style="margin:0;width:150px"><div class="aspect-ratio" style="--ratio:3/4"><div class="aspect-fill" style="filter:hue-rotate(${k * 50}deg)"></div></div><figcaption class="t-caption text-tertiary" style="margin-top:6px">Photo by <b class="text-primary">${n}</b></figcaption></figure>`).join("")}</div></div>` }],
-    react: `<ScrollArea className="h-72 w-48 rounded-md border">…</ScrollArea>`,
+    react: "",
     api: [["scroll-area", "class", "Bounded region (set a height or width)"], ["scroll-area-x", "modifier", "Horizontal row"], ["data-fade", "attribute", "Fade the scrolling edges"], ["data-bare", "attribute", "No border or background"]],
     a11y: ["Give the region tabindex=\"0\" and an aria-label so keyboard users can scroll it."] });
 
@@ -175,10 +149,7 @@
   <div class="row" style="flex-wrap:wrap;justify-content:center;gap:8px">${snr({ title: "Event created", description: "Sunday, Dec 03 at 9:00 AM" }, "Default")}${snr({ title: "Invoice paid", type: "success" }, "Success")}${snr({ title: "Couldn't sync", description: "Check your connection.", type: "error" }, "Error")}${snr({ title: "New version available", type: "info" }, "Info")}${snr({ title: "Storage almost full", type: "warning" }, "Warning")}${snr({ title: "Message archived", action: "Undo" }, "Action")}${snr({ title: "Saving changes…", promise: "resolve", success: "Changes saved", error: "Save failed" }, "Promise", "btn")}</div>
   <section class="sonner" id="sonner-demo" data-inline aria-label="Notifications" aria-live="polite"><div class="sonner-toast" data-type="success"><button class="sonner-close" aria-label="Close">${i("x")}</button>${i("circle-check")}<div class="grow"><b>Deploy finished</b><span>facet-ui · production · 42s</span></div></div></section>
 </div>` }],
-    react: `import { toast } from "sonner"
-<Toaster position="bottom-right" />
-toast("Event created", { description: "Sunday at 9:00", action: { label: "Undo", onClick: undo } })
-toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" })`,
+    react: "",
     api: [["Facet.sonner(o)", "function", "{ title, description, type, action, duration, target }"], ["Facet.sonner.success|error|info|warning|loading(title)", "function", "Shortcuts"], ["Facet.sonner.promise(p, msgs)", "function", "Loading → success/error"], ["sonner[data-position=\"top-center\"]", "attribute", "Region position (default bottom-right)"], ["data-sonner='{…}'", "attribute", "Declarative trigger"]],
     a11y: ["The region is aria-live=\"polite\"; errors use role=\"alert\".", "Hovering or focusing the stack pauses dismissal."] });
 
@@ -192,10 +163,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   <div class="bubble-row"><div class="bubble" data-variant="outline"><div class="bubble-more"><p>Release checklist for v1.3: tokens audited, Figma variants rebuilt, docs regenerated, changelog written, accessibility pass on the new components, Sonner stacking checked on Safari, and the questionnaire tested with a screen reader.</p><p>Ping me once the store listings are updated.</p></div><button class="bubble-toggle" aria-expanded="false">Show more</button></div></div>
   <div class="bubble-row"><div class="bubble" data-variant="tinted">Want me to schedule the newsletter?<div class="bubble-actions"><button class="btn btn-sm">Schedule</button><button class="btn btn-outline btn-sm">Not now</button></div></div></div>
 </div>` }],
-    react: `<Bubble align="end" variant="primary">
-  Yes — live since this morning.
-  <BubbleReactions>👍 2</BubbleReactions>
-</Bubble>`,
+    react: "",
     api: [["bubble-row[data-align=\"end\"]", "wrapper", "Groups bubbles from one sender; end aligns right"], ["bubble[data-variant]", "attribute", "default · primary · outline · tinted · ghost"], ["bubble-reactions · bubble-link · bubble-actions · bubble-meta", "class", "Parts"], ["bubble-more + bubble-toggle", "class", "Collapsible long content"]],
     a11y: ["Put sender and time in visible or visually-hidden text, not only alignment.", "The Show more button reports aria-expanded."] });
 
@@ -208,7 +176,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   <div class="marker" data-variant="pill" role="separator"><span class="marker-pill">${i("sparkles", "icon-sm")} Earlier messages summarised</span></div>
   <div class="marker" data-variant="status">${i("clock")} <span>Agent paused for approval · 2m</span></div>
 </div>` }],
-    react: `<Marker>Today</Marker>\n<Marker variant="status" icon={<UserPlus />}>Ada joined the conversation</Marker>`,
+    react: "",
     api: [["marker", "class", "Line + centered label (date break)"], ["data-variant", "attribute", "status · unread · pill"], ["marker-pill", "class", "Pill label for the pill variant"]],
     a11y: ["Use role=\"separator\" on breaks; status markers are plain text so they're read in order."] });
 
@@ -231,10 +199,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   </div></div>
   <div class="row" style="flex-wrap:wrap;gap:8px;justify-content:center"><button class="btn btn-sm" data-scroller-demo="ms-demo" data-kind="ask">Ask a question</button><button class="btn btn-outline btn-sm" data-scroller-demo="ms-demo">Stream a reply</button><button class="btn btn-ghost btn-sm" data-scroll-to="ms-m1">Jump to first question</button></div>
 </div>` }],
-    react: `<MessageScroller>
-  <MessageScrollerViewport>{messages.map((m) => <Message key={m.id} turn={m.role === "user"} />)}</MessageScrollerViewport>
-  <MessageScrollerJump />
-</MessageScroller>`,
+    react: "",
     api: [["message-scroller > message-scroller-viewport > message-scroller-content", "class", "Structure"], ["data-turn", "message", "Anchor this message to the top when added"], ["data-prepend", "message", "Restored history: keep the scroll position"], ["data-seen=\"false\"", "message", "Becomes true when half visible; fires facet:seen"], ["message-scroller-jump (+ .badge)", "class", "Jump to latest with unread count"], ["data-scroll-to=\"id\"", "attribute", "Jump to and highlight a message"]],
     a11y: ["Give the log role=\"log\" or aria-live on the content if replies should be announced.", "The jump button is a real button and appears only when you're scrolled up."] });
 
@@ -248,10 +213,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   <li class="trace-item" data-status="running"><span class="trace-line"></span><span class="trace-icon">${i("loader-circle")}</span><div class="trace-title">Drafting summary <span class="trace-meta">3.8s</span></div></li>
   <li class="trace-item" data-status="pending"><span class="trace-line"></span><span class="trace-icon">${i("send")}</span><div class="trace-title">Send to #revenue</div></li>
 </ol>` }],
-    react: `<Trace>
-  <TraceItem status="done"><TraceIcon><Search /></TraceIcon><TraceTitle>Searched the web</TraceTitle>
-    <TraceCollapsible>…</TraceCollapsible></TraceItem>
-</Trace>`,
+    react: "",
     api: [["trace > trace-item", "class", "Ordered list of steps"], ["data-status", "item", "done · running · error · pending"], ["trace-line · trace-icon · trace-title · trace-meta · trace-desc", "class", "Parts"], ["details.trace-collapsible", "element", "Collapsible input/output"]],
     a11y: ["Use an ordered list; status is also given by the icon shape and the text, not color alone."] });
 
@@ -266,11 +228,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   ${mb("View", `<button class="menu-item" role="menuitemcheckbox" aria-checked="true">${i("check", "check-mark")} Always show bookmarks</button><button class="menu-item" role="menuitemcheckbox" aria-checked="false">${i("check", "check-mark")} Always show full URLs</button><div class="menu-sep"></div>` + mi("refresh-cw", "Reload", "⌘R") + mi("maximize-2", "Toggle fullscreen"))}
   ${mb("Profiles", mi("user", "Andy") + mi("user", "Benoit") + mi("user", "Luis") + '<div class="menu-sep"></div>' + mi("pencil", "Edit…") + mi("plus", "Add profile…"))}
 </div>` }],
-    react: `<Menubar>
-  <MenubarMenu><MenubarTrigger>File</MenubarTrigger>
-    <MenubarContent><MenubarItem>New tab <MenubarShortcut>⌘T</MenubarShortcut></MenubarItem></MenubarContent>
-  </MenubarMenu>
-</Menubar>`,
+    react: "",
     api: [["menubar[role=menubar]", "class", "Bar"], ["dropdown > menubar-trigger", "class", "Each menu (reuses Dropdown Menu)"], ["menuitemcheckbox[aria-checked]", "item", "Checkable item"]],
     a11y: ["←/→ move between menus, ↑/↓ inside a menu, Escape closes.", "Shortcuts are hints only — register them in your app too."] });
 
@@ -286,12 +244,7 @@ toast.promise(save(), { loading: "Saving…", success: "Saved", error: "Failed" 
   <div class="nav-menu-panel" id="nm-start" data-layout="feature"><a class="nav-menu-feature" href="#">${i("sparkles")}<b>Facet UI</b><span>Tokens, components and Figma variants in one kit.</span></a>${nc("book-open", "Introduction", "Install and set up your theme.")}${nc("layers", "Theming", "Brand colors, density and style themes.")}${nc("code", "Installation", "CSS + JS, React or Tailwind preset.")}</div>
   <div class="nav-menu-panel" id="nm-comp">${nc("bell", "Alert Dialog", "Interrupts with important content.")}${nc("message-square", "Hover Card", "Preview content behind a link.")}${nc("sliders-horizontal", "Progress", "Shows completion of a task.")}${nc("panel-left", "Scroll Area", "Slim, themed scrollbars.")}${nc("layout-grid", "Tabs", "Layered sections of content.")}${nc("circle-help", "Tooltip", "Info on hover or focus.")}</div>
 </div></nav></div>` }],
-    react: `<NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem><NavigationMenuTrigger>Components</NavigationMenuTrigger>
-      <NavigationMenuContent>…</NavigationMenuContent></NavigationMenuItem>
-  </NavigationMenuList>
-</NavigationMenu>`,
+    react: "",
     api: [["nav-menu > nav-menu-list", "class", "Bar"], ["nav-menu-trigger[aria-controls]", "button", "Opens the panel with that id"], ["nav-menu-viewport > nav-menu-panel", "class", "Panels (data-layout=\"feature\" for a featured card)"], ["nav-menu-card · nav-menu-feature · nav-menu-link", "class", "Content"]],
     a11y: ["Triggers are buttons with aria-expanded; Escape closes and returns focus.", "Wrap the menu in <nav> with an aria-label."] });
 })();

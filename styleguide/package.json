@@ -1,0 +1,7 @@
+{
+  "name": "facet-ui-site",
+  "private": true,
+  "description": "Builds the public copy of the Facet UI style guide (minified, license-stamped). Not part of the buyer download.",
+  "scripts": { "build": "node build-public.mjs" },
+  "devDependencies": { "esbuild": "^0.25.0" }
+}

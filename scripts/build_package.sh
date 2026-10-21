@@ -11,7 +11,21 @@ sh "$ROOT/scripts/build_assets.sh"
 cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PARTY_NOTICES.md" "$PKG/"
 cp "$ROOT/figma/README.md" "$PKG/figma/"
 cp -r "$ROOT/tokens" "$ROOT/styleguide" "$PKG/"
-rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src" "$PKG/styleguide/api" "$PKG/styleguide/vercel.json"
+rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src" "$PKG/styleguide/api" "$PKG/styleguide/vercel.json" \
+  "$PKG/styleguide/node_modules" "$PKG/styleguide/public-build" "$PKG/styleguide/package.json" "$PKG/styleguide/package-lock.json" "$PKG/styleguide/build-public.mjs"
+# The buyer's copy of the style guide shows all code offline: license.js treats window.FACET_BUYER as unlocked.
+python3 - "$ROOT/react/registry/docs-snippets.json" "$PKG/styleguide" <<'PY'
+import json, sys, os
+snippets, site = sys.argv[1], sys.argv[2]
+data = json.load(open(snippets))
+open(os.path.join(site, "assets/buyer.js"), "w").write("/* Facet UI buyer copy: unlocks the code in this style guide. */\nwindow.FACET_BUYER = " + json.dumps(data) + ";\n")
+for page, src in (("index.html", "assets/buyer.js"), ("templates/index.html", "../assets/buyer.js")):
+    f = os.path.join(site, page); s = open(f).read()
+    lic = src.replace("buyer.js", "license.js")
+    assert lic in s, f
+    s = s.replace('<script src="%s"></script>' % lic, '<script src="%s"></script>\n<script src="%s"></script>' % (src, lic), 1)
+    open(f, "w").write(s)
+PY
 # Animated React components (source); buyers can also install them with the facetui CLI.
 mkdir -p "$PKG/react" && (cd "$ROOT/react" && tar --exclude=node_modules --exclude=.smoke -cf - .) | (cd "$PKG/react" && tar -xf -)
 # Turn links to the private repo into plain file names.

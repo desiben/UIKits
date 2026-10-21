@@ -27,11 +27,7 @@
 <button class="btn btn-ghost icon-btn" aria-label="More">${i("more-horizontal")}</button>
 <button class="btn icon-btn btn-sm" aria-label="Add">${i("plus")}</button>` },
     ],
-    react: `import { Button } from "@/components/ui/button"
-
-<Button>Primary</Button>
-<Button variant="outline" size="sm"><Plus /> New</Button>
-<Button variant="destructive" disabled>Delete</Button>`,
+    react: "",
     api: [["btn-secondary | btn-outline | btn-ghost | btn-destructive | btn-link", "class", "Visual variant (default: primary)"], ["btn-sm | btn-lg", "class", "Size — heights follow the Density tokens (32/36/44 comfortable)"], ["icon-btn", "class", "Square icon-only button. Always add aria-label"], ["data-loading", "attribute", "Shows loading state and blocks pointer events"], ["disabled", "attribute", "Native disabled state"]],
     a11y: ["Use <button> for actions and <a> for navigation.", "Icon-only buttons need aria-label (and optionally a tooltip).", "Focus ring is a 2-layer token ring (border/focus) visible in every theme."] });
 
@@ -47,10 +43,7 @@
   <button class="toggle" data-toggle aria-pressed="false">${i("calendar")} Calendar</button>
 </div>` },
     ],
-    react: `<ToggleGroup type="single" defaultValue="list">
-  <ToggleGroupItem value="list"><List /> List</ToggleGroupItem>
-  <ToggleGroupItem value="board"><Kanban /> Board</ToggleGroupItem>
-</ToggleGroup>`,
+    react: "",
     api: [["data-toggle", "attribute", "Enables click-to-toggle (facet.js)"], ["aria-pressed", "attribute", "Current state — styles key off it"], ["data-single", "attribute (group)", "Makes the group behave as a radio set"]],
     a11y: ["aria-pressed communicates state to assistive tech.", "Group needs role=group and an aria-label."] });
 
@@ -68,7 +61,7 @@
   <input class="input" disabled placeholder="Disabled">
 </div>` },
     ],
-    react: `<Input type="email" placeholder="you@company.com" />`,
+    react: "",
     api: [["input-sm | input-lg", "class", "Size"], ["aria-invalid=\"true\"", "attribute", "Error styling + danger focus ring"], ["input-group", "wrapper", "Leading icon / trailing kbd"]],
     a11y: ["Always pair with a visible <label> (see Field).", "border/input is 2.5:1 on white — it is decorative; the label and placeholder carry meaning. Raise to ink/500 if your audit requires 3:1 for control edges."] });
 
@@ -92,11 +85,7 @@
   <div class="field"><label class="label" for="f4">Role</label><select class="select" id="f4"><option>Admin</option><option selected>Member</option><option>Viewer</option></select></div>
 </div>` },
     ],
-    react: `<div className="grid gap-1.5">
-  <Label htmlFor="name">Workspace name</Label>
-  <Input id="name" aria-describedby="name-help" />
-  <p id="name-help" className="text-sm text-muted-foreground">Shown in invites.</p>
-</div>`,
+    react: "",
     api: [["field", "class", "Vertical stack with 6px gap"], ["data-invalid", "attribute", "Turns help text red"], ["label / .req", "class", "Label + required marker"]],
     a11y: ["Connect help/error text with aria-describedby.", "Mark required fields in the label, not only with color."] });
 
@@ -113,8 +102,7 @@
   <label class="check"><input type="radio" name="plan"><span>Yearly <span class="badge badge-success">-20%</span></span></label>
 </div>` },
     ],
-    react: `<Checkbox id="digest" defaultChecked />
-<RadioGroup defaultValue="monthly">…</RadioGroup>`,
+    react: "",
     api: [["check", "class (label)", "Wraps a native checkbox/radio and its text"], ["indeterminate", "JS property", "el.indeterminate = true shows the dash state"]],
     a11y: ["The whole label is the hit target.", "Use a fieldset/legend or role=radiogroup with a name for groups."] });
 
@@ -124,7 +112,7 @@
 <label class="switch"><input type="checkbox" role="switch"> Notifications</label>
 <label class="switch switch-sm"><input type="checkbox" role="switch" checked> Small</label>
 <label class="switch"><input type="checkbox" role="switch" disabled> Disabled</label>` }],
-    react: `<Switch id="sync" defaultChecked /> <Label htmlFor="sync">Auto-sync</Label>`,
+    react: "",
     api: [["switch", "class (label)", "Wrapper"], ["switch-sm", "class", "Small size"], ['role="switch"', "attribute", "Announces as a switch"]],
     a11y: ['Add role="switch" to the input.', "The off state uses bg/control-off (≥3:1) so the track is visible."] });
 
@@ -136,8 +124,7 @@
   <div class="progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><span style="--value:75%"></span></div></div>
   <div class="progress progress-sm"><span style="--value:30%"></span></div>
 </div>` }],
-    react: `<Slider defaultValue={[60]} max={100} />
-<Progress value={75} />`,
+    react: "",
     api: [["slider", "class (input range)", "Track fill follows value via facet.js"], ["--value", "CSS var", "Progress width, e.g. 75%"]],
     a11y: ["Give sliders an aria-label or visible label.", "Use role=progressbar with aria-valuenow."] });
 
@@ -148,9 +135,7 @@
   <span class="sep"></span>
   <input inputmode="numeric" maxlength="1" aria-label="Digit 4"><input inputmode="numeric" maxlength="1" aria-label="Digit 5"><input inputmode="numeric" maxlength="1" aria-label="Digit 6">
 </div>` }],
-    react: `<InputOTP maxLength={6}>
-  <InputOTPGroup><InputOTPSlot index={0} />…</InputOTPGroup>
-</InputOTP>`,
+    react: "",
     api: [["otp", "class", "Container; facet.js handles focus movement and paste"]],
     a11y: ['Use autocomplete="one-time-code" on the first input in production.', "Label each slot."] });
 
@@ -162,7 +147,7 @@
   <span class="t-body-xs text-tertiary">PNG, PDF or CSV up to 20 MB</span>
   <input type="file" class="sr-only" multiple>
 </label>` }],
-    react: `<Dropzone accept={{"image/*": []}} onDrop={upload} />`,
+    react: "",
     api: [["dropzone", "class", "Dashed container"], ['data-drag="true"', "attribute", "Set while dragging over"]],
     a11y: ["Keep a real <input type=file> inside so keyboard users can browse."] });
 
@@ -178,7 +163,7 @@
 <span class="badge badge-info">Beta</span>
 <span class="badge badge-accent">New</span>
 <span class="badge badge-solid">Solid</span>` }],
-    react: `<Badge variant="success">Active</Badge>`,
+    react: "",
     api: [["badge-{brand|success|warning|danger|info|accent|outline|solid}", "class", "Tone"], [".dot", "child", "Status dot"]],
     a11y: ["Don't rely on color alone — the text must say the status."] });
 
@@ -189,7 +174,7 @@
 <span class="avatar avatar-lg av-3" data-status="away">AK</span>
 <span class="avatar avatar-square av-4">AC</span>
 <span class="avatar-group"><span class="avatar av-1">MC</span><span class="avatar av-2">JR</span><span class="avatar av-3">AK</span><span class="avatar av-5">+4</span></span>` }],
-    react: `<Avatar><AvatarImage src={url} /><AvatarFallback>MC</AvatarFallback></Avatar>`,
+    react: "",
     api: [["avatar-sm | avatar-lg | avatar-square", "class", "Size / shape"], ["data-status", "online | away | busy", "Presence dot"], ["av-1 … av-5", "class", "Fallback tints"]],
     a11y: ["Give images alt text; decorative initials can be aria-hidden when the name is adjacent."] });
 
@@ -200,7 +185,7 @@
   <hr class="separator">
   <div class="row" style="--gap:12px"><div class="skeleton" style="width:40px;height:40px;border-radius:50%"></div><div class="stack grow" style="--gap:8px"><div class="skeleton" style="height:12px;width:70%"></div><div class="skeleton" style="height:12px;width:45%"></div></div></div>
 </div>` }],
-    react: `<Kbd>⌘K</Kbd>  <Spinner />  <Skeleton className="h-3 w-2/3" />  <Separator />`,
+    react: "",
     api: [["kbd | spinner | skeleton | separator", "class", "—"]], a11y: ["Spinners need role=status and a label."] });
 
   add({ slug: "card", name: "Card", group: "Data display", figma: "Card · Default / Elevated",
@@ -212,11 +197,7 @@
 </div>` },
       { title: "KPI card", html: `<div class="card kpi" style="width:260px"><span class="kpi-label">Monthly recurring revenue</span><span class="kpi-value">$248,920</span><span class="row" style="--gap:6px"><span class="delta">${i("trending-up", "icon-sm")} +12.4%</span><span class="t-caption text-tertiary">vs. last month</span></span></div>
 <div class="card kpi" style="width:260px"><span class="kpi-label">Churn</span><span class="kpi-value">2.1%</span><span class="row" style="--gap:6px"><span class="delta down">${i("trending-down", "icon-sm")} -0.3pt</span><span class="t-caption text-tertiary">vs. last month</span></span></div>` }],
-    react: `<Card>
-  <CardHeader><CardTitle>Northwind renewal</CardTitle><CardDescription>…</CardDescription></CardHeader>
-  <CardContent>…</CardContent>
-  <CardFooter><Button size="sm">Open deal</Button></CardFooter>
-</Card>`,
+    react: "",
     api: [["card / card-elevated", "class", "Container"], ["card-header | card-body | card-footer", "class", "Sections; padding = layout/card-padding (density-aware)"], ["kpi, kpi-label, kpi-value, delta", "class", "Metric card parts"]],
     a11y: ["If the entire card is clickable, use one link and keep other actions outside it."] });
 
@@ -231,8 +212,7 @@
     <tr><td><label class="check"><input type="checkbox" aria-label="Select row"></label></td><td><div class="cell-user"><span class="avatar avatar-sm av-3">IN</span><div><b>Initech</b><span>it@initech.co</span></div></div></td><td><span class="badge badge-danger">Past due</span></td><td class="num">$890</td><td><button class="btn btn-ghost btn-sm icon-btn" aria-label="Row actions">${i("more-horizontal")}</button></td></tr>
   </tbody>
 </table></div>` }],
-    react: `const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() })
-<Table>…</Table>  // data-table recipe, styled by Facet tokens`,
+    react: "",
     api: [["table-wrap", "class", "Scroll container with border + facet cut"], ["num", "class (td/th)", "Right-aligned tabular numbers"], ['aria-selected="true"', "tr attribute", "Selected row"]],
     a11y: ["Use real <table> markup with <th> headers.", "Sortable headers should be buttons with aria-sort on the th."] });
 
@@ -245,7 +225,7 @@
     <button class="cal-day muted">28</button><button class="cal-day muted">29</button><button class="cal-day muted">30</button>${Array.from({ length: 31 }, (_, d) => `<button class="cal-day${d + 1 === 15 ? " today" : ""}"${d + 1 === 20 ? ' aria-selected="true"' : ""}>${d + 1}</button>`).join("")}<button class="cal-day muted">1</button>
   </div>
 </div>` }],
-    react: `<Calendar mode="single" selected={date} onSelect={setDate} />`,
+    react: "",
     api: [["cal-day.today | .muted | .in-range", "class", "Day states"], ['aria-selected="true"', "attribute", "Selected day"]],
     a11y: ["Production calendars need roving tabindex + arrow-key navigation (react-day-picker provides it)."] });
 
@@ -255,8 +235,7 @@
   <div class="row" style="justify-content:space-between;margin-bottom:16px"><div><div class="card-title">Revenue</div><div class="card-desc">Last 8 weeks</div></div><div class="legend"><span><i style="--c:var(--chart-1)"></i>New</span><span><i style="--c:var(--chart-2)"></i>Expansion</span></div></div>
   <div class="bars">${[46, 58, 52, 70, 64, 82, 76, 94].map((v, k) => `<div><i style="--h:${v}%"${k % 3 === 2 ? ' class="alt"' : ""}></i><span>W${k + 1}</span></div>`).join("")}</div>
 </div>` }],
-    react: `// Recharts example
-<Bar dataKey="new" fill="var(--chart-1)" radius={[4, 2, 0, 0]} />`,
+    react: "",
     api: [["--chart-1 … --chart-6", "CSS vars", "Categorical palette (chart/1 follows brand)"]],
     a11y: ["Provide a data table or summary text for screen readers.", "Don't encode meaning by color alone; add labels or patterns."] });
 
@@ -269,22 +248,21 @@
   <div class="alert alert-warning" role="status">${i("alert-triangle")}<div><div class="alert-title">Seat limit almost reached</div><div class="alert-desc">23 of 25 seats are in use.</div></div></div>
   <div class="alert alert-danger" role="alert">${i("alert-circle")}<div><div class="alert-title">Sync failed</div><div class="alert-desc">We couldn't reach Salesforce. Retrying in 5 minutes.</div></div></div>
 </div>` }],
-    react: `<Alert variant="warning"><AlertTriangle /><AlertTitle>…</AlertTitle><AlertDescription>…</AlertDescription></Alert>`,
+    react: "",
     api: [["alert-{success|warning|danger|info}", "class", "Tone"]], a11y: ['Use role="alert" only for urgent errors; role="status" otherwise.'] });
 
   add({ slug: "toast", name: "Toast", group: "Feedback", figma: "Toast",
     desc: "Transient confirmation. Fire from JS with Facet.toast().",
     examples: [{ title: "Trigger toasts", html: `<button class="btn btn-outline" data-toast='{"title":"Project created","description":"Q4 Launch is ready for your team."}'>Show toast</button>
 <button class="btn btn-outline" data-toast='{"title":"Changes discarded","description":"Your draft was removed.","tone":"var(--icon-danger)","icon":"trash-2"}'>Danger toast</button>` }],
-    react: `import { toast } from "sonner"
-toast("Project created", { description: "Q4 Launch is ready." })`,
+    react: "",
     api: [["Facet.toast({ title, description, tone, icon, timeout })", "JS", "Returns the toast element"]],
     a11y: ["Region uses aria-live=polite.", "Never put the only copy of important info in a toast."] });
 
   add({ slug: "empty-state", name: "Empty State", group: "Feedback", figma: "Empty State",
     desc: "Explains why a view is empty and what to do next.",
     examples: [{ title: "Empty state", html: `<div class="card empty" style="width:440px"><span class="icon-wrap">${i("folder")}</span><b class="t-h5">No projects yet</b><p>Projects group your tasks, files and docs. Create one to get your team started.</p><div class="row" style="margin-top:8px"><button class="btn btn-outline btn-sm">Import</button><button class="btn btn-sm">${i("plus")} New project</button></div></div>` }],
-    react: `<EmptyState icon={<Folder />} title="No projects yet" action={<Button>New project</Button>} />`,
+    react: "",
     api: [["empty", "class", "Centered stack"]], a11y: ["Lead with a clear heading; keep one primary action."] });
 
   /* ------------------------------ Overlays ------------------------------ */
@@ -299,10 +277,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     <div class="dialog-footer"><button class="btn btn-ghost" data-close>Cancel</button><button class="btn" data-close>Send invites</button></div>
   </div>
 </div>` }],
-    react: `<Dialog>
-  <DialogTrigger asChild><Button>Invite</Button></DialogTrigger>
-  <DialogContent><DialogHeader><DialogTitle>Invite teammates</DialogTitle></DialogHeader>…</DialogContent>
-</Dialog>`,
+    react: "",
     api: [['data-open="id"', "trigger attribute", "Opens the overlay with that id"], ["data-close", "attribute", "Closes the nearest overlay"], ["overlay > dialog", "structure", "Backdrop + panel"]],
     a11y: ["role=dialog + aria-modal + aria-labelledby.", "For production, add a focus trap (Radix Dialog does this)."] });
 
@@ -322,7 +297,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     <div class="dialog-body"><div class="dialog-title">Share “Q4 Launch”</div><button class="btn btn-block">${i("link")} Copy link</button><button class="btn btn-outline btn-block" data-close>Done</button></div>
   </div>
 </div>` }],
-    react: `<Sheet><SheetTrigger>Open</SheetTrigger><SheetContent side="right">…</SheetContent></Sheet>`,
+    react: "",
     api: [["overlay.sheet-overlay > .sheet", "structure", "Right-side panel"], ["overlay.drawer-overlay > .drawer", "structure", "Bottom drawer"]],
     a11y: ["Same rules as Dialog."] });
 
@@ -339,10 +314,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     <button class="menu-item danger" role="menuitem">${i("trash-2")} Delete</button>
   </div>
 </div>` }],
-    react: `<DropdownMenu>
-  <DropdownMenuTrigger asChild><Button variant="outline">Options</Button></DropdownMenuTrigger>
-  <DropdownMenuContent><DropdownMenuItem>Rename</DropdownMenuItem></DropdownMenuContent>
-</DropdownMenu>`,
+    react: "",
     api: [["dropdown", "class", "Positioning wrapper; dropdown-end aligns right"], ["data-dropdown-trigger", "attribute", "Toggles the menu"], ["menu-item.danger", "class", "Destructive item"]],
     a11y: ["role=menu / menuitem; trigger has aria-haspopup and aria-expanded.", "Escape closes."] });
 
@@ -350,7 +322,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     desc: "Lightweight floating content. Tooltips are CSS-only via data-tooltip.",
     examples: [{ title: "Tooltip & popover", html: `<button class="btn btn-outline" data-tooltip="Copy link">${i("link")} Hover me</button>
 <div class="popover"><div class="row" style="--gap:12px"><span class="avatar av-1">MC</span><div><b class="t-label-md">Maya Chen</b><div class="t-body-xs text-tertiary">Design lead · Lisbon</div></div></div><p class="t-body-sm text-secondary" style="margin-top:12px">Owns the design system and onboarding redesign.</p></div>` }],
-    react: `<Tooltip><TooltipTrigger>…</TooltipTrigger><TooltipContent>Copy link</TooltipContent></Tooltip>`,
+    react: "",
     api: [["data-tooltip", "attribute", "Tooltip text"], ['data-tooltip-side="bottom"', "attribute", "Placement"], ["popover", "class", "Floating surface"]],
     a11y: ["Tooltips must not hold essential info; they don't show on touch."] });
 
@@ -361,7 +333,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   <details><summary>Does it support dark mode?${i("chevron-down")}</summary><div>Every semantic token has Light and Dark values.</div></details>
   <details><summary>Does it work with React?${i("chevron-down")}</summary><div>Yes. Install the animated React components with <code>npx facetui</code>, or use the Tailwind preset with your own markup.</div></details>
 </div>` }],
-    react: `<Accordion type="single" collapsible><AccordionItem value="a">…</AccordionItem></Accordion>`,
+    react: "",
     api: [["accordion > details > summary", "structure", "Native disclosure"]], a11y: ["Native details/summary is keyboard and screen-reader accessible."] });
 
   /* ------------------------------ Navigation ------------------------------ */
@@ -381,10 +353,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
       { title: "Pill", html: `<div class="tabs-pill" role="tablist" aria-label="Range">
   <button class="tab" role="tab" aria-selected="false">Day</button><button class="tab" role="tab" aria-selected="true">Week</button><button class="tab" role="tab" aria-selected="false">Month</button>
 </div>` }],
-    react: `<Tabs defaultValue="overview">
-  <TabsList><TabsTrigger value="overview">Overview</TabsTrigger></TabsList>
-  <TabsContent value="overview">…</TabsContent>
-</Tabs>`,
+    react: "",
     api: [["tabs-list | tabs-pill", "class (tablist)", "Style"], ["aria-selected / aria-controls", "attribute", "State + panel link"]],
     a11y: ["Roving tabindex: only the selected tab is in the tab order."] });
 
@@ -394,8 +363,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
 <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><a href="#">Acme</a></li>${i("chevron-right")}<li><a href="#">Projects</a></li>${i("chevron-right")}<li aria-current="page">Q4 Launch</li></ol></nav>
 <nav class="pagination" aria-label="Pagination"><button class="page-btn">${i("chevron-left", "icon-sm")} Prev</button><button class="page-btn">1</button><button class="page-btn" aria-current="page">2</button><button class="page-btn">3</button><span class="page-btn" aria-hidden="true">…</span><button class="page-btn">12</button><button class="page-btn">Next ${i("chevron-right", "icon-sm")}</button></nav>
 </div>` }],
-    react: `<Breadcrumb><BreadcrumbList>…</BreadcrumbList></Breadcrumb>
-<Pagination>…</Pagination>`,
+    react: "",
     api: [["breadcrumb", "class (ol)", "—"], ["page-btn[aria-current=page]", "class", "Current page"]], a11y: ["Wrap in <nav> with aria-label."] });
 
   add({ slug: "chip", name: "Chip & Link", group: "Navigation", figma: "Chip · Link",
@@ -404,7 +372,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
 <button class="chip" data-toggle aria-pressed="false">SMB</button>
 <button class="chip" data-toggle aria-pressed="false">Startup</button>
 <a class="link" href="#">Read the docs</a>` }],
-    react: `<Toggle variant="chip" pressed>Enterprise</Toggle>`,
+    react: "",
     api: [["chip[aria-pressed]", "class", "Selectable"], ["link", "class", "Underlined text link"]], a11y: ["Links must have discernible, unique text."] });
 
   add({ slug: "stepper", name: "Stepper", group: "Navigation", figma: "Step · Stepper",
@@ -415,7 +383,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   <li class="step" data-state="upcoming"><span class="step-bar"></span><b>Invite team</b><span>Next</span></li>
   <li class="step" data-state="upcoming"><span class="step-bar"></span><b>Connect data</b><span>Optional</span></li>
 </ol>` }],
-    react: `<Stepper current={1} steps={["Account","Workspace","Invite team","Connect data"]} />`,
+    react: "",
     api: [["data-state", "complete | current | upcoming", "Step state"]], a11y: ['Mark the current step with aria-current="step".'] });
 
   add({ slug: "sidebar", name: "Sidebar", group: "Navigation", figma: "Sidebar · Sidebar Item",
@@ -431,7 +399,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   <a class="sidebar-item" href="#">${i("bar-chart-3")} Reports</a>
   <a class="sidebar-item" href="#">${i("settings")} Settings</a>
 </nav>` }],
-    react: `<SidebarProvider><Sidebar><SidebarMenuButton isActive>Dashboard</SidebarMenuButton></Sidebar></SidebarProvider>`,
+    react: "",
     api: [["sidebar-item[aria-current=page]", "class", "Active item"], ["sidebar-label", "class", "Section label"], [".count", "child", "Trailing count"]],
     a11y: ['Use aria-current="page" on the active link.'] });
 
@@ -451,10 +419,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   </div>
   <div class="command-foot"><span><span class="kbd">↑↓</span> Navigate</span><span><span class="kbd">↵</span> Open</span><span><span class="kbd">⇥</span> Change scope</span></div>
 </div>` }],
-    react: `<CommandDialog open={open} onOpenChange={setOpen}>
-  <CommandInput placeholder="Search…" />
-  <CommandList><CommandGroup heading="Ask AI">…</CommandGroup></CommandList>
-</CommandDialog>`,
+    react: "",
     api: [["command, command-input, command-list, command-foot", "class", "Parts"], ["scope", "class", "Scope chip (⇥ to change)"]],
     a11y: ["Use combobox + listbox semantics (cmdk handles this)."] });
 
@@ -469,7 +434,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     <div class="composer-bar"><button class="btn btn-ghost btn-sm icon-btn" aria-label="Attach">${i("paperclip")}</button><button class="btn btn-ghost btn-sm">${i("sparkles", "icon-sm")} Facet Pro ${i("chevron-down", "icon-sm")}</button><span class="grow"></span><button class="btn btn-sm icon-btn" aria-label="Send">${i("send", "icon-sm")}</button></div>
   </div>
 </div>` }],
-    react: `<PromptComposer context={chips} model="facet-pro" onSubmit={send} generating={busy} />`,
+    react: "",
     api: [["composer, ctx-chip, composer-bar", "class", "Composer parts"], ["msg / msg-user, ai-mark", "class", "Messages"]],
     a11y: ["Announce streamed responses via an aria-live region.", "Show Stop while generating."] });
 
@@ -480,7 +445,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   <article class="kanban-card"><div class="row" style="--gap:6px"><span class="badge badge-brand">Design</span><span class="badge badge-danger">P1</span></div><b>Redesign onboarding</b><div class="progress progress-sm"><span style="--value:75%"></span></div><footer><span class="row" style="--gap:4px">${i("calendar", "icon-sm")} Oct 24</span><span class="avatar-group"><span class="avatar avatar-sm av-1">MC</span><span class="avatar avatar-sm av-2">JR</span></span></footer></article>
   <article class="kanban-card"><div class="row" style="--gap:6px"><span class="badge badge-info">Eng</span></div><b>Billing webhooks retry</b><footer><span class="row" style="--gap:4px">${i("message-square", "icon-sm")} 4</span><span class="avatar avatar-sm av-3">AK</span></footer></article>
 </div>` }],
-    react: `<KanbanColumn title="In progress"><KanbanCard title="Redesign onboarding" tags={["Design","P1"]} progress={75} /></KanbanColumn>`,
+    react: "",
     api: [["kanban-col / kanban-card", "class", "Parts"]], a11y: ["Support keyboard moves (Space to lift, arrows to move) — dnd-kit provides this."] });
 
   add({ slug: "timeline", name: "Activity Timeline & Notifications", group: "Signature", figma: "Activity Timeline · Notification Center",
@@ -494,14 +459,14 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
   <div class="notif" data-unread><span class="avatar avatar-sm av-1">MC</span><div><b>Maya mentioned you</b><p>“Can you review the pricing page copy?”</p><time>5 min ago</time></div></div><hr class="separator">
   <div class="notif"><span class="avatar avatar-sm av-4">${i("credit-card", "icon-sm")}</span><div><b>Invoice paid</b><p>INV-2041 · $12,400</p><time>3 h ago</time></div></div>
 </div>` }],
-    react: `<ActivityTimeline items={events} />  <NotificationCenter items={notifications} />`,
+    react: "",
     api: [["timeline > li > .node", "structure", "Node + connector line"], ["notif[data-unread]", "class", "Unread dot"]], a11y: ["Use <time datetime> in production."] });
 
   add({ slug: "pricing", name: "Pricing Card", group: "Signature", figma: "Pricing Card",
     desc: "Plan comparison for marketing and upgrade flows.",
     examples: [{ title: "Pricing", html: `<div class="card pricing" data-tilt="3" style="width:280px"><div><b class="t-h4">Starter</b><p class="t-body-sm text-tertiary">For small teams</p></div><div class="price">$0<small> /user/mo</small></div><button class="btn btn-outline btn-block">Get started</button><ul><li>${i("check")}Up to 5 projects</li><li>${i("check")}Basic analytics</li></ul></div>
 <div class="card pricing featured" data-tilt="3" style="width:280px"><div class="row" style="justify-content:space-between"><b class="t-h4">Growth</b><span class="badge badge-accent">Popular</span></div><div class="price">$24<small> /user/mo</small></div><button class="btn btn-block">Start free trial</button><ul><li>${i("check")}Unlimited projects</li><li>${i("check")}AI copilot</li><li>${i("check")}Advanced permissions</li></ul></div>` }],
-    react: `<PricingCard plan="Growth" price={24} featured features={[…]} />`,
+    react: "",
     api: [["pricing / pricing.featured", "class", "Card + highlighted plan"]], a11y: ["Make the price readable as text, not an image."] });
 
   window.FACET_REGISTRY = C;
