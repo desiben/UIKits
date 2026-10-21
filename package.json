@@ -2,5 +2,8 @@
   "name": "etkits-site",
   "private": true,
   "description": "ETKits storefront, claim page and license hub. Static pages plus Vercel functions in api/.",
-  "dependencies": { "@vercel/blob": "^2.8.2" }
+  "dependencies": {
+    "@vercel/blob": "^2.8.2",
+    "qrcode": "^1.5.4"
+  }
 }

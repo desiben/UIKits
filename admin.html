@@ -20,7 +20,11 @@
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
     .tools { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
     .tools .input-group { flex: 1 1 260px; max-width: 380px; }
-    .login { width: min(420px, 100% - 32px); margin: 12vh auto 0; }
+    .login { width: min(440px, 100% - 32px); margin: 10vh auto 0; }
+    .login .card-footer { display: flex; align-items: center; gap: 8px; }
+    .qr { width: 196px; margin: 0 auto 8px; padding: 10px; background: #fff; border-radius: 12px; border: 1px solid var(--border-subtle); }
+    .qr svg { display: block; width: 100%; height: auto; }
+    .codes { columns: 2; gap: 24px; margin: 0; padding: 14px 18px 14px 34px; background: var(--bg-subtle); border-radius: 10px; font-size: 14px; line-height: 1.9; }
     .dev-bar { display: flex; align-items: center; gap: 8px; min-width: 120px; }
     .dev-bar .progress { flex: 1; }
     .muted { color: var(--text-tertiary); }
@@ -47,7 +51,7 @@
   var ic = function (n, c) { return '<svg class="icon' + (c ? " " + c : "") + '" aria-hidden="true"><use href="#' + n + '"/></svg>'; };
   var ago = function (iso) { if (!iso) return "never"; var s = (Date.now() - Date.parse(iso)) / 1000; if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + " min ago"; if (s < 86400) return Math.floor(s / 3600) + " h ago"; if (s < 86400 * 30) return Math.floor(s / 86400) + " d ago"; return new Date(iso).toLocaleDateString(); };
   var date = function (iso) { return iso ? new Date(iso).toLocaleString() : "—"; };
-  var PASS = "etkits-admin";
+  var PASS = "etkits-session";
   var state = { list: [], products: [], q: "", filter: "all", product: "", open: null };
   var pass = function () { try { return sessionStorage.getItem(PASS) || ""; } catch (e) { return ""; } };
 
@@ -58,16 +62,71 @@
   function toast(t, tone) { if (window.Facet && Facet.toast) Facet.toast(Object.assign({ title: t, timeout: 2200 }, tone ? { tone: "var(--icon-danger)", icon: "alert-circle" } : {})); }
 
   /* ---------- login ---------- */
+  /* ---------- sign in: password, then authenticator code (or first-time setup) ---------- */
+  function auth(body) {
+    return fetch("/api/admin-auth", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body), cache: "no-store" })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || "Sign-in failed."); return d; }); });
+  }
+  function card(title, desc, body, foot) {
+    return '<form class="card login" id="login" novalidate><div class="card-header"><div class="grow"><div class="card-title">' + title + '</div><div class="card-desc">' + desc + '</div></div></div><div class="card-body">' + body + '</div><div class="card-footer">' + foot + "</div></form>";
+  }
+  var field = function (id, label, attrs, msg) { return '<div class="field"' + (msg ? ' data-invalid="true"' : "") + '><label class="label" for="' + id + '">' + label + '</label><input class="input" id="' + id + '" ' + attrs + (msg ? ' aria-invalid="true"' : "") + '><span class="help" role="status">' + esc(msg || "") + "</span></div>"; };
+  function busy(on) { var b = $("#login [type=submit]"); if (b) { b.disabled = on; } }
+  function signedIn(token) { try { sessionStorage.setItem(PASS, token); } catch (err) {} load(); }
+  var pw = "";
   function login(msg) {
-    $("#app").innerHTML = '<form class="card login" id="login"><div class="card-header"><div class="grow"><div class="card-title">ETKits licenses</div><div class="card-desc">Admin only. Use the password set as ETKITS_ADMIN_PASSWORD on the et-uikits Vercel project.</div></div></div>' +
-      '<div class="card-body"><div class="field' + (msg ? '" data-invalid="true' : "") + '"><label class="label" for="pw">Password</label><input class="input" id="pw" type="password" autocomplete="current-password" required' + (msg ? ' aria-invalid="true"' : "") + '><span class="help">' + esc(msg || "") + "</span></div></div>" +
-      '<div class="card-footer"><button class="btn" type="submit">' + ic("lock", "icon-sm") + " Sign in</button></div></form>";
+    pw = "";
+    $("#app").innerHTML = card("ETKits licenses", "Admin only. Sign in with the password set as ETKITS_ADMIN_PASSWORD, then the code from your authenticator app.", field("pw", "Password", 'type="password" autocomplete="current-password" required', msg), '<button class="btn" type="submit">' + ic("lock", "icon-sm") + " Continue</button>");
     $("#pw").focus();
-    $("#login").addEventListener("submit", function (e) { e.preventDefault(); try { sessionStorage.setItem(PASS, $("#pw").value); } catch (err) {} load(); });
+    $("#login").addEventListener("submit", function (e) {
+      e.preventDefault(); busy(true);
+      pw = $("#pw").value;
+      auth({ password: pw }).then(function (d) { d.next === "setup" ? setup(d) : codeStep(); }).catch(function (err) { login(err.message); });
+    });
+  }
+  function codeStep(msg, useRecovery) {
+    $("#app").innerHTML = card("Two-factor authentication", useRecovery ? "Enter one of your recovery codes. Each one works once." : "Enter the 6-digit code from your authenticator app.",
+      useRecovery ? field("otp", "Recovery code", 'autocomplete="off" spellcheck="false" placeholder="xxxxx-xxxxx" required', msg) : field("otp", "Code", 'inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="123456" required', msg),
+      '<button class="btn btn-ghost btn-sm" type="button" id="alt">' + (useRecovery ? "Use the authenticator app" : "Use a recovery code") + '</button><span class="grow"></span><button class="btn btn-ghost" type="button" id="back">Back</button><button class="btn" type="submit">Verify</button>');
+    $("#otp").focus();
+    $("#alt").addEventListener("click", function () { codeStep("", !useRecovery); });
+    $("#back").addEventListener("click", function () { login(); });
+    $("#otp").addEventListener("input", function (e) { if (!useRecovery && e.target.value.replace(/\D/g, "").length === 6) $("#login").requestSubmit(); });
+    $("#login").addEventListener("submit", function (e) {
+      e.preventDefault(); busy(true);
+      var v = $("#otp").value.trim();
+      auth(useRecovery ? { password: pw, recovery: v } : { password: pw, code: v }).then(function (d) {
+        if (d.recoveryLeft != null && d.recoveryLeft <= 2) setTimeout(function () { toast("Only " + d.recoveryLeft + " recovery code" + (d.recoveryLeft === 1 ? "" : "s") + " left. Make new ones under Security."); }, 600);
+        signedIn(d.token);
+      }).catch(function (err) { if (/password/i.test(err.message)) login(err.message); else codeStep(err.message, useRecovery); });
+    });
+  }
+  function setup(d, msg) {
+    $("#app").innerHTML = card("Set up two-factor authentication", "Scan this QR code with an authenticator app (Google Authenticator, 1Password, Authy, Microsoft Authenticator), then enter the 6-digit code it shows.",
+      '<div class="qr" aria-label="QR code">' + d.qr + '</div><p class="t-body-sm muted" style="text-align:center">Can\'t scan? Enter this key in the app:<br><code class="mono" style="user-select:all">' + esc(d.secret.replace(/(.{4})/g, "$1 ").trim()) + "</code></p>" +
+      field("otp", "Code from the app", 'inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="123456" required', msg),
+      '<button class="btn btn-ghost" type="button" id="back">Back</button><span class="grow"></span><button class="btn" type="submit">Turn on 2FA</button>');
+    $("#otp").focus();
+    $("#back").addEventListener("click", function () { login(); });
+    $("#login").addEventListener("submit", function (e) {
+      e.preventDefault(); busy(true);
+      auth({ password: pw, secret: d.secret, code: $("#otp").value.trim() }).then(function (r) {
+        try { sessionStorage.setItem(PASS, r.token); } catch (err) {}
+        recoveryCodes(r.recoveryCodes, true);
+      }).catch(function (err) { setup(d, err.message); });
+    });
+  }
+  function recoveryCodes(codes, first) {
+    var text = "ETKits admin recovery codes (each works once)\n\n" + codes.join("\n") + "\n";
+    $("#app").innerHTML = card(first ? "Two-factor authentication is on" : "New recovery codes", "Save these recovery codes somewhere safe, like your password manager. If you lose your phone, each code signs you in once. They won't be shown again.",
+      '<ol class="codes mono">' + codes.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("") + "</ol>",
+      '<button class="btn btn-outline btn-sm" type="button" id="copy">' + ic("copy", "icon-sm") + ' Copy</button><a class="btn btn-outline btn-sm" download="etkits-recovery-codes.txt" href="data:text/plain;charset=utf-8,' + encodeURIComponent(text) + '">' + ic("download", "icon-sm") + ' Download</a><span class="grow"></span><button class="btn" type="submit">I saved them, continue</button>');
+    $("#copy").addEventListener("click", function () { (navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject()).then(function () { toast("Recovery codes copied"); }).catch(function () {}); });
+    $("#login").addEventListener("submit", function (e) { e.preventDefault(); load(); });
   }
   function load() {
-    api("GET").then(function (d) { state.list = d.licenses; state.products = d.products; render(); })
-      .catch(function (e) { if (e.status === 401 || e.status === 503) { try { sessionStorage.removeItem(PASS); } catch (err) {} login(e.message); } else toast(e.message, true); });
+    api("GET").then(function (d) { state.list = d.licenses; state.products = d.products; state.security = d.security; render(); })
+      .catch(function (e) { if (e.status === 401 || e.status === 503) { try { sessionStorage.removeItem(PASS); } catch (err) {} login(e.status === 503 ? e.message : (pass() ? e.message : "")); } else toast(e.message, true); });
   }
 
   /* ---------- list ---------- */
@@ -105,7 +164,7 @@
         '<td class="hide-sm">' + l.claims + " / " + claimLimitOf(l) + '</td><td class="hide-sm">' + ago(l.lastSeen) + "</td><td>" + status(l) + '</td><td><button class="btn btn-outline btn-sm" data-manage="' + l.id + '">Manage</button></td></tr>';
     }).join("");
     $("#app").innerHTML = '<div class="wrap"><div class="top"><h1>Licenses</h1><span class="grow"></span>' +
-      '<button class="btn btn-ghost btn-sm" data-act="refresh">' + ic("refresh-cw", "icon-sm") + ' Refresh</button><button class="btn btn-sm" data-act="add">' + ic("plus", "icon-sm") + ' Add key</button><button class="btn btn-ghost btn-sm" data-act="signout">Sign out</button></div>' +
+      '<button class="btn btn-ghost btn-sm" data-act="refresh">' + ic("refresh-cw", "icon-sm") + ' Refresh</button><button class="btn btn-sm" data-act="add">' + ic("plus", "icon-sm") + ' Add key</button><button class="btn btn-ghost btn-sm" data-act="security" title="Two-factor authentication">' + ic("shield-check", "icon-sm") + ' Security</button><button class="btn btn-ghost btn-sm" data-act="signout">Sign out</button></div>' +
       '<div class="stats">' + kpi("Licenses", L.length) + kpi("Active", L.filter(function (l) { return !l.revoked && l.storeOk; }).length) + kpi("Revoked", L.filter(function (l) { return l.revoked; }).length) + kpi("Devices in use", devs) + kpi("Figma claims", L.reduce(function (a, l) { return a + (l.claims || 0); }, 0)) + "</div>" +
       '<div class="tools"><div class="input-group">' + ic("search") + '<input class="input" id="q" placeholder="Search email, key, device or note" value="' + esc(state.q) + '"></div>' +
       '<div class="tabs-pill" role="tablist">' + [["all", "All"], ["active", "Active"], ["limit", "At limit"], ["revoked", "Revoked"]].map(function (f) { return '<button class="tab" role="tab" aria-selected="' + (state.filter === f[0]) + '" data-filter="' + f[0] + '">' + f[1] + "</button>"; }).join("") + "</div>" +
@@ -171,6 +230,7 @@
     var k = b.dataset.act, id = state.open;
     if (k === "refresh") load();
     else if (k === "add") addDialog();
+    else if (k === "security") { var sec = state.security || {}; if (confirm("Two-factor authentication is on" + (sec.enabledAt ? " (since " + new Date(sec.enabledAt).toLocaleDateString() + ")" : "") + ". Recovery codes left: " + (sec.recoveryLeft != null ? sec.recoveryLeft : "?") + ".\n\nMake 10 new recovery codes? The old ones will stop working.")) api("POST", { action: "recoveryCodes" }).then(function (r) { recoveryCodes(r.recoveryCodes, false); }).catch(function (err) { toast(err.message, true); }); }
     else if (k === "signout") { try { sessionStorage.removeItem(PASS); } catch (err) {} login(); }
     else if (k === "limit") act({ action: "limit", id: id, limit: $("#lim").value }, function () { toast("Limit saved"); });
     else if (k === "climit") act({ action: "claimLimit", id: id, limit: $("#climit").value }, function () { toast("Claim limit saved"); });

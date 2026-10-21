@@ -1,12 +1,14 @@
 // ETKits license admin API, used by /admin.
-// Every request needs  Authorization: Bearer <ETKITS_ADMIN_PASSWORD>  (12+ characters, set on this
-// Vercel project; the dashboard stays locked until you do).
+// Every request needs  Authorization: Bearer <session>  from POST /api/admin-auth
+// (password + authenticator code, see api/_lib/admin-auth.js).
 //   GET  /api/admin                       -> { licenses, products }
 //   POST /api/admin  { action, id, ... }  -> { license }
 //     revoke {id, reason} · restore {id} · limit {id, limit|null} · claimLimit {id, limit|null}
 //     resetClaims {id} · removeDevice {id, device} · resetDevices {id} · note {id, note}
 //     add {key?, email, products[], note}   (a key you issue yourself: press, testers, direct sales)
+//     recoveryCodes {}                      (new 2FA recovery codes; the old ones stop working)
 const crypto = require("crypto")
+const { verifySession, regenerateRecovery, status: twoFactor } = require("./_lib/admin-auth")
 const { load, update, listAll, hash, blank, pushEvent, forget, product, slugs, KEY_PATTERN } = require("./_lib/licenses")
 
 function send(res, status, body) {
@@ -15,13 +17,6 @@ function send(res, status, body) {
   res.setHeader("cache-control", "no-store")
   res.setHeader("x-robots-tag", "noindex")
   res.end(JSON.stringify(body))
-}
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-function authorized(req) {
-  const pass = process.env.ETKITS_ADMIN_PASSWORD || ""
-  if (pass.length < 12) return null
-  const given = String(req.headers.authorization || "").replace(/^Bearer\s+/i, "")
-  return crypto.timingSafeEqual(crypto.createHash("sha256").update(given).digest(), crypto.createHash("sha256").update(pass).digest())
 }
 const mask = (k) => (k && k.length > 12 ? `${k.slice(0, 4)}…${k.slice(-4)}` : "••••")
 function view(r) {
@@ -44,19 +39,19 @@ const bad = (msg) => Object.assign(new Error(msg), { http: 400 })
 const limitArg = (v) => { if (v == null || v === "") return null; const n = parseInt(v, 10); if (!(n >= 1 && n <= 1000)) throw bad("Limits are 1 to 1000."); return n }
 
 module.exports = async function handler(req, res) {
-  const ok = authorized(req)
-  if (ok === null) return send(res, 503, { error: "The license dashboard isn't set up yet: add ETKITS_ADMIN_PASSWORD (12+ characters) to the et-uikits Vercel project and redeploy." })
-  if (!ok) { await sleep(800); return send(res, 401, { error: "Wrong password." }) }
+  const auth = await verifySession(req)
+  if (!auth.ok) return send(res, auth.status, { error: auth.error })
   try {
     if (req.method === "GET") {
       const all = (await listAll()).map(view).sort((a, b) => String(b.lastSeen || b.firstSeen).localeCompare(String(a.lastSeen || a.firstSeen)))
       const products = slugs().map((s) => { const p = product(s); return { slug: s, name: p.name, deviceLimit: p.deviceLimit, claimLimit: p.claimLimit, gumroad: !!p.gumroadProductId, envato: p.envatoItemIds.length > 0, figma: !!p.figmaUrl("any") } })
-      return send(res, 200, { licenses: all, products })
+      return send(res, 200, { licenses: all, products, security: await twoFactor() })
     }
     if (req.method !== "POST") { res.setHeader("allow", "GET, POST"); return send(res, 405, { error: "Use GET or POST." }) }
     const b = await readBody(req)
     const t = new Date().toISOString()
 
+    if (b.action === "recoveryCodes") return send(res, 200, { recoveryCodes: await regenerateRecovery() })
     if (b.action === "add") {
       const key = String(b.key || "").trim() || `ETK-${crypto.randomBytes(12).toString("hex").toUpperCase().match(/.{1,8}/g).join("-")}`
       if (!KEY_PATTERN.test(key)) throw bad("Keys use letters, numbers, - and _ (6 to 80 characters).")

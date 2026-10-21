@@ -56,7 +56,8 @@ Buyers never see a Figma link until their purchase is verified:
 | `DOWNLOAD_URL` | optional: link to the code + tokens zip |
 | `CLAIM_MAX_USES` | optional: claims per key (default 3) |
 
-| `ETKITS_ADMIN_PASSWORD` | password for the license dashboard at `/admin` (12+ characters) |
+| `ETKITS_ADMIN_PASSWORD` | password for the license dashboard at `/admin` (12+ characters); sign-in also needs a code from your authenticator app |
+| `ETKITS_2FA_RESET` | emergency only: set to `1` and redeploy to set up 2FA again with the password alone (if you lose your phone and recovery codes). Remove it and redeploy straight after |
 | `ETKITS_SERVICE_TOKEN` | shared secret product sites use to ask the hub about a key (set on each product's Vercel project too) |
 | `DEVICE_LIMIT` | optional: browsers + machines per key on product sites (default 5) |
 | `BLOCKED_KEYS` | optional: comma-separated keys to refuse everywhere |
@@ -72,6 +73,8 @@ ETKits manages the licenses for all its products. Every license key has one reco
 - **Figma delivery:** `api/claim.js` works out which product a code belongs to, checks it with the store, and counts the claim against the key's claim limit.
 - **Product sites** (Facet UI's style guide unlock and its `npx facetui` installer) call `POST /api/licenses/verify` with `ETKITS_SERVICE_TOKEN`, the key, the product and a device id. The hub checks the purchase (re-checked every 6 hours, so refunds and disputes stop a key), refuses revoked keys and enforces the device limit.
 - **Dashboard:** [etkits.vercel.app/admin](https://etkits.vercel.app/admin) (`admin.html` + `api/admin.js`, password `ETKITS_ADMIN_PASSWORD`). Search and filter every key by product; revoke or restore it (applies within a minute, no redeploy); change its device or claim limit; remove devices; reset claims; add notes; and add keys by hand for press, testers or direct sales. Keys are shown masked; a key you add is shown in full once.
+
+**Dashboard sign-in (2FA).** Password, then a 6-digit code from an authenticator app (Google Authenticator, 1Password, Authy, Microsoft Authenticator). The first sign-in shows a QR code to scan and gives you 10 one-time recovery codes; keep them in your password manager. **Security** in the dashboard makes new recovery codes. Sessions last 12 hours and end when the password or 2FA secret changes; each code works once; 5 failed attempts lock sign-in for 15 minutes. The 2FA secret and hashed recovery codes are stored in the private license store (`admin/2fa.json`). Code: [`api/_lib/admin-auth.js`](api/_lib/admin-auth.js), [`api/admin-auth.js`](api/admin-auth.js).
 
 In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your purchase code."* (Gumroad calls it a license key; buyers paste it in the same box.) If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
 
