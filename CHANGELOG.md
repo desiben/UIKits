@@ -2,6 +2,17 @@
 
 All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
+## [Unreleased]
+
+### Added
+- **Animated React components.** All 109 components are React components with motion on every interaction: spring presses, sliding layout indicators, height-animated disclosure, popovers that open from their trigger, drag (kanban, carousel, sheets), tilt (holo card), rolling numbers and streaming AI states. They're built on Radix primitives and Tailwind v4, and the animations respect reduced motion.
+- **shadcn registry with license-key access.** Install with `shadcn add @facet/<name>`, or `@facet/all`. `@facet/theme` maps Facet's light and dark tokens onto the standard shadcn variables, plus Facet extras and the signature corner utilities (`rounded-facet*`). The `/r/<name>.json` endpoint checks the buyer's Gumroad license key.
+- **React showcase** at `/react/` with live demos and copyable install commands (pnpm, npm, yarn, bun).
+- **Style guide:** every component page has a "React · animated" install section, the Installation page has a React section, and the header nav has a React link.
+
+### Changed
+- The maker credit is now **ETKits** (was ELTouch apps) everywhere: README, license, style guide, marketing page, Figma file, and the re-rendered marketing images and videos.
+
 ## [1.3.0] — 2026-10-20
 
 Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.

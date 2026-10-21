@@ -1,0 +1,7 @@
+{
+  "name": "app-layout",
+  "title": "App Layout",
+  "description": "A full app shell (sidebar, sticky navbar, main column, optional aside): the sidebar springs into an icon rail with a sliding active indicator, turns into a sliding sheet on narrow containers, and the aside animates its width in and out.",
+  "categories": ["navigation"],
+  "files": ["ui/app-layout.tsx"]
+}

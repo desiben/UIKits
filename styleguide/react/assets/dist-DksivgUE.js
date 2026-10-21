@@ -1,0 +1,1 @@
+import{ct as e,dt as t}from"./react-BaQ5Op-n.js";import{t as n}from"./dist-CxqnWqcg.js";var r=t(e(),1),i=Object.defineProperty,a=(e,t)=>i(e,`name`,{value:t,configurable:!0}),o=r.useInsertionEffect;function s(e){let t=r.useRef(e);return typeof o==`function`?o(()=>{t.current=e}):n(()=>{t.current=e}),r.useMemo(()=>((...e)=>t.current?.(...e)),[])}a(s,`useCallbackRef`);export{s as t};

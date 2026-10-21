@@ -388,6 +388,32 @@
       ]
     },
     {
+      "name": "app-layout",
+      "type": "registry:ui",
+      "title": "App Layout",
+      "description": "A full app shell (sidebar, sticky navbar, main column, optional aside): the sidebar springs into an icon rail with a sliding active indicator, turns into a sliding sheet on narrow containers, and the aside animates its width in and out.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/button",
+        "@facet/motion",
+        "@facet/sidebar",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/app-layout.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "area-chart",
       "type": "registry:ui",
       "title": "Area Chart",
@@ -1361,6 +1387,32 @@
       ]
     },
     {
+      "name": "emoji-picker",
+      "type": "registry:ui",
+      "title": "Emoji Picker",
+      "description": "Emoji picker with search, categories, skin tones and a live preview: the category indicator slides and follows the scroll, search results re-flow with layout animations, and the picked emoji pops and floats up.",
+      "categories": [
+        "overlays"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/motion",
+        "@facet/popover",
+        "@facet/scroll-area",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/emoji-picker.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "emoji-reaction",
       "type": "registry:ui",
       "title": "Emoji Reaction Button",
@@ -1642,6 +1694,30 @@
       "files": [
         {
           "path": "registry/facet/ui/item-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "kanban",
+      "type": "registry:ui",
+      "title": "Kanban",
+      "description": "Board columns with draggable task cards; cards lift and tilt while dragged, a drop line marks the target, neighbours shift with layout animations and keyboard moves (Space, arrows) are announced.",
+      "categories": [
+        "signature"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/motion",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/kanban.tsx",
           "type": "registry:ui"
         }
       ]
@@ -1960,6 +2036,31 @@
       ]
     },
     {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "Site navigation with rich dropdown panels: a highlight slides between triggers, the shared panel pops in, resizes smoothly between items and slides its content in from the direction you moved.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion",
+        "radix-ui"
+      ],
+      "registryDependencies": [
+        "@facet/motion",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "number-stepper",
       "type": "registry:ui",
       "title": "Number Stepper",
@@ -2075,6 +2176,31 @@
       "files": [
         {
           "path": "registry/facet/ui/pressable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pricing",
+      "type": "registry:ui",
+      "title": "Pricing Card",
+      "description": "Plan comparison card whose price rolls digit-by-digit on billing changes; the featured plan lifts with a brand glow, cards tilt toward the pointer and features stagger in with drawn checks.",
+      "categories": [
+        "signature"
+      ],
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/badge",
+        "@facet/button",
+        "@facet/motion",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/pricing.tsx",
           "type": "registry:ui"
         }
       ]
@@ -2474,6 +2600,31 @@
       ]
     },
     {
+      "name": "sonner",
+      "type": "registry:ui",
+      "title": "Sonner",
+      "description": "Sonner-style toasts: a <Toaster /> plus an imperative toast() API with types, actions and promise toasts. Toasts stack with depth, fan out on hover, pause while read, swipe away and morph their icon from loading to done.",
+      "categories": [
+        "feedback"
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/button",
+        "@facet/motion",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
@@ -2615,6 +2766,30 @@
       ]
     },
     {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Activity Timeline & Notifications",
+      "description": "Chronological activity and a notification inbox; items stagger in, connectors draw down between nodes, the current step pulses, and read/dismissed notifications pop their dot and collapse.",
+      "categories": [
+        "signature"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "motion"
+      ],
+      "registryDependencies": [
+        "@facet/motion",
+        "@facet/theme",
+        "@facet/utils"
+      ],
+      "files": [
+        {
+          "path": "registry/facet/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
@@ -2747,6 +2922,7 @@
         "@facet/agenda",
         "@facet/ai",
         "@facet/alert",
+        "@facet/app-layout",
         "@facet/area-chart",
         "@facet/aspect-ratio",
         "@facet/avatar",
@@ -2787,6 +2963,7 @@
         "@facet/dialog",
         "@facet/dropdown-menu",
         "@facet/dropzone",
+        "@facet/emoji-picker",
         "@facet/emoji-reaction",
         "@facet/empty-state",
         "@facet/field",
@@ -2799,6 +2976,7 @@
         "@facet/input",
         "@facet/item-card-group",
         "@facet/item-card",
+        "@facet/kanban",
         "@facet/kbd",
         "@facet/kpi-group",
         "@facet/kpi",
@@ -2812,11 +2990,13 @@
         "@facet/message-scroller",
         "@facet/native-select",
         "@facet/navbar",
+        "@facet/navigation-menu",
         "@facet/number-stepper",
         "@facet/number-value",
         "@facet/pie-chart",
         "@facet/popover",
         "@facet/pressable",
+        "@facet/pricing",
         "@facet/prompt-input",
         "@facet/prompt-suggestion",
         "@facet/questionnaire",
@@ -2833,12 +3013,14 @@
         "@facet/sheet",
         "@facet/sidebar",
         "@facet/slider",
+        "@facet/sonner",
         "@facet/stepper",
         "@facet/switch",
         "@facet/table",
         "@facet/tabs",
         "@facet/text-shimmer",
         "@facet/textarea",
+        "@facet/timeline",
         "@facet/toast",
         "@facet/toggle",
         "@facet/trace",

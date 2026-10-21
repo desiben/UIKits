@@ -1,0 +1,1 @@
+import{ct as e,dt as t}from"./react-BaQ5Op-n.js";var n=t(e(),1),r=globalThis?.document?n.useLayoutEffect:()=>{};export{r as t};

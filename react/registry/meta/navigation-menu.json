@@ -1,0 +1,7 @@
+{
+  "name": "navigation-menu",
+  "title": "Navigation Menu",
+  "description": "Site navigation with rich dropdown panels: a highlight slides between triggers, the shared panel pops in, resizes smoothly between items and slides its content in from the direction you moved.",
+  "categories": ["navigation"],
+  "files": ["ui/navigation-menu.tsx"]
+}

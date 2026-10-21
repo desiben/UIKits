@@ -16,6 +16,18 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 
 ---
 
+## New: animated React components
+
+All 109 components are now **React components with motion on every interaction**: springs, layout animations, gestures, drag, tilt and number tickers. They're built on Radix and Tailwind, and buyers install them with the shadcn CLI, so the code lands in their own project. [Browse them live](https://facetui.vercel.app/react/).
+
+```bash
+pnpm dlx shadcn@latest add @facet/theme   # Facet colours, radius and corner utilities
+pnpm dlx shadcn@latest add @facet/switch  # any component…
+pnpm dlx shadcn@latest add @facet/all     # …or everything
+```
+
+Setup, the license-key header and the full component list are in [React components](#react-components-shadcn-cli).
+
 ## What's new in v1.3
 
 - **Full shadcn/ui coverage.** Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.
@@ -429,6 +441,46 @@ Files:
 
 ---
 
+## React components (shadcn CLI)
+
+Facet ships as a [shadcn registry](https://ui.shadcn.com/docs/registry). Every one of the 109 components has an animated React version in `react/registry/facet/ui/`, with a demo in `react/demos/`. Each item includes its own npm dependencies and its links to other Facet items (theme, motion presets, `cn()`).
+
+**For buyers.** The registry needs the license key from the Gumroad receipt:
+
+1. Create a project: `pnpm dlx shadcn@latest init` (Next.js, Vite, React Router, Astro or TanStack Start).
+2. Add the registry to `components.json`:
+   ```json
+   {
+     "registries": {
+       "@facet": {
+         "url": "https://facetui.vercel.app/r/{name}.json",
+         "headers": { "Authorization": "Bearer ${FACET_LICENSE_KEY}" }
+       }
+     }
+   }
+   ```
+   and put `FACET_LICENSE_KEY=<license key>` in `.env.local`.
+3. `pnpm dlx shadcn@latest add @facet/theme`, then any component (`@facet/tabs`), or `@facet/all`.
+4. Wrap the app once in `<FacetMotion>` from `@/lib/motion`, so animations respect the OS "reduce motion" setting.
+
+**How the gate works.** `api/r/[name].js` (a Vercel function behind `/r/<name>.json`) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
+
+| Variable | Required | Purpose |
+|---|---|---|
+| `GUMROAD_PRODUCT_ID` | yes | Gumroad product ID used to verify license keys |
+| `FACET_EXTRA_KEYS` | no | Comma-separated extra keys (press, testers) |
+
+**For maintainers** (`cd react`, then `npm install`):
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Showcase with every demo (`showcase/`) |
+| `node scripts/gen-theme.mjs` | Re-resolve the theme from `styleguide/assets/tokens.css` |
+| `node scripts/smoke.mjs <name…> [--dark]` | Render demos in Chromium, fail on runtime errors, save screenshots to `.smoke/` |
+| `npm run build` | Typecheck, build the registry into `api/_registry/` and the showcase into `styleguide/react/` |
+
+Motion presets (springs, easings, variants) live in one file, `registry/facet/lib/motion.tsx`. Change them there to change how the whole kit feels.
+
 ## Using Facet with Tailwind CSS and shadcn/ui
 
 ```js
@@ -582,6 +634,9 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/assets/icons.js` | Lucide sprite | ✅ (or use `lucide` / `lucide-react`) |
 | `styleguide/assets/docs.*`, `registry.js`, `tokens-meta.js` | Style guide site only | ❌ |
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
+| `react/registry/facet/` | Animated React components (installed with the shadcn CLI) | ✅ via `shadcn add` |
+| `react/demos/`, `react/showcase/`, `styleguide/react/` | React showcase and its build | ❌ |
+| `api/r/[name].js`, `api/_registry/` | License-gated registry endpoint and its built JSON | ❌ (server only) |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |
 | `marketing/`, `scripts/render_marketing_*.js` | Sources and render scripts for the marketing kit | ❌ |
 | `marketing/listings/`, `scripts/render_listing_images.js` | Store listing images and their renderer | ❌ |

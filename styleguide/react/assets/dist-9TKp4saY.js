@@ -1,0 +1,1 @@
+import{ct as e,dt as t,st as n}from"./react-BaQ5Op-n.js";var r=t(e(),1);n();var i=Object.defineProperty,a=(e,t)=>i(e,`name`,{value:t,configurable:!0}),o={LTR:`ltr`,RTL:`rtl`},s=r.createContext(void 0);function c(e){let t=r.useContext(s);return e||t||o.LTR}a(c,`useDirection`);export{c as t};

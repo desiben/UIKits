@@ -276,7 +276,7 @@ function NavigationMenuFeature({ className, icon, title, description, ...props }
           "relative row-span-3 flex min-h-[180px] flex-col justify-end gap-1 overflow-hidden rounded-facet bg-primary p-4 text-primary-foreground no-underline outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-popover max-sm:row-span-1 max-sm:min-h-[120px]",
           className
         )}
-        style={{ backgroundImage: "radial-gradient(120% 100% at 0 0, var(--chart-2), transparent 60%)" }}
+        style={{ backgroundImage: "radial-gradient(120% 100% at 0 0, var(--brand-400), transparent 65%), radial-gradient(90% 80% at 100% 100%, var(--brand-800), transparent 70%)" }}
         whileHover={{ scale: 1.015 }}
         whileTap={{ scale: 0.98 }}
         transition={spring}

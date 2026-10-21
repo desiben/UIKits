@@ -197,7 +197,7 @@ function AppLayout({
             <motion.div
               id={ctx.sidebarId}
               data-slot="app-layout-sheet"
-              className="absolute inset-y-0 left-0 z-30 flex w-[280px] max-w-[86%] overflow-hidden border-r border-border bg-card shadow-2xl"
+              className={cn("absolute inset-y-0 left-0 z-30 flex w-[280px] max-w-[86%] overflow-hidden border-r border-border bg-card transition-shadow", mobileNavOpen && "shadow-2xl")}
               initial={false}
               animate={{ x: mobileNavOpen ? 0 : "-102%" }}
               transition={springSoft}

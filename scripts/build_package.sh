@@ -12,6 +12,8 @@ cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PA
 cp "$ROOT/figma/README.md" "$PKG/figma/"
 cp -r "$ROOT/tokens" "$ROOT/styleguide" "$PKG/"
 rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src"
+# Animated React components (source); buyers can also install them with the shadcn CLI.
+mkdir -p "$PKG/react" && (cd "$ROOT/react" && tar --exclude=node_modules --exclude=.smoke -cf - .) | (cd "$PKG/react" && tar -xf -)
 # Turn links to the private repo into plain file names.
 python3 - "$PKG/CHANGELOG.md" <<'PY'
 import re, sys

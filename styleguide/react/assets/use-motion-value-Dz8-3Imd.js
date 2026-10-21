@@ -1,0 +1,1 @@
+import{E as e,at as t,ct as n,dt as r,r as i}from"./react-BaQ5Op-n.js";var a=r(n(),1);function o(n){let r=t(()=>e(n)),{isStatic:o}=(0,a.useContext)(i);if(o){let[,e]=(0,a.useState)(n);(0,a.useEffect)(()=>r.on(`change`,e),[])}return r}export{o as t};

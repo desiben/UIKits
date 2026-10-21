@@ -1,0 +1,1 @@
+import{ct as e,dt as t}from"./react-BaQ5Op-n.js";import{Q as n}from"./CategoricalChart--GtKzAYm.js";import{t as r}from"./CartesianChart-DE6iCyW1.js";var i=t(e()),a=[`axis`],o=(0,i.forwardRef)((e,t)=>i.createElement(r,{chartName:`AreaChart`,defaultTooltipEventType:`axis`,validateTooltipEventTypes:a,tooltipPayloadSearcher:n,categoricalChartProps:e,ref:t}));export{o as t};

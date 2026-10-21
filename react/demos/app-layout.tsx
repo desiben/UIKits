@@ -175,7 +175,7 @@ export default function AppLayoutDemo() {
           <AppLayoutMain>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={active} className="flex flex-col gap-4" variants={stagger(0.05)} initial="hidden" animate="visible" exit="exit">
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-3">
                   {stats[active].map((s) => (
                     <motion.div key={s.label} variants={slideUp} className="flex flex-col gap-1 rounded-facet-lg border border-border bg-card p-4">
                       <span className="text-[13px] text-muted-foreground">{s.label}</span>
