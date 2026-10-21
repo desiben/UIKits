@@ -23,8 +23,18 @@
   var store = function (k) { try { k ? localStorage.setItem(STORE, k) : localStorage.removeItem(STORE); } catch (e) {} };
   var emit = function () { document.dispatchEvent(new CustomEvent("facet:license", { detail: state })); };
 
+  // A random id for this browser, so a license can be limited to a number of devices.
+  function deviceId() {
+    try { var d = localStorage.getItem("facet-device"); if (d) return d; d = (crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now()); localStorage.setItem("facet-device", d); return d; } catch (e) { return "no-storage"; }
+  }
+  function deviceName() {
+    var ua = navigator.userAgent, b = /Edg\//.test(ua) ? "Edge" : /Firefox\//.test(ua) ? "Firefox" : /Chrome\//.test(ua) ? "Chrome" : /Safari\//.test(ua) ? "Safari" : "Browser";
+    var os = /Mac OS X/.test(ua) ? "macOS" : /Windows/.test(ua) ? "Windows" : /Android/.test(ua) ? "Android" : /iPhone|iPad/.test(ua) ? "iOS" : /Linux/.test(ua) ? "Linux" : "";
+    return b + (os ? " on " + os : "");
+  }
+
   function verify(key) {
-    return fetch(endpoint, { headers: { Authorization: "Bearer " + key }, cache: "no-store" })
+    return fetch(endpoint, { headers: { Authorization: "Bearer " + key, "X-Facet-Device": deviceId(), "X-Facet-Client": "web", "X-Facet-Device-Name": deviceName() }, cache: "no-store" })
       .catch(function () { throw new Error("Couldn't reach the license server. Check your connection and try again."); })
       .then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (d) {

@@ -459,8 +459,13 @@ pnpm, yarn and bun work too: `pnpm dlx facetui@latest …`, `yarn dlx facetui@la
 | Variable | Required | Purpose |
 |---|---|---|
 | `GUMROAD_PRODUCT_ID` | yes | Gumroad product ID used to verify license keys |
-| `FACET_EXTRA_KEYS` | no | Comma-separated extra keys (press, testers) |
+| `FACET_ADMIN_PASSWORD` | yes, for /admin | Password for the license dashboard (12+ characters). The dashboard stays locked until it's set |
+| `FACET_DEVICE_LIMIT` | no | Devices per key (default 5). Override per buyer in the dashboard |
+| `BLOB_READ_WRITE_TOKEN` | set by Vercel | The private `facet-licenses` Blob store that holds license records (already connected) |
+| `FACET_EXTRA_KEYS` | no | Comma-separated extra keys (press, testers). The dashboard's *Add key* does the same without a redeploy |
 | `FACET_BLOCKED_KEYS` | no | Comma-separated keys to refuse (for example a key shared publicly). Refunded, charged-back and disputed purchases, and keys you disable in Gumroad, are refused automatically |
+
+**License dashboard** (`https://facetui.vercel.app/admin/`, password `FACET_ADMIN_PASSWORD`). Every key appears the first time it's used, with the buyer's email from Gumroad, its devices (each browser that unlocked the docs and each machine that ran `npx facetui`), last use and recent activity. From there you can revoke or restore a key (applies within a minute, no redeploy), change its device limit, remove devices, add notes, and add keys by hand for press or sales outside Gumroad. A key over its device limit is refused with a message asking the buyer to contact you. Records live in the private `facet-licenses` Vercel Blob store; the code is in `styleguide/api/_lib/license.js` and `styleguide/api/admin.js`.
 
 **Code in the style guide.** Live demos are public; copyable code is for buyers. `styleguide/assets/license.js` shows an *Unlock code* dialog, checks the key against `/r/docs-snippets.json` (same license check as the CLI) and remembers it in the browser. The React markup snippets live in `react/registry/docs-snippets.json` and are served only through that gated item. Vercel builds the public site with `styleguide/build-public.mjs` (minified CSS/JS with a license banner, no `api/`, `assets/src` or build files). The buyer zip adds `assets/buyer.js`, so its style guide is unlocked offline.
 

@@ -5,6 +5,8 @@ import fs from "node:fs"
 import path from "node:path"
 import { spawnSync } from "node:child_process"
 import { createInterface } from "node:readline/promises"
+import os from "node:os"
+import { randomUUID } from "node:crypto"
 
 const VERSION = "1.0.0"
 const REGISTRY = (process.env.FACET_REGISTRY_URL || "https://facetui.vercel.app/r").replace(/\/$/, "")
@@ -134,9 +136,24 @@ async function licenseKey({ ask }) {
 }
 
 /* ---------- registry ---------- */
+// A random id for this machine, so a license can be limited to a number of devices.
+let device
+function deviceHeaders() {
+  if (!device) {
+    const dir = path.join(os.homedir(), ".config", "facetui"), file = path.join(dir, "device.json")
+    try { device = JSON.parse(fs.readFileSync(file, "utf8")) } catch {}
+    if (!device || !device.id) {
+      device = { id: randomUUID() }
+      try { fs.mkdirSync(dir, { recursive: true }); fs.writeFileSync(file, JSON.stringify(device) + "\n") } catch {}
+    }
+  }
+  const platform = { darwin: "macOS", win32: "Windows", linux: "Linux" }[process.platform] || process.platform
+  return { "X-Facet-Device": device.id, "X-Facet-Client": "cli", "X-Facet-Device-Name": `${os.hostname().split(".")[0].slice(0, 40)} · ${platform}` }
+}
+
 async function fetchItem(name, key) {
   let res
-  try { res = await fetch(`${REGISTRY}/${encodeURIComponent(name)}.json`, { headers: { Authorization: `Bearer ${key}`, "User-Agent": `facetui/${VERSION}` } }) }
+  try { res = await fetch(`${REGISTRY}/${encodeURIComponent(name)}.json`, { headers: { Authorization: `Bearer ${key}`, "User-Agent": `facetui/${VERSION}`, ...deviceHeaders() } }) }
   catch (e) { fail(`Could not reach ${REGISTRY} (${e.cause?.code || e.message}). Check your connection.`) }
   const body = await res.json().catch(() => ({}))
   if (!res.ok) fail(body.error || `The registry answered ${res.status} for "${name}".`)
