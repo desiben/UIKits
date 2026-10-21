@@ -8,7 +8,7 @@
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "dev": "vite",
     "build:showcase": "vite build",
-    "build:registry": "node scripts/sync-registry.mjs && rm -rf ../api/_registry && shadcn build --output ../api/_registry",
+    "build:registry": "node scripts/sync-registry.mjs && rm -rf ../styleguide/api/_registry && shadcn build --output ../styleguide/api/_registry",
     "build": "npm run typecheck && npm run build:registry && npm run build:showcase"
   },
   "dependencies": {

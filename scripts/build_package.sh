@@ -11,7 +11,7 @@ sh "$ROOT/scripts/build_assets.sh"
 cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PARTY_NOTICES.md" "$PKG/"
 cp "$ROOT/figma/README.md" "$PKG/figma/"
 cp -r "$ROOT/tokens" "$ROOT/styleguide" "$PKG/"
-rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src"
+rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src" "$PKG/styleguide/api" "$PKG/styleguide/vercel.json"
 # Animated React components (source); buyers can also install them with the shadcn CLI.
 mkdir -p "$PKG/react" && (cd "$ROOT/react" && tar --exclude=node_modules --exclude=.smoke -cf - .) | (cd "$PKG/react" && tar -xf -)
 # Turn links to the private repo into plain file names.

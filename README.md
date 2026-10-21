@@ -463,7 +463,7 @@ Facet ships as a [shadcn registry](https://ui.shadcn.com/docs/registry). Every o
 3. `pnpm dlx shadcn@latest add @facet/theme`, then any component (`@facet/tabs`), or `@facet/all`.
 4. Wrap the app once in `<FacetMotion>` from `@/lib/motion`, so animations respect the OS "reduce motion" setting.
 
-**How the gate works.** `api/r/[name].js` (a Vercel function behind `/r/<name>.json`) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
+**How the gate works.** `styleguide/api/r/[name].js` (a Vercel function behind `/r/<name>.json`) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -477,7 +477,7 @@ Facet ships as a [shadcn registry](https://ui.shadcn.com/docs/registry). Every o
 | `npm run dev` | Showcase with every demo (`showcase/`) |
 | `node scripts/gen-theme.mjs` | Re-resolve the theme from `styleguide/assets/tokens.css` |
 | `node scripts/smoke.mjs <name…> [--dark]` | Render demos in Chromium, fail on runtime errors, save screenshots to `.smoke/` |
-| `npm run build` | Typecheck, build the registry into `api/_registry/` and the showcase into `styleguide/react/` |
+| `npm run build` | Typecheck, build the registry into `styleguide/api/_registry/` and the showcase into `styleguide/react/` |
 
 Motion presets (springs, easings, variants) live in one file, `registry/facet/lib/motion.tsx`. Change them there to change how the whole kit feels.
 
@@ -636,7 +636,7 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
 | `react/registry/facet/` | Animated React components (installed with the shadcn CLI) | ✅ via `shadcn add` |
 | `react/demos/`, `react/showcase/`, `styleguide/react/` | React showcase and its build | ❌ |
-| `api/r/[name].js`, `api/_registry/` | License-gated registry endpoint and its built JSON | ❌ (server only) |
+| `styleguide/api/r/[name].js`, `styleguide/api/_registry/` | License-gated registry endpoint and its built JSON | ❌ (server only) |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |
 | `marketing/`, `scripts/render_marketing_*.js` | Sources and render scripts for the marketing kit | ❌ |
 | `marketing/listings/`, `scripts/render_listing_images.js` | Store listing images and their renderer | ❌ |
