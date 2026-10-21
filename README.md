@@ -56,7 +56,22 @@ Buyers never see a Figma link until their purchase is verified:
 | `DOWNLOAD_URL` | optional: link to the code + tokens zip |
 | `CLAIM_MAX_USES` | optional: claims per key (default 3) |
 
-4. Redeploy. Until a store's variables are set, the claim page answers "Claiming for … purchases is not set up yet".
+| `ETKITS_ADMIN_PASSWORD` | password for the license dashboard at `/admin` (12+ characters) |
+| `ETKITS_SERVICE_TOKEN` | shared secret product sites use to ask the hub about a key (set on each product's Vercel project too) |
+| `DEVICE_LIMIT` | optional: browsers + machines per key on product sites (default 5) |
+| `BLOCKED_KEYS` | optional: comma-separated keys to refuse everywhere |
+
+For a second product, add it to [`api/_lib/products.js`](api/_lib/products.js) and use the same variables with the product suffix (for example `GUMROAD_PRODUCT_ID_FACETUI`, `FIGMA_DELIVERY_URL_FACETUI`); the unsuffixed ones above are Facet UI's fallback.
+
+4. Redeploy. Until a store's variables are set, the claim page answers "Claiming … isn't set up yet".
+
+### License hub: one place for every product's licenses
+
+ETKits manages the licenses for all its products. Every license key has one record in the private **etkits-licenses** Vercel Blob store ([`api/_lib/licenses.js`](api/_lib/licenses.js)): the store that sold it, the products it unlocks, the buyer, its Figma claims, the devices that use it (per product) and recent activity.
+
+- **Figma delivery:** `api/claim.js` works out which product a code belongs to, checks it with the store, and counts the claim against the key's claim limit.
+- **Product sites** (Facet UI's style guide unlock and its `npx facetui` installer) call `POST /api/licenses/verify` with `ETKITS_SERVICE_TOKEN`, the key, the product and a device id. The hub checks the purchase (re-checked every 6 hours, so refunds and disputes stop a key), refuses revoked keys and enforces the device limit.
+- **Dashboard:** [etkits.vercel.app/admin](https://etkits.vercel.app/admin) (`admin.html` + `api/admin.js`, password `ETKITS_ADMIN_PASSWORD`). Search and filter every key by product; revoke or restore it (applies within a minute, no redeploy); change its device or claim limit; remove devices; reset claims; add notes; and add keys by hand for press, testers or direct sales. Keys are shown masked; a key you add is shown in full once.
 
 In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at etkits.vercel.app/claim with your purchase code."* (Gumroad calls it a license key; buyers paste it in the same box.) If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
 
