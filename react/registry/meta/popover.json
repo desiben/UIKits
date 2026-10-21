@@ -1,0 +1,7 @@
+{
+  "name": "popover",
+  "title": "Popover, Hover Card & Tooltip",
+  "description": "Lightweight floating surfaces that spring out of their trigger side and fade away on close.",
+  "categories": ["overlays"],
+  "files": ["ui/popover.tsx"]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Two-state buttons and toggle groups. Pressed surfaces scale in and the single-select pill slides between items.",
+  "categories": [
+    "actions"
+  ],
+  "files": [
+    "ui/toggle.tsx"
+  ]
+}

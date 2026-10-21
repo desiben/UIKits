@@ -1,0 +1,1 @@
+{ "name": "trace", "title": "Trace", "description": "An agent's step list with timings and collapsible input/output; steps stagger in, icons morph from spinner to a drawn check and the rail fills as steps finish.", "categories": ["ai"], "files": ["ui/trace.tsx"] }

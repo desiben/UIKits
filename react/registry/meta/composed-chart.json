@@ -1,0 +1,11 @@
+{
+  "name": "composed-chart",
+  "title": "Composed Chart",
+  "description": "Bars, lines and areas on shared or dual axes; bars grow, then lines draw in, with category dimming and an animated tooltip on hover.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/composed-chart.tsx"
+  ]
+}

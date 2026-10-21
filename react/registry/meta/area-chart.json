@@ -1,0 +1,11 @@
+{
+  "name": "area-chart",
+  "title": "Area Chart",
+  "description": "Trend over time with a gradient fill; the area grows in on mount, a dashed crosshair and popping dot follow the pointer and the legend highlights a series.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/area-chart.tsx"
+  ]
+}

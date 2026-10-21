@@ -1,0 +1,7 @@
+{
+  "name": "sheet-pro",
+  "title": "Sheet (sides & parts)",
+  "description": "Left or right panels with a sticky header, scrolling body and footer: the panel slides in on a spring, fields stagger up and dividers fade in as the body scrolls; drag to dismiss.",
+  "categories": ["overlays"],
+  "files": ["ui/sheet-pro.tsx"]
+}

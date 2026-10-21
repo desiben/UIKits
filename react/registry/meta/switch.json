@@ -1,0 +1,11 @@
+{
+  "name": "switch",
+  "title": "Switch",
+  "description": "On/off switch whose thumb springs across the track and stretches while pressed.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/switch.tsx"
+  ]
+}

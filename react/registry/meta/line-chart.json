@@ -1,0 +1,11 @@
+{
+  "name": "line-chart",
+  "title": "Line Chart",
+  "description": "One or more series over time, with dashed targets and optional dots; lines draw in on mount and the legend fades the other series on hover.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/line-chart.tsx"
+  ]
+}

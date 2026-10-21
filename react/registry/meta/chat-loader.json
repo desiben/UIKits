@@ -1,0 +1,1 @@
+{ "name": "chat-loader", "title": "Chat Loader", "description": "Assistant waiting states: bouncing typing dots, a spinner with shimmering status text and a pulsing dot.", "categories": ["ai"], "files": ["ui/chat-loader.tsx"] }

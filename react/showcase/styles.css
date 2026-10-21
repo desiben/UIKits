@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "./theme.css";
+@source "../registry";
+@source "../demos";
+@source "./";
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  * { border-color: var(--border); }
+  html { font-family: "Mona Sans", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { background: var(--background); color: var(--foreground); }
+}

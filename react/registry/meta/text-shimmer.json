@@ -1,0 +1,1 @@
+{ "name": "text-shimmer", "title": "Text Shimmer", "description": "Loading text with an animated gradient sweep in neutral or brand colours; stops under reduced motion.", "categories": ["ai"], "files": ["ui/text-shimmer.tsx"] }

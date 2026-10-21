@@ -1,0 +1,1 @@
+{ "name": "chain-of-thought", "title": "Chain Of Thought", "description": "Collapsible reasoning steps whose panel animates its height and whose status nodes morph from pending to a spinner to a drawn check.", "categories": ["ai"], "files": ["ui/chain-of-thought.tsx"] }

@@ -1,0 +1,7 @@
+{
+  "name": "number-value",
+  "title": "Number Value",
+  "description": "Formats numbers with Intl (currency, compact, percent, signed); digits roll like an odometer when the value changes.",
+  "categories": ["feedback"],
+  "files": ["ui/number-value.tsx"]
+}

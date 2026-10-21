@@ -1,0 +1,7 @@
+{
+  "name": "segment",
+  "title": "Segment",
+  "description": "A segmented control for switching views or values; the thumb slides between options on a spring and arrow keys move the selection.",
+  "categories": ["navigation"],
+  "files": ["ui/segment.tsx"]
+}

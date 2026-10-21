@@ -1,0 +1,7 @@
+{
+  "name": "navbar",
+  "title": "Navbar",
+  "description": "A sticky, blurred top bar: a highlight follows the pointer across links, the active marker slides between pages, and under 720px the menu icon morphs and the mobile menu springs open with staggered links.",
+  "categories": ["navigation"],
+  "files": ["ui/navbar.tsx"]
+}

@@ -1,0 +1,1 @@
+{ "name": "markdown", "title": "Markdown", "description": "Renders a safe Markdown subset (headings, lists, tasks, quotes, code, tables, links) as Facet prose without injecting HTML; blocks rise in as they stream.", "categories": ["ai"], "files": ["ui/markdown.tsx"] }

@@ -1,0 +1,11 @@
+{
+  "name": "checkbox-button-group",
+  "title": "Checkbox Button Group",
+  "description": "Card-style multi-select checkboxes that stagger in, lift on hover and glow with a drawn check when selected.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/checkbox-button-group.tsx"
+  ]
+}

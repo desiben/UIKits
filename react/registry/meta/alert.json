@@ -1,0 +1,1 @@
+{ "name": "alert", "title": "Alert", "description": "Inline, persistent message with a tone rail in four tones. Slides in as the rail draws and the icon pops, and collapses smoothly when dismissed.", "categories": ["feedback"], "files": ["ui/alert.tsx"] }

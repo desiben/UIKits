@@ -1,0 +1,1 @@
+{ "name": "code-block", "title": "Code Block", "description": "Lightly token-coloured code with filename, language tag, line numbers, sweeping line highlights and diff lines, plus a copy button that morphs to a check.", "categories": ["ai"], "files": ["ui/code-block.tsx"] }

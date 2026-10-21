@@ -1,0 +1,1 @@
+{ "name": "chat-conversation", "title": "Chat Conversation", "description": "The chat scroll container: messages rise in, the view sticks to the bottom while replies stream and a jump-to-latest pill floats in when you scroll up.", "categories": ["ai"], "files": ["ui/chat-conversation.tsx"] }

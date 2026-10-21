@@ -1,0 +1,1 @@
+{ "name": "toast", "title": "Toast", "description": "Lightweight toaster (provider + useToast hook) for transient confirmations. Toasts stack like a deck, fan out on hover, pause while read, update in place and swipe away.", "categories": ["feedback"], "files": ["ui/toast.tsx"] }

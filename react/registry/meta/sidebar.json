@@ -1,0 +1,7 @@
+{
+  "name": "sidebar",
+  "title": "Sidebar",
+  "description": "Primary app navigation: the active selection and its signal rail slide between items, and the bar springs into an icon rail with labels fading out.",
+  "categories": ["navigation"],
+  "files": ["ui/sidebar.tsx"]
+}

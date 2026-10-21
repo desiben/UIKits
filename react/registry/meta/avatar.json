@@ -1,0 +1,1 @@
+{ "name": "avatar", "title": "Avatar", "description": "A person or workspace with image, tinted-initials fallback and presence dot. Images fade in, status dots spring, and groups stagger in and fan out on hover.", "categories": ["data-display"], "files": ["ui/avatar.tsx"] }

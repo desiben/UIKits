@@ -1,0 +1,1 @@
+{ "name": "card", "title": "Card", "description": "Groups related content with the Facet cut. Interactive cards lift on hover and settle on press; cards animate in and out with AnimatePresence.", "categories": ["data-display"], "files": ["ui/card.tsx"] }

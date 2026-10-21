@@ -1,0 +1,11 @@
+{
+  "name": "field",
+  "title": "Field",
+  "description": "Label + control + help text wired with aria-describedby; the error message slides in and collapses away.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/field.tsx"
+  ]
+}

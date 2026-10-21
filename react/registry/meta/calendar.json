@@ -1,0 +1,1 @@
+{ "name": "calendar", "title": "Calendar", "description": "Month grid for picking a day or range, on react-day-picker. Months slide in the direction you navigate, the caption rolls and the selected day pops in with a spring.", "categories": ["data-display"], "files": ["ui/calendar.tsx"] }

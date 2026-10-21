@@ -1,0 +1,11 @@
+{
+  "name": "checkbox",
+  "title": "Checkbox",
+  "description": "Checkbox and radio group; the checkmark draws itself in and the radio dot pops with a little overshoot.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/checkbox.tsx"
+  ]
+}

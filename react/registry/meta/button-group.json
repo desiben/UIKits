@@ -1,0 +1,11 @@
+{
+  "name": "button-group",
+  "title": "Button Group",
+  "description": "Joins buttons, inputs and text addons into one control; text addons roll their value when it changes.",
+  "categories": [
+    "actions"
+  ],
+  "files": [
+    "ui/button-group.tsx"
+  ]
+}

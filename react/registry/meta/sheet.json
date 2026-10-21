@@ -1,0 +1,7 @@
+{
+  "name": "sheet",
+  "title": "Sheet & Drawer",
+  "description": "Side panels and bottom drawers that slide in on a spring over a fading scrim, and can be dragged or swiped away to dismiss.",
+  "categories": ["overlays"],
+  "files": ["ui/sheet.tsx"]
+}

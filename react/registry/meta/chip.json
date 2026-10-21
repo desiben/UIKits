@@ -1,0 +1,7 @@
+{
+  "name": "chip",
+  "title": "Chip & Link",
+  "description": "Filter chips that press with a bounce and draw a check when selected, removable chips that collapse out while neighbours slide in, and an underline-animated text link.",
+  "categories": ["navigation"],
+  "files": ["ui/chip.tsx"]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "stepper",
+  "title": "Stepper",
+  "description": "Progress through a multi-step flow: bars fill on a spring with a shimmer on the current step, and completed steps draw their checkmarks.",
+  "categories": ["navigation"],
+  "files": ["ui/stepper.tsx"]
+}

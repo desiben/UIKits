@@ -1,0 +1,1 @@
+{ "name": "trend-chip", "title": "Trend Chip", "description": "A small change indicator with arrow, sign and tone. The arrow flips and the value rolls when the trend changes.", "categories": ["feedback"], "files": ["ui/trend-chip.tsx"] }

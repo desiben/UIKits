@@ -1,0 +1,1 @@
+{ "name": "table", "title": "Data Table", "description": "Semantic table with the Facet cut, numeric alignment and selection. Rows stagger in, highlight on hover, glide to their new place when sorted, and sort arrows morph and flip.", "categories": ["data-display"], "files": ["ui/table.tsx"] }

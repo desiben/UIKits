@@ -1,0 +1,1 @@
+{ "name": "kpi", "title": "KPI", "description": "A key number with label, trend chip and optional sparkline, progress or footer. Values count up with a spring, trends pop in and flip, sparklines draw in and progress springs to its value.", "categories": ["data-display"], "files": ["ui/kpi.tsx"] }

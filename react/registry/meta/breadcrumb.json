@@ -1,0 +1,7 @@
+{
+  "name": "breadcrumb",
+  "title": "Breadcrumb & Pagination",
+  "description": "Where you are and how to move through pages: crumbs slide in and collapse out as the path changes, and the current-page box glides between pages.",
+  "categories": ["navigation"],
+  "files": ["ui/breadcrumb.tsx"]
+}

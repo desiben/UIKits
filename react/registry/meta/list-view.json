@@ -1,0 +1,7 @@
+{
+  "name": "list-view",
+  "title": "List View",
+  "description": "A selectable list of rows with avatar, two lines of text and metadata; rows stagger in and the selection rail slides between rows.",
+  "categories": ["data-display"],
+  "files": ["ui/list-view.tsx"]
+}

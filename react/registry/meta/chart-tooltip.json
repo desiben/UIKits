@@ -1,0 +1,11 @@
+{
+  "name": "chart-tooltip",
+  "title": "Chart Tooltip",
+  "description": "The floating value panel shared by every Facet chart (plus legend, formatting and number helpers); it pops in, slides its heading between points and springs the values.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/chart-tooltip.tsx"
+  ]
+}

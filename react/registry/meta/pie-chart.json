@@ -1,0 +1,11 @@
+{
+  "name": "pie-chart",
+  "title": "Pie Chart",
+  "description": "Donut or pie with a percentage legend; slices sweep in, spring outward on hover and the center total counts up and swaps to the hovered slice.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/pie-chart.tsx"
+  ]
+}

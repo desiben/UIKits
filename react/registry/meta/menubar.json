@@ -1,0 +1,7 @@
+{
+  "name": "menubar",
+  "title": "Menubar",
+  "description": "A desktop-style menu bar whose open-menu pill slides between triggers while panels scale in, stagger their items and slide a highlight between them.",
+  "categories": ["navigation"],
+  "files": ["ui/menubar.tsx"]
+}

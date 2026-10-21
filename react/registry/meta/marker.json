@@ -1,0 +1,1 @@
+{ "name": "marker", "title": "Marker", "description": "Conversation separators and status notes (date breaks, joins, New messages, summaries) whose rules draw outward as the label fades in.", "categories": ["ai"], "files": ["ui/marker.tsx"] }

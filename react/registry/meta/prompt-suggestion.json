@@ -1,0 +1,1 @@
+{ "name": "prompt-suggestion", "title": "Prompt Suggestion", "description": "Suggested prompts as chips or cards that stagger in, lift on hover and press with a spring.", "categories": ["ai"], "files": ["ui/prompt-suggestion.tsx"] }

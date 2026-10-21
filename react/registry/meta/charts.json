@@ -1,0 +1,1 @@
+{ "name": "charts", "title": "Charts", "description": "Recharts container, tooltip and legend themed with the Facet chart palette. Series draw in when the chart scrolls into view, tooltips pop in and legend chips toggle series.", "categories": ["data-display"], "files": ["ui/charts.tsx"] }

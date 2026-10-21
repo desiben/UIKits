@@ -1,0 +1,7 @@
+{
+  "name": "item-card-group",
+  "title": "Item Card Group",
+  "description": "Arranges item cards as a spaced list, a joined list with dividers or a responsive grid; cards stagger in and spring on press.",
+  "categories": ["data-display"],
+  "files": ["ui/item-card-group.tsx"]
+}

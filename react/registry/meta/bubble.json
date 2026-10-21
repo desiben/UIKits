@@ -1,0 +1,1 @@
+{ "name": "bubble", "title": "Bubble", "description": "Chat bubbles with variants, start/end alignment and grouped corners that spring in from the sender's side, with popping reactions, link previews, actions and height-animated Show more.", "categories": ["ai"], "files": ["ui/bubble.tsx"] }

@@ -1,0 +1,1 @@
+{ "name": "prompt-input", "title": "Prompt Input", "description": "Chat composer whose textarea grows smoothly, sends on Enter and whose send button springs into a stop button while a reply streams.", "categories": ["ai"], "files": ["ui/prompt-input.tsx"] }

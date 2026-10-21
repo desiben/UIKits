@@ -1,0 +1,1 @@
+{ "name": "chat-tool", "title": "Chat Tool", "description": "An agent tool call with a morphing status chip, height-animated input/output and an approval gate that collapses once decided.", "categories": ["ai"], "files": ["ui/chat-tool.tsx"] }
