@@ -27,14 +27,14 @@
   const mk = (id, html) => { const s = document.createElement("section"); s.className = "scene bg-grid noise vbig"; s.id = id; s.innerHTML = html; document.body.appendChild(s); return s; };
   mk("intro", `<div class="glow brand" style="width:900px;height:700px;left:510px;top:190px;opacity:.5"></div>
     <div class="center"><span class="mark"><b></b>Facet UI</span><div class="line"></div><p class="sub">The design system with an edge.</p></div>
-    <div class="credit">Facet UI <span class="dot"></span> by ELTouch apps</div>`);
+    <div class="credit">Facet UI <span class="dot"></span> by ETKits</div>`);
   mk("outro", `<div class="glow brand" style="width:1000px;height:700px;left:460px;top:260px;opacity:.5"></div>
     <div class="glow lime" style="width:500px;height:400px;left:1400px;top:760px"></div>
     <div class="center"><span class="mark"><b></b>Facet UI</span>
       <h2 class="h1">Ship SaaS UI <span class="grad">faster.</span></h2>
       <p class="sub">Figma UI kit · 158 components · 10 templates · tokens &amp; code</p>
       <span class="url">facetui.vercel.app</span>
-      <span class="by">Made by ELTouch apps</span></div>`);
+      <span class="by">Made by ETKits</span></div>`);
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));

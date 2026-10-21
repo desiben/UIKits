@@ -2,7 +2,7 @@
 
 # Facet UI
 
-<sub>by ELTouch apps</sub>
+<sub>by ETKits</sub>
 
 **A token-driven design system: a Figma library, design tokens and a framework-agnostic HTML/CSS/JS implementation.**
 
@@ -610,4 +610,4 @@ Facet aims to be honest about what isn't finished:
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Facet UI itself is sold under [LICENSE.md](LICENSE.md) (Personal, Commercial and Team). Buyers start with [START-HERE.md](START-HERE.md).
 
-<div align="center"><sub>Facet UI v1.3 · by ELTouch apps · Built with Figma variables, OKLCH color and plain CSS.</sub></div>
+<div align="center"><sub>Facet UI v1.3 · by ETKits · Built with Figma variables, OKLCH color and plain CSS.</sub></div>

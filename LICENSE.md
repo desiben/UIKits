@@ -1,6 +1,6 @@
 # Facet UI License
 
-Copyright © 2026 ELTouch apps. All rights reserved.
+Copyright © 2026 ETKits. All rights reserved.
 
 This license covers the Facet UI Figma file, design tokens, code and other files you received when you bought Facet UI (the "Product"). By using the Product you agree to these terms.
 
@@ -33,7 +33,7 @@ The Mona Sans typeface (SIL Open Font License 1.1) and Lucide icons (ISC License
 
 ## No warranty
 
-The Product is provided "as is", without warranty of any kind. ELTouch apps is not liable for any damages arising from its use.
+The Product is provided "as is", without warranty of any kind. ETKits is not liable for any damages arising from its use.
 
 ## Termination
 

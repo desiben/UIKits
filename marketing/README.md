@@ -27,4 +27,4 @@ ffmpeg -i styleguide/marketing/media/facet-ui-demo.mp4 -c:v libvpx-vp9 -b:v 0 -c
 
 Needs Node 18+, Playwright's Chromium and ffmpeg. Change `data-brand` on `<html>` in `scenes.html` or `reel.html` to re-theme the live components (the template screenshots in `src/screens/` stay as exported from Figma).
 
-Made by ELTouch apps.
+Made by ETKits.

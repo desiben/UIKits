@@ -62,7 +62,7 @@ Every component in the shadcn/ui list now has a Facet counterpart in Figma and i
 - 13 marketing images: 11 angled 16:9 shots at 3840×2160 and 2 squares at 2160×2160, with WebP thumbnails.
 - Listing copy (tagline, one-liner, description, feature bullets) with copy buttons.
 - Sources and render scripts: `marketing/` and `scripts/render_marketing_images.js`, `render_marketing_video.js`, `render_marketing_reel.js`.
-- A subtle "by ELTouch apps" credit in the README, style guide pages, marketing images, videos and Figma cover.
+- A subtle "by ETKits" credit in the README, style guide pages, marketing images, videos and Figma cover.
 
 ## [1.1.0] — 2026-10-16
 
