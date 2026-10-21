@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-shimmer",
+  "title": "Text Shimmer",
+  "description": "Loading text with an animated gradient sweep in neutral or brand colours; stops under reduced motion.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/text-shimmer.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useReducedMotion } from \"motion/react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\n\nconst gradients = {\n  neutral:\n    \"linear-gradient(90deg, var(--muted-foreground) 0%, var(--muted-foreground) 35%, var(--foreground) 50%, var(--muted-foreground) 65%, var(--muted-foreground) 100%)\",\n  brand:\n    \"linear-gradient(90deg, var(--brand-400) 0%, var(--brand-700) 35%, var(--brand-300) 50%, var(--brand-700) 65%, var(--brand-400) 100%)\",\n} as const\n\nexport interface TextShimmerProps extends Omit<React.ComponentProps<\"span\">, \"ref\"> {\n  /** Neutral grey sweep (default) or a brand-coloured sweep. */\n  variant?: keyof typeof gradients\n  /** Seconds for one sweep. */\n  duration?: number\n  /** Pause the sweep (text stays readable). */\n  paused?: boolean\n}\n\n/** Text with a light sweeping across it — for \"Thinking…\" states and loading labels. */\nfunction TextShimmer({ variant = \"neutral\", duration = 2, paused = false, className, style, children, ...props }: TextShimmerProps) {\n  const reduce = useReducedMotion()\n  const still = reduce || paused\n  return (\n    <motion.span\n      data-slot=\"text-shimmer\"\n      data-variant={variant}\n      className={cn(\n        \"inline-block bg-clip-text text-transparent [-webkit-background-clip:text] [background-size:250%_100%]\",\n        className\n      )}\n      style={{ backgroundImage: gradients[variant], backgroundPosition: still ? \"50% 0\" : undefined, ...style }}\n      initial={false}\n      animate={still ? undefined : { backgroundPosition: [\"100% 0\", \"-150% 0\"] }}\n      transition={still ? undefined : { duration, ease: \"linear\", repeat: Infinity }}\n      {...(props as React.ComponentProps<typeof motion.span>)}\n    >\n      {children}\n    </motion.span>\n  )\n}\n\nexport { TextShimmer }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "ai"
+  ],
+  "type": "registry:ui"
+}

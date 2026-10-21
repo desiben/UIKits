@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "native-select",
+  "title": "Native Select",
+  "description": "Styled native <select> with an animated chevron and an error shake.",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/native-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useAnimate } from \"motion/react\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { spring } from \"@/registry/facet/lib/motion\"\n\nconst nativeSelectVariants = cva(\n  \"w-full cursor-pointer appearance-none rounded-facet border border-input bg-card pl-3 pr-9 text-foreground outline-none transition-[border-color,box-shadow] duration-150 hover:border-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 aria-invalid:border-danger aria-invalid:focus-visible:ring-danger/25 disabled:cursor-not-allowed disabled:border-border disabled:bg-muted disabled:text-placeholder\",\n  {\n    variants: {\n      size: {\n        sm: \"h-8 text-[13px]\",\n        md: \"h-9 text-sm\",\n        lg: \"h-11 text-[15px]\",\n      },\n    },\n    defaultVariants: { size: \"md\" },\n  }\n)\n\nexport interface NativeSelectProps\n  extends Omit<React.ComponentProps<\"select\">, \"size\">,\n    VariantProps<typeof nativeSelectVariants> {\n  wrapperClassName?: string\n}\n\n/**\n * The browser's own <select>, dressed as a Facet input. Presses give a soft squeeze, the chevron\n * nods on change and an invalid state arrives with a short shake.\n */\nfunction NativeSelect({ className, wrapperClassName, size, onChange, children, ...props }: NativeSelectProps) {\n  const [scope, animate] = useAnimate<HTMLDivElement>()\n  const chevron = React.useRef<SVGSVGElement>(null)\n  const invalid = props[\"aria-invalid\"] === true || props[\"aria-invalid\"] === \"true\"\n  const first = React.useRef(true)\n\n  React.useEffect(() => {\n    if (first.current) {\n      first.current = false\n      return\n    }\n    if (invalid && scope.current) animate(scope.current, { x: [0, -5, 5, -3, 3, 0] }, { duration: 0.35 })\n  }, [invalid, animate, scope])\n\n  return (\n    <motion.div\n      ref={scope}\n      data-slot=\"native-select-wrapper\"\n      className={cn(\"group/ns relative w-full\", wrapperClassName)}\n      whileTap={props.disabled ? undefined : { scale: 0.985 }}\n      transition={spring}\n    >\n      <select\n        data-slot=\"native-select\"\n        className={cn(nativeSelectVariants({ size }), className)}\n        onChange={(e) => {\n          if (chevron.current) animate(chevron.current, { y: [0, 3, 0] }, { duration: 0.3 })\n          onChange?.(e)\n        }}\n        {...props}\n      >\n        {children}\n      </select>\n      <ChevronDown\n        ref={chevron}\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-placeholder transition-colors group-hover/ns:text-muted-foreground group-focus-within/ns:text-brand\"\n      />\n    </motion.div>\n  )\n}\n\nfunction NativeSelectOption(props: React.ComponentProps<\"option\">) {\n  return <option data-slot=\"native-select-option\" {...props} />\n}\n\nfunction NativeSelectOptGroup(props: React.ComponentProps<\"optgroup\">) {\n  return <optgroup data-slot=\"native-select-optgroup\" {...props} />\n}\n\nexport { NativeSelect, NativeSelectOption, NativeSelectOptGroup, nativeSelectVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "forms"
+  ],
+  "type": "registry:ui"
+}

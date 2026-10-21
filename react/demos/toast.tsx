@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Trash2 } from "lucide-react"
 import { Button } from "@/registry/facet/ui/button"
 import { ToastProvider, useToast } from "@/registry/facet/ui/toast"

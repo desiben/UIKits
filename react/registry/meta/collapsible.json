@@ -1,0 +1,11 @@
+{
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Collapsible (Radix) with height animation and a rotating chevron.",
+  "categories": [
+    "layout"
+  ],
+  "files": [
+    "ui/collapsible.tsx"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "Aspect-ratio box (Radix) for media with a soft reveal on load.",
+  "categories": [
+    "layout"
+  ],
+  "files": [
+    "ui/aspect-ratio.tsx"
+  ]
+}

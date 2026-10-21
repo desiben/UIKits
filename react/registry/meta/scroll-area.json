@@ -1,0 +1,11 @@
+{
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Scroll area (Radix) with fading edge shadows and scrollbars that appear on hover.",
+  "categories": [
+    "layout"
+  ],
+  "files": [
+    "ui/scroll-area.tsx"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "title": "Aspect Ratio",
+  "description": "Aspect-ratio box (Radix) for media with a soft reveal on load.",
+  "dependencies": [
+    "motion",
+    "radix-ui"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/aspect-ratio.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, type Variants } from \"motion/react\"\nimport { AspectRatio as AspectRatioPrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { springSoft } from \"@/registry/facet/lib/motion\"\n\nconst frame: Variants = {\n  rest: {},\n  hover: {},\n}\nconst media: Variants = {\n  hidden: { opacity: 0, scale: 1.06, filter: \"blur(8px)\" },\n  rest: { opacity: 1, scale: 1, filter: \"blur(0px)\", transition: springSoft },\n  hover: { opacity: 1, scale: 1.045, filter: \"blur(0px)\", transition: springSoft },\n}\nconst caption: Variants = {\n  rest: { y: 0 },\n  hover: { y: -3, transition: springSoft },\n}\n\ninterface AspectRatioProps extends React.ComponentProps<typeof AspectRatioPrimitive.Root> {\n  /** Zoom the media slightly when hovered. Defaults to true. */\n  interactive?: boolean\n  /** Fade and un-blur the media the first time it scrolls into view. Defaults to true. */\n  reveal?: boolean\n  frameClassName?: string\n}\n\n/**\n * Keeps media at a fixed ratio while it scales. The media eases into view the first time it is\n * seen and zooms a touch on hover; a caption lifts with it.\n */\nfunction AspectRatio({ ratio = 16 / 9, className, frameClassName, interactive = true, reveal = true, children, ...props }: AspectRatioProps) {\n  return (\n    <motion.div\n      data-slot=\"aspect-ratio\"\n      variants={frame}\n      initial={reveal ? \"hidden\" : \"rest\"}\n      whileInView=\"rest\"\n      viewport={{ once: true, margin: \"-40px\" }}\n      whileHover={interactive ? \"hover\" : undefined}\n      className={cn(\"relative w-full overflow-hidden rounded-facet-lg bg-muted\", frameClassName)}\n    >\n      <AspectRatioPrimitive.Root ratio={ratio} {...props}>\n        <div className={cn(\"absolute inset-0\", className)}>{children}</div>\n      </AspectRatioPrimitive.Root>\n    </motion.div>\n  )\n}\n\n/** Media layer (img, video, iframe or any element) that fills and covers the frame. */\nfunction AspectRatioMedia({ className, ...props }: React.ComponentProps<typeof motion.div>) {\n  return (\n    <motion.div\n      data-slot=\"aspect-ratio-media\"\n      variants={media}\n      className={cn(\"absolute inset-0 size-full [&>img,&>video,&>iframe]:size-full [&>img,&>video,&>iframe]:object-cover\", className)}\n      {...props}\n    />\n  )\n}\n\n/** Small frosted caption pinned to the bottom-left corner. */\nfunction AspectRatioCaption({ className, ...props }: React.ComponentProps<typeof motion.figcaption>) {\n  return (\n    <motion.figcaption\n      data-slot=\"aspect-ratio-caption\"\n      variants={caption}\n      className={cn(\n        \"absolute bottom-3 left-3 rounded-facet-sm bg-black/45 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-md\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { AspectRatio, AspectRatioMedia, AspectRatioCaption }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "layout"
+  ],
+  "type": "registry:ui"
+}

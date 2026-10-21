@@ -1,0 +1,11 @@
+{
+  "name": "emoji-reaction",
+  "title": "Emoji Reaction Button",
+  "description": "Reaction pills that burst on click and tick their counts up.",
+  "categories": [
+    "feedback"
+  ],
+  "files": [
+    "ui/emoji-reaction.tsx"
+  ]
+}

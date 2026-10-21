@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "resizable",
+  "title": "Resizable",
+  "description": "Resizable panel groups (react-resizable-panels) with animated collapse and a handle that grows on drag.",
+  "dependencies": [
+    "motion",
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/resizable.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { animate } from \"motion/react\"\nimport { Group, Panel, Separator, type PanelImperativeHandle } from \"react-resizable-panels\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { springSoft } from \"@/registry/facet/lib/motion\"\n\nfunction ResizablePanelGroup({ className, ...props }: React.ComponentProps<typeof Group>) {\n  return (\n    <Group\n      data-slot=\"resizable-panel-group\"\n      className={cn(\"size-full\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction ResizablePanel({ className, ...props }: React.ComponentProps<typeof Panel>) {\n  return <Panel data-slot=\"resizable-panel\" className={cn(\"min-h-0 min-w-0\", className)} {...props} />\n}\n\ninterface ResizableHandleProps extends React.ComponentProps<typeof Separator> {\n  /** Show a grip pill in the middle of the handle. */\n  withHandle?: boolean\n}\n\n/**\n * Drag handle between panels (role=separator, arrow keys resize, double-click resets). The line\n * lights up in brand colour on hover, and the grip springs taller and fills while dragging.\n */\nfunction ResizableHandle({ className, withHandle = true, ...props }: ResizableHandleProps) {\n  return (\n    <Separator\n      data-slot=\"resizable-handle\"\n      className={cn(\n        \"group/handle relative flex shrink-0 items-center justify-center bg-border outline-none transition-colors duration-150\",\n        // vertical line (between side-by-side panels)\n        \"aria-[orientation=vertical]:w-px aria-[orientation=vertical]:cursor-col-resize aria-[orientation=vertical]:before:absolute aria-[orientation=vertical]:before:inset-y-0 aria-[orientation=vertical]:before:-inset-x-1.5\",\n        // horizontal line (between stacked panels)\n        \"aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:cursor-row-resize aria-[orientation=horizontal]:before:absolute aria-[orientation=horizontal]:before:inset-x-0 aria-[orientation=horizontal]:before:-inset-y-1.5\",\n        \"data-[separator=hover]:bg-brand-400 data-[separator=active]:bg-primary data-[separator=focus]:bg-ring\",\n        className\n      )}\n      {...props}\n    >\n      {withHandle && (\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"z-10 block rounded-full bg-card shadow-[inset_0_0_0_1px_var(--border-strong)] transition-[width,height,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]\",\n            \"group-aria-[orientation=vertical]/handle:h-7 group-aria-[orientation=vertical]/handle:w-1.5\",\n            \"group-aria-[orientation=horizontal]/handle:h-1.5 group-aria-[orientation=horizontal]/handle:w-7\",\n            \"group-data-[separator=hover]/handle:bg-primary group-data-[separator=hover]/handle:shadow-none\",\n            \"group-data-[separator=focus]/handle:bg-ring group-data-[separator=focus]/handle:shadow-none\",\n            \"group-data-[separator=active]/handle:bg-primary group-data-[separator=active]/handle:shadow-none\",\n            \"group-aria-[orientation=vertical]/handle:group-data-[separator=active]/handle:h-11\",\n            \"group-aria-[orientation=horizontal]/handle:group-data-[separator=active]/handle:w-11\"\n          )}\n        />\n      )}\n    </Separator>\n  )\n}\n\n/**\n * Smoothly resize a panel (by ref) to a percentage with a spring, instead of jumping.\n * `const resizeTo = useAnimatedPanel(ref); resizeTo(0)` — pass 0 to collapse a collapsible panel.\n */\nfunction useAnimatedPanel(ref: React.RefObject<PanelImperativeHandle | null>) {\n  const controls = React.useRef<ReturnType<typeof animate> | null>(null)\n  React.useEffect(() => () => controls.current?.stop(), [])\n  return React.useCallback(\n    (to: number) => {\n      const panel = ref.current\n      if (!panel) return\n      controls.current?.stop()\n      const from = panel.getSize().asPercentage\n      controls.current = animate(from, to, {\n        ...springSoft,\n        onUpdate: (v) => ref.current?.resize(`${v}%`),\n        onComplete: () => ref.current?.resize(`${to}%`),\n      })\n    },\n    [ref]\n  )\n}\n\nexport { ResizablePanelGroup, ResizablePanel, ResizableHandle, useAnimatedPanel }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "layout"
+  ],
+  "type": "registry:ui"
+}

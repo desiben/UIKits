@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "scroll-area",
+  "title": "Scroll Area",
+  "description": "Scroll area (Radix) with fading edge shadows and scrollbars that appear on hover.",
+  "dependencies": [
+    "motion",
+    "radix-ui"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/scroll-area.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useMotionValue, animate } from \"motion/react\"\nimport { ScrollArea as ScrollAreaPrimitive } from \"radix-ui\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { durations, ease } from \"@/registry/facet/lib/motion\"\n\ntype Orientation = \"vertical\" | \"horizontal\" | \"both\"\n\ninterface ScrollAreaProps extends Omit<React.ComponentProps<typeof ScrollAreaPrimitive.Root>, \"dir\"> {\n  orientation?: Orientation\n  /** Fade the edges that still have content to scroll to. The fades come and go as you scroll. */\n  fade?: boolean\n  /** No border or background. */\n  bare?: boolean\n  /** Accessible name; the viewport is focusable so keyboard users can scroll it. */\n  label?: string\n  viewportClassName?: string\n}\n\nconst FADE = 20\n\n/**\n * A bounded scroll region with slim themed scrollbars that fade in on hover and thicken under the\n * pointer. Optional edge fades track the scroll position.\n */\nfunction ScrollArea({\n  className,\n  viewportClassName,\n  children,\n  orientation = \"vertical\",\n  fade = false,\n  bare = false,\n  label,\n  type = \"hover\",\n  ...props\n}: ScrollAreaProps) {\n  const viewport = React.useRef<HTMLDivElement>(null)\n  const start = useMotionValue(\"0px\")\n  const end = useMotionValue(\"0px\")\n  const horizontal = orientation === \"horizontal\"\n\n  const update = React.useCallback(() => {\n    const el = viewport.current\n    if (!el || !fade) return\n    const pos = horizontal ? el.scrollLeft : el.scrollTop\n    const max = horizontal ? el.scrollWidth - el.clientWidth : el.scrollHeight - el.clientHeight\n    const t = { duration: durations.base, ease }\n    animate(start, pos > 2 ? `${FADE}px` : \"0px\", t)\n    animate(end, pos < max - 2 ? `${FADE}px` : \"0px\", t)\n  }, [fade, horizontal, start, end])\n\n  React.useEffect(() => {\n    update()\n    const el = viewport.current\n    if (!el || !fade) return\n    const ro = new ResizeObserver(update)\n    ro.observe(el)\n    if (el.firstElementChild) ro.observe(el.firstElementChild)\n    return () => ro.disconnect()\n  }, [update, fade])\n\n  const dir = horizontal ? \"to right\" : \"to bottom\"\n  const mask = fade\n    ? `linear-gradient(${dir}, transparent 0, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent 100%)`\n    : undefined\n\n  return (\n    <ScrollAreaPrimitive.Root data-slot=\"scroll-area\" type={type} asChild {...props}>\n      <motion.div\n        style={{ \"--fade-start\": start, \"--fade-end\": end } as React.CSSProperties & Record<string, unknown>}\n        className={cn(\n          \"relative overflow-hidden\",\n          !bare && \"rounded-facet-lg border border-border bg-card\",\n          className\n        )}\n      >\n        <ScrollAreaPrimitive.Viewport\n          ref={viewport}\n          data-slot=\"scroll-area-viewport\"\n          tabIndex={0}\n          aria-label={label}\n          role={label ? \"region\" : undefined}\n          onScroll={update}\n          style={mask ? { maskImage: mask, WebkitMaskImage: mask } : undefined}\n          className={cn(\n            \"size-full rounded-[inherit] outline-none transition-shadow focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset\",\n            viewportClassName\n          )}\n        >\n          {children}\n        </ScrollAreaPrimitive.Viewport>\n        {orientation !== \"horizontal\" && <ScrollBar orientation=\"vertical\" />}\n        {orientation !== \"vertical\" && <ScrollBar orientation=\"horizontal\" />}\n        <ScrollAreaPrimitive.Corner />\n      </motion.div>\n    </ScrollAreaPrimitive.Root>\n  )\n}\n\nfunction ScrollBar({ className, orientation = \"vertical\", ...props }: React.ComponentProps<typeof ScrollAreaPrimitive.Scrollbar>) {\n  return (\n    <ScrollAreaPrimitive.Scrollbar\n      data-slot=\"scroll-area-scrollbar\"\n      orientation={orientation}\n      forceMount\n      className={cn(\n        \"group/sb z-10 flex touch-none p-[3px] select-none transition-[opacity,width,height] duration-200 ease-out data-[state=hidden]:pointer-events-none data-[state=hidden]:opacity-0\",\n        orientation === \"vertical\" && \"h-full w-2.5 hover:w-3.5\",\n        orientation === \"horizontal\" && \"h-2.5 flex-col hover:h-3.5\",\n        className\n      )}\n      {...props}\n    >\n      <ScrollAreaPrimitive.Thumb\n        data-slot=\"scroll-area-thumb\"\n        className=\"relative flex-1 rounded-full bg-border-strong transition-colors group-hover/sb:bg-muted-foreground\"\n      />\n    </ScrollAreaPrimitive.Scrollbar>\n  )\n}\n\nexport { ScrollArea, ScrollBar }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "layout"
+  ],
+  "type": "registry:ui"
+}

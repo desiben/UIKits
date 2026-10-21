@@ -1,0 +1,11 @@
+{
+  "name": "select",
+  "title": "Select",
+  "description": "Select (Radix) that pops from the trigger with staggered options and a sliding highlight; supports multiple.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/select.tsx"
+  ]
+}

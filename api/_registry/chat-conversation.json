@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chat-conversation",
+  "title": "Chat Conversation",
+  "description": "The chat scroll container: messages rise in, the view sticks to the bottom while replies stream and a jump-to-latest pill floats in when you scroll up.",
+  "dependencies": [],
+  "registryDependencies": [
+    "@facet/message-scroller",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/chat-conversation.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport {\n  MessageScroller,\n  MessageScrollerJump,\n  MessageScrollerViewport,\n  useMessageScroller,\n  type MessageScrollerProps,\n  type MessageScrollerViewportProps,\n} from \"@/registry/facet/ui/message-scroller\"\n\n/**\n * The scrolling container for a chat. Built on MessageScroller: sticks to the bottom while a\n * reply streams and shows a jump-to-latest button when you scroll up.\n */\nfunction ChatConversation({ className, ...props }: MessageScrollerProps) {\n  return <MessageScroller data-slot=\"chat-conversation\" className={cn(\"flex-1\", className)} {...props} />\n}\n\n/** The message column (max 720px). It's a polite live log so new replies are announced. */\nfunction ChatConversationContent({ className, contentClassName, contentProps, busy, ...props }: MessageScrollerViewportProps & { busy?: boolean }) {\n  return (\n    <MessageScrollerViewport\n      data-slot=\"chat-conversation-content\"\n      className={className}\n      contentClassName={cn(\"gap-5 px-4 py-5\", contentClassName)}\n      contentProps={{ role: \"log\", \"aria-live\": \"polite\", \"aria-busy\": busy || undefined, ...contentProps }}\n      {...props}\n    />\n  )\n}\n\nfunction ChatConversationScrollButton(props: React.ComponentProps<typeof MessageScrollerJump>) {\n  return <MessageScrollerJump data-slot=\"chat-conversation-scroll-button\" {...props} />\n}\n\nexport { ChatConversation, ChatConversationContent, ChatConversationScrollButton, useMessageScroller as useChatConversation }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "ai"
+  ],
+  "type": "registry:ui"
+}

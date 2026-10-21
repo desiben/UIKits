@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chat-loader",
+  "title": "Chat Loader",
+  "description": "Assistant waiting states: bouncing typing dots, a spinner with shimmering status text and a pulsing dot.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/text-shimmer",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/chat-loader.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, useReducedMotion } from \"motion/react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { TextShimmer } from \"@/registry/facet/ui/text-shimmer\"\n\nexport interface ChatLoaderProps extends React.ComponentProps<\"span\"> {\n  /** typing: bouncing dots · shimmer: spinner + shimmering label · pulse: pulsing dot + label · spinner: spinner + label */\n  variant?: \"typing\" | \"shimmer\" | \"pulse\" | \"spinner\"\n  /** Accessible status text (also the visible label for shimmer / pulse / spinner). */\n  label?: string\n}\n\nfunction TypingDots() {\n  const reduce = useReducedMotion()\n  return (\n    <span className=\"inline-flex items-center gap-1 rounded-[18px_18px_18px_6px] bg-muted px-3.5 py-2.5\" aria-hidden=\"true\">\n      {[0, 1, 2].map((i) => (\n        <motion.i\n          key={i}\n          className=\"block size-1.5 rounded-full bg-muted-foreground\"\n          initial={{ opacity: 0.5, y: 0 }}\n          animate={reduce ? { opacity: 0.7 } : { y: [0, -4, 0, 0], opacity: [0.5, 1, 0.5, 0.5] }}\n          transition={reduce ? undefined : { duration: 1.2, times: [0, 0.25, 0.5, 1], ease: \"easeInOut\", repeat: Infinity, delay: i * 0.15 }}\n        />\n      ))}\n    </span>\n  )\n}\n\nfunction LoaderSpinner({ className }: { className?: string }) {\n  const reduce = useReducedMotion()\n  return (\n    <motion.svg\n      viewBox=\"0 0 24 24\"\n      className={cn(\"size-3.5 text-brand\", className)}\n      aria-hidden=\"true\"\n      animate={reduce ? undefined : { rotate: 360 }}\n      transition={{ repeat: Infinity, ease: \"linear\", duration: 0.8 }}\n    >\n      <circle cx=\"12\" cy=\"12\" r=\"9\" fill=\"none\" stroke=\"currentColor\" strokeOpacity=\".25\" strokeWidth=\"3\" />\n      <path d=\"M21 12a9 9 0 0 0-9-9\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3\" strokeLinecap=\"round\" />\n    </motion.svg>\n  )\n}\n\nfunction PulseDot({ className }: { className?: string }) {\n  const reduce = useReducedMotion()\n  return (\n    <motion.span\n      aria-hidden=\"true\"\n      className={cn(\"block size-2.5 shrink-0 rounded-full bg-primary\", className)}\n      animate={reduce ? undefined : { scale: [1, 0.6, 1], opacity: [1, 0.6, 1] }}\n      transition={{ duration: 1.2, ease: \"easeInOut\", repeat: Infinity }}\n    />\n  )\n}\n\n/** Waiting states while the assistant works: typing dots, a shimmering status or a pulsing dot. */\nfunction ChatLoader({ variant = \"typing\", label, className, children, ...props }: ChatLoaderProps) {\n  const text = label ?? (variant === \"typing\" ? \"Assistant is typing\" : variant === \"pulse\" ? \"Working\" : \"Thinking…\")\n  return (\n    <span\n      data-slot=\"chat-loader\"\n      data-variant={variant}\n      role=\"status\"\n      aria-live=\"polite\"\n      className={cn(\"inline-flex items-center gap-2 text-[13px] font-medium text-muted-foreground\", className)}\n      {...props}\n    >\n      {variant === \"typing\" ? (\n        <>\n          <TypingDots />\n          <span className=\"sr-only\">{text}</span>\n        </>\n      ) : variant === \"shimmer\" ? (\n        <>\n          <LoaderSpinner />\n          <TextShimmer>{children ?? text}</TextShimmer>\n        </>\n      ) : variant === \"spinner\" ? (\n        <>\n          <LoaderSpinner />\n          <span>{children ?? text}</span>\n        </>\n      ) : (\n        <>\n          <PulseDot />\n          <span>{children ?? text}</span>\n        </>\n      )}\n    </span>\n  )\n}\n\nexport { ChatLoader, LoaderSpinner, PulseDot }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "ai"
+  ],
+  "type": "registry:ui"
+}

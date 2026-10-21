@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "motion",
+  "title": "Facet motion presets",
+  "description": "Springs, easings and variants shared by every Facet component, plus <FacetMotion> for reduced-motion support.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/theme"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/lib/motion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { MotionConfig, type Transition, type Variants } from \"motion/react\"\n\n/* Facet UI motion presets — one place to tune how the whole kit feels. */\n\n/** Snappy spring for presses, toggles, indicators and thumbs. */\nexport const spring = { type: \"spring\", stiffness: 520, damping: 34, mass: 0.7 } satisfies Transition\n/** Softer spring for panels, cards and layout shifts. */\nexport const springSoft = { type: \"spring\", stiffness: 280, damping: 28, mass: 0.9 } satisfies Transition\n/** Playful spring with a little overshoot, for success states and badges. */\nexport const springBouncy = { type: \"spring\", stiffness: 600, damping: 16, mass: 0.6 } satisfies Transition\n/** Facet's default easing curve (ease-out-quint-ish). */\nexport const ease = [0.22, 1, 0.36, 1] as const\nexport const durations = { fast: 0.15, base: 0.24, slow: 0.4 } as const\n\n/** Spread onto motion elements that should react to pointer presses. */\nexport const press = { whileTap: { scale: 0.97 }, transition: spring } as const\n/** Spread onto cards and tiles that lift on hover. */\nexport const hoverLift = { whileHover: { y: -3 }, whileTap: { scale: 0.99 }, transition: springSoft } as const\n\nexport const fade: Variants = {\n  hidden: { opacity: 0 },\n  visible: { opacity: 1, transition: { duration: durations.base, ease } },\n  exit: { opacity: 0, transition: { duration: durations.fast, ease } },\n}\n\n/** Overlays (popover, dropdown, tooltip, dialog): scale + fade from the trigger side. */\nexport const popIn: Variants = {\n  hidden: { opacity: 0, scale: 0.96, y: 4 },\n  visible: { opacity: 1, scale: 1, y: 0, transition: spring },\n  exit: { opacity: 0, scale: 0.97, y: 2, transition: { duration: durations.fast, ease } },\n}\n\nexport const slideUp: Variants = {\n  hidden: { opacity: 0, y: 12 },\n  visible: { opacity: 1, y: 0, transition: springSoft },\n  exit: { opacity: 0, y: 8, transition: { duration: durations.fast, ease } },\n}\n\n/** Parent variant that staggers its children (use with slideUp / fade on the children). */\nexport const stagger = (step = 0.05, delay = 0): Variants => ({\n  hidden: {},\n  visible: { transition: { staggerChildren: step, delayChildren: delay } },\n  exit: { transition: { staggerChildren: step / 2, staggerDirection: -1 } },\n})\n\n/** Wrap your app once: honours the OS \"reduce motion\" setting for every Facet component. */\nexport function FacetMotion({ children }: { children: React.ReactNode }) {\n  return <MotionConfig reducedMotion=\"user\">{children}</MotionConfig>\n}\n",
+      "type": "registry:lib"
+    }
+  ],
+  "type": "registry:lib"
+}

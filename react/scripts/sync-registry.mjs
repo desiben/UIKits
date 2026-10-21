@@ -43,7 +43,7 @@ const items = metas.map((m) => {
     const src = readFileSync(file, "utf8")
     for (const [, spec] of src.matchAll(/from\s+["']([^"']+)["']/g)) {
       if (spec.startsWith("@/registry/facet/ui/")) { const dep = spec.split("/").pop(); if (dep !== m.name) regDeps.add(`@facet/${dep}`) }
-      else if (spec === "@/registry/facet/lib/utils") regDeps.add("utils")
+      else if (spec === "@/registry/facet/lib/utils") regDeps.add("@facet/utils")
       else if (spec === "@/registry/facet/lib/motion") regDeps.add("@facet/motion")
       else if (spec.startsWith("@/")) problems.push(`${m.name}: unsupported import ${spec}`)
       else if (!spec.startsWith(".")) { const pkg = spec.startsWith("@") ? spec.split("/").slice(0, 2).join("/") : spec.split("/")[0]; if (!PEER.has(pkg)) deps.add(pkg) }
@@ -64,7 +64,8 @@ const registry = {
   homepage: "https://facetui.vercel.app",
   items: [
     { name: "theme", type: "registry:theme", title: "Facet UI theme", description: "Facet UI colour, radius and motion tokens mapped onto shadcn variables (light + dark), plus the Facet corner utilities.", cssVars: { theme, light, dark }, css },
-    { name: "motion", type: "registry:lib", title: "Facet motion presets", description: "Springs, easings and variants shared by every Facet component, plus <FacetMotion> for reduced-motion support.", dependencies: ["motion"], files: [{ path: "registry/facet/lib/motion.tsx", type: "registry:lib" }] },
+    { name: "utils", type: "registry:lib", title: "cn() helper", description: "Class name helper (clsx + tailwind-merge) used by every Facet component.", dependencies: ["clsx", "tailwind-merge"], files: [{ path: "registry/facet/lib/utils.ts", type: "registry:lib" }] },
+    { name: "motion", type: "registry:lib", title: "Facet motion presets", description: "Springs, easings and variants shared by every Facet component, plus <FacetMotion> for reduced-motion support.", dependencies: ["motion"], registryDependencies: ["@facet/theme"], files: [{ path: "registry/facet/lib/motion.tsx", type: "registry:lib" }] },
     ...items,
     { name: "all", type: "registry:block", title: "Everything", description: "Every Facet UI React component in one command.", registryDependencies: items.map((i) => `@facet/${i.name}`) },
   ],

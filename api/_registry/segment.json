@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "segment",
+  "title": "Segment",
+  "description": "A segmented control for switching views or values; the thumb slides between options on a spring and arrow keys move the selection.",
+  "dependencies": [
+    "class-variance-authority",
+    "motion",
+    "radix-ui"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/segment.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion } from \"motion/react\"\nimport { RadioGroup as RadioGroupPrimitive } from \"radix-ui\"\nimport { cva, type VariantProps } from \"class-variance-authority\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { spring } from \"@/registry/facet/lib/motion\"\n\nconst segmentVariants = cva(\"relative isolate inline-flex max-w-full gap-0.5 rounded-facet bg-muted p-[3px]\", {\n  variants: {\n    size: { sm: \"\", md: \"\", lg: \"\" },\n    block: { true: \"flex w-full\", false: \"\" },\n  },\n  defaultVariants: { size: \"md\", block: false },\n})\n\nconst itemSize = {\n  sm: \"h-[26px] px-2.5 text-xs\",\n  md: \"h-[30px] px-3 text-[13px]\",\n  lg: \"h-[38px] px-3 text-sm\",\n}\n\ntype SegmentCtx = { value: string; id: string; size: \"sm\" | \"md\" | \"lg\"; tone: \"neutral\" | \"primary\"; block: boolean; iconOnly: boolean }\nconst SegmentContext = React.createContext<SegmentCtx>({ value: \"\", id: \"\", size: \"md\", tone: \"neutral\", block: false, iconOnly: false })\n\ntype SegmentProps = Omit<React.ComponentProps<typeof RadioGroupPrimitive.Root>, \"orientation\"> &\n  VariantProps<typeof segmentVariants> & {\n    /** \"primary\" fills the thumb with the brand colour. */\n    tone?: \"neutral\" | \"primary\"\n    /** Square icon-only buttons (give each item an aria-label). */\n    iconOnly?: boolean\n  }\n\n/** Segmented control: radiogroup semantics, arrow keys move the selection, the thumb slides. */\nfunction Segment({\n  className,\n  size = \"md\",\n  block = false,\n  tone = \"neutral\",\n  iconOnly = false,\n  value: valueProp,\n  defaultValue = \"\",\n  onValueChange,\n  ...props\n}: SegmentProps) {\n  const [inner, setInner] = React.useState(defaultValue)\n  const value = valueProp ?? inner\n  const id = React.useId()\n  return (\n    <SegmentContext.Provider value={{ value, id, size: size ?? \"md\", tone, block: !!block, iconOnly }}>\n      <RadioGroupPrimitive.Root\n        data-slot=\"segment\"\n        orientation=\"horizontal\"\n        loop\n        value={value}\n        onValueChange={(v) => {\n          if (valueProp === undefined) setInner(v)\n          onValueChange?.(v)\n        }}\n        className={cn(segmentVariants({ size, block }), className)}\n        {...props}\n      />\n    </SegmentContext.Provider>\n  )\n}\n\nfunction SegmentItem({ className, value, children, ...props }: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {\n  const ctx = React.useContext(SegmentContext)\n  const checked = ctx.value === value\n  return (\n    <RadioGroupPrimitive.Item\n      data-slot=\"segment-item\"\n      value={value}\n      className={cn(\n        \"relative inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-[6px] font-medium whitespace-nowrap text-muted-foreground outline-none transition-colors duration-150 select-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4\",\n        itemSize[ctx.size],\n        ctx.iconOnly && \"aspect-square px-0\",\n        ctx.iconOnly && ctx.size === \"md\" && \"w-[34px] aspect-auto\",\n        ctx.block && \"flex-1\",\n        checked && (ctx.tone === \"primary\" ? \"text-primary-foreground hover:text-primary-foreground\" : \"text-foreground\"),\n        className\n      )}\n      {...props}\n    >\n      {checked && (\n        <motion.span\n          aria-hidden=\"true\"\n          layoutId={`${ctx.id}-thumb`}\n          transition={spring}\n          className={cn(\n            \"absolute inset-0 -z-10 rounded-[6px] shadow-sm\",\n            ctx.tone === \"primary\" ? \"bg-primary\" : \"bg-card ring-1 ring-border-subtle\"\n          )}\n        />\n      )}\n      <motion.span className=\"relative inline-flex items-center gap-1.5\" whileTap={{ scale: 0.94 }} transition={spring}>\n        {children}\n      </motion.span>\n    </RadioGroupPrimitive.Item>\n  )\n}\n\nexport { Segment, SegmentItem, segmentVariants }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "navigation"
+  ],
+  "type": "registry:ui"
+}

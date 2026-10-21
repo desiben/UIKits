@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "prompt-suggestion",
+  "title": "Prompt Suggestion",
+  "description": "Suggested prompts as chips or cards that stagger in, lift on hover and press with a spring.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/prompt-suggestion.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion } from \"motion/react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { spring, springSoft, stagger } from \"@/registry/facet/lib/motion\"\n\ntype Layout = \"chips\" | \"cards\"\nconst LayoutContext = React.createContext<Layout>(\"chips\")\n\nexport interface PromptSuggestionsProps extends React.ComponentProps<typeof motion.div> {\n  /** Pill chips for short prompts, cards for richer starters. */\n  variant?: Layout\n}\n\n/** Group of suggestions; children stagger in. */\nfunction PromptSuggestions({ variant: layout = \"chips\", className, ...props }: PromptSuggestionsProps) {\n  return (\n    <LayoutContext.Provider value={layout}>\n      <motion.div\n        data-slot=\"prompt-suggestions\"\n        data-layout={layout}\n        role=\"group\"\n        className={cn(\n          layout === \"cards\" ? \"grid grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-2\" : \"flex flex-wrap gap-2\",\n          className\n        )}\n        variants={stagger(0.06, 0.05)}\n        initial=\"hidden\"\n        animate=\"visible\"\n        {...props}\n      />\n    </LayoutContext.Provider>\n  )\n}\n\nexport interface PromptSuggestionProps extends Omit<React.ComponentProps<typeof motion.button>, \"title\" | \"children\"> {\n  children?: React.ReactNode\n  icon?: React.ReactNode\n  /** Card title (cards layout). Children are used when omitted. */\n  title?: React.ReactNode\n  description?: React.ReactNode\n}\n\n/** A suggested prompt. It's a button: clicking it should fill or send the prompt. */\nfunction PromptSuggestion({ icon, title, description, className, children, ...props }: PromptSuggestionProps) {\n  const layout = React.useContext(LayoutContext)\n  const card = layout === \"cards\"\n  return (\n    <motion.button\n      type=\"button\"\n      data-slot=\"prompt-suggestion\"\n      variants={{\n        hidden: { opacity: 0, y: 10, scale: 0.96 },\n        visible: { opacity: 1, y: 0, scale: 1, transition: springSoft },\n      }}\n      whileHover={{ y: -2, transition: spring }}\n      whileTap={{ scale: 0.97, transition: spring }}\n      className={cn(\n        \"group/sug inline-flex cursor-pointer border border-border bg-card text-left text-[13px] font-medium text-foreground-secondary outline-none transition-[color,border-color,box-shadow] hover:border-brand-400 hover:text-foreground hover:shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [&_svg]:shrink-0 [&_svg]:text-brand\",\n        card\n          ? \"flex-col items-start gap-1 rounded-facet-lg px-4 py-3 [&_svg]:mb-1 [&_svg]:size-[18px]\"\n          : \"min-h-9 items-center gap-2 rounded-full px-3.5 py-1.5 [&_svg]:size-3.5\",\n        className\n      )}\n      {...props}\n    >\n      {icon && (\n        <span className=\"inline-flex transition-transform duration-300 group-hover/sug:-rotate-8 group-hover/sug:scale-110\">{icon}</span>\n      )}\n      {card ? (\n        <>\n          <b className=\"font-semibold text-foreground\">{title ?? children}</b>\n          {description && <small className=\"text-xs font-normal text-muted-foreground\">{description}</small>}\n        </>\n      ) : (\n        (title ?? children)\n      )}\n    </motion.button>\n  )\n}\n\nexport { PromptSuggestions, PromptSuggestion }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "ai"
+  ],
+  "type": "registry:ui"
+}

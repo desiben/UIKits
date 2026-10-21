@@ -1,0 +1,11 @@
+{
+  "name": "textarea",
+  "title": "Textarea",
+  "description": "Textarea that grows smoothly with content and an animated character counter.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/textarea.tsx"
+  ]
+}

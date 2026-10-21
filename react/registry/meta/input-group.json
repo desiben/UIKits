@@ -1,0 +1,11 @@
+{
+  "name": "input-group",
+  "title": "Input Group",
+  "description": "Inputs with prefixes, suffixes, icons and buttons; addons animate on focus and reveal.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/input-group.tsx"
+  ]
+}

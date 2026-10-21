@@ -1,0 +1,7 @@
+{
+  "name": "timeline",
+  "title": "Activity Timeline & Notifications",
+  "description": "Chronological activity and a notification inbox; items stagger in, connectors draw down between nodes, the current step pulses, and read/dismissed notifications pop their dot and collapse.",
+  "categories": ["signature"],
+  "files": ["ui/timeline.tsx"]
+}

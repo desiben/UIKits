@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "widget",
+  "title": "Widget",
+  "description": "Dashboard container with a soft shell, header, legend and an elevated content area for charts, tables or KPIs. Widgets rise in on view and stagger inside a widget grid.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/widget.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, type HTMLMotionProps } from \"motion/react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { slideUp, stagger } from \"@/registry/facet/lib/motion\"\n\nconst InGridContext = React.createContext(false)\n\nexport type WidgetProps = HTMLMotionProps<\"section\">\n\n/**\n * Dashboard container: a soft outer shell (title, description, legend, actions) around an\n * elevated content area. Rises in when it enters the viewport — or staggers with its siblings\n * inside a <WidgetGrid>.\n */\nfunction Widget({ className, ...props }: WidgetProps) {\n  const inGrid = React.useContext(InGridContext)\n  return (\n    <motion.section\n      data-slot=\"widget\"\n      variants={slideUp}\n      {...(inGrid ? {} : { initial: \"hidden\", whileInView: \"visible\", viewport: { once: true, amount: 0.2 } })}\n      className={cn(\"flex min-w-0 flex-col rounded-facet-xl border border-border bg-subtle p-1\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction WidgetHeader({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"widget-header\"\n      className={cn(\"flex flex-wrap items-start gap-3 px-3 pt-3 pb-2.5\", className)}\n      {...props}\n    />\n  )\n}\n\nfunction WidgetTitle({ className, ...props }: React.ComponentProps<\"h3\">) {\n  return <h3 data-slot=\"widget-title\" className={cn(\"block text-sm font-medium text-foreground\", className)} {...props} />\n}\n\nfunction WidgetDescription({ className, ...props }: React.ComponentProps<\"p\">) {\n  return <p data-slot=\"widget-description\" className={cn(\"mt-0.5 block text-[13px] text-muted-foreground\", className)} {...props} />\n}\n\n/** Trailing header slot for a legend or actions; pushed to the right. */\nfunction WidgetAction({ className, ...props }: React.ComponentProps<\"div\">) {\n  return <div data-slot=\"widget-action\" className={cn(\"ml-auto flex items-center gap-2\", className)} {...props} />\n}\n\nexport interface WidgetContentProps extends React.ComponentProps<\"div\"> {\n  /** Edge-to-edge content (tables). */\n  flush?: boolean\n}\n\nfunction WidgetContent({ className, flush, ...props }: WidgetContentProps) {\n  return (\n    <div\n      data-slot=\"widget-content\"\n      data-flush={flush || undefined}\n      className={cn(\n        \"min-w-0 rounded-facet-lg border border-border-subtle bg-card shadow-xs dark:border-border\",\n        flush ? \"overflow-hidden p-0\" : \"p-4\",\n        className\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction WidgetFooter({ className, ...props }: React.ComponentProps<\"div\">) {\n  return (\n    <div\n      data-slot=\"widget-footer\"\n      className={cn(\"flex items-center gap-2 px-3 pt-2.5 pb-2 text-[13px] text-muted-foreground [&_svg]:size-3.5\", className)}\n      {...props}\n    />\n  )\n}\n\nexport type WidgetGridProps = HTMLMotionProps<\"div\">\n\n/** Responsive auto-fit grid of widgets; children stagger in on view. */\nfunction WidgetGrid({ className, ...props }: WidgetGridProps) {\n  return (\n    <InGridContext.Provider value={true}>\n    <motion.div\n      data-slot=\"widget-grid\"\n      variants={stagger(0.08)}\n      initial=\"hidden\"\n      whileInView=\"visible\"\n      viewport={{ once: true, amount: 0.2 }}\n      className={cn(\"grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] gap-4\", className)}\n      {...props}\n    />\n    </InGridContext.Provider>\n  )\n}\n\nexport { Widget, WidgetHeader, WidgetTitle, WidgetDescription, WidgetAction, WidgetContent, WidgetFooter, WidgetGrid }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "data-display"
+  ],
+  "type": "registry:ui"
+}

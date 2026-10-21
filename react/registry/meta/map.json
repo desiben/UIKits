@@ -1,0 +1,11 @@
+{
+  "name": "map",
+  "title": "Map",
+  "description": "Stylised map with animated pins, a drawn route, zoom controls and pop-in details \u2014 no map library.",
+  "categories": [
+    "data-display"
+  ],
+  "files": [
+    "ui/map.tsx"
+  ]
+}

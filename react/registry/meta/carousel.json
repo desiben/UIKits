@@ -1,0 +1,11 @@
+{
+  "name": "carousel",
+  "title": "Carousel",
+  "description": "Drag or swipe slides with momentum, snap and animated pagination dots.",
+  "categories": [
+    "data-display"
+  ],
+  "files": [
+    "ui/carousel.tsx"
+  ]
+}

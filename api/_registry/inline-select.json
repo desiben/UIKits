@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "inline-select",
+  "title": "Inline Select",
+  "description": "Inline select inside a sentence: the value swaps with a roll and the menu pops from the word.",
+  "dependencies": [
+    "lucide-react",
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/inline-select.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { AnimatePresence, motion, type Variants } from \"motion/react\"\nimport { ChevronDown } from \"lucide-react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { spring, springSoft } from \"@/registry/facet/lib/motion\"\n\nconst roll: Variants = {\n  enter: (dir: number) => ({ y: dir >= 0 ? \"60%\" : \"-60%\", opacity: 0 }),\n  center: { y: \"0%\", opacity: 1 },\n  exit: (dir: number) => ({ y: dir >= 0 ? \"-60%\" : \"60%\", opacity: 0 }),\n}\n\nexport interface InlineSelectOption {\n  value: string\n  label: string\n}\n\nexport interface InlineSelectProps\n  extends Omit<React.ComponentProps<\"select\">, \"value\" | \"defaultValue\" | \"onChange\" | \"children\"> {\n  options: InlineSelectOption[]\n  value?: string\n  defaultValue?: string\n  onValueChange?: (value: string) => void\n  /** Required: the sentence around the select is not its label. */\n  \"aria-label\": string\n  wrapperClassName?: string\n}\n\n/**\n * A native <select> that reads as part of a sentence. The real select sits invisibly on top\n * (so the platform picker and keyboard work); the visible text rolls to the new choice and the\n * underline stretches to its width.\n */\nfunction InlineSelect({\n  options,\n  value: valueProp,\n  defaultValue,\n  onValueChange,\n  className,\n  wrapperClassName,\n  disabled,\n  ...props\n}: InlineSelectProps) {\n  const [inner, setInner] = React.useState(defaultValue ?? options[0]?.value ?? \"\")\n  const value = valueProp ?? inner\n  const index = Math.max(0, options.findIndex((o) => o.value === value))\n  const label = options[index]?.label ?? \"\"\n  const [state, setState] = React.useState({ index, dir: 0 })\n  if (state.index !== index) setState({ index, dir: index > state.index ? 1 : -1 })\n\n  const measure = React.useRef<HTMLSpanElement>(null)\n  const [width, setWidth] = React.useState<number | \"auto\">(\"auto\")\n  React.useLayoutEffect(() => {\n    if (measure.current) setWidth(measure.current.getBoundingClientRect().width)\n  }, [label])\n\n  return (\n    <span\n      data-slot=\"inline-select\"\n      data-disabled={disabled || undefined}\n      className={cn(\n        \"group/is relative inline-flex items-baseline rounded-[3px] align-baseline font-semibold text-brand has-[select:focus-visible]:ring-2 has-[select:focus-visible]:ring-ring has-[select:focus-visible]:ring-offset-2 has-[select:focus-visible]:ring-offset-background\",\n        disabled && \"opacity-55\",\n        wrapperClassName\n      )}\n    >\n      <span ref={measure} aria-hidden=\"true\" className=\"invisible absolute left-0 top-0 whitespace-pre\">\n        {label}\n      </span>\n      <motion.span\n        aria-hidden=\"true\"\n        initial={false}\n        animate={{ width }}\n        transition={springSoft}\n        className=\"relative inline-flex overflow-hidden whitespace-pre border-b-[1.5px] border-dashed border-brand/50 transition-colors group-hover/is:border-solid group-hover/is:border-brand\"\n      >\n        <AnimatePresence initial={false} mode=\"popLayout\" custom={state.dir}>\n          <motion.span\n            key={label}\n            custom={state.dir}\n            variants={roll}\n            initial=\"enter\"\n            animate=\"center\"\n            exit=\"exit\"\n            transition={spring}\n            className=\"inline-block\"\n          >\n            {label}\n          </motion.span>\n        </AnimatePresence>\n      </motion.span>\n      <motion.span\n        aria-hidden=\"true\"\n        className=\"ml-0.5 inline-flex self-center\"\n        whileHover={{ y: 1 }}\n        transition={spring}\n      >\n        <ChevronDown className=\"size-[0.85em]\" strokeWidth={2.5} />\n      </motion.span>\n      <select\n        data-slot=\"inline-select-native\"\n        value={value}\n        disabled={disabled}\n        onChange={(e) => {\n          if (valueProp === undefined) setInner(e.target.value)\n          onValueChange?.(e.target.value)\n        }}\n        className={cn(\n          \"absolute inset-0 size-full cursor-pointer appearance-none opacity-0 outline-none disabled:cursor-not-allowed\",\n          className\n        )}\n        {...props}\n      >\n        {options.map((o) => (\n          <option key={o.value} value={o.value}>\n            {o.label}\n          </option>\n        ))}\n      </select>\n    </span>\n  )\n}\n\nexport { InlineSelect }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "forms"
+  ],
+  "type": "registry:ui"
+}

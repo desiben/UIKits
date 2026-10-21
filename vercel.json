@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/r/[name].js": { "includeFiles": "api/_registry/**" }
+  },
+  "rewrites": [
+    { "source": "/r/:name.json", "destination": "/api/r/:name" }
+  ]
+}

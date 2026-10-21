@@ -16,8 +16,8 @@
            .replace(/ ([a-zA-Z-:@]+)=(&quot;|")(.*?)\2/g, ' <span class="tk-attr">$1</span>=<span class="tk-str">"$3"</span>')
            .replace(/ ([a-zA-Z-:@]+)='(.*?)'/g, " <span class=\"tk-attr\">$1</span>=<span class=\"tk-str\">'$2'</span>");
     } else {
-      s = s.replace(/(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g, '<span class="tk-com">$1</span>')
-           .replace(/("[^"\n]*"|'[^'\n]*'|`[^`]*`)/g, '<span class="tk-str">$1</span>')
+      // strings and comments in one pass so "https://…" stays a string
+      s = s.replace(/("[^"\n]*"|'[^'\n]*'|`[^`]*`)|(\/\/[^\n]*|\/\*[\s\S]*?\*\/)/g, (m, str, com) => str ? `<span class="tk-str">${str}</span>` : `<span class="tk-com">${com}</span>`)
            .replace(/\b(import|from|const|let|return|export|default|function|module|exports|presets|require)\b/g, '<span class="tk-kw">$1</span>')
            .replace(/(&lt;\/?)([A-Z][A-Za-z.]*)/g, '$1<span class="tk-tag">$2</span>');
     }
@@ -25,6 +25,10 @@
   }
   // Pretty-print preview HTML: collapse inline SVG <use> to a readable form
   const tidy = (h) => h.replace(/<svg class="icon([^"]*)" aria-hidden="true"><use href="#([^"]+)"\/><\/svg>/g, '<svg class="icon$1"><use href="#$2"/></svg>');
+  /* shadcn CLI install command with package-manager tabs (choice remembered across pages). */
+  const PM = { pnpm: (c) => `pnpm dlx shadcn@latest ${c}`, npm: (c) => `npx shadcn@latest ${c}`, yarn: (c) => `yarn dlx shadcn@latest ${c}`, bun: (c) => `bunx --bun shadcn@latest ${c}` };
+  const pmNow = () => { try { return PM[localStorage.getItem("facet-pm")] ? localStorage.getItem("facet-pm") : "pnpm"; } catch (e) { return "pnpm"; } };
+  const install = (cmd) => { const pm = pmNow(), full = PM[pm](cmd); return `<div class="pm-install" data-pm-cmd="${esc(cmd)}"><div class="pm-tabs" role="tablist" aria-label="Package manager">${i("terminal", "icon-sm")}${Object.keys(PM).map((k) => `<button type="button" role="tab" data-pm="${k}" aria-selected="${k === pm}">${k}</button>`).join("")}<button type="button" class="btn btn-ghost btn-sm icon-btn pm-copy" data-copy-text="${esc(full)}" aria-label="Copy command">${i("copy", "icon-sm")}</button></div><pre class="code"><code>${esc(full)}</code></pre></div>`; };
   const codeBlock = (code, lang = "js") => `<div class="codeblock"><button class="copy" data-copy>${i("copy", "icon-sm")} Copy</button><pre class="code"><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, lang)}</code></pre></div>`;
 
   /* ---------- AI agent examples (agents/*.html) ---------- */
@@ -89,9 +93,23 @@
       <tr><td><code>tailwind.preset.js</code></td><td>tokens/</td><td>Tailwind / shadcn/ui projects</td></tr>
       <tr><td><code>facet.css</code> + <code>facet.js</code></td><td>styleguide/assets/</td><td>Drop-in components for plain HTML</td></tr>
       <tr><td>Figma library</td><td><a href="${FIGMA}" target="_blank" rel="noopener">Get the Figma file</a></td><td>Design, prototypes, documentation, templates</td></tr></tbody></table>
-    <div class="callout">${i("info")}<div>The CSS here is a faithful reference implementation of the Figma components, not a React package. For React, use shadcn/ui components with the Facet Tailwind preset (see <a href="#/installation">Installation</a>).</div></div>`);
+    <div class="callout">${i("info")}<div>The CSS here is a faithful reference implementation of the Figma components, not a React package. For React, install the <a href="react/">animated React components</a> with the shadcn CLI (see <a href="#/installation">Installation</a>).</div></div>`);
 
-  P.installation = () => page("Getting started", "Installation", "Three ways to use Facet: plain HTML, Tailwind + shadcn/ui, or tokens only.", `
+  P.installation = () => page("Getting started", "Installation", "Four ways to use Facet: animated React components, plain HTML, Tailwind + shadcn/ui, or tokens only.", `
+    <h2 id="react">React · animated components <span class="badge badge-brand">New</span></h2>
+    <p>All ${R.length} components ship as React components with motion on every interaction (springs, layout animations, gestures), built on Radix and Tailwind. They install into your project with the shadcn CLI, so you own the code. <a href="react/">Browse them live</a>.</p>
+    <p><b>1.</b> Start a project with shadcn (Next.js, Vite, React Router, Astro or TanStack Start):</p>${install("init")}
+    <p><b>2.</b> Add the Facet registry to <code>components.json</code> and put the license key from your Gumroad receipt in <code>.env.local</code> as <code>FACET_LICENSE_KEY=…</code>:</p>
+    ${codeBlock(`{
+  "registries": {
+    "@facet": {
+      "url": "https://facetui.vercel.app/r/{name}.json",
+      "headers": { "Authorization": "Bearer \${FACET_LICENSE_KEY}" }
+    }
+  }
+}`, "js")}
+    <p><b>3.</b> Add the theme, then any component, or everything at once:</p>${install("add @facet/theme")}${install("add @facet/all")}
+    <p>Wrap your app in <code>&lt;FacetMotion&gt;</code> (from <code>@/lib/motion</code>) once so every animation respects the OS "reduce motion" setting.</p>
     <h2 id="html">1 · Plain HTML / any framework</h2><p>Copy <code>styleguide/assets/</code> into your project and include:</p>
     ${codeBlock(`<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -356,7 +374,8 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     P["components/" + c.slug] = () => page(`Components ${i("chevron-right", "icon-sm")} ${c.group}`, c.name, c.desc,
       c.examples.map(example).join("") +
       (MOTION[c.slug] ? `<h2 id="motion">Motion</h2><div class="callout">${i("zap")}<div><b>${MOTION[c.slug][0]}.</b> ${MOTION[c.slug][1]} Turned off automatically for reduced-motion users. <a href="#/motion">Motion guide</a></div></div>` : "") +
-      `<h2 id="react">React (shadcn/ui + Facet preset)</h2>${codeBlock(c.react, "js")}
+      `<h2 id="react-animated">React · animated</h2><p>Install the animated React version with the shadcn CLI. <a href="react/#${c.slug}">See it live</a> · <a href="#/installation">Set up the registry</a></p>${install(`add @facet/${c.slug}`)}
+       <h2 id="react">React (shadcn/ui markup)</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
       `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? `<span class="badge badge-accent">New in v${c.since || "1.2"}</span>` : ""}`);
@@ -442,6 +461,12 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     if (cm) { const slug = cm.dataset.copyMd; const txt = slug ? window.FACET_MD(R.find((c) => c.slug === slug)) : `# Facet UI components\n\n` + CATS.map((g) => `## ${g}\n\n` + R.filter((c) => c.group === g).map((c) => `- **${c.name}** — ${c.desc}`).join("\n")).join("\n\n"); (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(() => Facet.toast({ title: "Markdown copied", description: "Paste it into your AI assistant or docs.", timeout: 2200 })).catch(() => {}); }
     // style themes
     const st = e.target.closest("[data-style-pick]"); if (st) T.setStyle(st.dataset.stylePick);
+    // package manager tabs on install commands
+    const pmb = e.target.closest("[data-pm]");
+    if (pmb) {
+      const pm = pmb.dataset.pm; try { localStorage.setItem("facet-pm", pm); } catch (err) {}
+      document.querySelectorAll(".pm-install").forEach((box) => { const full = PM[pm](box.dataset.pmCmd); box.querySelectorAll("[data-pm]").forEach((b) => b.setAttribute("aria-selected", b.dataset.pm === pm)); box.querySelector("code").textContent = full; box.querySelector(".pm-copy").dataset.copyText = full; });
+    }
     // copy
     const cp = e.target.closest("[data-copy], [data-copy-ex], [data-copy-text]");
     if (cp) {

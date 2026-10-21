@@ -291,7 +291,7 @@ function KanbanColumn({ id, title, color = "var(--chart-1)", footer, className, 
         animate={{ opacity: 1, y: 0 }}
         transition={springSoft}
       >
-        <AnimatePresence initial={false}>{items}</AnimatePresence>
+        {items}
       </motion.div>
       {footer}
     </section>

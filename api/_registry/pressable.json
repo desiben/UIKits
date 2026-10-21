@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pressable",
+  "title": "Pressable Feedback",
+  "description": "Press feedback wrapper — scale, highlight or lift — for any card or tile.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "@facet/motion",
+    "@facet/theme",
+    "@facet/utils"
+  ],
+  "files": [
+    {
+      "path": "registry/facet/ui/pressable.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { motion, type HTMLMotionProps } from \"motion/react\"\n\nimport { cn } from \"@/registry/facet/lib/utils\"\nimport { spring, springSoft } from \"@/registry/facet/lib/motion\"\n\ntype PressFeedback = \"scale\" | \"highlight\" | \"lift\"\n\ninterface PressableProps extends Omit<HTMLMotionProps<\"div\">, \"children\"> {\n  /** scale (default): shrink on press · highlight: press tint · lift: rise on hover, settle on press. */\n  feedback?: PressFeedback\n  /** Scale while pressed (default 0.97). */\n  pressScale?: number\n  disabled?: boolean\n  children?: React.ReactNode\n}\n\n/**\n * Wraps anything clickable with tactile press feedback. Renders a focusable role=\"button\"\n * that activates on Enter/Space; motion's whileTap also plays for keyboard presses.\n */\nfunction Pressable({\n  feedback = \"scale\",\n  pressScale = 0.97,\n  disabled = false,\n  role = \"button\",\n  tabIndex,\n  className,\n  children,\n  onClick,\n  onKeyDown,\n  ...props\n}: PressableProps) {\n  const [pressed, setPressed] = React.useState(false)\n\n  return (\n    <motion.div\n      data-slot=\"pressable\"\n      data-feedback={feedback}\n      data-pressed={pressed || undefined}\n      role={role}\n      tabIndex={disabled ? -1 : (tabIndex ?? 0)}\n      aria-disabled={disabled || undefined}\n      onClick={disabled ? undefined : onClick}\n      onKeyDown={(e) => {\n        onKeyDown?.(e)\n        if (disabled || e.defaultPrevented) return\n        if (role === \"button\" && (e.key === \"Enter\" || e.key === \" \")) {\n          e.preventDefault()\n          e.currentTarget.click()\n        }\n      }}\n      onTapStart={() => setPressed(true)}\n      onTap={() => setPressed(false)}\n      onTapCancel={() => setPressed(false)}\n      whileTap={disabled ? undefined : feedback === \"lift\" ? { y: 0, scale: 0.99 } : feedback === \"scale\" ? { scale: pressScale } : { scale: 0.995 }}\n      whileHover={disabled || feedback !== \"lift\" ? undefined : { y: -3 }}\n      transition={feedback === \"lift\" ? springSoft : spring}\n      className={cn(\n        \"group/pressable relative cursor-pointer overflow-hidden outline-none [-webkit-tap-highlight-color:transparent] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n        feedback === \"lift\" && \"transition-shadow duration-300 hover:shadow-lg\",\n        disabled && \"pointer-events-none opacity-50\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      {feedback === \"highlight\" && (\n        <motion.span\n          aria-hidden=\"true\"\n          className=\"pointer-events-none absolute inset-0 bg-foreground\"\n          initial={false}\n          animate={{ opacity: pressed ? 0.07 : 0 }}\n          transition={{ duration: pressed ? 0.05 : 0.3 }}\n        />\n      )}\n    </motion.div>\n  )\n}\n\nexport { Pressable }\nexport type { PressableProps, PressFeedback }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "feedback"
+  ],
+  "type": "registry:ui"
+}

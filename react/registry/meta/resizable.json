@@ -1,0 +1,11 @@
+{
+  "name": "resizable",
+  "title": "Resizable",
+  "description": "Resizable panel groups (react-resizable-panels) with animated collapse and a handle that grows on drag.",
+  "categories": [
+    "layout"
+  ],
+  "files": [
+    "ui/resizable.tsx"
+  ]
+}

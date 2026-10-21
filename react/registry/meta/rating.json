@@ -1,0 +1,11 @@
+{
+  "name": "rating",
+  "title": "Rating",
+  "description": "Star rating: stars pop and fill on hover and select, with half-star display.",
+  "categories": [
+    "feedback"
+  ],
+  "files": [
+    "ui/rating.tsx"
+  ]
+}
