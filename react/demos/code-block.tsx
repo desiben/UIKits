@@ -17,7 +17,7 @@ export default function CodeBlockDemo() {
       <CodeBlock language="tsx" filename="save.tsx" showLineNumbers highlightLines={[5]} code={tsx} />
       <div className="grid gap-4 sm:grid-cols-2">
         <CodeBlock language="css" filename="tokens.css" removedLines={[1]} addedLines={[2]} code={css} />
-        <CodeBlock hideHeader language="sh" code={"# install the component\nnpx shadcn add @facet/code-block"} />
+        <CodeBlock hideHeader language="sh" code={"# install the component\nnpx facetui@latest add code-block"} />
       </div>
     </div>
   )

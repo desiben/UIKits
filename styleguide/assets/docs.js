@@ -25,9 +25,9 @@
   }
   // Pretty-print preview HTML: collapse inline SVG <use> to a readable form
   const tidy = (h) => h.replace(/<svg class="icon([^"]*)" aria-hidden="true"><use href="#([^"]+)"\/><\/svg>/g, '<svg class="icon$1"><use href="#$2"/></svg>');
-  /* shadcn CLI install command with package-manager tabs (choice remembered across pages). */
-  const PM = { pnpm: (c) => `pnpm dlx shadcn@latest ${c}`, npm: (c) => `npx shadcn@latest ${c}`, yarn: (c) => `yarn dlx shadcn@latest ${c}`, bun: (c) => `bunx --bun shadcn@latest ${c}` };
-  const pmNow = () => { try { return PM[localStorage.getItem("facet-pm")] ? localStorage.getItem("facet-pm") : "pnpm"; } catch (e) { return "pnpm"; } };
+  /* facetui CLI install command with package-manager tabs (choice remembered across pages). */
+  const PM = { npm: (c) => `npx facetui@latest ${c}`, pnpm: (c) => `pnpm dlx facetui@latest ${c}`, yarn: (c) => `yarn dlx facetui@latest ${c}`, bun: (c) => `bunx facetui@latest ${c}` };
+  const pmNow = () => { try { return PM[localStorage.getItem("facet-pm")] ? localStorage.getItem("facet-pm") : "npm"; } catch (e) { return "npm"; } };
   const install = (cmd) => { const pm = pmNow(), full = PM[pm](cmd); return `<div class="pm-install" data-pm-cmd="${esc(cmd)}"><div class="pm-tabs" role="tablist" aria-label="Package manager">${i("terminal", "icon-sm")}${Object.keys(PM).map((k) => `<button type="button" role="tab" data-pm="${k}" aria-selected="${k === pm}">${k}</button>`).join("")}<button type="button" class="btn btn-ghost btn-sm icon-btn pm-copy" data-copy-text="${esc(full)}" aria-label="Copy command">${i("copy", "icon-sm")}</button></div><pre class="code"><code>${esc(full)}</code></pre></div>`; };
   const codeBlock = (code, lang = "js") => `<div class="codeblock"><button class="copy" data-copy>${i("copy", "icon-sm")} Copy</button><pre class="code"><code data-raw="${esc(code).replace(/"/g, "&quot;")}">${hl(code, lang)}</code></pre></div>`;
 
@@ -75,9 +75,9 @@
 
   /* ---------- pages ---------- */
   const P = {};
-  P.introduction = () => page("Getting started", "Facet UI", "A token-driven UI kit for product teams — Figma library, design tokens and a framework-agnostic CSS/JS implementation that mirrors shadcn/ui's component model with its own visual language.",
+  P.introduction = () => page("Getting started", "Facet UI", "A token-driven UI kit for product teams — Figma library, design tokens and a framework-agnostic CSS/JS implementation that follows the component model React developers already know with its own visual language.",
     `<div class="ex-cards">
-      ${[["layers", "158 components", "In Figma with Variables and every state, including every shadcn/ui component. 109 are documented and working on this site."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
+      ${[["layers", "158 components", "In Figma with Variables and every state, including every standard product-UI component. 109 are documented and working on this site."], ["palette", "6 brand themes", "Iris, Ember, Lagoon, Rose, Cobalt, Forest — or any color you pick."], ["sun", "Light & dark", "62 semantic color tokens with values for both modes."], ["sliders-horizontal", "Density", "Comfortable and Compact control heights, padding and row heights."]].map(([ic, b, s]) => `<div class="card ex-card" data-tilt="3"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${s}</span></div>`).join("")}
     </div>
     <div class="example" style="margin-top:24px"><video class="showcase-video" autoplay muted loop playsinline preload="metadata" poster="assets/showcase/facet-micro-interactions-poster.jpg" aria-label="Facet UI micro-interactions demo"><source src="assets/showcase/facet-micro-interactions.webm" type="video/webm"><source src="assets/showcase/facet-micro-interactions.mp4" type="video/mp4"></video></div>
     <p class="t-body-sm text-tertiary">Micro-interactions demo · <a href="#/showcase">Showcase</a></p>
@@ -85,30 +85,21 @@
     <ul class="prose"><li><b>Tokens first.</b> Every color, space, radius and type style in the components is a variable. Change the token, not the component.</li>
     <li><b>The Facet cut.</b> Containers and controls have a slightly sharper top-right corner — a quiet, recognizable signature.</li>
     <li><b>Signal rail.</b> A 3px brand bar marks active, selected and toned states (sidebar, menus, alerts, toasts).</li>
-    <li><b>Familiar API.</b> Names and anatomy follow shadcn/ui so engineers can map components 1:1 to React.</li></ul>
+    <li><b>Familiar API.</b> Names and anatomy follow common React conventions, so engineers can map components 1:1 to code.</li></ul>
     <h2 id="whats-inside">What's inside</h2>
     <table class="api"><thead><tr><th>Part</th><th>Path</th><th>Use it for</th></tr></thead><tbody>
       <tr><td><code>tokens.css</code></td><td>tokens/</td><td>CSS custom properties for every theme, brand and density</td></tr>
       <tr><td><code>facet.tokens.json</code></td><td>tokens/</td><td>W3C Design Tokens format (Style Dictionary, Tokens Studio)</td></tr>
-      <tr><td><code>tailwind.preset.js</code></td><td>tokens/</td><td>Tailwind / shadcn/ui projects</td></tr>
+      <tr><td><code>tailwind.preset.js</code></td><td>tokens/</td><td>Tailwind projects</td></tr>
       <tr><td><code>facet.css</code> + <code>facet.js</code></td><td>styleguide/assets/</td><td>Drop-in components for plain HTML</td></tr>
       <tr><td>Figma library</td><td><a href="${FIGMA}" target="_blank" rel="noopener">Get the Figma file</a></td><td>Design, prototypes, documentation, templates</td></tr></tbody></table>
-    <div class="callout">${i("info")}<div>The CSS here is a faithful reference implementation of the Figma components, not a React package. For React, install the <a href="react/">animated React components</a> with the shadcn CLI (see <a href="#/installation">Installation</a>).</div></div>`);
+    <div class="callout">${i("info")}<div>The CSS here is a faithful reference implementation of the Figma components, not a React package. For React, install the <a href="react/">animated React components</a> with the Facet CLI, <code>npx facetui</code> (see <a href="#/installation">Installation</a>).</div></div>`);
 
-  P.installation = () => page("Getting started", "Installation", "Four ways to use Facet: animated React components, plain HTML, Tailwind + shadcn/ui, or tokens only.", `
+  P.installation = () => page("Getting started", "Installation", "Four ways to use Facet: animated React components, plain HTML, Tailwind CSS, or tokens only.", `
     <h2 id="react">React · animated components <span class="badge badge-brand">New</span></h2>
-    <p>All ${R.length} components ship as React components with motion on every interaction (springs, layout animations, gestures), built on Radix and Tailwind. They install into your project with the shadcn CLI, so you own the code. <a href="react/">Browse them live</a>.</p>
-    <p><b>1.</b> Start a project with shadcn (Next.js, Vite, React Router, Astro or TanStack Start):</p>${install("init")}
-    <p><b>2.</b> Add the Facet registry to <code>components.json</code> and put the license key from your Gumroad receipt in <code>.env.local</code> as <code>FACET_LICENSE_KEY=…</code>:</p>
-    ${codeBlock(`{
-  "registries": {
-    "@facet": {
-      "url": "https://facetui.vercel.app/r/{name}.json",
-      "headers": { "Authorization": "Bearer \${FACET_LICENSE_KEY}" }
-    }
-  }
-}`, "js")}
-    <p><b>3.</b> Add the theme, then any component, or everything at once:</p>${install("add @facet/theme")}${install("add @facet/all")}
+    <p>All ${R.length} components ship as React components with motion on every interaction (springs, layout animations, gestures), built on Radix and Tailwind. They install into your project with the Facet CLI, so you own the code. <a href="react/">Browse them live</a>.</p>
+    <p><b>1.</b> In your React project (Next.js, Vite, React Router, Astro or TanStack Start), set up Facet. This adds Tailwind CSS v4 if needed, the <code>@/</code> import alias and the Facet theme. It asks once for the license key from your Gumroad receipt and saves it to <code>.env.local</code>.</p>${install("init")}
+    <p><b>2.</b> Add any components, or everything at once:</p>${install("add button dialog tabs")}${install("add --all")}
     <p>Wrap your app in <code>&lt;FacetMotion&gt;</code> (from <code>@/lib/motion</code>) once so every animation respects the OS "reduce motion" setting.</p>
     <h2 id="html">1 · Plain HTML / any framework</h2><p>Copy <code>styleguide/assets/</code> into your project and include:</p>
     ${codeBlock(`<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,7 +111,7 @@
 
 <html data-theme="light" data-brand="iris" data-density="comfortable">`, "html")}
     <p>Then copy any example's HTML from the component pages.</p>
-    <h2 id="tailwind">2 · Tailwind CSS + shadcn/ui</h2>
+    <h2 id="tailwind">2 · Tailwind CSS</h2>
     ${codeBlock(`// tailwind.config.js
 module.exports = {
   presets: [require("./tokens/tailwind.preset.js")],
@@ -129,7 +120,7 @@ module.exports = {
     ${codeBlock(`/* app/globals.css */
 @import "./tokens/tokens.css";
 body { font-family: var(--font-sans); background: var(--bg-canvas); color: var(--text-primary); }`, "js")}
-    <p>The preset maps shadcn's names (<code>bg-primary</code>, <code>text-muted-foreground</code>, <code>border-input</code>, <code>ring</code>) to Facet tokens, and adds the full Facet groups: <code>bg-bg-subtle</code>, <code>text-fg-secondary</code>, <code>border-line-strong</code>, <code>rounded-lg</code>, <code>h-control-md</code>…</p>
+    <p>The preset maps the standard semantic names (<code>bg-primary</code>, <code>text-muted-foreground</code>, <code>border-input</code>, <code>ring</code>) to Facet tokens, and adds the full Facet groups: <code>bg-bg-subtle</code>, <code>text-fg-secondary</code>, <code>border-line-strong</code>, <code>rounded-lg</code>, <code>h-control-md</code>…</p>
     <h2 id="tokens">3 · Tokens only</h2><p>Use <code>tokens/facet.tokens.json</code> with Style Dictionary or Tokens Studio, or regenerate everything with <code>python3 scripts/build_tokens.py</code>.</p>`);
 
   P.theming = () => page("Getting started", "Theming", "Three independent axes, set with data attributes on &lt;html&gt; or on any subtree.", `
@@ -279,7 +270,7 @@ Facet.motion.refresh(el)    // after injecting new markup (SPA routes, modals)`,
     <h2 id="catalog">Interaction catalog</h2>
     <table class="api"><thead><tr><th>Component</th><th>Trigger</th><th>Behaviour</th></tr></thead><tbody>
     ${R.filter((c) => MOTION[c.slug]).map((c) => `<tr><td><a href="#/components/${c.slug}">${c.name}</a></td><td>${MOTION[c.slug][0]}</td><td>${MOTION[c.slug][1]}</td></tr>`).join("")}</tbody></table>
-    <h2 id="react-motion">In React</h2><p>The CSS layer works unchanged with shadcn/ui markup. For JS-driven effects (tilt, magnetic, sliding indicators) use <code>motion</code> (Framer Motion) with the same values:</p>
+    <h2 id="react-motion">In React</h2><p>The CSS layer works with any React markup, and the animated React components already include this motion. For JS-driven effects (tilt, magnetic, sliding indicators) use <code>motion</code> (Framer Motion) with the same values:</p>
     ${codeBlock(`import { motion } from "motion/react"
 const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-spring @ 320ms
 
@@ -372,7 +363,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     timeline: ["Reveal / live", "Items rise in sequence; AI nodes pulse; unread notifications ping."],
     pricing: ["Idle / hover", "The featured plan has a slowly rotating gradient border; cards lift on hover."],
   };
-  P.components = () => page("Components", "Components", `${R.length} documented components in ${CATS.length} categories — ${R.filter((c) => c.isNew && !c.since).length} new in v1.2 and ${R.filter((c) => c.since === "1.3").length} in v1.3, so every shadcn/ui component has a Facet counterpart. Every one is a real Figma component with Variables, and a working HTML/CSS version here. Each card is a live, scaled-down preview.`,
+  P.components = () => page("Components", "Components", `${R.length} documented components in ${CATS.length} categories — ${R.filter((c) => c.isNew && !c.since).length} new in v1.2 and ${R.filter((c) => c.since === "1.3").length} in v1.3, covering every standard product-UI component. Every one is a real Figma component with Variables, and a working HTML/CSS version here. Each card is a live, scaled-down preview.`,
     `<div class="ov-filter"><div class="input-group" style="max-width:320px;flex:1"><svg class="icon"><use href="#search"/></svg><input class="input" id="ov-q" placeholder="Filter components…" aria-label="Filter components"></div><div class="row ov-chips">${CATS.map((g) => `<a class="chip" href="javascript:void 0" data-scroll="cat-${g.replace(/\W+/g, "-")}">${i(CAT_ICON[g], "icon-sm")} ${g}</a>`).join("")}</div></div>` +
     CATS.map((g) => { const items = R.filter((c) => c.group === g); if (!items.length) return ""; return `<h2 id="cat-${g.replace(/\W+/g, "-")}">${g} <span class="badge">${items.length}</span></h2><div class="ov-grid">${items.map((c) => `<a class="ov-card" href="#/components/${c.slug}" data-name="${c.name.toLowerCase()} ${g.toLowerCase()}"><div class="ov-thumb" aria-hidden="true" inert><div class="ov-inner">${c.examples[0].html}</div></div><div class="ov-meta"><b>${c.name}</b>${c.isNew ? '<span class="badge badge-accent">New</span>' : ""}<span class="ov-count">${c.examples.length} example${c.examples.length > 1 ? "s" : ""}</span></div></a>`).join("")}</div>`; }).join(""),
     `<span class="badge badge-outline">${i("layers", "icon-sm")} ${R.length} documented · 144 in Figma</span><button class="badge badge-outline" data-copy-md style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>`);
@@ -382,8 +373,8 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     P["components/" + c.slug] = () => page(`Components ${i("chevron-right", "icon-sm")} ${c.group}`, c.name, c.desc,
       c.examples.map(example).join("") +
       (MOTION[c.slug] ? `<h2 id="motion">Motion</h2><div class="callout">${i("zap")}<div><b>${MOTION[c.slug][0]}.</b> ${MOTION[c.slug][1]} Turned off automatically for reduced-motion users. <a href="#/motion">Motion guide</a></div></div>` : "") +
-      `<h2 id="react-animated">React · animated</h2><p>Install the animated React version with the shadcn CLI. <a href="react/#${c.slug}">See it live</a> · <a href="#/installation">Set up the registry</a></p>${install(`add @facet/${c.slug}`)}
-       <h2 id="react">React (shadcn/ui markup)</h2>${codeBlock(c.react, "js")}
+      `<h2 id="react-animated">React · animated</h2><p>Install the animated React version with the Facet CLI. <a href="react/#${c.slug}">See it live</a> · <a href="#/installation">First-time setup</a></p>${install(`add ${c.slug}`)}
+       <h2 id="react">React markup</h2>${codeBlock(c.react, "js")}
        <h2 id="api">API</h2><table class="api"><thead><tr><th>Name</th><th>Type</th><th>Description</th></tr></thead><tbody>${c.api.map(([a, b, d]) => `<tr><td><code>${esc(a)}</code></td><td>${b}</td><td>${d}</td></tr>`).join("")}</tbody></table>
        <h2 id="a11y">Accessibility</h2><ul class="prose">${c.a11y.map((x) => `<li>${esc(x).replace(/&lt;(\/?\w+)&gt;/g, "<code>&lt;$1&gt;</code>")}</li>`).join("")}</ul>`,
       `<span class="badge badge-outline">${i("component", "icon-sm")} Figma: ${c.figma}</span><a class="badge badge-outline" href="${FIGMA}" target="_blank" rel="noopener" style="text-decoration:none">${i("external-link", "icon-sm")} Get the Figma file</a><button class="badge badge-outline" data-copy-md="${c.slug}" style="cursor:pointer;border:0">${i("copy", "icon-sm")} Copy Markdown</button>${c.isNew ? `<span class="badge badge-accent">New in v${c.since || "1.2"}</span>` : ""}`);

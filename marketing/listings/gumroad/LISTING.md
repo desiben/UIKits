@@ -32,7 +32,7 @@ Version descriptions (paste into each version):
 
 ## 3. Summary (the one-liner under the title)
 
-> 158 Figma components with Variables, every shadcn/ui component, 10 app templates, light & dark, 6 brand colors and matching HTML/CSS + React code.
+> 158 Figma components with Variables, every standard product-UI component, 10 app templates, light & dark, 6 brand colors and matching HTML/CSS + React code.
 
 ## 4. Description
 
@@ -48,7 +48,7 @@ Live preview: https://facetui.vercel.app
 ## What's inside
 
 - 158 components, 105 variant sets and 622 variants, all built with Variables and Auto Layout
-- Every shadcn/ui component, including the new chat and agent components: Bubble, Message Scroller, Marker, Questionnaire and Trace
+- Every standard product-UI component, including the new chat and agent components: Bubble, Message Scroller, Marker, Questionnaire and Trace
 - 10 app templates, 26 screens, desktop and mobile (CRM, finance, analytics, settings, auth and more)
 - Light & Dark modes, 6 brand colors and 4 style themes (Default, Soft, Glass, Mono)
 - Comfortable and Compact density
@@ -59,7 +59,7 @@ Live preview: https://facetui.vercel.app
 ## Code included
 
 - HTML/CSS reference implementation of 109 components with working behaviour
-- Design tokens as CSS variables, JSON and a Tailwind preset that maps shadcn/ui names to Facet tokens
+- Design tokens as CSS variables, JSON and a Tailwind preset that maps standard semantic class names to Facet tokens
 - 6 AI agent demos (chain of thought, tool calls, approvals)
 
 ## Requirements
@@ -78,7 +78,7 @@ Personal, Commercial and Team licenses. No resale or redistribution of the kit o
 
 ## 5. Tags
 
-`figma`, `ui kit`, `design system`, `dashboard`, `shadcn`, `figma variables`, `saas`, `admin template`, `tailwind`, `components`
+`figma`, `ui kit`, `design system`, `dashboard`, `react`, `figma variables`, `saas`, `admin template`, `tailwind`, `components`
 
 ## 6. Content (what the buyer gets)
 

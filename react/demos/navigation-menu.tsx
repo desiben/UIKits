@@ -45,7 +45,7 @@ export default function NavigationMenuDemo() {
               />
               <NavigationMenuCard href="#" onClick={prevent} icon={<BookOpen />} title="Introduction" description="Install and set up your theme." />
               <NavigationMenuCard href="#" onClick={prevent} icon={<Layers />} title="Theming" description="Brand colors, density and style themes." />
-              <NavigationMenuCard href="#" onClick={prevent} icon={<Code />} title="Installation" description="Add components with the shadcn CLI." />
+              <NavigationMenuCard href="#" onClick={prevent} icon={<Code />} title="Installation" description="Add components with npx facetui." />
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem value="components">

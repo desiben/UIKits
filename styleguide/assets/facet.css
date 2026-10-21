@@ -1122,7 +1122,7 @@ details[open] > summary .chev { transform: rotate(90deg); }
 /* container-query roots need a definite width inside flex/grid parents */
 .list-view, .cell-group, .agenda, .carousel, .rte, .navbar, .map, .chat-conversation, .prompt-input, .chart, .app-layout, .data-grid, .kpi-group, .widget-grid, .choice-group, .item-card-group, .resizable { width: 100%; }
 /* =========================================================================
-   Facet UI v1.3 — shadcn/ui parity
+   Facet UI v1.3 — full component coverage
    Aspect Ratio · Button Group · Input Group · Label · Collapsible · Scroll Area ·
    Sonner · Bubble · Marker · Message Scroller · Questionnaire · Trace ·
    Combobox · Select · Textarea · Menubar · Navigation Menu

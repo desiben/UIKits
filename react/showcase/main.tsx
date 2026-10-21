@@ -21,13 +21,13 @@ const grouped = GROUPS.map(([id, label]) => ({
 })).filter((g) => g.items.length)
 
 const PMS = {
-  pnpm: (c: string) => `pnpm dlx shadcn@latest ${c}`,
-  npm: (c: string) => `npx shadcn@latest ${c}`,
-  yarn: (c: string) => `yarn dlx shadcn@latest ${c}`,
-  bun: (c: string) => `bunx --bun shadcn@latest ${c}`,
+  npm: (c: string) => `npx facetui@latest ${c}`,
+  pnpm: (c: string) => `pnpm dlx facetui@latest ${c}`,
+  yarn: (c: string) => `yarn dlx facetui@latest ${c}`,
+  bun: (c: string) => `bunx facetui@latest ${c}`,
 } as const
 type PM = keyof typeof PMS
-const PMContext = React.createContext<[PM, (p: PM) => void]>(["pnpm", () => {}])
+const PMContext = React.createContext<[PM, (p: PM) => void]>(["npm", () => {}])
 
 function CopyButton({ text }: { text: string }) {
   const [done, setDone] = React.useState(false)
@@ -109,13 +109,13 @@ function Section({ m }: { m: Meta }) {
         </div>
       </div>
       <div className="rounded-facet-xl border bg-card p-6 shadow-sm sm:p-8">{seen ? <Demo name={m.name} /> : <div className="h-24" />}</div>
-      <div className="mt-4"><Command cmd={`add @facet/${m.name}`} /></div>
+      <div className="mt-4"><Command cmd={`add ${m.name}`} /></div>
     </section>
   )
 }
 
 function App() {
-  const pmState = React.useState<PM>(() => (localStorage.getItem("facet-pm") as PM) || "pnpm")
+  const pmState = React.useState<PM>(() => (localStorage.getItem("facet-pm") as PM) || "npm")
   const [dark, setDark] = React.useState(() => document.documentElement.classList.contains("dark"))
   React.useEffect(() => { localStorage.setItem("facet-pm", pmState[0]) }, [pmState[0]])
   React.useEffect(() => { document.documentElement.classList.toggle("dark", dark) }, [dark])
@@ -155,27 +155,16 @@ function App() {
             <section id="install" className="pb-10">
               <p className="text-sm font-medium text-brand">Facet UI v1.3 · React</p>
               <h1 className="mt-2 text-4xl font-semibold tracking-tight sm:text-5xl">Animated components, installed with one command.</h1>
-              <p className="mt-4 max-w-2xl text-foreground-secondary">Every Facet UI component as a React component with motion on every interaction — springs, layout animations and gestures, built on Radix and Tailwind. They install into your project with the shadcn CLI, so you own the code.</p>
+              <p className="mt-4 max-w-2xl text-foreground-secondary">Every Facet UI component as a React component with motion on every interaction — springs, layout animations and gestures, built on Radix and Tailwind. They install into your project with the Facet CLI, so you own the code.</p>
               <ol className="mt-8 grid gap-6">
                 <li>
-                  <p className="mb-2 font-medium">1. Start a project (Next.js, Vite, React Router, Astro or TanStack Start)</p>
+                  <p className="mb-2 font-medium">1. Set up Facet in your React project (Next.js, Vite, React Router, Astro or TanStack Start)</p>
                   <Command cmd="init" />
+                  <p className="mt-2 text-sm text-foreground-secondary">Adds Tailwind CSS v4 if needed, the <code className="rounded bg-muted px-1 py-0.5 text-[13px]">@/</code> import alias and the Facet theme. It asks once for the license key from your Gumroad receipt and saves it to <code className="rounded bg-muted px-1 py-0.5 text-[13px]">.env.local</code>.</p>
                 </li>
                 <li>
-                  <p className="mb-2 font-medium">2. Add the Facet registry to <code className="rounded bg-muted px-1 py-0.5 text-[13px]">components.json</code></p>
-                  <pre className="overflow-x-auto rounded-facet-lg border bg-subtle px-4 py-3 font-mono text-[13px]">{`{
-  "registries": {
-    "@facet": {
-      "url": "https://facetui.vercel.app/r/{name}.json",
-      "headers": { "Authorization": "Bearer \${FACET_LICENSE_KEY}" }
-    }
-  }
-}`}</pre>
-                  <p className="mt-2 text-sm text-foreground-secondary">Put the license key from your Gumroad receipt in <code className="rounded bg-muted px-1 py-0.5 text-[13px]">.env.local</code> as <code className="rounded bg-muted px-1 py-0.5 text-[13px]">FACET_LICENSE_KEY=…</code></p>
-                </li>
-                <li>
-                  <p className="mb-2 font-medium">3. Add the theme, then any component — or everything at once</p>
-                  <div className="grid gap-3"><Command cmd="add @facet/theme" /><Command cmd="add @facet/all" /></div>
+                  <p className="mb-2 font-medium">2. Add any component, or everything at once</p>
+                  <div className="grid gap-3"><Command cmd="add button dialog tabs" /><Command cmd="add --all" /></div>
                 </li>
               </ol>
             </section>

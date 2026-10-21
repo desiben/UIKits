@@ -6,7 +6,7 @@
 
 **A token-driven design system: a Figma library, design tokens and a framework-agnostic HTML/CSS/JS implementation.**
 
-It follows shadcn/ui's component model and naming but has its own visual language: the *Facet cut* and the *signal rail*.
+It uses the component model and naming React developers already know, with its own visual language: the *Facet cut* and the *signal rail*.
 
 **[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · **[Buy on ETKits](https://etkits.vercel.app/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
 
@@ -18,19 +18,19 @@ It follows shadcn/ui's component model and naming but has its own visual languag
 
 ## New: animated React components
 
-All 109 components are now **React components with motion on every interaction**: springs, layout animations, gestures, drag, tilt and number tickers. They're built on Radix and Tailwind, and buyers install them with the shadcn CLI, so the code lands in their own project. [Browse them live](https://facetui.vercel.app/react/).
+All 109 components are now **React components with motion on every interaction**: springs, layout animations, gestures, drag, tilt and number tickers. They're built on Radix and Tailwind, and buyers install them with the Facet CLI (`npx facetui`), so the code lands in their own project. [Browse them live](https://facetui.vercel.app/react/).
 
 ```bash
-pnpm dlx shadcn@latest add @facet/theme   # Facet colours, radius and corner utilities
-pnpm dlx shadcn@latest add @facet/switch  # any component…
-pnpm dlx shadcn@latest add @facet/all     # …or everything
+npx facetui@latest init          # Tailwind, the @/ alias, the Facet theme and base files
+npx facetui@latest add switch    # any component…
+npx facetui@latest add --all     # …or everything
 ```
 
-Setup, the license-key header and the full component list are in [React components](#react-components-shadcn-cli).
+Setup, the license key and the full component list are in [React components](#react-components-facetui-cli).
 
 ## What's new in v1.3
 
-- **Full shadcn/ui coverage.** Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.
+- **Full component coverage.** Every standard product-UI component now has a Facet counterpart in Figma and in the style guide.
 - **17 new style-guide components:** Aspect Ratio, Button Group, Input Group, Label, Collapsible, Scroll Area, Sonner (stacked toasts), Bubble, Marker, Message Scroller, Questionnaire, Trace, Combobox, Select, Textarea, Menubar and Navigation Menu.
 - **13 new Figma variant sets (57 variants)** on the Components page, plus a composed Trace: Label, Button Group, Input Group, Q Option, Questionnaire, Aspect Ratio, Collapsible, Scroll Area, Sonner, Bubble, Marker, Trace Item and Message Scroller. All are bound to Facet variables and text styles, and built from existing Button, Icon Button, Input, Kbd and Badge instances.
 - **`Facet.sonner()`** for stacked toasts, with types, actions and `Facet.sonner.promise()`.
@@ -55,7 +55,7 @@ Setup, the license-key header and the full component list are in [React componen
 8. [Marketing kit: videos & images](#marketing-kit-videos--images)
 9. [Selling on Gumroad, Envato and UI8](#selling-on-gumroad-envato-and-ui8)
 10. [Design tokens](#design-tokens)
-11. [Using Facet with Tailwind CSS and shadcn/ui](#using-facet-with-tailwind-css-and-shadcnui)
+11. [Using Facet with Tailwind CSS](#using-facet-with-tailwind-css)
 12. [Components](#components)
 13. [Example pages](#example-pages)
 14. [The Figma file](#the-figma-file)
@@ -82,7 +82,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 
 - **6 brand themes × light/dark × 2 densities.** Switch with a data attribute, or generate a brand from **any color** in one line of JS.
 - **Token-only components.** Every color, space, radius and text style is a variable. A QA pass on the Figma file found 0 hard-coded fills and 0 unstyled text in the components.
-- **A familiar API.** Component names, anatomy and props mirror shadcn/ui, so each Figma component maps to a React component.
+- **A familiar API.** Component names, anatomy and props follow common React conventions, so each Figma component maps to a React component.
 - **One typeface.** Mona Sans (SIL OFL) in weights 400/500/600, with 25 text styles.
 - **Signature components.** Command palette with AI scope, prompt composer, AI copilot panel, kanban, workflow builder, resource planner, filter builder and activity timeline.
 
@@ -100,7 +100,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 ├── tokens/
 │   ├── tokens.css               ← CSS custom properties (all themes, brands, densities)
 │   ├── facet.tokens.json        ← W3C Design Tokens (DTCG) format
-│   ├── tailwind.preset.js       ← Tailwind / shadcn/ui preset
+│   ├── tailwind.preset.js       ← Tailwind preset
 │   └── source/                  ← raw exports used to generate the files above
 ├── styleguide/
 │   ├── index.html               ← the living style guide (open this)
@@ -176,7 +176,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 **Live at [facetui.vercel.app](https://facetui.vercel.app)** (deployed automatically by Vercel from the `FacetUI` branch, root directory `styleguide`; in the **facetui** Vercel project, Production Branch must be set to `FacetUI`). It is a public preview, so it never links the Figma source file or the private repo.
 
-`styleguide/index.html` is a documentation site in the style of [ui.shadcn.com/docs/components](https://ui.shadcn.com/docs/components), built with Facet itself.
+`styleguide/index.html` is a component documentation site, built with Facet itself.
 
 ![Style guide — Button](docs/images/styleguide-button.png)
 
@@ -184,7 +184,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 |---|---|
 | **Sidebar navigation** | Getting started, Foundations, 30 component pages grouped by category, Examples |
 | **Live previews** | Each example has Preview and HTML tabs and a one-click copy button |
-| **React mapping** | Each component shows its shadcn/ui React equivalent |
+| **React** | Each component has an install command for its animated React version, plus React markup |
 | **API tables** | Classes, attributes and JS hooks for every component |
 | **Accessibility notes** | Per-component guidance |
 | **⌘K / Ctrl K search** | Command palette to jump to any page or toggle the theme |
@@ -316,7 +316,7 @@ Facet.motion.refresh(el);    // after injecting new markup (SPA routes, modals)
 
 **In Figma:** the 78 interactive component states use Smart Animate with a Gentle spring (320 ms, or 120 ms for press). Hover variants of buttons, icon buttons and chips gain Elevation/1 for a lift. The full spec is in **07 — Documentation → Motion & micro-interactions**. Effects that follow the cursor (spotlight, tilt, magnetic pull, gliding indicators) can't be expressed in Figma prototypes, so they exist only in code.
 
-**In React:** the CSS layer works unchanged with shadcn/ui markup. For the JS-driven effects, use `motion` (Framer Motion) with `{ type: "spring", stiffness: 420, damping: 28 }`, which roughly matches `--ease-spring` at 320 ms.
+**In React:** the CSS layer works with any React markup, and the animated components (`npx facetui add …`) already include motion. For the JS-driven effects, use `motion` (Framer Motion) with `{ type: "spring", stiffness: 420, damping: 28 }`, which roughly matches `--ease-spring` at 320 ms.
 
 ---
 
@@ -442,29 +442,19 @@ Files:
 
 ---
 
-## React components (shadcn CLI)
+## React components (facetui CLI)
 
-Facet ships as a [shadcn registry](https://ui.shadcn.com/docs/registry). Every one of the 109 components has an animated React version in `react/registry/facet/ui/`, with a demo in `react/demos/`. Each item includes its own npm dependencies and its links to other Facet items (theme, motion presets, `cn()`).
+Every one of the 109 components has an animated React version in `react/registry/facet/ui/`, with a demo in `react/demos/`. Buyers install them with Facet's own CLI, **`facetui`** (source in `cli/`), from the license-gated Facet registry. Each registry item lists its npm dependencies and the other Facet items it needs (theme, motion presets, `cn()`), and the CLI installs all of them.
 
 **For buyers.** The registry needs the license key from the Gumroad receipt:
 
-1. Create a project: `pnpm dlx shadcn@latest init` (Next.js, Vite, React Router, Astro or TanStack Start).
-2. Add the registry to `components.json`:
-   ```json
-   {
-     "registries": {
-       "@facet": {
-         "url": "https://facetui.vercel.app/r/{name}.json",
-         "headers": { "Authorization": "Bearer ${FACET_LICENSE_KEY}" }
-       }
-     }
-   }
-   ```
-   and put `FACET_LICENSE_KEY=<license key>` in `.env.local`.
-3. `pnpm dlx shadcn@latest add @facet/theme`, then any component (`@facet/tabs`), or `@facet/all`.
-4. Wrap the app once in `<FacetMotion>` from `@/lib/motion`, so animations respect the OS "reduce motion" setting.
+1. In a React project (Next.js, Vite, React Router, Astro or TanStack Start), run `npx facetui@latest init`. It installs Tailwind CSS v4 if needed, adds the `@/` import alias, writes `facet.json`, puts the Facet theme in the global stylesheet and adds `lib/utils.ts` and `lib/motion.tsx`. It asks for the license key once and saves it to `.env.local` as `FACET_LICENSE_KEY` (git-ignored).
+2. `npx facetui@latest add tabs dialog` for any components, or `npx facetui@latest add --all`. `npx facetui list` shows them all; `--overwrite` updates files you already have.
+3. Wrap the app once in `<FacetMotion>` from `@/lib/motion`, so animations respect the OS "reduce motion" setting.
 
-**How the gate works.** `styleguide/api/r/[name].js` (a Vercel function behind `/r/<name>.json`) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
+pnpm, yarn and bun work too: `pnpm dlx facetui@latest …`, `yarn dlx facetui@latest …`, `bunx facetui@latest …`.
+
+**How the gate works.** `styleguide/api/r/[name].js` (a Vercel function behind `/r/<name>.json`, with `/r/index.json` listing every item) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -480,9 +470,11 @@ Facet ships as a [shadcn registry](https://ui.shadcn.com/docs/registry). Every o
 | `node scripts/smoke.mjs <name…> [--dark]` | Render demos in Chromium, fail on runtime errors, save screenshots to `.smoke/` |
 | `npm run build` | Typecheck, build the registry into `styleguide/api/_registry/` and the showcase into `styleguide/react/` |
 
+**Publishing the CLI** (`cd cli`): bump `version` in `package.json` and `VERSION` in `bin/facetui.mjs`, then `npm publish`. For a local test, point it at another registry with `FACET_REGISTRY_URL=http://localhost:8790/r`.
+
 Motion presets (springs, easings, variants) live in one file, `registry/facet/lib/motion.tsx`. Change them there to change how the whole kit feels.
 
-## Using Facet with Tailwind CSS and shadcn/ui
+## Using Facet with Tailwind CSS
 
 ```js
 // tailwind.config.js
@@ -498,9 +490,9 @@ module.exports = {
 body { font-family: var(--font-sans); background: var(--bg-canvas); color: var(--text-primary); }
 ```
 
-The preset maps **shadcn/ui's names** to Facet tokens, so existing shadcn components pick up Facet's look without changes:
+The preset maps the **standard semantic class names** to Facet tokens, so existing Tailwind components that use them pick up Facet's look without changes:
 
-| shadcn class | Facet token |
+| Tailwind class | Facet token |
 |---|---|
 | `bg-background` | `--bg-canvas` |
 | `bg-primary` / `text-primary-foreground` | `--bg-primary` / `--text-on-primary` |
@@ -510,7 +502,7 @@ The preset maps **shadcn/ui's names** to Facet tokens, so existing shadcn compon
 
 It also exposes the full Facet groups (`bg-bg-subtle`, `text-fg-secondary`, `border-line-strong`, `fill-icon-brand`, `bg-chart-1`), the radius scale (`rounded-lg`), the spacing scale and density heights (`h-control-md`).
 
-To add the Facet cut to a shadcn component:
+To add the Facet cut to any component:
 
 ```tsx
 <Card className="rounded-lg rounded-tr-sm">…</Card>
@@ -521,7 +513,7 @@ To add the Facet cut to a shadcn component:
 
 ## Components
 
-Each Figma component maps to a class-based HTML implementation and a shadcn/ui React equivalent. ✅ means it's implemented in the style guide. Figma-only components are listed below the table.
+Each Figma component maps to a class-based HTML implementation and an animated React component. ✅ means it's implemented in the style guide. Figma-only components are listed below the table.
 
 | Category | Components (✅ = in the HTML style guide) |
 |---|---|
@@ -535,7 +527,7 @@ Each Figma component maps to a class-based HTML implementation and a shadcn/ui R
 | **Navigation** | Tabs ✅ · Breadcrumb ✅ · Pagination ✅ · Chip ✅ · Link ✅ · Stepper ✅ · Sidebar ✅ · Navigation Menu ✅ |
 | **Signature** | Command Palette ✅ · Prompt Composer ✅ · Message ✅ · Kanban ✅ · Activity Timeline ✅ · Notification Center ✅ · Pricing Card ✅ · AI Copilot Panel · Source Card · Code Block ✅ · Tree · Filter Builder · Workflow Builder · Resource Planner · Expandable Data Card |
 
-Components without a ✅ exist in Figma, fully tokenized, but don't yet have an HTML reference implementation. In React, use the shadcn/ui component with the Tailwind preset.
+Components without a ✅ exist in Figma, fully tokenized, but don't yet have an HTML reference implementation. In React, build them with the Tailwind preset.
 
 ### Signature motifs
 
@@ -637,7 +629,8 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/assets/lucide.js` | Every Lucide icon as a sprite, plus search metadata | ✅ optional |
 | `styleguide/assets/docs.*`, `registry.js`, `tokens-meta.js` | Style guide site only | ❌ |
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
-| `react/registry/facet/` | Animated React components (installed with the shadcn CLI) | ✅ via `shadcn add` |
+| `react/registry/facet/` | Animated React components | ✅ via `npx facetui add` |
+| `cli/` | The `facetui` CLI (published to npm) | — |
 | `react/demos/`, `react/showcase/`, `styleguide/react/` | React showcase and its build | ❌ |
 | `styleguide/api/r/[name].js`, `styleguide/api/_registry/` | License-gated registry endpoint and its built JSON | ❌ (server only) |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |
@@ -653,7 +646,7 @@ Facet aims to be honest about what isn't finished:
 1. **`border/input` contrast is 2.5:1** against white. That's below WCAG 1.4.11's 3:1 for control boundaries. Labels and placeholders carry the meaning, but if your audit requires 3:1, change `--border-input` to `var(--ink-500)`.
 2. **Code and Data text styles use Mona Sans**, not a true monospace, to keep the kit to one family. Swap `--font-mono` if you show a lot of code.
 3. **The HTML style guide documents 109 components.** A few Figma components (e.g. Workflow Builder, Resource Planner, Date Range Picker) are Figma-only for now.
-4. **The HTML is a reference implementation, not a React package.** Focus-trapping in dialogs and the full calendar keyboard model are simplified. For production React apps, use shadcn/ui (Radix) with the Facet preset.
+4. **The HTML is a reference implementation, not a React package.** Focus-trapping in dialogs and the full calendar keyboard model are simplified. For production React apps, use the animated React components (`npx facetui add …`), which are built on Radix.
 5. **The Figma prototype covers two flows.** The remaining template screens are static.
 6. **Mona Sans loads from Google Fonts.** Offline, it falls back to the system UI font.
 

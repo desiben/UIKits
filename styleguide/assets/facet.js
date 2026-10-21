@@ -476,7 +476,7 @@
 })();
 
 /* =========================================================================
-   Facet UI v1.3 — behaviours for the shadcn/ui parity components
+   Facet UI v1.3 — behaviours for the v1.3 components
    Sonner · Select · Combobox · Menubar · Navigation Menu · Message Scroller ·
    Questionnaire · Bubble (show more) · Textarea (counter, autosize)
    ========================================================================= */

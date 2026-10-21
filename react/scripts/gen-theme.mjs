@@ -1,10 +1,10 @@
-// Resolves Facet UI tokens (styleguide/assets/tokens.css) into the shadcn theme variables
+// Resolves Facet UI tokens (styleguide/assets/tokens.css) into the React theme variables
 // used by the registry's facet-theme item. Run: node scripts/gen-theme.mjs
 import { chromium } from "playwright";
 import { readFileSync, writeFileSync } from "node:fs";
 
 const css = readFileSync(new URL("../../styleguide/assets/tokens.css", import.meta.url), "utf8");
-// shadcn name -> Facet semantic token
+// theme variable name -> Facet semantic token
 const MAP = {
   background: "--bg-canvas", foreground: "--text-primary",
   card: "--bg-surface", "card-foreground": "--text-primary",

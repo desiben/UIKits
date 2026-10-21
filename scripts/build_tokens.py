@@ -193,7 +193,7 @@ preset = {
     "darkMode": ["selector", '[data-theme="dark"]'],
     "theme": {"extend": {
         "colors": {
-            # shadcn/ui-compatible aliases
+            # standard semantic aliases (bg-primary, text-muted-foreground, …)
             "background": "var(--bg-canvas)", "foreground": "var(--text-primary)",
             "card": {"DEFAULT": "var(--bg-surface)", "foreground": "var(--text-primary)"},
             "popover": {"DEFAULT": "var(--bg-elevated)", "foreground": "var(--text-primary)"},

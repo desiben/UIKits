@@ -32,4 +32,4 @@ Select a frame → right sidebar → **Layer → Variable modes**:
 3. Keep `brand/600` ≥ 4.5:1 on white and `brand/700` ≥ 6:1.
 
 ## Developer handoff
-Every variable has a WEB code-syntax value (e.g. `var(--bg-primary)`), so Dev Mode shows the same CSS variable names as `tokens/tokens.css`. Component descriptions include the React/shadcn mapping and accessibility notes.
+Every variable has a WEB code-syntax value (e.g. `var(--bg-primary)`), so Dev Mode shows the same CSS variable names as `tokens/tokens.css`. Component descriptions include the React mapping and accessibility notes.

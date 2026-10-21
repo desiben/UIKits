@@ -1,5 +1,6 @@
 // Facet UI React registry, gated by license key.
 // GET /r/<name>.json  (rewritten to /api/r/<name>)  with  Authorization: Bearer <Gumroad license key>
+// Used by the facetui CLI (cli/). /r/index.json lists every item.
 // Env: GUMROAD_PRODUCT_ID (required)  ·  FACET_EXTRA_KEYS (optional, comma-separated keys for testers/press)
 const fs = require("fs")
 const path = require("path")
@@ -46,7 +47,7 @@ module.exports = async function handler(req, res) {
   const auth = String(req.headers.authorization || "")
   const key = ((auth.match(/^Bearer\s+(.+)$/i) || [])[1] || "").trim()
   if (!key || key.startsWith("${")) {
-    return fail(res, 401, "Facet UI license key required. Add FACET_LICENSE_KEY=<key from your Gumroad receipt> to .env.local and the @facet registry to components.json.")
+    return fail(res, 401, "Facet UI license key required. Add FACET_LICENSE_KEY=<key from your Gumroad receipt> to .env.local, then run npx facetui@latest add <component>.")
   }
   if (!(await isValidKey(key))) return fail(res, 403, "This Facet UI license key is not valid (or the purchase was refunded).")
   res.statusCode = 200

@@ -232,7 +232,7 @@
   </tbody>
 </table></div>` }],
     react: `const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() })
-<Table>…</Table>  // shadcn data-table recipe, styled by Facet tokens`,
+<Table>…</Table>  // data-table recipe, styled by Facet tokens`,
     api: [["table-wrap", "class", "Scroll container with border + facet cut"], ["num", "class (td/th)", "Right-aligned tabular numbers"], ['aria-selected="true"', "tr attribute", "Selected row"]],
     a11y: ["Use real <table> markup with <th> headers.", "Sortable headers should be buttons with aria-sort on the th."] });
 
@@ -359,7 +359,7 @@ toast("Project created", { description: "Q4 Launch is ready." })`,
     examples: [{ title: "Accordion", layout: "block", html: `<div class="accordion" style="max-width:560px;margin:auto">
   <details open><summary>Can I change the brand color?${i("chevron-down")}</summary><div>Yes — switch data-brand or call Facet.theme.setCustomBrand('#ff5a1f').</div></details>
   <details><summary>Does it support dark mode?${i("chevron-down")}</summary><div>Every semantic token has Light and Dark values.</div></details>
-  <details><summary>Is it compatible with shadcn/ui?${i("chevron-down")}</summary><div>Yes. Use the Tailwind preset; class names map to shadcn's CSS variables.</div></details>
+  <details><summary>Does it work with React?${i("chevron-down")}</summary><div>Yes. Install the animated React components with <code>npx facetui</code>, or use the Tailwind preset with your own markup.</div></details>
 </div>` }],
     react: `<Accordion type="single" collapsible><AccordionItem value="a">…</AccordionItem></Accordion>`,
     api: [["accordion > details > summary", "structure", "Native disclosure"]], a11y: ["Native details/summary is keyboard and screen-reader accessible."] });

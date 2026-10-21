@@ -6,7 +6,7 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
 ### Added
 - **Animated React components.** All 109 components are React components with motion on every interaction: spring presses, sliding layout indicators, height-animated disclosure, popovers that open from their trigger, drag (kanban, carousel, sheets), tilt (holo card), rolling numbers and streaming AI states. They're built on Radix primitives and Tailwind v4, and the animations respect reduced motion.
-- **shadcn registry with license-key access.** Install with `shadcn add @facet/<name>`, or `@facet/all`. `@facet/theme` maps Facet's light and dark tokens onto the standard shadcn variables, plus Facet extras and the signature corner utilities (`rounded-facet*`). The `/r/<name>.json` endpoint checks the buyer's Gumroad license key.
+- **`facetui` CLI and license-gated registry.** `npx facetui@latest init` sets up Tailwind CSS v4, the `@/` alias, the Facet theme (light and dark tokens plus the signature corner utilities, `rounded-facet*`) and the base files. `npx facetui@latest add <name>` adds components with everything they need, `add --all` adds every one. The `/r/<name>.json` endpoint checks the buyer's Gumroad license key.
 - **React showcase** at `/react/` with live demos and copyable install commands (pnpm, npm, yarn, bun).
 - **The full Lucide icon set (1,903 icons, v1.61.0).** The style guide Icons page lets you search every icon by name and tag, filter by Lucide's 42 categories, and copy each one as HTML, SVG or React. `assets/lucide.js` is the full sprite (old Lucide names still work). In Figma, the new page "10 — Icons" has every icon as a component, grouped by category, in the same style as the existing icons (24px, 1.75 stroke, `icon/primary`).
 - **Style guide:** every component page has a "React · animated" install section, the Installation page has a React section, and the header nav has a React link.
@@ -17,10 +17,10 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
 ## [1.3.0] — 2026-10-20
 
-Every component in the shadcn/ui list now has a Facet counterpart in Figma and in the style guide.
+Every standard product-UI component now has a Facet counterpart in Figma and in the style guide.
 
 ### Added
-- Style guide: 17 new components, each with live examples, a React (shadcn/ui) snippet, API and accessibility notes: Aspect Ratio, Button Group, Input Group, Label, Collapsible, Scroll Area, Sonner, Bubble, Marker, Message Scroller, Questionnaire, Trace, Combobox, Select, Textarea, Menubar and Navigation Menu (109 documented components in total).
+- Style guide: 17 new components, each with live examples, a React snippet, API and accessibility notes: Aspect Ratio, Button Group, Input Group, Label, Collapsible, Scroll Area, Sonner, Bubble, Marker, Message Scroller, Questionnaire, Trace, Combobox, Select, Textarea, Menubar and Navigation Menu (109 documented components in total).
 - Figma: 13 new variant sets (57 variants) plus a composed Trace, in three new groups on the Components page:
   - Forms & Actions: Label (Default, Required, Optional, Disabled), Button Group (Outline, Split, With Input, Vertical), Input Group (Icon + Text × Default/Focus/Error, Prefix + Suffix, Button, Textarea), Q Option, Questionnaire (Single, Multiple, Freeform, Summary).
   - Layout & Feedback: Aspect Ratio (16:9, 4:3, 1:1, 9:16), Collapsible (Closed, Open), Scroll Area (Vertical, Horizontal), Sonner (7 types, Stack, Expanded).

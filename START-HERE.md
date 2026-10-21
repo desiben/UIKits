@@ -14,7 +14,7 @@ Install the free **Mona Sans** font first so text renders correctly. Variable mo
 
 | Folder | What it is |
 |---|---|
-| `tokens/` | `tokens.css` (CSS variables), `facet.tokens.json`, and `tailwind.preset.js` for shadcn/ui |
+| `tokens/` | `tokens.css` (CSS variables), `facet.tokens.json`, and `tailwind.preset.js` for Tailwind |
 | `styleguide/` | The full style guide. Open `styleguide/index.html`, or serve the folder with any static server |
 | `styleguide/assets/` | `facet.css` + `facet.js` (all components), `tokens.css`, `icons.js`, `charts.js` |
 | `styleguide/examples/` | Dashboard, Login and Settings pages |

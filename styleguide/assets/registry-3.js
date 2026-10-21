@@ -1,4 +1,4 @@
-/* Facet UI v1.3 registry — shadcn/ui parity: every shadcn/ui component now has a Facet counterpart. */
+/* Facet UI v1.3 registry — full component coverage. */
 (function () {
   const i = (n, c = "") => `<svg class="icon${c ? " " + c : ""}" aria-hidden="true"><use href="#${n}"/></svg>`;
   const add = (o) => window.FACET_REGISTRY.push({ isNew: true, since: "1.3", ...o });

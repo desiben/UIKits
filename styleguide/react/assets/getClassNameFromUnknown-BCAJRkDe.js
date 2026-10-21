@@ -1,0 +1,18 @@
+import{ct as e,dt as t}from"./react-BaQ5Op-n.js";import{n}from"./utils-D0T3A-kS.js";import{Ar as r,Fn as i,Lr as a,Mn as o,Vr as s,qr as c,wr as l}from"./CategoricalChart-DpkvsUde.js";var u=t(e()),d,f,p,m,h,g,_;function v(){return v=Object.assign?Object.assign.bind():function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var r in n)({}).hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},v.apply(null,arguments)}function y(e,t){return t||=e.slice(0),Object.freeze(Object.defineProperties(e,{raw:{value:Object.freeze(t)}}))}var b=(e,t)=>a(t-e)*Math.min(Math.abs(t-e),359.999),x=e=>{var t=e.cx,n=e.cy,r=e.radius,a=e.angle,s=e.sign,c=e.isExternal,l=e.cornerRadius,u=e.cornerIsExternal,d=l*(c?1:-1)+r,f=Math.asin(l/d)/o,p=u?a:a+s*f,m=i(t,n,d,p),h=i(t,n,r,p),g=u?a-s*f:a;return{center:m,circleTangency:h,lineTangency:i(t,n,d*Math.cos(f*o),g),theta:f}},S=e=>{var t=e.cx,n=e.cy,r=e.innerRadius,a=e.outerRadius,o=e.startAngle,c=e.endAngle,l=b(o,c),u=o+l,m=i(t,n,a,o),h=i(t,n,a,u),g=s(d||=y([`M `,`,`,`
+    A `,`,`,`,0,
+    `,`,`,`,
+    `,`,`,`
+  `]),m.x,m.y,a,a,+(Math.abs(l)>180),+(o>u),h.x,h.y);if(r>0){var _=i(t,n,r,o),v=i(t,n,r,u);g+=s(f||=y([`L `,`,`,`
+            A `,`,`,`,0,
+            `,`,`,`,
+            `,`,`,` Z`]),v.x,v.y,r,r,+(Math.abs(l)>180),+(o<=u),_.x,_.y)}else g+=s(p||=y([`L `,`,`,` Z`]),t,n);return g},C=e=>{var t=e.cx,n=e.cy,r=e.innerRadius,i=e.outerRadius,o=e.cornerRadius,c=e.forceCornerRadius,l=e.cornerIsExternal,u=e.startAngle,d=e.endAngle,f=a(d-u),p=x({cx:t,cy:n,radius:i,angle:u,sign:f,cornerRadius:o,cornerIsExternal:l}),v=p.circleTangency,b=p.lineTangency,C=p.theta,w=x({cx:t,cy:n,radius:i,angle:d,sign:-f,cornerRadius:o,cornerIsExternal:l}),T=w.circleTangency,E=w.lineTangency,D=w.theta,O=l?Math.abs(u-d):Math.abs(u-d)-C-D;if(O<0)return c?s(m||=y([`M `,`,`,`
+        a`,`,`,`,0,0,1,`,`,0
+        a`,`,`,`,0,0,1,`,`,0
+      `]),b.x,b.y,o,o,o*2,o,o,-o*2):S({cx:t,cy:n,innerRadius:r,outerRadius:i,startAngle:u,endAngle:d});var k=s(h||=y([`M `,`,`,`
+    A`,`,`,`,0,0,`,`,`,`,`,`
+    A`,`,`,`,0,`,`,`,`,`,`,`,`
+    A`,`,`,`,0,0,`,`,`,`,`,`
+  `]),b.x,b.y,o,o,+(f<0),v.x,v.y,i,i,+(O>180),+(f<0),T.x,T.y,o,o,+(f<0),E.x,E.y);if(r>0){var A=x({cx:t,cy:n,radius:r,angle:u,sign:f,isExternal:!0,cornerRadius:o,cornerIsExternal:l}),j=A.circleTangency,M=A.lineTangency,N=A.theta,P=x({cx:t,cy:n,radius:r,angle:d,sign:-f,isExternal:!0,cornerRadius:o,cornerIsExternal:l}),F=P.circleTangency,I=P.lineTangency,L=P.theta,R=l?Math.abs(u-d):Math.abs(u-d)-N-L;if(R<0&&o===0)return`${k}L${t},${n}Z`;k+=s(g||=y([`L`,`,`,`
+      A`,`,`,`,0,0,`,`,`,`,`,`
+      A`,`,`,`,0,`,`,`,`,`,`,`,`
+      A`,`,`,`,0,0,`,`,`,`,`,`Z`]),I.x,I.y,o,o,+(f<0),F.x,F.y,r,r,+(R>180),+(f>0),j.x,j.y,o,o,+(f<0),M.x,M.y)}else k+=s(_||=y([`L`,`,`,`Z`]),t,n);return k},w={cx:0,cy:0,innerRadius:0,outerRadius:0,startAngle:0,endAngle:0,cornerRadius:0,forceCornerRadius:!1,cornerIsExternal:!1},T=e=>{var t=l(e,w),i=t.cx,a=t.cy,o=t.innerRadius,s=t.outerRadius,d=t.cornerRadius,f=t.forceCornerRadius,p=t.cornerIsExternal,m=t.startAngle,h=t.endAngle,g=t.className;if(s<o||m===h)return null;var _=n(`recharts-sector`,g),y=s-o,b=r(d,y,0,!0),x=b>0&&Math.abs(m-h)<360?C({cx:i,cy:a,innerRadius:o,outerRadius:s,cornerRadius:Math.min(b,y/2),forceCornerRadius:f,cornerIsExternal:p,startAngle:m,endAngle:h}):S({cx:i,cy:a,innerRadius:o,outerRadius:s,startAngle:m,endAngle:h});return u.createElement(`path`,v({},c(t),{className:_,d:x}))};function E(e){return e&&typeof e==`object`&&`className`in e&&typeof e.className==`string`?e.className:``}export{T as n,E as t};
