@@ -109,7 +109,8 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 │   │   ├── facet.css            ← component styles
 │   │   ├── facet.js             ← theming API + interactive behaviours
 │   │   ├── motion.css / motion.js ← micro-interactions (hover, press, spring, reveal)
-│   │   ├── icons.js             ← Lucide icon sprite (89 icons)
+│   │   ├── icons.js             ← Lucide core sprite (the 210 icons the kit uses)
+│   │   ├── lucide.js            ← every Lucide icon (1,903), loaded by the Icons page
 │   │   ├── docs.css / docs.js   ← style guide chrome (not needed in your app)
 │   │   ├── registry.js          ← component docs data (examples, API, a11y)
 │   │   └── tokens-meta.js       ← token metadata for the docs pages
@@ -572,7 +573,7 @@ The Figma file is delivered with your purchase: open the Figma link in your Gumr
 | **00 — Start Here** | Cover, design directions explored, principles, inventory and build status, getting started |
 | **01 — Foundations** | Color ramps, typography, spacing, radius, elevation, iconography |
 | **02 — Design Tokens** | Theme matrix (brand × light/dark), density comparison, CSS reference, brand-color examples |
-| **03 — Components** | 158 components, 105 variant sets, 622 variants, 147 Lucide icon components |
+| **03 — Components** | 158 components, 105 variant sets, 622 variants, 147 core Lucide icon components |
 | **04 — Patterns** | 23 patterns: app shell, filter bar, KPI row, table toolbar, auth forms, onboarding, AI dock, marketing sections |
 | **05 — Templates** | 10 apps, 26 screens (desktop and mobile), annotated |
 | **06 — Playground** | Desktop and mobile sandboxes, theme lab, component tray, **clickable prototype flows** |
@@ -631,7 +632,8 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/assets/facet.css` | Component classes | ✅ (if not using Tailwind) |
 | `styleguide/assets/facet.js` | Theme API + behaviours (≈ 12 KB unminified, no deps) | ✅ (optional) |
 | `styleguide/assets/motion.css` + `motion.js` | Micro-interactions (≈ 36 KB unminified, no deps) | ✅ (optional) |
-| `styleguide/assets/icons.js` | Lucide sprite | ✅ (or use `lucide` / `lucide-react`) |
+| `styleguide/assets/icons.js` | Lucide core sprite | ✅ (or use `lucide` / `lucide-react`) |
+| `styleguide/assets/lucide.js` | Every Lucide icon as a sprite, plus search metadata | ✅ optional |
 | `styleguide/assets/docs.*`, `registry.js`, `tokens-meta.js` | Style guide site only | ❌ |
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
 | `react/registry/facet/` | Animated React components (installed with the shadcn CLI) | ✅ via `shadcn add` |
@@ -659,7 +661,7 @@ Facet aims to be honest about what isn't finished:
 ## Credits and licenses
 
 - **Typeface:** [Mona Sans](https://github.com/github/mona-sans) by GitHub, SIL Open Font License 1.1.
-- **Icons:** [Lucide](https://lucide.dev) v0.460.0, ISC License (see `styleguide/assets/LUCIDE-LICENSE.txt`).
+- **Icons:** [Lucide](https://lucide.dev) v1.61.0, all 1,903 icons, ISC License (see `styleguide/assets/LUCIDE-LICENSE.txt`). Rebuild the sprites with `node scripts/build-lucide.mjs` (usage at the top of the script).
 - **Marketing kit:** rendered with Playwright and ffmpeg from the sources in `marketing/`.
 - **Inspiration:** the component inventory and API conventions of [shadcn/ui](https://ui.shadcn.com) (MIT). Facet does not copy shadcn's code or visual design.
 

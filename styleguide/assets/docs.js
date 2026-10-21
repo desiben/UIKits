@@ -194,7 +194,7 @@ Facet.theme.cssFor("#ff5a1f", "acme")   // CSS to paste into your stylesheet`, "
   P.figma = () => page("Getting started", "Figma file", "The design source of truth. Nine pages, all token-driven.", `
     <p><a class="btn" href="${FIGMA}" target="_blank" rel="noopener">${i("external-link")} Get the Facet UI Figma file</a></p>
     <table class="api"><thead><tr><th>Page</th><th>Contents</th></tr></thead><tbody>
-    ${[["00 — Start Here", "Cover, design directions, principles, inventory & status, getting started"], ["01 — Foundations", "Color ramps, typography (25 Mona Sans styles), spacing, radius, elevation, icons"], ["02 — Design Tokens", "Theme matrix (brand × light/dark), density, CSS reference, brand color examples"], ["03 — Components", "158 components / 105 variant sets with properties, states and sizes + 147 Lucide icons"], ["04 — Patterns", "23 pattern components (app shell, filter bar, auth forms, AI dock, marketing sections…)"], ["05 — Templates", "10 apps, 26 desktop + mobile screens: dashboard, CRM, PM, AI, e-commerce, finance, calendar, settings, auth, marketing"], ["06 — Playground", "Sandboxes, theme lab, component tray, clickable prototype flows"], ["07 — Documentation", "20 component doc cards (anatomy, props, a11y, React code, do/don't) + customization guide"], ["08 — Changelog", "Version history and known limitations"]].map(([a, b]) => `<tr><td><b>${a}</b></td><td>${b}</td></tr>`).join("")}</tbody></table>
+    ${[["00 — Start Here", "Cover, design directions, principles, inventory & status, getting started"], ["01 — Foundations", "Color ramps, typography (25 Mona Sans styles), spacing, radius, elevation, icons"], ["02 — Design Tokens", "Theme matrix (brand × light/dark), density, CSS reference, brand color examples"], ["03 — Components", "158 components / 105 variant sets with properties, states and sizes + 147 core icons"], ["04 — Patterns", "23 pattern components (app shell, filter bar, auth forms, AI dock, marketing sections…)"], ["05 — Templates", "10 apps, 26 desktop + mobile screens: dashboard, CRM, PM, AI, e-commerce, finance, calendar, settings, auth, marketing"], ["06 — Playground", "Sandboxes, theme lab, component tray, clickable prototype flows"], ["07 — Documentation", "20 component doc cards (anatomy, props, a11y, React code, do/don't) + customization guide"], ["08 — Changelog", "Version history and known limitations"], ["10 — Icons", "All 1,903 Lucide icons as components, grouped by category"]].map(([a, b]) => `<tr><td><b>${a}</b></td><td>${b}</td></tr>`).join("")}</tbody></table>
     <h2 id="prototype">Prototype</h2><p>Open <b>06 — Playground</b> and press Present. Flows: <i>Auth → Onboarding → Dashboard</i> and <i>Settings sections</i>. Interactive components (button, tabs, checkbox, switch, toggle, chip, accordion, menu item, sidebar item, input) have hover/press/toggle states wired.</p>`);
 
   P.colors = () => {
@@ -299,12 +299,20 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     <div class="showcase-grid">${shots.map(([f, t]) => `<a class="card showcase-shot" data-tilt="3" href="assets/showcase/${f}.png" target="_blank" rel="noopener"><img src="assets/showcase/${f}.png" alt="${t} — Facet UI marketplace preview" loading="lazy" width="1920" height="1080"><span>${t}</span></a>`).join("")}</div>`);
   };
 
-  P.icons = () => page("Foundations", "Icons", `Lucide (ISC). ${window.FACET_ICONS.length} icons are bundled in the sprite; the Figma file has 100 as components. Click to copy.`, `
-    <div class="input-group" style="max-width:360px;margin-bottom:16px">${i("search")}<input class="input" id="icon-q" placeholder="Filter icons…"></div>
-    <div class="icon-grid" id="icon-grid">${window.FACET_ICONS.map((n) => `<button class="icon-cell" data-copy-text='<svg class="icon"><use href="#${n}"/></svg>' data-name="${n}">${i(n)}${n}</button>`).join("")}</div>
-    <h2 id="usage">Usage</h2>${codeBlock(`<script src="assets/icons.js" defer></script>
+  P.icons = () => page("Foundations", "Icons", `Every <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> icon (ISC license), searchable by name and tag. Click an icon to copy its HTML, SVG or React code. The Figma file has the same set as components on the <b>10 — Icons</b> page.`, `
+    <div class="icon-tools">
+      <div class="input-group">${i("search")}<input class="input" id="icon-q" type="search" placeholder="Search 1,900+ icons — try “arrow”, “money”, “chart”" autocomplete="off"></div>
+      <select class="select" id="icon-cat" aria-label="Category"><option value="">All categories</option></select>
+      <span class="icon-count" id="icon-count" aria-live="polite"></span>
+    </div>
+    <div class="icon-detail card" id="icon-detail" hidden></div>
+    <div class="icon-grid" id="icon-grid"><p class="icon-loading">${i("loader-circle", "spin")} Loading the full icon set…</p></div>
+    <h2 id="usage">Usage</h2>
+    <p><code>icons.js</code> is the core sprite: the ${window.FACET_ICONS.length} icons the kit itself uses (small, loaded on every page). Add <code>lucide.js</code> after it when you want the whole set.</p>${codeBlock(`<script src="assets/icons.js" defer></script>
+<script src="assets/lucide.js" defer></script>   <!-- optional: all Lucide icons -->
+
 <svg class="icon"><use href="#sparkles"/></svg>  <!-- .icon-sm / .icon-lg -->`, "html")}
-    <p>Need more? Add any icon from <a href="https://lucide.dev" target="_blank" rel="noopener">lucide.dev</a> to the sprite, or use <code>lucide-react</code> in React.</p>`);
+    <p>In React, use <code>lucide-react</code>, which the animated components already depend on: <code>import { Sparkles } from "lucide-react"</code>. Old Lucide names (for example <code>home</code> for <code>house</code>) still work in both sprites.</p>`);
 
   P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" data-tilt="3" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
     <p>The Figma file has 10 complete templates (26 screens) — CRM, project management, AI workspace, e-commerce, finance, calendar, settings, auth and marketing.</p>`);
@@ -392,6 +400,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     document.title = (FLAT[idx] ? FLAT[idx].label + " — " : "") + "Facet UI";
     window.scrollTo(0, 0);
     if (cur === "brand-colors") studio();
+    if (cur === "icons") iconsPage();
     main.querySelectorAll("[data-custom-brand]").forEach((el) => T.setCustomBrand(el.dataset.customBrand, el));
     const on = $(".docs-side a.on"); if (on) on.scrollIntoView({ block: "nearest" });
     document.querySelectorAll(".header-nav a").forEach((a) => a.classList.toggle("on", cur.startsWith(a.dataset.sec)));
@@ -424,6 +433,56 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     document.addEventListener("facet:theme", () => { if ($("#bc-ramp")) requestAnimationFrame(showRamp); });
     showRamp();
   }
+
+  /* ---------- icons page (full Lucide set, loaded on demand) ---------- */
+  const pascal = (n) => n.replace(/(^|-)([a-z0-9])/g, (m, a, b) => b.toUpperCase());
+  let iconIndex = null;
+  function iconsPage() {
+    if (window.FACET_LUCIDE) return renderIcons();
+    document.addEventListener("facet:lucide", renderIcons, { once: true });
+    if (!document.querySelector("script[data-lucide]")) { const sc = document.createElement("script"); sc.src = "assets/lucide.js"; sc.dataset.lucide = ""; document.head.appendChild(sc); }
+  }
+  function renderIcons() {
+    const L = window.FACET_LUCIDE, grid = $("#icon-grid"); if (!grid) return;
+    if (!iconIndex) {
+      const al = {}; Object.entries(L.aliases).forEach(([a, n]) => (al[n] = (al[n] || "") + " " + a));
+      iconIndex = L.icons.map(([n, cats, tags]) => ({ n, cats, names: (n + (al[n] || "")).split(" "), hay: (n + " " + tags + (al[n] || "")).toLowerCase() }));
+    }
+    const counts = L.categories.map((_, k) => iconIndex.filter((x) => x.cats.includes(k)).length);
+    $("#icon-cat").insertAdjacentHTML("beforeend", L.categories.map((c, k) => [c, k]).sort((a, b) => a[0].localeCompare(b[0])).map(([c, k]) => `<option value="${k}">${esc(c)} (${counts[k]})</option>`).join(""));
+    grid.innerHTML = iconIndex.map((x) => `<button class="icon-cell" data-icon="${x.n}" title="${x.n}">${i(x.n)}<span>${x.n}</span></button>`).join("");
+    filterIcons();
+  }
+  function filterIcons() {
+    if (!iconIndex || !$("#icon-grid")) return;
+    const q = $("#icon-q").value.toLowerCase().trim(), cat = $("#icon-cat").value, words = q.split(/\s+/).filter(Boolean);
+    let shown = 0;
+    $("#icon-grid").querySelectorAll(".icon-cell").forEach((c, k) => {
+      const x = iconIndex[k], ok = (cat === "" || x.cats.includes(+cat)) && words.every((w) => x.hay.includes(w));
+      c.hidden = !ok; if (ok) shown++;
+      // exact name first, then names that start with / contain the query, then tag matches
+      c.style.order = !q || !ok ? "" : x.names.includes(q) ? 0 : x.names.some((m) => m.startsWith(q)) ? 1 : x.n.includes(q) ? 2 : 3;
+    });
+    $("#icon-count").textContent = shown === iconIndex.length ? `${shown.toLocaleString()} icons` : `${shown.toLocaleString()} of ${iconIndex.length.toLocaleString()}`;
+  }
+  function showIcon(n) {
+    const L = window.FACET_LUCIDE, x = iconIndex.find((y) => y.n === n), sym = document.getElementById(n); if (!x || !sym) return;
+    const html = `<svg class="icon"><use href="#${n}"/></svg>`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${sym.innerHTML}</svg>`;
+    const react = `import { ${pascal(n)} } from "lucide-react"\n\n<${pascal(n)} className="size-4" />`;
+    const row = (label, code) => `<div class="icon-code"><span>${label}</span><code>${esc(code.split("\n").pop())}</code><button class="btn btn-ghost btn-sm" data-copy-text="${esc(code).replace(/"/g, "&quot;")}">${i("copy", "icon-sm")} Copy</button></div>`;
+    const d = $("#icon-detail"); d.hidden = false;
+    d.innerHTML = `<div class="icon-preview">${i(n)}</div><div class="icon-info"><div class="icon-head"><b>${n}</b>${x.cats.map((k) => `<button class="badge badge-outline" data-icon-cat="${k}">${esc(L.categories[k])}</button>`).join("")}<button class="btn btn-ghost btn-sm icon-btn" data-icon-close aria-label="Close">${i("x", "icon-sm")}</button></div>${row("HTML", html)}${row("SVG", svg)}${row("React", react)}</div>`;
+    document.querySelectorAll(".icon-cell[aria-pressed]").forEach((c) => c.removeAttribute("aria-pressed"));
+    const cell = document.querySelector(`.icon-cell[data-icon="${n}"]`); if (cell) cell.setAttribute("aria-pressed", "true");
+    d.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+  document.addEventListener("click", (e) => {
+    const c = e.target.closest(".icon-cell[data-icon]"); if (c) showIcon(c.dataset.icon);
+    const k = e.target.closest("[data-icon-cat]"); if (k) { $("#icon-cat").value = k.dataset.iconCat; filterIcons(); }
+    if (e.target.closest("[data-icon-close]")) { $("#icon-detail").hidden = true; document.querySelectorAll(".icon-cell[aria-pressed]").forEach((x) => x.removeAttribute("aria-pressed")); }
+  });
+  document.addEventListener("change", (e) => { if (e.target.id === "icon-cat") filterIcons(); });
 
   /* ---------- header controls ---------- */
   function syncHeader() {
@@ -476,7 +535,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
   });
   document.addEventListener("input", (e) => {
     if (e.target.id === "ov-q") { const q = e.target.value.toLowerCase().trim(); document.querySelectorAll(".ov-card").forEach((c) => (c.hidden = q && !c.dataset.name.includes(q))); document.querySelectorAll(".docs-main h2[id^=cat-]").forEach((h) => { const g = h.nextElementSibling; h.hidden = g.hidden = q && ![...g.children].some((c) => !c.hidden); }); }
-    if (e.target.id === "icon-q") { const q = e.target.value.toLowerCase(); document.querySelectorAll(".icon-cell").forEach((c) => (c.hidden = !c.dataset.name.includes(q))); }
+    if (e.target.id === "icon-q" || e.target.id === "icon-cat") filterIcons();
   });
   document.addEventListener("facet:theme", syncHeader);
 
