@@ -7,8 +7,5 @@
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
-  },
-  "dependencies": {
-    "@vercel/blob": "^2.8.2"
   }
 }

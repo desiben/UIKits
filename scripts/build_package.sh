@@ -12,7 +12,7 @@ cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PA
 cp "$ROOT/figma/README.md" "$PKG/figma/"
 cp -r "$ROOT/tokens" "$ROOT/styleguide" "$PKG/"
 rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src" "$PKG/styleguide/api" "$PKG/styleguide/vercel.json" \
-  "$PKG/styleguide/node_modules" "$PKG/styleguide/public-build" "$PKG/styleguide/admin" "$PKG/styleguide/package.json" "$PKG/styleguide/package-lock.json" "$PKG/styleguide/build-public.mjs"
+  "$PKG/styleguide/node_modules" "$PKG/styleguide/public-build" "$PKG/styleguide/package.json" "$PKG/styleguide/package-lock.json" "$PKG/styleguide/build-public.mjs"
 # The buyer's copy of the style guide shows all code offline: license.js treats window.FACET_BUYER as unlocked.
 python3 - "$ROOT/react/registry/docs-snippets.json" "$PKG/styleguide" <<'PY'
 import json, sys, os
