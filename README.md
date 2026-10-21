@@ -1,8 +1,8 @@
 # ETKits
 
-<sub>by ELTouch apps</sub>
+<sub>by ETKits</sub>
 
-The storefront and marketing site for ETKits, the ELTouch apps UI kit collection. The first product is **Facet UI**.
+The storefront and marketing site for ETKits, the UI kit collection. The first product is **Facet UI**.
 
 Live: **[etkits.vercel.app](https://etkits.vercel.app)**. It is a static site with no build step: open `index.html` in a browser, or serve the repo root.
 
