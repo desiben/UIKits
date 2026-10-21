@@ -13,7 +13,7 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 
 ### Changed
 - The core icon sprite (`icons.js`) is redrawn from Lucide v1.61.0 (was v0.460.0). Icon names are unchanged.
-- The maker credit is now **ETKits** (was ELTouch apps) everywhere: README, license, style guide, marketing page, Figma file, and the re-rendered marketing images and videos.
+- The maker credit is now **ETKits** everywhere: README, license, style guide, marketing page, Figma file, and the re-rendered marketing images and videos.
 
 ## [1.3.0] — 2026-10-20
 
