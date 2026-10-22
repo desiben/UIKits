@@ -12,7 +12,7 @@ async function authorize(key, device) {
   const memo = key + "|" + device.id
   if ((recentOk.get(memo) || 0) > Date.now()) return { ok: true }
   const token = process.env.ETKITS_SERVICE_TOKEN
-  if (!token) return { ok: false, status: 503, error: "License checking isn't set up yet. Please contact support." }
+  if (!token) return { ok: false, status: 503, error: "License checking isn't set up yet. Please email contact@etkits.us." }
   const res = await fetch(`${HUB()}/api/licenses/verify`, {
     method: "POST",
     headers: { "content-type": "application/json", authorization: `Bearer ${token}` },

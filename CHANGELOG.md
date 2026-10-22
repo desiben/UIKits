@@ -76,7 +76,7 @@ Every standard product-UI component now has a Facet counterpart in Figma and in 
 ## [1.1.2] — 2026-10-16
 
 ### Added
-- Marketing kit page at [`/marketing/`](https://facetui.vercel.app/marketing/), linked from the style guide header and the Showcase page.
+- Marketing kit page at [`/marketing/`](https://facet.etkits.us/marketing/), linked from the style guide header and the Showcase page.
 - Product demo video (55 s, 1920×1080, MP4 + WebM) and components reel (33 s, live components with a real cursor).
 - 13 marketing images: 11 angled 16:9 shots at 3840×2160 and 2 squares at 2160×2160, with WebP thumbnails.
 - Listing copy (tagline, one-liner, description, feature bullets) with copy buttons.

@@ -38,3 +38,7 @@ The Product is provided "as is", without warranty of any kind. ETKits is not lia
 ## Termination
 
 This license ends automatically if you break its terms. If it ends, stop using the Product and delete your copies.
+
+## Contact
+
+Questions about this license: contact@etkits.us

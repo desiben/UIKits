@@ -42,4 +42,4 @@ Theme with attributes on `<html>`: `data-theme="dark"`, `data-brand="ember"`, `d
 - `CHANGELOG.md`: what's new (also at https://facet.etkits.us/#/changelog)
 - `LICENSE.md`: what you can and can't do
 
-Need help? Reply to your purchase email.
+Need help? Email contact@etkits.us with your order number.

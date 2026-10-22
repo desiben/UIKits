@@ -95,7 +95,7 @@ Thanks for buying Facet UI!
 2. Enter your license key (it's in this email) and press Unlock.
 3. Open the Figma file and choose "Duplicate" to save it to your drafts.
 
-Your key can be claimed up to 3 times. Need help? Reply to this email.
+Your key can be claimed up to 3 times. Need help? Email contact@etkits.us.
 ```
 
 ## 8. Before you publish
