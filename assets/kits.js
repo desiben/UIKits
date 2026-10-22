@@ -29,7 +29,7 @@ window.UIKITS = [
     // Never link the Figma source or the repo here: buyers get them after purchase.
     links: [
       { label: "Buy Facet UI", buy: true, primary: true },
-      { label: "Live preview", href: "https://facetui.vercel.app" }
+      { label: "Live preview", href: "https://facet.etkits.us" }
     ]
   }
 ];
