@@ -712,3 +712,13 @@ form.done > :not(.tp-sent) { display: none; } form.done .tp-sent { display: bloc
 }
 [data-style="mono"] :is(.tp-cta-box, .tp-sec.brand, .tp-sec.ink) .btn-outline { border-color: rgb(255 255 255 / .5); }
 .tp-code.tp-locked { background: none; padding: 0 16px 16px; max-height: none; }
+
+/* App pages: whole example pages (../examples/*.html) as live, scaled previews. */
+.tp-apps { padding: 24px 0 8px; }
+.tp-apps-head h2 { margin-top: 8px; font: 700 clamp(28px, 4vw, 40px)/1.1 var(--font-sans); letter-spacing: -.03em; }
+.tp-apps-head p { margin-top: 10px; max-width: 640px; font: var(--text-body-md); color: var(--text-secondary); }
+.tp-apps-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.tp-page-card .tp-thumb iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 880px; border: 0; transform: scale(var(--s, .25)); transform-origin: 0 0; pointer-events: none; background: var(--bg-canvas); }
+.tp-page-card:hover .tp-thumb iframe { transform: scale(calc(var(--s, .25) * 1.02)); transition: transform .6s var(--tp-ease); }
+.tp-page-card b .icon { color: var(--icon-brand); }
+.tp-apps-note { font: var(--text-body-sm); color: var(--text-tertiary); }

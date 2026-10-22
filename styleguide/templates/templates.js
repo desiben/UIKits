@@ -40,14 +40,14 @@
       <div class="tp-frame" data-device="desktop"><div class="tp-canvas">${v.html}</div></div>${codeHTML(v)}</div>`).join("")}</section>`).join("");
 
   // Thumbnails: scale the 1200px-wide first variant into each card.
-  function fitThumbs() { $$(".tp-thumb").forEach((t) => { const s = (t.clientWidth - 36) / 1200, inner = t.firstElementChild, h = inner.offsetHeight * s; t.style.setProperty("--s", s); inner.style.top = Math.max(18, (t.clientHeight - h) / 2) + "px"; }); }
+  function fitThumbs() { $$(".tp-page-card .tp-thumb").forEach((t) => t.style.setProperty("--s", t.clientWidth / 1280)); $$(".tp-card:not(.tp-page-card) .tp-thumb").forEach((t) => { const s = (t.clientWidth - 36) / 1200, inner = t.firstElementChild, h = inner.offsetHeight * s; t.style.setProperty("--s", s); inner.style.top = Math.max(18, (t.clientHeight - h) / 2) + "px"; }); }
   fitThumbs(); addEventListener("resize", fitThumbs);
 
   /* ---------- gallery filter + search ---------- */
   let cat = "All";
   function filter() {
     const q = $("#tp-search").value.trim().toLowerCase(); let n = 0;
-    $$(".tp-card").forEach((c) => { const show = (cat === "All" || c.dataset.cat === cat) && (!q || c.dataset.name.includes(q)); c.hidden = !show; if (show) n++; });
+    $$("#tp-gallery .tp-card").forEach((c) => { const show = (cat === "All" || c.dataset.cat === cat) && (!q || c.dataset.name.includes(q)); c.hidden = !show; if (show) n++; });
     $$(".tp-block").forEach((s) => (s.hidden = !(cat === "All" || s.dataset.cat === cat)));
     $("#tp-results").textContent = `${n} block${n === 1 ? "" : "s"}`;
   }

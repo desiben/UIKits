@@ -55,7 +55,6 @@
   PAGES.push({ group: "Components", items: [["components", "All components", "v1.3"]] });
   CATS.forEach((g) => { const items = R.filter((c) => c.group === g); if (items.length) PAGES.push({ group: g, items: items.map((c) => ["components/" + c.slug, c.name, c.isNew ? "New" : ""]) }); });
   PAGES.push({ group: "AI agents", items: [["agents", "Agent examples", "New"]].concat(AGENTS.map((a) => ["agents/" + a.id, a.name])) });
-  PAGES.push({ group: "Examples", items: [["examples", "All examples"], ["examples/dashboard", "Dashboard"], ["examples/login", "Login"], ["examples/settings", "Settings"]] });
   const FLAT = PAGES.flatMap((g) => g.items.map(([id, label]) => ({ id, label, group: g.group })));
 
   function renderSide(cur) {
@@ -307,12 +306,9 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
 <svg class="icon"><use href="#sparkles"/></svg>  <!-- .icon-sm / .icon-lg -->`, "html")}
     <p>In React, use <code>lucide-react</code>, which the animated components already depend on: <code>import { Sparkles } from "lucide-react"</code>. Old Lucide names (for example <code>home</code> for <code>house</code>) still work in both sprites.</p>`);
 
-  P.examples = () => page("Examples", "Examples", "Full pages built only with Facet components. Open them standalone or view them inline.", `<div class="ex-cards">${[["dashboard", "layout-dashboard", "Dashboard", "KPIs, revenue chart, deals table, activity"], ["login", "lock", "Login", "Sign in with SSO / email, OTP verify"], ["settings", "settings", "Settings", "Profile, notifications, danger zone"]].map(([s, ic, b, d]) => `<a class="card ex-card" data-tilt="3" href="#/examples/${s}"><span class="icon-wrap">${i(ic)}</span><b>${b}</b><span>${d}</span></a>`).join("")}</div>
-    <p>The Figma file has 10 complete templates (26 screens) — CRM, project management, AI workspace, e-commerce, finance, calendar, settings, auth and marketing.</p>`);
-  ["dashboard", "login", "settings"].forEach((s) => {
-    P["examples/" + s] = () => page(`Examples ${i("chevron-right", "icon-sm")} ${s}`, s[0].toUpperCase() + s.slice(1), `Built from Facet components. <a href="examples/${s}.html" target="_blank" rel="noopener">Open standalone ${i("external-link", "icon-sm")}</a>`,
-      `<div class="example"><iframe class="example-frame" src="examples/${s}.html" title="${s} example" loading="lazy"></iframe></div>`);
-  });
+  // Examples moved into Templates (App pages). Old links land there.
+  const toApps = () => { location.replace("templates/#app-pages"); return page("Templates", "App pages", "The Dashboard, Login and Settings pages are now in Templates.", `<p><a href="templates/#app-pages">Open App pages in Templates</a></p>`); };
+  ["examples", "examples/dashboard", "examples/login", "examples/settings"].forEach((id) => (P[id] = toApps));
 
   P.styles = () => page("Getting started", "Style themes", "Four looks on top of the six brand colors and light/dark: Default, Soft, Glass and Mono. They change shape, surfaces and depth — not your content. Switch with one attribute in code, or one Variable mode in Figma.",
     `<div class="style-grid">${Object.entries(T.styles).map(([k, n]) => `<button class="style-card" data-style-pick="${k}" aria-label="Use ${n}"><div class="style-demo" data-style="${k === "default" ? "" : k}"><div class="card kpi"><span class="kpi-label">Revenue</span><div class="kpi-row"><span class="kpi-value">$248.9k</span><span class="trend-chip">${i("trending-up")} 12%</span></div><div class="row" style="--gap:6px;margin-top:10px"><span class="btn btn-sm">Primary</span><span class="btn btn-outline btn-sm">Outline</span></div></div></div><div class="style-cap"><b>${n}</b><span>${STYLE_DESC[k]}</span></div></button>`).join("")}</div>

@@ -14,6 +14,7 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 - **Style guide:** every component page has a "React · animated" install section, the Installation page has a React section, and the header nav has a React link.
 
 ### Changed
+- **Examples are now App pages in Templates.** The Dashboard, Login and Settings pages appear as live previews at the top of Templates; the separate Examples section and header link are gone, and old `#/examples` links open App pages. The files stay in `styleguide/examples/`.
 - **New addresses.** The style guide is at **facet.etkits.us** and ETKits (storefront, claim page, license hub) at **www.etkits.us**. Links, the CLI's registry, the license hub address and the file banner use them. The old facetui.vercel.app and etkits.vercel.app addresses keep working.
 - The core icon sprite (`icons.js`) is redrawn from Lucide v1.61.0 (was v0.460.0). Icon names are unchanged.
 - The maker credit is now **ETKits** everywhere: README, license, style guide, marketing page, Figma file, and the re-rendered marketing images and videos.

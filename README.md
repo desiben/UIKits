@@ -114,7 +114,7 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 │   │   ├── docs.css / docs.js   ← style guide chrome (not needed in your app)
 │   │   ├── registry.js          ← component docs data (examples, API, a11y)
 │   │   └── tokens-meta.js       ← token metadata for the docs pages
-│   └── examples/                ← full pages: dashboard, login, settings
+│   └── examples/                ← full pages: dashboard, login, settings (shown under Templates › App pages)
 ├── scripts/
 │   ├── build_tokens.py          ← regenerates tokens + style guide assets
 │   ├── generate_palette.py      ← OKLCH palette generator (with contrast checks)
@@ -182,7 +182,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 | Feature | Details |
 |---|---|
-| **Sidebar navigation** | Getting started, Foundations, 30 component pages grouped by category, Examples |
+| **Sidebar navigation** | Getting started, Foundations, 30 component pages grouped by category |
 | **Live previews** | Each example has Preview and HTML tabs and a one-click copy button |
 | **React** | Each component has an install command for its animated React version, plus React markup |
 | **API tables** | Classes, attributes and JS hooks for every component |
