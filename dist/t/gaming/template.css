@@ -1,0 +1,135 @@
+/*! FacetUI Industry Templates · Gaming & Esports (Nightforge) · © 2026 ETKits.
+   Voice: broadcast graphics. Condensed Mona Sans (78%) at semibold, dark glass surfaces,
+   dense data, team tags as cut badges. One accent (custom brand), chart tokens for team colours. */
+:root {
+  --k-stretch-display: 78%;
+  --k-stretch-heading: 84%;
+  --k-media-tone: var(--brand-950);
+  --k-media-tone-2: var(--brand-800);
+  --k-media-ink: var(--brand-200);
+}
+.k-display { letter-spacing: -0.01em; }
+
+/* ---------------------------------------------------------------- team marks */
+.nf-mark { display: inline-grid; place-items: center; flex: none; min-width: 34px; height: 24px; padding: 0 var(--space-1-5); font: var(--text-label-xs); font-stretch: 82%; font-weight: 600; letter-spacing: 0.04em; color: var(--text-inverse); background: var(--chart-1); border-radius: var(--radius-sm) var(--radius-xs) var(--radius-sm) var(--radius-sm); }
+.nf-mark.sm { min-width: 30px; height: 20px; }
+.nf-mark.lg { min-width: 56px; height: 40px; font: var(--text-label-md); font-stretch: 80%; font-weight: 600; }
+.nf-c1 { background: var(--chart-1); } .nf-c2 { background: var(--chart-2); } .nf-c3 { background: var(--chart-3); } .nf-c4 { background: var(--chart-4); } .nf-c5 { background: var(--chart-5); }
+
+/* ---------------------------------------------------------------- hero / live */
+.nf-hero { padding-block: var(--space-8) var(--space-12); background: radial-gradient(80% 60% at 70% 0%, color-mix(in oklab, var(--brand-700) 35%, transparent), transparent 70%); }
+.nf-hero-head { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); margin-bottom: var(--space-8); }
+@media (min-width: 1024px) { .nf-hero-head { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: end; column-gap: var(--space-12); } .nf-hero-head .k-display { grid-row: span 2; } }
+.nf-broadcast-grid { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .nf-broadcast-grid { grid-template-columns: minmax(0, 8fr) minmax(0, 3.5fr); } }
+.nf-broadcast { position: relative; display: flex; flex-direction: column; }
+.nf-scorebar { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-4); margin-top: calc(-1 * var(--space-12)); margin-inline: var(--space-3); position: relative; z-index: 1; background: color-mix(in oklab, var(--bg-elevated) 88%, transparent); backdrop-filter: blur(14px) saturate(1.3); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); box-shadow: var(--shadow-4); }
+@media (min-width: 768px) { .nf-scorebar { margin-inline: var(--space-6); padding: var(--space-5) var(--space-6); } }
+.nf-scorebar-top { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.nf-event { font: var(--text-label-md); color: var(--text-secondary); margin: 0; flex: 1 1 auto; min-width: 0; }
+.nf-viewers { display: inline-flex; align-items: center; gap: var(--space-1); font: var(--text-label-sm); color: var(--text-tertiary); }
+.nf-versus { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: var(--space-3); }
+.nf-side { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+.nf-side--b { justify-content: flex-end; }
+.nf-side-name { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nf-series { display: grid; place-items: center; width: 28px; height: 28px; border-radius: var(--radius-sm); background: var(--bg-muted); font: var(--text-label-md); }
+.nf-center { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); }
+.nf-big { font: var(--text-display-lg); font-stretch: 75%; display: inline-flex; gap: var(--space-2); line-height: 1; }
+.nf-big span { display: inline-block; }
+.nf-map { font: var(--text-label-sm); color: var(--text-tertiary); white-space: nowrap; }
+.nf-bump { animation: nf-bump var(--duration-slower) var(--ease-spring); color: var(--text-brand); }
+@keyframes nf-bump { from { transform: translateY(-30%); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (max-width: 767px) {
+  .nf-side { flex-direction: column; align-items: flex-start; gap: var(--space-1-5); }
+  .nf-side--b { align-items: flex-end; }
+  .nf-side-name { font: var(--text-label-md); font-stretch: 85%; max-width: 100%; }
+  .nf-big { font: var(--text-heading-h1); font-stretch: 75%; }
+  .nf-series { width: 24px; height: 24px; }
+  .nf-side--b .nf-series { order: 2; }
+  .nf-side--b .nf-mark { order: -1; }
+}
+.nf-scorebar-foot { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); align-items: center; }
+.nf-rail { align-self: start; }
+.nf-sched { list-style: none; display: flex; flex-direction: column; }
+.nf-sched li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-1) var(--space-3); padding: var(--space-3) var(--layout-card-padding); border-top: 1px solid var(--border-subtle); }
+.nf-sched-time { font: var(--text-label-sm); color: var(--text-brand); }
+.nf-sched-teams { grid-column: 1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1-5); font: var(--text-label-md); }
+.nf-sched-event { grid-column: 1; font: var(--text-body-xs); color: var(--text-tertiary); }
+.nf-sched li .btn { grid-column: 2; grid-row: 1 / span 3; align-self: center; }
+
+/* ---------------------------------------------------------------- tournaments */
+.nf-tgrid { --k-grid-gap: var(--space-4); }
+.nf-tcard { overflow: hidden; display: flex; flex-direction: column; }
+.nf-tcard .k-media { border-bottom: 1px solid var(--border-subtle); }
+.nf-tcard-title { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); }
+.nf-tcard-title a { color: inherit; text-decoration: none; }
+.nf-tcard-title a::after { content: ""; position: absolute; inset: 0; }
+.nf-tcard { position: relative; }
+.nf-tcard:hover { border-color: var(--border-brand); }
+.nf-tcard:focus-within { box-shadow: var(--ring); }
+.nf-tcard-title a:focus-visible { box-shadow: none; }
+.nf-tfacts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); }
+.nf-tfacts dt { font: var(--text-caption); color: var(--text-tertiary); }
+.nf-tfacts dd { margin: 0; font: var(--text-label-md); }
+.nf-slots { display: flex; flex-direction: column; gap: var(--space-1-5); }
+.nf-status-filter { width: auto; }
+
+/* ---------------------------------------------------------------- standings + bracket */
+.nf-tables { background: var(--bg-subtle); }
+.nf-tables-grid { display: grid; gap: var(--space-10); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1280px) { .nf-tables-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+.nf-tteam { display: inline-flex; align-items: center; gap: var(--space-2); font: var(--text-label-md); }
+.nf-table tbody th { font-weight: 500; text-align: left; }
+.nf-qual td:first-child { box-shadow: inset 3px 0 0 var(--bg-primary); }
+.nf-table .icon { color: var(--icon-secondary); }
+
+.nf-bracket { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: var(--space-5); overflow-x: auto; padding-bottom: var(--space-2); }
+.nf-round { display: flex; flex-direction: column; gap: var(--space-3); }
+.nf-round-title { font: var(--text-label-sm); color: var(--text-tertiary); margin: 0; }
+.nf-round-matches { list-style: none; display: flex; flex-direction: column; justify-content: space-around; gap: var(--space-3); flex: 1; }
+.nf-match { position: relative; display: flex; flex-direction: column; background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); overflow: hidden; }
+.nf-match--live { border-color: var(--border-danger); }
+.nf-row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); color: var(--text-secondary); }
+.nf-row + .nf-row { border-top: 1px solid var(--border-subtle); }
+.nf-row.nf-win { color: var(--text-primary); }
+.nf-row.nf-win .nf-score { color: var(--text-brand); font-weight: 600; }
+.nf-team { font: var(--text-label-md); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nf-score { font: var(--text-label-md); }
+.nf-tbd { font: var(--text-body-sm); color: var(--text-tertiary); grid-column: 1 / -1; }
+.nf-match-state { padding: var(--space-1-5) var(--space-3); border-top: 1px solid var(--border-subtle); font: var(--text-caption); color: var(--text-tertiary); }
+.nf-bracket--compact { grid-auto-columns: minmax(200px, 1fr); }
+
+/* ---------------------------------------------------------------- roster */
+.nf-roster { list-style: none; display: grid; gap: var(--space-4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 768px) { .nf-roster { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .nf-roster { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.nf-player { display: flex; flex-direction: column; gap: var(--space-1); padding: var(--space-5) var(--space-4); }
+.nf-player .avatar { margin-bottom: var(--space-2); }
+.nf-handle { font: var(--text-heading-h3); font-stretch: 75%; line-height: 1; }
+
+/* ---------------------------------------------------------------- how */
+.nf-steps { list-style: none; counter-reset: s; display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .nf-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .nf-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.nf-steps li { counter-increment: s; position: relative; padding: var(--space-5); padding-top: calc(var(--space-16) + var(--space-2)); background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); }
+.nf-steps li::before { content: counter(s); position: absolute; top: var(--space-4); left: var(--space-5); font: var(--text-display-lg); font-stretch: 75%; line-height: 1; color: var(--text-brand); }
+.nf-steps h3 { font: var(--text-heading-h5); font-stretch: var(--k-stretch-heading); margin-bottom: var(--space-2); }
+.nf-steps p { font: var(--text-body-sm); color: var(--text-secondary); }
+
+/* ---------------------------------------------------------------- tournament page */
+.nf-thead { padding-block: var(--space-6) var(--space-8); }
+.nf-thead-grid { display: grid; gap: var(--space-6); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .nf-thead-grid { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: end; } }
+.nf-thead-facts { display: grid; gap: var(--space-3) var(--space-6); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 768px) { .nf-thead-facts { grid-template-columns: repeat(4, minmax(0, auto)); justify-content: start; } }
+.nf-thead-facts dt { font: var(--text-caption); color: var(--text-tertiary); }
+.nf-thead-facts dd { margin: 0; font: var(--text-label-lg); }
+.nf-reg { box-shadow: var(--shadow-3); }
+.nf-kv { border-collapse: collapse; font: var(--text-body-md); max-width: 560px; width: 100%; }
+.nf-kv th, .nf-kv td { text-align: left; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-subtle); vertical-align: top; }
+.nf-kv th { font-weight: 500; color: var(--text-secondary); width: 40%; }
+.nf-rules { background: var(--bg-subtle); }
+.nf-reg-lede { margin-top: var(--space-3); }
+.nf-before { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); font: var(--text-body-sm); }
+.nf-before li { display: flex; gap: var(--space-2); align-items: flex-start; }
+.nf-before .icon { color: var(--icon-success); margin-top: 2px; flex: none; }
