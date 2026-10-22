@@ -8,7 +8,8 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="$ROOT/dist"; PKG="$OUT/FacetUI-v$V"
 rm -rf "$PKG" "$PKG.zip"; mkdir -p "$PKG/figma"
 sh "$ROOT/scripts/build_assets.sh"
-cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PARTY_NOTICES.md" "$PKG/"
+node "$ROOT/scripts/build_llms.mjs"
+cp "$ROOT/START-HERE.md" "$ROOT/LICENSE.md" "$ROOT/CHANGELOG.md" "$ROOT/THIRD_PARTY_NOTICES.md" "$ROOT/FACETUI-LLMS.md" "$PKG/"
 cp "$ROOT/figma/README.md" "$PKG/figma/"
 cp -r "$ROOT/tokens" "$ROOT/styleguide" "$PKG/"
 rm -rf "$PKG/styleguide/marketing" "$PKG/styleguide/assets/src" "$PKG/styleguide/api" "$PKG/styleguide/vercel.json" \
@@ -34,6 +35,8 @@ import re, sys
 p = sys.argv[1]; s = open(p).read()
 open(p, "w").write(re.sub(r'\[`([^`]+)`\]\(https://github\.com/desiben/[^)]+\)', r'`\1`', s))
 PY
+# The style guide's Changelog page reads CHANGELOG.md next to index.html.
+cp "$PKG/CHANGELOG.md" "$PKG/styleguide/CHANGELOG.md"
 if grep -rIl "github.com/desiben\|figma.com/design\|figma.com/file" "$PKG"; then echo "private link found, aborting" >&2; exit 1; fi
 (cd "$OUT" && zip -qr "FacetUI-v$V.zip" "FacetUI-v$V")
 echo "built $OUT/FacetUI-v$V.zip"

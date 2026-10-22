@@ -8,7 +8,7 @@
 
 It uses the component model and naming React developers already know, with its own visual language: the *Facet cut* and the *signal rail*.
 
-**[Live style guide](https://facet.etkits.us)** · **[Marketing kit](https://facet.etkits.us/marketing/)** · **[Buy on ETKits](https://www.etkits.us/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facet.etkits.us/#/examples) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facet.etkits.us)** · **[Marketing kit](https://facet.etkits.us/marketing/)** · **[Buy on ETKits](https://www.etkits.us/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Templates](https://facet.etkits.us/templates/) · [React](https://facet.etkits.us/react/) · [Changelog](https://facet.etkits.us/#/changelog) · [LLM guide](FACETUI-LLMS.md)
 
 ![Facet UI — the design system with an edge](styleguide/marketing/media/facet-ui-hero.jpg)
 
@@ -27,6 +27,17 @@ npx facetui@latest add --all     # …or everything
 ```
 
 Setup, the license key and the full component list are in [React components](#react-components-facetui-cli).
+
+## What's new since v1.3 (next release)
+
+- **Animated React components** for all 109 components, installed with the `facetui` CLI from a license-gated registry ([details](#react-components-facetui-cli)).
+- **The full Lucide icon set:** 1,903 icons (v1.61.0) with search, categories and copy as HTML, SVG or React; a new Figma page, **10 — Icons**.
+- **Licenses managed by ETKits** ([www.etkits.us](https://www.etkits.us)): one hub checks purchases, counts devices (5 per key by default) and revokes keys for every product.
+- **Code for buyers only:** the live demos stay public, while example HTML, React markup, template HTML and Copy Markdown unlock with a license key.
+- **Templates gained App pages:** the Dashboard, Login and Settings pages now sit at the top of [Templates](https://facet.etkits.us/templates/), replacing the separate Examples section.
+- **Changelog on the site:** a [Changelog page](https://facet.etkits.us/#/changelog) reads `CHANGELOG.md`, so the site and the repo never disagree.
+- **LLM guide:** [`FACETUI-LLMS.md`](FACETUI-LLMS.md), a single Markdown reference of the whole kit for AI coding assistants ([details](#using-facet-with-ai-assistants)).
+- **New addresses:** the style guide is at **facet.etkits.us** and ETKits at **www.etkits.us** (the old vercel.app addresses still work).
 
 ## What's new in v1.3
 
@@ -55,16 +66,19 @@ Setup, the license key and the full component list are in [React components](#re
 8. [Marketing kit: videos & images](#marketing-kit-videos--images)
 9. [Selling on Gumroad, Envato and UI8](#selling-on-gumroad-envato-and-ui8)
 10. [Design tokens](#design-tokens)
-11. [Using Facet with Tailwind CSS](#using-facet-with-tailwind-css)
-12. [Components](#components)
-13. [Example pages](#example-pages)
-14. [The Figma file](#the-figma-file)
-15. [Accessibility](#accessibility)
-16. [Browser support](#browser-support)
-17. [Regenerating tokens](#regenerating-tokens)
-18. [Project structure](#project-structure)
-19. [Known limitations](#known-limitations)
-20. [Credits and licenses](#credits-and-licenses)
+11. [React components (facetui CLI)](#react-components-facetui-cli)
+12. [Using Facet with Tailwind CSS](#using-facet-with-tailwind-css)
+13. [Using Facet with AI assistants](#using-facet-with-ai-assistants)
+14. [Components](#components)
+15. [Templates, app pages and AI agents](#templates-app-pages-and-ai-agents)
+16. [The Figma file](#the-figma-file)
+17. [Accessibility](#accessibility)
+18. [Browser support](#browser-support)
+19. [Regenerating tokens](#regenerating-tokens)
+20. [Changelog](#changelog)
+21. [Project structure](#project-structure)
+22. [Known limitations](#known-limitations)
+23. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -74,9 +88,10 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 
 | Layer | What it is | Who uses it |
 |---|---|---|
-| **Figma library** | 9 pages, 158 components (105 variant sets, 622 variants), 147 icons, 4 style themes, 23 patterns, 10 app templates (26 screens), prototype flows and documentation | Designers |
+| **Figma library** | 11 pages, 158 components (105 variant sets, 622 variants), 1,903 Lucide icons, 4 style themes, 23 patterns, 10 app templates (26 screens), 36 page blocks, prototype flows and documentation | Designers |
 | **Design tokens** | 246 Figma variables exported as CSS custom properties, W3C DTCG JSON and a Tailwind preset | Designers and developers |
-| **Living style guide** | A dependency-free HTML/CSS/JS reference implementation with live previews, copy-paste code and a theme studio | Developers |
+| **HTML/CSS/JS** | A dependency-free implementation of 109 components, documented in the living style guide with live previews, copy-paste code and a theme studio | Developers |
+| **Animated React components** | The same 109 components for React (Radix + Tailwind v4, motion on every interaction), installed into your project with `npx facetui` | React developers |
 
 **Highlights**
 
@@ -93,7 +108,10 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 ```
 .
 ├── README.md                    ← you are here
-├── CHANGELOG.md
+├── START-HERE.md                ← first steps for buyers
+├── CHANGELOG.md                 ← every release (also shown on the site's Changelog page)
+├── FACETUI-LLMS.md              ← the whole kit in one Markdown file for AI assistants (generated)
+├── LICENSE.md                   ← Personal, Commercial and Team terms
 ├── THIRD_PARTY_NOTICES.md
 ├── facet-micro-interactions.mp4 ← 20-second motion demo
 ├── FacetUI-marketplace-previews/ ← 8 marketplace images, 1920×1080
@@ -114,9 +132,19 @@ Facet UI is a UI kit for building SaaS products, dashboards, admin tools and AI 
 │   │   ├── docs.css / docs.js   ← style guide chrome (not needed in your app)
 │   │   ├── registry.js          ← component docs data (examples, API, a11y)
 │   │   └── tokens-meta.js       ← token metadata for the docs pages
-│   └── examples/                ← full pages: dashboard, login, settings (shown under Templates › App pages)
+│   ├── examples/                ← app pages: dashboard, login, settings (shown under Templates › App pages)
+│   ├── templates/               ← 36 page blocks + the App pages gallery
+│   ├── agents/                  ← 6 AI agent demos
+│   ├── react/                   ← built React showcase (from react/)
+│   ├── marketing/               ← marketing page, videos and images
+│   ├── api/                     ← license-gated registry for the CLI (server only)
+│   └── build-public.mjs         ← builds the public copy Vercel serves
+├── react/                       ← animated React components (registry/), demos and showcase source
+├── cli/                         ← the facetui CLI (published to npm)
 ├── scripts/
 │   ├── build_tokens.py          ← regenerates tokens + style guide assets
+│   ├── build_llms.mjs           ← regenerates FACETUI-LLMS.md from the style guide registry
+│   ├── build-lucide.mjs         ← rebuilds the Lucide sprites
 │   ├── generate_palette.py      ← OKLCH palette generator (with contrast checks)
 │   └── render_listing_images.js ← renders marketing/listings/*
 ├── marketing/
@@ -182,7 +210,11 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 | Feature | Details |
 |---|---|
-| **Sidebar navigation** | Getting started, Foundations, 30 component pages grouped by category |
+| **Sidebar navigation** | Getting started (incl. Changelog), Foundations, 109 component pages in 9 categories, AI agents |
+| **Components overview** | Every component with a live thumbnail, search and a "New" badge per release |
+| **Templates** | 36 page blocks and 3 App pages, with a theme bar (any brand color, light/dark, style, motion) |
+| **Changelog** | The [Changelog page](https://facet.etkits.us/#/changelog) renders `CHANGELOG.md` from the repo |
+| **Unlock code** | Buyers enter their license key once to copy HTML, React markup and Markdown |
 | **Live previews** | Each example has Preview and HTML tabs and a one-click copy button |
 | **React** | Each component has an install command for its animated React version, plus React markup |
 | **API tables** | Classes, attributes and JS hooks for every component |
@@ -454,7 +486,7 @@ Every one of the 109 components has an animated React version in `react/registry
 
 pnpm, yarn and bun work too: `pnpm dlx facetui@latest …`, `yarn dlx facetui@latest …`, `bunx facetui@latest …`.
 
-**How the gate works.** `styleguide/api/r/[name].js` (a Vercel function behind `/r/<name>.json`, with `/r/index.json` listing every item) serves registry items only for a valid key. It checks the key with Gumroad's license API, and caches valid keys for 10 minutes. Refunded, charged-back and disputed purchases are rejected. Set these on the `facetui` Vercel project:
+**How the gate works.** `styleguide/api/r/[name].js` (a Vercel function behind `/r/<name>.json`, with `/r/index.json` listing every item) serves registry items only for a valid key. It asks the ETKits license hub whether the key may be used on that device (see below) and remembers a yes for one minute, since the CLI fetches many items in a row. Refunded, charged-back, disputed and revoked keys are rejected. Set these on the `facetui` Vercel project:
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -517,6 +549,16 @@ To add the Facet cut to any component:
 
 ---
 
+## Using Facet with AI assistants
+
+[`FACETUI-LLMS.md`](FACETUI-LLMS.md) is the whole kit in one Markdown file, written for ChatGPT, Claude, Cursor, Copilot and other assistants: setup for HTML, React and Tailwind, rules to follow (tokens only, documented classes, semantic HTML, motion settings), every token, the theme, chart, toast and motion APIs, the templates and, for each of the 109 components, its classes, attributes, accessibility notes, React install command and a working HTML example.
+
+- **Use it:** attach it to a chat, add it to your editor's rules or context (for example Cursor rules or a `CLAUDE.md`), or paste the relevant sections.
+- **Keep it current:** it's generated from the style guide registry. After changing components, run `node scripts/build_llms.mjs`. The hand-written part is `scripts/llms-intro.md`.
+- **Buyer-only:** it contains component markup, so it ships in the download and is never published on the site.
+
+Every component page in the style guide also has **Copy Markdown** (for buyers) to give an assistant a single component.
+
 ## Components
 
 Each Figma component maps to a class-based HTML implementation and an animated React component. ✅ means it's implemented in the style guide. Figma-only components are listed below the table.
@@ -542,9 +584,23 @@ Components without a ✅ exist in Figma, fully tokenized, but don't yet have an 
 
 ---
 
-## Example pages
+## Templates, app pages and AI agents
 
-Full pages built only from Facet components and tokens. Each one responds to the theme, brand and density settings.
+**[Templates](https://facet.etkits.us/templates/)** (`styleguide/templates/`) has 36 page blocks with 56 variants, built only from Facet components, each with live motion and copyable HTML (for buyers). The theme bar re-colors everything with any brand color, light/dark, the 4 styles and motion on/off.
+
+| Category | Blocks |
+|---|---|
+| **Marketing** (15) | Hero sections, feature items, feature grids, stats and counters, logo clouds, logo carousels, how it works, timeline/roadmap, testimonials, call-to-action banners, pricing tiers, FAQ, footer, team profiles, video showcase |
+| **Navigation** (4) | Mega menus, announcement banners, breadcrumbs, sticky and floating headers |
+| **Forms** (3) | Contact forms, newsletter and lead capture, multi-step wizard |
+| **Content** (2) | Blog, news articles |
+| **App** (3) | Dashboard, activity feed, data tables |
+| **Commerce** (5) | Filter and sort toolbar, product cards, product gallery, cart drawer, checkout |
+| **System** (4) | 404 page, empty states, loaders and skeletons, cookie consent |
+
+### App pages
+
+Whole screens at the top of Templates, as live previews. The files are in `styleguide/examples/` and respond to the theme, brand and density settings.
 
 | Page | File | What it shows |
 |---|---|---|
@@ -556,6 +612,12 @@ Full pages built only from Facet components and tokens. Each one responds to the
 |---|---|---|
 | ![](docs/images/example-dashboard.png) | ![](docs/images/example-login.png) | ![](docs/images/example-settings.png) |
 
+### AI agents
+
+Six working agent demos at [`/#/agents`](https://facet.etkits.us/#/agents) (`styleguide/agents/`): **Business Banking** (cash, burn, runway, approval-gated transfers), **Commerce Ops** (orders, inventory, restocking approvals), **Travel** (destinations, itinerary, budget), **Email** (find, summarize, draft, send), **Health** (workouts, sleep, nutrition) and **Support** (queues, SLA, CSAT, triage). Each shows chain of thought, tool calls, approvals and generative UI built from Facet's AI components.
+
+### In Figma
+
 The Figma file goes further, with **10 templates and 26 desktop and mobile screens**: SaaS analytics, CRM, project management, AI workspace, e-commerce admin, finance, calendar and scheduling, settings and account, authentication and onboarding, and a marketing website.
 
 ![Figma dashboard template](docs/images/figma-template-dashboard.png)
@@ -564,7 +626,7 @@ The Figma file goes further, with **10 templates and 26 desktop and mobile scree
 
 ## The Figma file
 
-The Figma file is delivered with your purchase: open the Figma link in your Gumroad receipt.
+The Figma file is delivered with your purchase: unlock it at [www.etkits.us/claim](https://www.etkits.us/claim) with your Gumroad license key or Envato purchase code, then choose **Duplicate**.
 
 | Page | Contents |
 |---|---|
@@ -623,6 +685,14 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 
 ---
 
+## Changelog
+
+Every release is in [`CHANGELOG.md`](CHANGELOG.md), newest first, with **Added**, **Changed** and **Fixed** sections and an **Unreleased** section for work since the last version. The style guide shows the same file on its [Changelog page](https://facet.etkits.us/#/changelog) (`styleguide/build-public.mjs` copies it into the public site), and the Figma file has a matching **08 — Changelog** page.
+
+To release: rename **Unreleased** to `[x.y.z] — YYYY-MM-DD`, bump the version in the style guide header and `cli/package.json` if the CLI changed, then add a new empty **Unreleased** section.
+
+---
+
 ## Project structure
 
 | Path | Purpose | Ship it in your app? |
@@ -637,6 +707,8 @@ To add a brand permanently, add its ramp to `palette.json` and a mode to `figma_
 | `styleguide/examples/example.css` | App-shell layout for the examples | Optional starting point |
 | `react/registry/facet/` | Animated React components | ✅ via `npx facetui add` |
 | `cli/` | The `facetui` CLI (published to npm) | — |
+| `FACETUI-LLMS.md`, `scripts/build_llms.mjs`, `scripts/llms-intro.md` | LLM guide and its generator | Give it to your AI assistant |
+| `styleguide/templates/` | Page blocks and App pages | Copy the blocks you need |
 | `react/demos/`, `react/showcase/`, `styleguide/react/` | React showcase and its build | ❌ |
 | `styleguide/api/r/[name].js`, `styleguide/api/_registry/` | License-gated registry endpoint and its built JSON | ❌ (server only) |
 | `styleguide/marketing/` | Marketing page, videos and images | ❌ |

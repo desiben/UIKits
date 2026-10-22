@@ -43,7 +43,7 @@
 
   /* ---------- navigation model ---------- */
   const PAGES = [
-    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors"], ["styles", "Style themes", "New"], ["figma", "Figma file"], ["showcase", "Showcase"]] },
+    { group: "Getting started", items: [["introduction", "Introduction"], ["installation", "Installation"], ["theming", "Theming"], ["brand-colors", "Brand colors"], ["styles", "Style themes", "New"], ["figma", "Figma file"], ["showcase", "Showcase"], ["changelog", "Changelog"]] },
     { group: "Foundations", items: [["colors", "Colors"], ["typography", "Typography"], ["spacing", "Spacing & density"], ["radius", "Radius & the Facet cut"], ["elevation", "Elevation & focus"], ["motion", "Motion", "New"], ["icons", "Icons"]] },
   ];
   // v1.2 categories (older "Signature" entries are filed into their natural category)
@@ -390,6 +390,7 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
     window.scrollTo(0, 0);
     if (cur === "brand-colors") studio();
     if (cur === "icons") iconsPage();
+    if (cur === "changelog") changelogPage();
     main.querySelectorAll("[data-custom-brand]").forEach((el) => T.setCustomBrand(el.dataset.customBrand, el));
     const on = $(".docs-side a.on"); if (on) on.scrollIntoView({ block: "nearest" });
     document.querySelectorAll(".header-nav a").forEach((a) => a.classList.toggle("on", cur.startsWith(a.dataset.sec)));
@@ -426,6 +427,32 @@ const spring = { type: "spring", stiffness: 420, damping: 28 }  // ≈ --ease-sp
   /* ---------- icons page (full Lucide set, loaded on demand) ---------- */
   const pascal = (n) => n.replace(/(^|-)([a-z0-9])/g, (m, a, b) => b.toUpperCase());
   let iconIndex = null;
+  /* ---------- Changelog: CHANGELOG.md rendered in the page (build-public.mjs copies it next to index.html) ---------- */
+  P.changelog = () => page("Getting started", "Changelog", "Every release of Facet UI: what's new, what changed and what was fixed, newest first.", `<div id="changelog-body" class="prose changelog"><p class="text-secondary">Loading the changelog…</p></div>`);
+  function mdInline(s) {
+    return esc(s).replace(/`([^`]+)`/g, "<code>$1</code>").replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/\*([^*]+)\*/g, "<i>$1</i>")
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/\[([^\]]+)\]\([^)]*\)/g, "$1");
+  }
+  function mdToHtml(md) {
+    const out = []; let list = 0;
+    const close = (to) => { while (list > to) { out.push("</ul>"); list--; } };
+    for (const line of md.split("\n")) {
+      const h = line.match(/^(#{2,4}) (.*)$/), li = line.match(/^( *)- (.*)$/);
+      if (h) { close(0); const lvl = h[1].length, text = h[2].replace(/^\[([^\]]+)\]/, "$1"); const id = lvl === 2 ? ` id="v-${text.replace(/[^\w]+/g, "-").replace(/^-|-$/g, "").toLowerCase()}"` : ""; out.push(`<h${lvl}${id}>${mdInline(text)}</h${lvl}>`); }
+      else if (li) { const depth = Math.floor(li[1].length / 2) + 1; while (list < depth) { out.push("<ul>"); list++; } close(depth); out.push(`<li>${mdInline(li[2])}</li>`); }
+      else if (line.trim()) { close(0); out.push(`<p>${mdInline(line)}</p>`); }
+      else close(0);
+    }
+    close(0); return out.join("");
+  }
+  function changelogPage() {
+    const box = $("#changelog-body");
+    const get = (u) => fetch(u, { cache: "no-cache" }).then((r) => (r.ok ? r.text() : Promise.reject(r.status)));
+    get("CHANGELOG.md").catch(() => get("../CHANGELOG.md"))
+      .then((md) => { if (!box.isConnected) return; box.innerHTML = mdToHtml(md.replace(/^# .*\n/, "")); toc(); })
+      .catch(() => { if (box.isConnected) box.innerHTML = `<p>The changelog couldn't be loaded here. Open <code>CHANGELOG.md</code> in your download.</p>`; });
+  }
+
   function iconsPage() {
     if (window.FACET_LUCIDE) return renderIcons();
     document.addEventListener("facet:lucide", renderIcons, { once: true });

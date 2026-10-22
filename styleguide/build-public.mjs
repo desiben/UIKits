@@ -33,4 +33,8 @@ async function walk(dir) {
 }
 fs.rmSync(OUT, { recursive: true, force: true })
 await walk(".")
+// The style guide's Changelog page reads CHANGELOG.md from the repo root.
+const CHANGELOG = path.join(ROOT, "../CHANGELOG.md")
+if (fs.existsSync(CHANGELOG)) fs.copyFileSync(CHANGELOG, path.join(OUT, "CHANGELOG.md"))
+else console.warn("CHANGELOG.md not found next to styleguide/: the Changelog page will show a fallback")
 console.log(`public-build: ${min} files minified (${Math.round(saved / 1024)} KB smaller), ${copied} copied`)

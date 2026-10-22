@@ -17,8 +17,10 @@ Install the free **Mona Sans** font first so text renders correctly. Variable mo
 | `tokens/` | `tokens.css` (CSS variables), `facet.tokens.json`, and `tailwind.preset.js` for Tailwind |
 | `styleguide/` | The full style guide. Open `styleguide/index.html`, or serve the folder with any static server |
 | `styleguide/assets/` | `facet.css` + `facet.js` (all components), `tokens.css`, `icons.js`, `charts.js` |
-| `styleguide/examples/` | Dashboard, Login and Settings pages |
+| `styleguide/templates/` | 36 page blocks, plus the App pages gallery |
+| `styleguide/examples/` | Dashboard, Login and Settings app pages |
 | `styleguide/agents/` | 6 AI agent demos |
+| `FACETUI-LLMS.md` | The whole kit in one file for AI assistants (ChatGPT, Claude, Cursor, Copilot) |
 
 Quick start:
 
@@ -35,7 +37,9 @@ Theme with attributes on `<html>`: `data-theme="dark"`, `data-brand="ember"`, `d
 
 - `styleguide/index.html`: full documentation for every component, token and theme (also live at https://facet.etkits.us)
 - `figma/README.md`: Figma file guide (pages, themes, adding your brand)
-- `CHANGELOG.md`: what's new
+- `FACETUI-LLMS.md`: give this to your AI coding assistant
+- React: `npx facetui@latest init`, then `npx facetui@latest add button` (uses your license key)
+- `CHANGELOG.md`: what's new (also at https://facet.etkits.us/#/changelog)
 - `LICENSE.md`: what you can and can't do
 
 Need help? Reply to your purchase email.
