@@ -1,0 +1,299 @@
+/*! FacetUI Industry Templates · kit.css · © 2026 ETKits. All rights reserved.
+   Shared layout layer for all 36 templates. Facet UI components come from facet.css;
+   this file only adds page layout, the site header/footer, media slots, forms and flows.
+   Rules: semantic tokens only (no hex), Mona Sans only, transform/opacity motion only.
+
+   Breakpoints (mobile-first; Facet UI defines none, so the kit standardises these):
+     sm 480px · md 768px · lg 1024px · xl 1280px · 2xl 1440px
+*/
+
+/* ---------------------------------------------------------------- font
+   Mona Sans variable (wdth 75–125, wght 200–900), self-hosted under the SIL OFL 1.1.
+   Facet UI's single-typeface rule is kept; templates vary only width (font-stretch). */
+@font-face {
+  font-family: "Mona Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  src: url("../fonts/mona-sans-latin-wdth-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Mona Sans";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+  src: url("../fonts/mona-sans-latin-ext-wdth-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------- kit tokens
+   Templates override these in template.css (on :root). They only ever point at Facet tokens. */
+:root {
+  --k-max: 1240px;
+  --k-max-narrow: 760px;
+  --k-max-wide: 1440px;
+  --k-gutter: var(--space-4);
+  --k-section: var(--space-16);
+  --k-section-tight: var(--space-10);
+  --k-header-h: 60px;
+  --k-stretch-display: 100%;   /* 75%–125%: per-template typographic voice */
+  --k-stretch-heading: 100%;
+  --k-weight-display: 600;     /* Facet weights: 400 / 500 / 600 */
+  --k-media-tone: var(--brand-100);
+  --k-media-tone-2: var(--brand-300);
+  --k-media-ink: var(--brand-700);
+}
+@media (min-width: 768px)  { :root { --k-gutter: var(--space-8); --k-section: var(--space-20); --k-section-tight: var(--space-12); } }
+@media (min-width: 1280px) { :root { --k-gutter: var(--space-10); } }
+
+/* WCAG 2.2 non-text contrast: Facet's --border-input is 2.5:1 on white (documented gap, §11).
+   The kit raises it to ink/500 for form controls in light mode. */
+:root:not([data-theme="dark"]), [data-theme="light"] { --border-input: var(--ink-500); }
+
+/* ---------------------------------------------------------------- base */
+html { scroll-padding-top: calc(var(--k-header-h) + var(--space-4)); -webkit-text-size-adjust: 100%; }
+body.k-page { margin: 0; min-height: 100vh; display: flex; flex-direction: column; background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-sans); font: var(--text-body-md); overflow-x: clip; }
+body.k-page > main { flex: 1 0 auto; }
+main:focus { outline: none; }
+.k-page img { max-width: 100%; display: block; }
+.k-page :where(h1, h2, h3, h4, h5, p, figure, dl, dd, blockquote) { margin: 0; }
+.k-page :where(ul, ol) { margin: 0; padding: 0; }
+.k-page :where(a:not(.btn, .chip, .tab, .item-card, .nav-menu-card)):focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--radius-xs); }
+[data-theme] { color-scheme: light; } [data-theme="dark"] { color-scheme: dark; }
+[hidden] { display: none !important; }
+
+.k-skip { position: fixed; left: var(--space-4); top: var(--space-2); z-index: 100; transform: translateY(-200%); }
+.k-skip:focus { transform: none; }
+
+/* ---------------------------------------------------------------- layout */
+.k-wrap { width: 100%; max-width: calc(var(--k-max) + 2 * var(--k-gutter)); margin-inline: auto; padding-inline: var(--k-gutter); box-sizing: border-box; }
+.k-wrap--narrow { max-width: calc(var(--k-max-narrow) + 2 * var(--k-gutter)); }
+.k-wrap--wide { max-width: calc(var(--k-max-wide) + 2 * var(--k-gutter)); }
+.k-section { padding-block: var(--k-section); }
+.k-section--tight { padding-block: var(--k-section-tight); }
+.k-section--flush-top { padding-top: 0; }
+.k-section[data-theme], .k-band[data-theme] { background: var(--bg-canvas); color: var(--text-primary); }
+.k-surface { background: var(--bg-subtle); }
+.k-surface-raised { background: var(--bg-surface); }
+.k-rule { border: 0; border-top: 1px solid var(--border-default); margin: 0; }
+
+.k-grid { display: grid; gap: var(--k-grid-gap, var(--space-6)); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) {
+  .k-grid--2, .k-grid--3, .k-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .k-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .k-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.k-split { display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1024px) {
+  .k-split { grid-template-columns: minmax(0, var(--k-split-a, 1fr)) minmax(0, var(--k-split-b, 1fr)); gap: var(--k-split-gap, var(--space-12)); }
+  .k-split--center { align-items: center; }
+  .k-sticky-col { position: sticky; top: calc(var(--k-header-h) + var(--space-6)); }
+}
+.k-stack { display: flex; flex-direction: column; gap: var(--k-gap, var(--space-4)); }
+.k-cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--k-gap, var(--space-3)); }
+.k-span-full { grid-column: 1 / -1; }
+.k-hscroll { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(var(--k-hscroll-min, 260px), 1fr); gap: var(--space-4); overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: var(--space-2); }
+.k-hscroll > * { scroll-snap-align: start; }
+
+/* ---------------------------------------------------------------- type
+   Display and heading sizes step up with the viewport using Facet's own type tokens. */
+.k-display, .k-h1, .k-h2, .k-h3, .k-h4 { color: var(--text-primary); text-wrap: balance; }
+.k-display { font: var(--text-display-lg); letter-spacing: var(--tracking-display-lg, -0.02em); font-stretch: var(--k-stretch-display); font-weight: var(--k-weight-display); }
+.k-h1 { font: var(--text-heading-h1); letter-spacing: var(--tracking-heading-h1, -0.015em); font-stretch: var(--k-stretch-heading); }
+.k-h2 { font: var(--text-heading-h2); letter-spacing: var(--tracking-heading-h2, -0.01em); font-stretch: var(--k-stretch-heading); }
+.k-h3 { font: var(--text-heading-h3); font-stretch: var(--k-stretch-heading); }
+.k-h4 { font: var(--text-heading-h4); }
+.k-h5 { font: var(--text-heading-h5); }
+@media (min-width: 768px) {
+  .k-display { font: var(--text-display-xl); font-stretch: var(--k-stretch-display); font-weight: var(--k-weight-display); letter-spacing: var(--tracking-display-xl, -0.025em); }
+  .k-h1 { font: var(--text-display-lg); font-stretch: var(--k-stretch-heading); letter-spacing: var(--tracking-display-lg, -0.02em); }
+}
+@media (min-width: 1280px) {
+  .k-display { font: var(--text-display-2xl); font-stretch: var(--k-stretch-display); font-weight: var(--k-weight-display); letter-spacing: var(--tracking-display-2xl, -0.03em); }
+}
+.k-display--xl { }
+@media (min-width: 1280px) { .k-display--xl { font: var(--text-display-3xl); font-stretch: var(--k-stretch-display); font-weight: var(--k-weight-display); letter-spacing: var(--tracking-display-3xl, -0.035em); } }
+.k-lede { font: var(--text-body-lg); color: var(--text-secondary); max-width: 62ch; text-wrap: pretty; }
+.k-prose { font: var(--text-body-lg); color: var(--text-secondary); max-width: 68ch; }
+.k-prose > * + * { margin-top: var(--space-4); }
+.k-prose h2, .k-prose h3 { color: var(--text-primary); margin-top: var(--space-10); }
+.k-prose h2 { font: var(--text-heading-h3); } .k-prose h3 { font: var(--text-heading-h4); }
+.k-prose ul, .k-prose ol { padding-left: var(--space-6); }
+.k-prose li + li { margin-top: var(--space-2); }
+.k-num { font-variant-numeric: tabular-nums; }
+.k-optional { font: var(--text-caption); color: var(--text-tertiary); margin-left: var(--space-1); }
+
+.k-section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--space-4) var(--space-8); margin-bottom: var(--space-8); }
+.k-section-head-text { display: flex; flex-direction: column; gap: var(--space-3); max-width: 720px; }
+.k-section-head--center { justify-content: center; text-align: center; }
+.k-section-head--center .k-section-head-text { align-items: center; }
+
+/* ---------------------------------------------------------------- media slots */
+.k-media { position: relative; margin: 0; overflow: hidden; aspect-ratio: var(--k-ratio-sm, var(--k-ratio, 4/3)); background: var(--bg-muted); isolation: isolate; }
+@media (min-width: 768px) { .k-media { aspect-ratio: var(--k-ratio, 4/3); } }
+.k-media img { width: 100%; height: 100%; object-fit: cover; object-position: var(--k-focal-sm, 50% 50%); }
+@media (min-width: 768px) { .k-media img { object-position: var(--k-focal, 50% 50%); } }
+.k-media--fill { aspect-ratio: auto !important; height: 100%; min-height: inherit; }
+.k-media figcaption { position: absolute; left: var(--space-3); bottom: var(--space-3); right: var(--space-3); font: var(--text-caption); color: var(--text-on-primary); }
+/* Pending photo slot: art-directed, never pretends to be a photo. */
+.k-media--pending {
+  background:
+    radial-gradient(120% 90% at var(--k-focal, 50% 50%), color-mix(in oklab, var(--k-media-tone-2) 70%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--k-media-tone), color-mix(in oklab, var(--k-media-tone-2) 55%, var(--k-media-tone)));
+  color: var(--k-media-ink);
+}
+.k-media--pending::after { content: ""; position: absolute; inset: 0; background-image: repeating-linear-gradient(135deg, color-mix(in oklab, var(--k-media-ink) 7%, transparent) 0 1px, transparent 1px 14px); pointer-events: none; }
+.k-media-art { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 56px; height: 56px; border-radius: var(--radius-full); background: color-mix(in oklab, var(--bg-surface) 55%, transparent); }
+.k-media-art .icon { width: 24px; height: 24px; }
+.k-media-brief { position: absolute; z-index: 1; left: var(--space-3); top: var(--space-3); max-width: calc(100% - var(--space-6)); display: inline-flex; gap: var(--space-1-5); align-items: flex-start; padding: var(--space-1) var(--space-2); font: var(--text-caption); color: var(--text-secondary); background: color-mix(in oklab, var(--bg-surface) 88%, transparent); border-radius: var(--radius-sm); }
+.k-media-brief .icon { flex: none; margin-top: 2px; }
+.k-media-brief span { overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+
+/* ---------------------------------------------------------------- header */
+.k-kitbar { background: var(--bg-canvas); color: var(--text-secondary); font: var(--text-label-sm); }
+.k-kitbar-inner { display: flex; align-items: center; gap: var(--space-4); min-height: 36px; white-space: nowrap; }
+.k-kitbar a { color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: var(--space-1-5); min-height: 36px; padding-inline: var(--space-1); }
+.k-kitbar a:hover, .k-kitbar a[aria-current="page"] { color: var(--text-primary); }
+.k-kitbar a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
+.k-kitbar-meta { display: none; color: var(--text-tertiary); }
+.k-kitbar-pages { margin-left: auto; display: flex; gap: var(--space-3); overflow-x: auto; scrollbar-width: none; min-width: 0; }
+@media (min-width: 768px) { .k-kitbar-meta { display: inline; } }
+
+.k-header { position: relative; z-index: 40; }
+.k-header--sticky { position: sticky; top: 0; }
+.k-header .navbar-inner { max-width: calc(var(--k-max) + 2 * var(--k-gutter)); padding-inline: var(--k-gutter); }
+.k-header .navbar-links a { font-stretch: var(--k-stretch-heading); }
+.k-brand { display: inline-flex; align-items: center; gap: var(--space-2-5); text-decoration: none; color: var(--text-primary); font: var(--text-heading-h5); font-stretch: var(--k-stretch-display); }
+.k-brand .logo { width: 28px; height: 28px; display: grid; place-items: center; background: var(--bg-primary); color: var(--text-on-primary); font: var(--text-label-sm); border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); }
+.k-mark { fill: var(--icon-brand); flex: none; }
+.k-utility { background: var(--bg-subtle); border-bottom: 1px solid var(--border-subtle); font: var(--text-label-sm); color: var(--text-secondary); }
+.k-utility-inner { display: flex; gap: var(--space-5); align-items: center; min-height: 36px; overflow-x: auto; white-space: nowrap; }
+.k-utility-item { display: inline-flex; align-items: center; gap: var(--space-1-5); color: inherit; text-decoration: none; }
+a.k-utility-item:hover { color: var(--text-primary); text-decoration: underline; }
+.k-utility-item:first-child { font-weight: 600; color: var(--text-primary); }
+/* Overlay header: transparent over a full-bleed hero (home pages that opt in). */
+.k-header--overlay { position: absolute; inset: 0 0 auto 0; }
+.k-header--overlay .navbar { background: transparent; border-bottom-color: transparent; backdrop-filter: none; }
+.k-header--overlay .navbar[data-open="true"] { background: var(--bg-surface); }
+
+/* ---------------------------------------------------------------- footer */
+.k-footer { margin-top: auto; background: var(--bg-subtle); color: var(--text-secondary); border-top: 1px solid var(--border-default); padding-block: var(--space-12) var(--space-8); font: var(--text-body-sm); }
+.k-footer[data-theme] { background: var(--bg-canvas); }
+.k-footer a { color: var(--text-secondary); text-decoration: none; }
+.k-footer a:hover { color: var(--text-primary); text-decoration: underline; }
+.k-footer-grid { display: grid; gap: var(--space-10); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .k-footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
+.k-footer-brand { display: flex; flex-direction: column; gap: var(--space-4); max-width: 360px; }
+.k-footer-contact { font-style: normal; display: flex; flex-direction: column; gap: var(--space-2); }
+.k-footer-contact span { display: inline-flex; gap: var(--space-2); align-items: center; }
+.k-footer-cols { display: grid; gap: var(--space-8); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 768px) { .k-footer-cols { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); } }
+.k-footer-title { font: var(--text-label-md); color: var(--text-primary); margin-bottom: var(--space-3); }
+.k-footer-col ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-1); }
+.k-footer-col a { display: inline-flex; min-height: 32px; align-items: center; }
+.k-footer-legal { margin-top: var(--space-10); padding-top: var(--space-6); border-top: 1px solid var(--border-default); display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-8); justify-content: space-between; font: var(--text-caption); color: var(--text-tertiary); }
+.k-footer-legal p { max-width: 70ch; }
+.k-footer-statement { font: var(--text-display-lg); font-stretch: var(--k-stretch-display); color: var(--text-primary); margin-bottom: var(--space-12); max-width: 18ch; text-wrap: balance; }
+.k-footer--compact .k-wrap { display: flex; flex-direction: column; gap: var(--space-6); }
+.k-footer-inline { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.k-footer-inline a { min-height: 32px; display: inline-flex; align-items: center; }
+
+/* ---------------------------------------------------------------- breadcrumb */
+.k-breadcrumb { margin-bottom: var(--space-6); }
+.k-breadcrumb .breadcrumb { flex-wrap: wrap; }
+
+/* ---------------------------------------------------------------- tabs */
+.k-tabs .tabs-list, .k-tabs .tabs-pill { overflow-x: auto; scrollbar-width: none; max-width: 100%; }
+.k-tab-panel { padding-top: var(--space-6); }
+.k-tab-panel:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--radius-md); }
+
+/* ---------------------------------------------------------------- forms & flows */
+.k-flow { position: relative; }
+.k-form { display: flex; flex-direction: column; gap: var(--space-6); }
+.k-form-grid { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .k-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .k-form-grid > .k-fieldset, .k-form-grid > .k-datepicker, .k-form-grid > .field:has(.textarea), .k-form-grid > .field:has(.dropzone) { grid-column: 1 / -1; } }
+.k-fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.k-fieldset > legend { margin-bottom: var(--space-2); padding: 0; }
+.k-step { border: 0; padding: 0; margin: 0; min-width: 0; }
+.k-step-legend { font: var(--text-heading-h4); padding: 0; margin-bottom: var(--space-5); }
+.k-form .input, .k-form .select, .k-form .textarea { width: 100%; }
+@media (max-width: 767px) { .k-form .input, .k-form .select { min-height: 44px; font-size: 16px; } .k-form .textarea { font-size: 16px; } }
+.k-form .help:empty { display: none; }
+.field[data-invalid="true"] .help, .k-fieldset[data-invalid="true"] .help { color: var(--text-danger); }
+.k-fieldset[data-invalid="true"] > legend { color: var(--text-danger); }
+.help .icon { vertical-align: -3px; margin-right: 4px; }
+.k-form-actions { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding-top: var(--space-2); }
+@media (max-width: 479px) { .k-form-actions .btn:not(.btn-ghost) { flex: 1 1 100%; } .k-form-actions .grow { display: none; } }
+.k-error-summary ul { margin: var(--space-1) 0 0; padding-left: var(--space-4); }
+.k-error-summary a { color: var(--text-danger); }
+.k-error-summary:focus, .k-submit-error:focus, .k-success:focus { outline: none; box-shadow: var(--ring); }
+.k-demo-note { display: flex; gap: var(--space-2); align-items: flex-start; font: var(--text-body-xs); color: var(--text-tertiary); }
+.k-demo-note .icon { flex: none; margin-top: 1px; color: var(--icon-secondary); }
+.k-success { display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start; padding: var(--space-8); background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); }
+.k-success-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius-full); background: var(--bg-success-subtle); color: var(--icon-success); }
+.k-success-icon .icon { width: 24px; height: 24px; }
+.k-summary { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: var(--space-2) var(--space-6); font: var(--text-body-sm); width: 100%; }
+.k-summary:empty { display: none; }
+.k-summary dt { color: var(--text-tertiary); }
+.k-summary dd { margin: 0; color: var(--text-primary); overflow-wrap: anywhere; }
+.k-success-actions { flex-wrap: wrap; }
+.k-dropzone { cursor: pointer; }
+.k-dropzone:focus-within { box-shadow: var(--ring); }
+.k-file-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-1); font: var(--text-body-sm); color: var(--text-secondary); }
+.k-file-list:empty { display: none; }
+
+/* Calendar + time slots (rendered by kit.js on Facet .calendar markup) */
+.k-datepicker { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .k-datepicker { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: start; } }
+.k-cal { width: 100%; max-width: 360px; box-sizing: border-box; }
+.k-cal .cal-day { min-height: 40px; }
+.k-cal .cal-day[aria-disabled="true"] { opacity: .38; cursor: not-allowed; text-decoration: line-through; text-decoration-color: var(--text-tertiary); }
+.k-cal .cal-day:focus-visible { box-shadow: var(--ring); outline: none; position: relative; z-index: 1; }
+.k-cal-title { font: var(--text-label-md); }
+.k-slot-list { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); }
+.k-slots .choice { min-height: 44px; }
+
+/* ---------------------------------------------------------------- filters */
+.k-filter-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.k-filter-count { margin: var(--space-4) 0; }
+.k-filter-items.is-loading { opacity: .4; transition: opacity var(--duration-fast) var(--ease-out); }
+.k-empty { border: 1px dashed var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); }
+
+/* ---------------------------------------------------------------- touch & a11y */
+@media (pointer: coarse) {
+  .navbar-links a, .chip, .btn-sm, .page-btn, .tab { min-height: 44px; }
+  .btn-sm.icon-btn { min-width: 44px; }
+}
+.k-page .chip { cursor: pointer; }
+
+/* ---------------------------------------------------------------- motion
+   One orchestrated entrance per page (.k-enter children with --i). Off for reduced motion. */
+@keyframes k-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.k-enter > * { animation: k-rise var(--duration-slower) var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + 60ms); }
+@media (prefers-reduced-motion: reduce) {
+  .k-enter > *, .k-page *, .k-page *::before, .k-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+html[data-motion="off"] .k-enter > * { animation: none; }
+
+/* ---------------------------------------------------------------- print */
+@media print { .k-kitbar, .k-header, .k-footer, .k-skip { display: none !important; } }
+
+/* ---------------------------------------------------------------- navbar collapse
+   Facet collapses the navbar under 720px (container query). Real sites carry 4–6 links plus
+   actions, so the kit collapses below 1024px of header width instead. */
+@container (max-width: 1023px) {
+  .k-header .navbar-links, .k-header .navbar-actions .hide-sm { display: none; }
+  .k-header .navbar-toggle { display: inline-flex !important; }
+  .k-header .navbar[data-open="true"] .navbar-mobile { display: flex; }
+}
+@container (max-width: 479px) {
+  .k-header .navbar-actions > .btn:not(.navbar-toggle) { display: none; }
+}
+.k-header .navbar-mobile { max-height: calc(100vh - var(--k-header-h)); overflow-y: auto; }
+
+[data-kit-scroll]:focus-visible, .table-wrap:focus-visible, .k-hscroll:focus-visible { outline: none; box-shadow: var(--ring); }

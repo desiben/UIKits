@@ -1,0 +1,121 @@
+/*! FacetUI Industry Templates · Healthcare & Medical (Harbor Lane Health) · © 2026 ETKits.
+   Composition styles only. Tokens only; components come from facet.css, layout from kit.css.
+   Voice: calm and plain. Slightly widened headings (104%) read friendly without shouting. */
+:root {
+  --k-stretch-display: 104%;
+  --k-stretch-heading: 102%;
+  --k-media-tone: var(--brand-100);
+  --k-media-tone-2: var(--brand-200);
+}
+
+/* ---------------------------------------------------------------- hero */
+.hl-hero { padding-block: var(--space-8) var(--space-12); background: linear-gradient(180deg, var(--bg-primary-subtle), var(--bg-canvas) 70%); }
+.hl-hero-grid { display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); }
+.hl-hero-main { display: flex; flex-direction: column; gap: var(--space-5); }
+.hl-hero-main .k-display { max-width: 14ch; }
+@media (min-width: 1024px) {
+  .hl-hero { padding-block: var(--space-12) var(--space-16); }
+  .hl-hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-12); align-items: start; }
+  .hl-hero-media { position: sticky; top: calc(var(--k-header-h) + var(--space-6)); }
+}
+.hl-hero-media { position: relative; }
+.hl-hero-tag { position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4); display: flex; gap: var(--space-3); align-items: center; padding: var(--space-3) var(--space-4); background: var(--bg-surface); box-shadow: var(--shadow-3); }
+@media (min-width: 1024px) { .hl-hero-tag { left: calc(-1 * var(--space-8)); right: auto; max-width: 300px; } }
+.hl-hero-tag b { display: block; font: var(--text-label-md); }
+.hl-hero-tag span:not(.hl-hero-tag-icon) { font: var(--text-body-xs); color: var(--text-tertiary); }
+.hl-hero-tag-icon { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-full); background: var(--bg-primary-subtle); color: var(--icon-brand); }
+
+/* Finder: the hero's working centre */
+.hl-finder { padding: var(--space-5); display: flex; flex-direction: column; gap: var(--space-5); box-shadow: var(--shadow-2); }
+.hl-intent-list { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.hl-intent { position: relative; display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0 var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-full); background: var(--bg-surface); font: var(--text-label-md); color: var(--text-secondary); cursor: pointer; transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out); }
+.hl-intent:hover { border-color: var(--border-strong); color: var(--text-primary); }
+.hl-intent input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.hl-intent:has(input:checked) { background: var(--bg-primary); border-color: var(--bg-primary); color: var(--text-on-primary); }
+.hl-intent:has(input:focus-visible) { box-shadow: var(--ring); }
+.hl-finder-loc { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-4); }
+.hl-finder-loc .segment { max-width: 100%; overflow-x: auto; }
+.hl-result { min-height: 120px; }
+.hl-match { display: flex; flex-direction: column; gap: var(--space-4); padding-top: var(--space-5); border-top: 1px solid var(--border-subtle); }
+.hl-match-head { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1-5); }
+.hl-match-title { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); }
+.hl-slots { list-style: none; display: grid; gap: var(--space-2); }
+.hl-slots li { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2-5) var(--space-3); background: var(--bg-subtle); border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); }
+.hl-slot-info b { display: block; font: var(--text-label-md); }
+.hl-slot-info > span { font: var(--text-body-sm); color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+.hl-match-more { color: var(--text-secondary); }
+.hl-911 { display: flex; align-items: center; gap: var(--space-2); font: var(--text-body-sm); color: var(--text-danger); }
+
+/* ---------------------------------------------------------------- tasks band */
+.hl-tasks { border-block: 1px solid var(--border-default); background: var(--bg-surface); }
+.hl-task-grid { display: grid; grid-template-columns: minmax(0, 1fr); padding-block: var(--space-2); }
+.hl-task-grid .item-card { min-height: 44px; }
+@media (min-width: 768px) { .hl-task-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .hl-task-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ---------------------------------------------------------------- services */
+.hl-services { --k-split-a: 2fr; --k-split-b: 3fr; }
+.hl-callout { background: var(--bg-primary-subtle); border-color: transparent; }
+.hl-service-list { list-style: none; border-top: 1px solid var(--border-default); }
+.hl-service-list li { border-bottom: 1px solid var(--border-default); }
+.hl-service { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-4); align-items: start; padding: var(--space-5) var(--space-2); text-decoration: none; color: inherit; border-radius: var(--radius-md); }
+.hl-service:hover { background: var(--bg-hover); }
+.hl-service:hover .hl-service-go { transform: translate(2px, -2px); color: var(--icon-brand); }
+.hl-service-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); background: var(--bg-primary-subtle); color: var(--icon-brand); }
+.hl-service-icon--lg { width: 56px; height: 56px; }
+.hl-service-icon--lg .icon { width: 26px; height: 26px; }
+.hl-service-body { display: flex; flex-direction: column; gap: var(--space-2); }
+.hl-service-name { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); }
+.hl-service-text { font: var(--text-body-md); color: var(--text-secondary); max-width: 56ch; }
+.hl-service-go { color: var(--icon-secondary); margin-top: var(--space-1); transition: transform var(--duration-base) var(--ease-out); }
+
+/* ---------------------------------------------------------------- locations */
+.hl-loc-grid { display: grid; gap: var(--space-6); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1024px) { .hl-loc-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; } .hl-map { position: sticky; top: calc(var(--k-header-h) + var(--space-6)); } }
+@media (max-width: 767px) { .hl-map { min-height: 260px !important; } }
+.hl-loc { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .hl-loc { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+.hl-loc .icon { vertical-align: -3px; color: var(--icon-secondary); }
+.hl-hours { border-collapse: collapse; font: var(--text-body-sm); width: 100%; }
+.hl-hours th, .hl-hours td { text-align: left; padding: var(--space-1-5) 0; border-bottom: 1px solid var(--border-subtle); font-variant-numeric: tabular-nums; }
+.hl-hours th { font-weight: 500; color: var(--text-secondary); padding-right: var(--space-4); }
+
+/* ---------------------------------------------------------------- clinicians */
+.hl-cl-grid { --k-grid-gap: var(--space-4); }
+.hl-clinician h3 { margin: 0; }
+.hl-clinician .icon { vertical-align: -3px; }
+.hl-clinician-foot { justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
+.hl-clinician .card-body { height: 100%; box-sizing: border-box; }
+.hl-loc-filter { width: auto; }
+.k-filter-controls .select { width: auto; min-width: 160px; }
+
+/* ---------------------------------------------------------------- insurance */
+.hl-ins-field { max-width: 420px; }
+.hl-selfpay { background: var(--bg-surface); }
+
+/* ---------------------------------------------------------------- steps & lists */
+.hl-steps { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: var(--space-5); }
+.hl-steps li { counter-increment: step; display: grid; grid-template-columns: 36px minmax(0, 1fr); column-gap: var(--space-4); row-gap: var(--space-1); }
+.hl-steps li::before { content: counter(step); grid-row: span 2; display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--radius-full); background: var(--bg-primary-subtle); color: var(--text-brand); font: var(--text-label-md); }
+.hl-steps b { font: var(--text-label-lg); align-self: center; }
+.hl-steps span { font: var(--text-body-md); color: var(--text-secondary); }
+.hl-steps--timeline li { position: relative; }
+.hl-steps--timeline li:not(:last-child)::after { content: ""; position: absolute; left: 17px; top: 40px; bottom: calc(-1 * var(--space-5) + 4px); width: 2px; background: var(--border-default); }
+.hl-checklist { list-style: none; display: grid; gap: var(--space-2); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .hl-checklist { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.hl-checklist li { display: flex; gap: var(--space-2); align-items: flex-start; font: var(--text-body-md); }
+.hl-checklist .icon { color: var(--icon-success); margin-top: 3px; flex: none; }
+.hl-team { list-style: none; display: grid; gap: var(--space-2); }
+
+/* ---------------------------------------------------------------- service page */
+.hl-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-default); }
+.hl-facts dt { font: var(--text-label-sm); color: var(--text-tertiary); }
+.hl-facts dd { margin: var(--space-1) 0 0; font: var(--text-label-lg); }
+.hl-book-card { box-shadow: var(--shadow-2); }
+.hl-book-locs { list-style: none; display: flex; flex-direction: column; gap: var(--space-1); }
+.hl-book-locs a { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-2-5) var(--space-3); border-radius: var(--radius-md); text-decoration: none; color: inherit; background: var(--bg-subtle); min-height: 44px; }
+.hl-book-locs a:hover { background: var(--bg-hover); }
+.hl-book-locs b { display: block; font: var(--text-label-md); }
+.hl-book-locs span span { font: var(--text-body-xs); color: var(--text-tertiary); }
+.hl-other { list-style: none; --k-grid-gap: var(--space-3); }
+.hl-book-head .k-lede { margin-top: var(--space-3); }

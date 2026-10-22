@@ -1,0 +1,113 @@
+/*! FacetUI Industry Templates · Architecture & Interiors · © 2026 ETKits. Demo content; Studio Verran is fictional. */
+
+const projects = [
+  { id: "ridgeline-house", name: "Ridgeline House", place: "Hollis Ridge", year: 2025, type: "new-home", typeLabel: "New home", area: "3,150 sq ft", status: "Completed",
+    lede: "A single-story house folded along a slope, so every room steps down toward the valley and none of them looks at the neighbors.",
+    story: [
+      "The site falls nine feet from the road to the tree line. Rather than level it, we followed the grade: the house is three linked pavilions, each a half-level lower than the last, joined by a glazed gallery that doubles as the main circulation.",
+      "Charred cedar cladding and a standing-seam roof keep maintenance low in a wet climate. Inside, the palette is limited to white oak, lime plaster and blackened steel, so the view does the decorating.",
+      "Deep roof overhangs shade the west glazing in summer and let low winter sun reach the polished concrete floors, which store the heat into the evening.",
+    ],
+    materials: ["Charred cedar cladding", "Standing-seam zinc roof", "White oak floors and joinery", "Lime plaster walls", "Polished concrete slab"],
+    team: "Studio Verran with Larch Structural and Fieldline Landscape" },
+  { id: "almond-street", name: "Almond Street Rowhouse", place: "Old Market", year: 2024, type: "renovation", typeLabel: "Renovation", area: "1,980 sq ft", status: "Completed",
+    lede: "A narrow 1890s rowhouse opened up around a new light well, without losing the plasterwork that made the family buy it.",
+    story: [
+      "The house is fifteen feet wide and fifty-two deep. Its middle rooms never saw daylight. We removed one bay of the floor plates to make a light well that drops from a new roof lantern down to the kitchen.",
+      "Original cornices and doors were catalogued, repaired and reinstalled. New work is deliberately plain so the two periods read clearly side by side.",
+      "A small rear extension in pale brick adds a mudroom and a ground-floor bathroom, making the house workable for the owners as they get older.",
+    ],
+    materials: ["Reclaimed brick", "Restored plaster cornices", "Ash staircase", "Terrazzo kitchen floor", "Steel-framed roof lantern"],
+    team: "Studio Verran with Oxbow Engineering" },
+  { id: "tidewater-cabin", name: "Tidewater Cabin", place: "Gull Point", year: 2023, type: "new-home", typeLabel: "New home", area: "960 sq ft", status: "Completed",
+    lede: "A compact weekend cabin raised on piers above a flood-prone meadow, built mostly from prefabricated timber panels.",
+    story: [
+      "Planning rules required the floor to sit three feet above the hundred-year flood line. We turned that into a porch that wraps the cabin and frames the marsh.",
+      "Cross-laminated timber panels were cut off-site and assembled in eleven days, which kept disturbance to the wetland edge to a minimum.",
+      "One room holds the kitchen, living space and a sleeping loft; a second contains a bunk room for visiting grandchildren.",
+    ],
+    materials: ["Cross-laminated timber", "Larch rainscreen", "Galvanized steel piers", "Plywood interiors", "Recycled rubber decking"],
+    team: "Studio Verran with Gullwing Timber" },
+  { id: "foundry-loft", name: "Foundry Loft", place: "Riverside Works", year: 2024, type: "interior", typeLabel: "Interior", area: "2,400 sq ft", status: "Completed",
+    lede: "A loft in a former brass foundry, planned around a single long table and a kitchen that can cook for twenty.",
+    story: [
+      "The owners host often. We kept the loft open but zoned it with a thirty-foot oak table and a run of tall joinery that hides storage, a pantry and the guest bathroom.",
+      "Existing steel trusses and brick walls were cleaned, not covered. Acoustic plaster on the ceiling between trusses brings the echo down to a comfortable level.",
+      "Lighting is layered on three circuits so the room works for breakfast, dinner and late conversation.",
+    ],
+    materials: ["Fumed oak joinery", "Acoustic plaster", "Cleaned original brick", "Brass fittings", "Linen curtains"],
+    team: "Studio Verran interiors team" },
+  { id: "orchard-court", name: "Orchard Court", place: "Westmere", year: 2026, type: "new-home", typeLabel: "New home", area: "4,200 sq ft", status: "On site",
+    lede: "A courtyard house for three generations, set among the old apple trees of a former orchard.",
+    story: [
+      "Each generation has its own wing around a shared courtyard, with a kitchen at the hinge where everyone meets.",
+      "The plan keeps eleven of the original apple trees. Foundations are pad-and-beam where they pass near roots.",
+      "Construction began in spring 2026; completion is planned for summer 2027.",
+    ],
+    materials: ["Rammed earth walls", "Douglas fir structure", "Clay tile roof", "Cork insulation", "Reused orchard timber"],
+    team: "Studio Verran with Larch Structural" },
+  { id: "pell-street-kitchen", name: "Pell Street Kitchen", place: "Northfield", year: 2025, type: "interior", typeLabel: "Interior", area: "420 sq ft", status: "Completed",
+    lede: "A dark galley kitchen turned into the brightest room in the house with one new opening and a lot of careful joinery.",
+    story: [
+      "Moving a single wall opened the kitchen to the garden. A wide steel-framed window seat now catches the afternoon light.",
+      "Cabinetry in painted poplar runs floor to ceiling, with a library ladder for the top shelves.",
+      "Worktops are honed soapstone, chosen because it ages well and doesn't mind hot pans.",
+    ],
+    materials: ["Painted poplar cabinetry", "Soapstone worktops", "Steel window seat", "Encaustic floor tile", "Unlacquered brass"],
+    team: "Studio Verran interiors team" },
+];
+
+export default {
+  slug: "architecture",
+  business: "residential architecture and interiors studio",
+  description: "Studio Verran designs houses, renovations and interiors that start from the site. See selected projects and request a first consultation.",
+  brand: { name: "Studio Verran", tagline: "Houses and interiors that start from the site", markPath: "M4 26V6h4v16h16v4H4Zm8-8V6h4v8h12v4H12Z" },
+  theme: { mode: "light", brand: "verran", custom: { hex: "#4f6b5c" }, style: "mono", density: "comfortable", themeColor: "#ffffff" },
+  header: { variant: "bar", cta: { label: "Start a project", page: "consult" } },
+  nav: [
+    { label: "Work", page: "home", hash: "work" },
+    { label: "Approach", page: "home", hash: "approach" },
+    { label: "Studio", page: "home", hash: "studio" },
+    { label: "Contact", page: "consult" },
+  ],
+  footer: {
+    variant: "statement",
+    statement: "Good buildings start with a long look at the site.",
+    blurb: "An architecture and interiors studio of fourteen people, working on homes within a day's drive of the studio.",
+    contact: [
+      { icon: "map-pin", label: "41 Canal Wharf, Riverside Works" },
+      { icon: "mail", label: "studio@verran.example", href: "mailto:studio@verran.example" },
+      { icon: "phone", label: "(555) 016-2290", href: "tel:+15550162290" },
+    ],
+    columns: [
+      { title: "Work", links: projects.slice(0, 4).map((p) => ({ label: p.name, page: `project-${p.id}` })) },
+      { title: "Studio", links: [{ label: "Approach", page: "home", hash: "approach" }, { label: "People", page: "home", hash: "studio" }, { label: "Start a project", page: "consult" }] },
+    ],
+  },
+  intro: "We design new houses, careful renovations and interiors for people who plan to stay. Every project starts with a day on the site before a single line is drawn.",
+  facts: [["Founded", "2011"], ["Homes completed", "46"], ["In the studio", "14 people"]],
+  filters: [{ id: "new-home", label: "New homes" }, { id: "renovation", label: "Renovations" }, { id: "interior", label: "Interiors" }],
+  process: [
+    { title: "Site and brief", time: "2–4 weeks", text: "A day on site together, a measured survey and a written brief that we both sign off." },
+    { title: "Concept design", time: "6–8 weeks", text: "Two or three options as models and sketches. We develop the one you choose." },
+    { title: "Planning and permits", time: "8–16 weeks", text: "Drawings for planning approval and building permits, plus early contractor input on cost." },
+    { title: "Technical design", time: "8–12 weeks", text: "Construction drawings, specifications and the interior schedule, ready to tender." },
+    { title: "On site", time: "6–18 months", text: "We visit weekly, answer the contractor's questions and keep the budget in view until handover." },
+  ],
+  people: [
+    { name: "Ines Verran", role: "Founding director, architect" },
+    { name: "Tomasz Hale", role: "Director, architect" },
+    { name: "Ruth Achterberg", role: "Head of interiors" },
+    { name: "Daniel Osei", role: "Associate, project architect" },
+  ],
+  projects,
+  images: Object.fromEntries([
+    ...projects.flatMap((p) => [
+      [`${p.id}-hero`, { alt: `${p.name}, ${p.place}: exterior view`, brief: `${p.typeLabel === "Interior" ? "Wide interior" : "Exterior"} of a contemporary ${p.typeLabel.toLowerCase()} · ${p.materials[0].toLowerCase()}, soft overcast light`, search: p.type === "interior" ? "minimal interior oak kitchen daylight" : "contemporary timber house landscape", focal: "50% 55%", ratio: "3/2", ratioSm: "4/5", placement: `Project hero: ${p.name}` }],
+      [`${p.id}-a`, { alt: `${p.name}: interior with ${p.materials[2].toLowerCase()}`, brief: `Interior detail · ${p.materials[2].toLowerCase()} and ${p.materials[3].toLowerCase()}`, search: "architecture interior detail natural materials", focal: "50% 50%", ratio: "4/5", placement: `Project page: ${p.name}, image pair left` }],
+      [`${p.id}-b`, { alt: `${p.name}: material detail of ${p.materials[1].toLowerCase()}`, brief: `Close material detail · ${p.materials[1].toLowerCase()}`, search: "architectural material texture close up", focal: "50% 50%", ratio: "4/5", placement: `Project page: ${p.name}, image pair right` }],
+      [`${p.id}-plan`, { alt: `${p.name}: floor plan drawing`, brief: "Line drawing of the floor plan on white (studio drawing, not a photo)", search: "", focal: "50% 50%", ratio: "16/9", icon: "drafting-compass", placement: `Project page: ${p.name}, drawings` }],
+    ]),
+    ["studio", { alt: "The Studio Verran team around a large table covered with drawings and card models", brief: "Architects around a big table with drawings and white card models, daylight studio", search: "architects studio models drawings table", focal: "50% 50%", ratio: "16/9", ratioSm: "4/3", placement: "Home: studio section" }],
+  ]),
+};
