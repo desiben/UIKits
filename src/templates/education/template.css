@@ -1,0 +1,216 @@
+/*! FacetUI Industry Templates · Education & Learning (Brightfield Academy) · © 2026 ETKits.
+   Composition styles only. Tokens only; components come from facet.css, layout from kit.css.
+   Voice: a printed course prospectus. Slightly widened Mona Sans (106/104), ruled lines,
+   timetable grids, and the week strip on every course as the recurring signature. */
+:root {
+  --k-stretch-display: 106%;
+  --k-stretch-heading: 104%;
+  --k-media-tone: var(--brand-50);
+  --k-media-tone-2: var(--brand-200);
+  --k-media-ink: var(--brand-800);
+  --ba-subj-data: var(--chart-1);
+  --ba-subj-design: var(--chart-2);
+  --ba-subj-trades: var(--chart-3);
+  --ba-subj-languages: var(--chart-4);
+}
+[data-subject="data"] { --ba-subj: var(--ba-subj-data); }
+[data-subject="design"] { --ba-subj: var(--ba-subj-design); }
+[data-subject="trades"] { --ba-subj: var(--ba-subj-trades); }
+[data-subject="languages"] { --ba-subj: var(--ba-subj-languages); }
+
+/* ---------------------------------------------------------------- hero = catalog */
+.ba-hero { padding-block: var(--space-8) var(--space-16); border-bottom: 1px solid var(--border-default); }
+.ba-hero-head { display: grid; gap: var(--space-5); grid-template-columns: minmax(0, 1fr); padding-bottom: var(--space-8); }
+.ba-hero-head .k-display { max-width: 13ch; }
+.ba-hero-aside { display: flex; flex-direction: column; gap: var(--space-4); }
+.ba-term-note { display: flex; gap: var(--space-2); align-items: flex-start; font: var(--text-body-sm); color: var(--text-secondary); }
+.ba-term-note .icon { color: var(--icon-brand); margin-top: 2px; flex: none; }
+.ba-term-note b { color: var(--text-primary); font-weight: 600; }
+@media (min-width: 1024px) {
+  .ba-hero { padding-top: var(--space-12); }
+  .ba-hero-head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: var(--space-12); align-items: end; padding-bottom: var(--space-10); }
+}
+
+/* Filter console: one ruled panel, groups side by side on wide screens */
+.ba-catalog .k-filter-controls {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-4);
+  padding: var(--space-5); background: var(--bg-surface); border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); box-shadow: var(--shadow-1);
+}
+@media (min-width: 768px) { .ba-catalog .k-filter-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1280px) {
+  .ba-catalog .k-filter-controls { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr) auto auto; gap: 0; padding: var(--space-4) 0; }
+  .ba-catalog .k-filter-controls > * { padding-inline: var(--space-5); }
+  .ba-catalog .k-filter-controls > * + * { border-left: 1px solid var(--border-subtle); }
+}
+.ba-search { display: flex; flex-direction: column; gap: var(--space-2); }
+.ba-search .label { font: var(--text-label-sm); color: var(--text-secondary); }
+.ba-fgroup { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.ba-flabel { font: var(--text-label-sm); color: var(--text-secondary); }
+.ba-chips { display: flex; flex-wrap: wrap; gap: var(--space-1-5); }
+.ba-catalog .k-filter-count { margin: var(--space-5) 0 var(--space-4); }
+.ba-grid { --k-grid-gap: var(--space-5); }
+
+/* ---------------------------------------------------------------- course card */
+.ba-card {
+  position: relative; display: flex; flex-direction: column; gap: var(--space-4);
+  padding: var(--space-5); background: var(--bg-surface); border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg);
+  transition: border-color var(--duration-fast) var(--ease-out), transform var(--duration-base) var(--ease-out);
+}
+.ba-card::before { content: ""; position: absolute; left: var(--space-5); right: var(--space-5); top: -1px; height: 3px; background: var(--ba-subj); border-radius: 0 0 var(--radius-xs) var(--radius-xs); }
+.ba-card:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.ba-card:focus-within { box-shadow: var(--ring); }
+.ba-card-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.ba-subj { display: inline-flex; align-items: center; gap: var(--space-1-5); font: var(--text-label-sm); color: var(--text-primary); }
+.ba-subj .icon { color: var(--ba-subj, var(--icon-brand)); }
+.ba-level { font: var(--text-label-xs); color: var(--text-tertiary); }
+.ba-card-title { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); text-wrap: balance; }
+.ba-card-title a { color: inherit; text-decoration: none; }
+.ba-card-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.ba-card-title a:focus-visible { box-shadow: none; outline: none; }
+.ba-card-blurb { font: var(--text-body-sm); color: var(--text-secondary); }
+.ba-card-facts { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border-subtle); margin-top: auto; }
+.ba-card-facts dt { font: var(--text-caption); color: var(--text-tertiary); }
+.ba-card-facts dd { margin: var(--space-0-5, 2px) 0 0; font: var(--text-label-md); }
+.ba-card-facts div:last-child { text-align: right; }
+.ba-card-next { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1-5) var(--space-2); font: var(--text-body-xs); color: var(--text-secondary); }
+.ba-card-next .icon { color: var(--icon-secondary); }
+.ba-card-next .badge { margin-left: auto; position: relative; }
+
+/* ---------------------------------------------------------------- signature: week strip */
+.ba-week { display: flex; flex-direction: column; gap: var(--space-2); }
+.ba-week-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: var(--space-1); }
+.ba-day { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-1); }
+.ba-day-name { font: var(--text-label-xs); color: var(--text-tertiary); text-align: center; }
+.ba-day-track { position: relative; height: 36px; background: var(--bg-subtle); border-radius: var(--radius-sm) var(--radius-xs) var(--radius-sm) var(--radius-sm); overflow: hidden; }
+.ba-day.is-weekend .ba-day-track { background: var(--bg-muted); }
+.ba-day.is-on .ba-day-name { color: var(--text-brand); font-weight: 600; }
+.ba-day.is-on .ba-day-track { background: var(--bg-primary-subtle); box-shadow: inset 0 0 0 1px var(--border-brand); }
+.ba-slot { position: absolute; left: 3px; right: 3px; top: calc(var(--s) * 100%); height: calc((var(--e) - var(--s)) * 100%); min-height: 4px; background: var(--bg-primary); border-radius: var(--radius-xs); }
+.ba-week-label { display: flex; align-items: center; gap: var(--space-1-5); font: var(--text-label-sm); color: var(--text-primary); }
+.ba-week-label .icon { color: var(--icon-brand); flex: none; }
+.ba-week--lg { padding: var(--space-4); background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); max-width: 520px; }
+.ba-week--lg .ba-week-days { gap: var(--space-1-5); }
+.ba-week--lg .ba-day-track { height: 64px; }
+.ba-week--lg .ba-day-name { font: var(--text-label-sm); }
+.ba-week--lg .ba-week-label { font: var(--text-label-md); }
+
+/* ---------------------------------------------------------------- timetable */
+.ba-tt-wrap { background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); }
+.ba-tt { min-width: 900px; table-layout: fixed; }
+.ba-tt th, .ba-tt td { vertical-align: top; padding: var(--space-3); border-left: 1px solid var(--border-subtle); }
+.ba-tt thead th { font: var(--text-label-md); text-align: left; }
+.ba-tt thead th:first-child, .ba-tt tbody th { width: 130px; border-left: 0; }
+.ba-tt tbody th { text-align: left; }
+.ba-tt tbody th b { display: block; font: var(--text-label-md); }
+.ba-tt tbody th span { font: var(--text-caption); color: var(--text-tertiary); font-weight: 400; }
+.ba-tt .ba-tt-we { background: var(--bg-subtle); }
+.ba-tt-free { font: var(--text-caption); color: var(--text-tertiary); }
+.ba-tt-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-2); }
+.ba-tt-item { display: flex; flex-direction: column; gap: var(--space-0-5, 2px); padding: var(--space-2) var(--space-2-5); background: var(--bg-surface); border: 1px solid var(--border-subtle); border-left: 3px solid var(--ba-subj); border-radius: var(--radius-sm) var(--radius-xs) var(--radius-sm) var(--radius-xs); text-decoration: none; color: inherit; }
+.ba-tt-item:hover { border-color: var(--border-strong); border-left-color: var(--ba-subj); }
+.ba-tt-item b { font: var(--text-label-sm); }
+.ba-tt-item span { font: var(--text-caption); color: var(--text-secondary); }
+.ba-tt-key { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); margin-top: var(--space-4); font: var(--text-label-sm); color: var(--text-secondary); }
+.ba-key { display: inline-flex; align-items: center; gap: var(--space-1-5); }
+.ba-key .icon { color: var(--ba-subj); }
+
+/* ---------------------------------------------------------------- term rail */
+.ba-term { list-style: none; display: grid; gap: 0; grid-template-columns: minmax(0, 1fr); }
+.ba-term li { position: relative; padding: 0 0 var(--space-6) var(--space-8); }
+.ba-term li::before { content: ""; position: absolute; left: 5px; top: 6px; width: 12px; height: 12px; border-radius: var(--radius-full); background: var(--bg-surface); border: 2px solid var(--border-brand); }
+.ba-term li::after { content: ""; position: absolute; left: 10px; top: 22px; bottom: 0; width: 2px; background: var(--border-default); }
+.ba-term li:last-child::after { display: none; }
+.ba-term li:nth-child(3)::before { background: var(--bg-primary); border-color: var(--bg-primary); }
+.ba-term-when { font: var(--text-label-sm); color: var(--text-brand); }
+.ba-term-title { font: var(--text-heading-h4); font-stretch: var(--k-stretch-heading); margin: var(--space-1) 0 var(--space-2); }
+.ba-term p { font: var(--text-body-sm); color: var(--text-secondary); max-width: 40ch; }
+@media (min-width: 1024px) {
+  .ba-term { grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: var(--space-5); }
+  .ba-term li { padding: var(--space-8) 0 0; }
+  .ba-term li::before { left: 0; top: 0; }
+  .ba-term li::after { left: 16px; right: calc(-1 * var(--space-5)); top: 5px; bottom: auto; width: auto; height: 2px; }
+}
+
+/* ---------------------------------------------------------------- tuition */
+.ba-price th[scope="row"] { font-weight: 500; text-align: left; }
+.ba-price td b { font-weight: 600; }
+.ba-pay { list-style: none; display: flex; flex-direction: column; border-top: 1px solid var(--border-default); }
+.ba-pay li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-3); padding: var(--space-4) 0; border-bottom: 1px solid var(--border-default); }
+.ba-pay b { display: block; font: var(--text-label-lg); margin-bottom: var(--space-1); }
+.ba-pay li > span:last-child > span { font: var(--text-body-sm); color: var(--text-secondary); }
+.ba-pay-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); background: var(--bg-primary-subtle); color: var(--icon-brand); }
+
+/* ---------------------------------------------------------------- instructors */
+.ba-people { list-style: none; display: grid; grid-template-columns: minmax(0, 1fr); border-top: 1px solid var(--border-default); }
+@media (min-width: 768px) { .ba-people { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-8); } }
+@media (min-width: 1280px) { .ba-people { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ba-person { display: flex; gap: var(--space-4); align-items: flex-start; padding: var(--space-5) 0; border-bottom: 1px solid var(--border-default); }
+.ba-person-body { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.ba-person-name { font: var(--text-heading-h5); font-stretch: var(--k-stretch-heading); }
+.ba-person .link { margin-top: var(--space-1); align-self: flex-start; }
+
+/* ---------------------------------------------------------------- campus */
+.ba-campus { display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); }
+.ba-campus-media { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .ba-campus-media { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); align-items: end; } }
+@media (min-width: 1024px) { .ba-campus { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-12); align-items: center; } }
+.ba-campus-text .icon { vertical-align: -3px; color: var(--icon-brand); }
+.ba-floors { display: flex; flex-direction: column; border-top: 1px solid var(--border-default); }
+.ba-floors div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-3); padding: var(--space-2-5) 0; border-bottom: 1px solid var(--border-subtle); }
+.ba-floors dt { font: var(--text-label-sm); color: var(--text-brand); }
+.ba-floors dd { margin: 0; font: var(--text-body-sm); }
+.ba-hours { border-collapse: collapse; width: 100%; font: var(--text-body-sm); }
+.ba-hours caption { text-align: left; padding-bottom: var(--space-1-5); }
+.ba-hours th, .ba-hours td { text-align: left; padding: var(--space-1-5) 0; border-bottom: 1px solid var(--border-subtle); font-variant-numeric: tabular-nums; }
+.ba-hours th { font-weight: 500; color: var(--text-secondary); padding-right: var(--space-4); }
+
+/* ---------------------------------------------------------------- faq */
+.ba-advisor { background: var(--bg-primary-subtle); border-color: transparent; }
+
+/* ---------------------------------------------------------------- course page */
+.ba-course-head { padding-block: var(--space-6) var(--space-10); background: var(--bg-subtle); border-bottom: 1px solid var(--border-default); }
+.ba-course-grid { display: grid; gap: var(--space-8); grid-template-columns: minmax(0, 1fr); margin-top: var(--space-4); }
+@media (min-width: 1024px) { .ba-course-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-12); align-items: start; } }
+.ba-course-head .k-h1 { max-width: 20ch; }
+.ba-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border-default); }
+@media (min-width: 768px) { .ba-facts { grid-template-columns: repeat(4, minmax(0, auto)); justify-content: start; column-gap: var(--space-8); } }
+.ba-facts dt { font: var(--text-label-sm); color: var(--text-tertiary); }
+.ba-facts dd { margin: var(--space-1) 0 0; font: var(--text-label-lg); }
+.ba-outcomes { list-style: none; display: grid; gap: var(--space-3); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .ba-outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.ba-outcomes li { display: flex; gap: var(--space-2-5); align-items: flex-start; padding: var(--space-3) var(--space-4); background: var(--bg-subtle); border-radius: var(--radius-md) var(--radius-xs) var(--radius-md) var(--radius-md); font: var(--text-body-md); }
+.ba-outcomes .icon { color: var(--icon-brand); flex: none; margin-top: 3px; }
+.ba-syl-sum { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-4); }
+.ba-syl-when { min-width: 96px; font: var(--text-label-sm); color: var(--text-brand); font-variant-numeric: tabular-nums; }
+.ba-needs { display: flex; gap: var(--space-2); align-items: flex-start; font: var(--text-body-sm); color: var(--text-secondary); }
+.ba-needs b { color: var(--text-primary); font-weight: 600; }
+.ba-needs .icon { color: var(--icon-secondary); flex: none; margin-top: 2px; }
+.ba-instructor { display: flex; gap: var(--space-5); align-items: flex-start; padding: var(--space-5); border: 1px solid var(--border-default); background: var(--bg-surface); }
+.ba-instructor .avatar { width: 64px; height: 64px; font: var(--text-heading-h4); flex: none; }
+.ba-cohorts th[scope="row"] { font-weight: 500; text-align: left; white-space: nowrap; }
+.ba-cohorts td { white-space: nowrap; }
+.ba-cost { box-shadow: var(--shadow-2); }
+.ba-cost-table { width: 100%; border-collapse: collapse; font: var(--text-body-md); }
+.ba-cost-table th, .ba-cost-table td { padding: var(--space-2) 0; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+.ba-cost-table th { font-weight: 400; color: var(--text-secondary); }
+.ba-cost-table td { text-align: right; }
+.ba-cost-total th, .ba-cost-total td { font: var(--text-heading-h4); color: var(--text-primary); border-bottom: 0; padding-top: var(--space-3); }
+.ba-more { list-style: none; display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 768px) { .ba-more { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ba-more-item { display: flex; flex-direction: column; gap: var(--space-4); height: 100%; padding: var(--space-5); background: var(--bg-surface); border: 1px solid var(--border-default); border-radius: var(--radius-lg) var(--radius-sm) var(--radius-lg) var(--radius-lg); text-decoration: none; color: inherit; }
+.ba-more-item:hover { border-color: var(--border-strong); }
+.ba-more-name { font: var(--text-heading-h5); font-stretch: var(--k-stretch-heading); }
+.ba-more-item .ba-week { margin-top: auto; }
+
+/* ---------------------------------------------------------------- enroll */
+.ba-enroll-head .k-lede { margin-top: var(--space-3); }
+.ba-summary { box-shadow: var(--shadow-2); }
+.ba-summary-body { display: flex; flex-direction: column; gap: var(--space-4); }
+.ba-summary-name { font: var(--text-heading-h5); font-stretch: var(--k-stretch-heading); }
+.ba-summary-list { display: flex; flex-direction: column; }
+.ba-summary-list div { display: flex; justify-content: space-between; gap: var(--space-3); padding: var(--space-1-5) 0; border-bottom: 1px solid var(--border-subtle); font: var(--text-body-sm); }
+.ba-summary-list dt { color: var(--text-secondary); }
+.ba-summary-list dd { margin: 0; text-align: right; font-weight: 500; font-variant-numeric: tabular-nums; }
+.ba-next { padding-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-1-5); font: var(--text-body-sm); color: var(--text-secondary); }

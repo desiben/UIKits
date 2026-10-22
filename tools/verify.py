@@ -21,7 +21,7 @@ os.environ.setdefault("PLAYWRIGHT_BROWSERS_PATH", "/opt/pw-browsers")
 from playwright.sync_api import sync_playwright
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-DIST = ROOT / "dist"
+DIST = pathlib.Path(os.environ["DIST_DIR"]).resolve() if os.environ.get("DIST_DIR") else ROOT / "dist"
 AXE = (ROOT / "tools/node_modules/axe-core/axe.min.js").read_text()
 WIDTHS = [375, 390, 768, 1024, 1440]
 

@@ -16,7 +16,7 @@ import { registry } from "./src/templates/registry.mjs";
 
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, "src");
-const DIST = path.join(ROOT, "dist");
+const DIST = process.env.DIST_DIR ? path.resolve(process.env.DIST_DIR) : path.join(ROOT, "dist");
 const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 
 /* ------------------------------------------------------------ helpers */
