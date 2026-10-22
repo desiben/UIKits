@@ -28,7 +28,7 @@ async function body(req) {
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") { res.setHeader("allow", "POST"); return send(res, 405, { ok: false, error: "Use POST." }) }
   const ok = serviceOk(req)
-  if (ok === null) return send(res, 503, { ok: false, error: "License checking isn't set up yet. Please contact support." })
+  if (ok === null) return send(res, 503, { ok: false, error: "License checking isn't set up yet. Please email contact@etkits.us." })
   if (!ok) return send(res, 401, { ok: false, error: "Not allowed." })
   const b = await body(req)
   const d = b.device || {}

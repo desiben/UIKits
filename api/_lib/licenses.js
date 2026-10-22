@@ -118,7 +118,7 @@ async function storeCheck(key, slug) {
   if (out.reason !== "unreachable") storeCache.set(ck, { until: Date.now() + 10 * 60 * 1000, data: out })
   return out
 }
-const storeMessage = (reason, p) => reason === "not-configured" ? `Licensing for ${p ? p.name : "this product"} isn't set up yet. Please contact support.`
+const storeMessage = (reason, p) => reason === "not-configured" ? `Licensing for ${p ? p.name : "this product"} isn't set up yet. Please email contact@etkits.us.`
   : reason === "unreachable" ? "Couldn't reach the store to check your license. Please try again in a minute."
   : ["refunded", "chargebacked", "disputed"].includes(reason) ? "This purchase was refunded or disputed, so the license no longer works."
   : reason === "subscription ended" ? "This subscription is no longer active."
@@ -127,13 +127,13 @@ const storeMessage = (reason, p) => reason === "not-configured" ? `Licensing for
 // Shared first half of authorize() and claim(): blocked list, revoked flag, store re-check.
 async function check(key, slug, kind) {
   if (!KEY_PATTERN.test(key)) return fail(400, "That doesn't look like a license key. Please check it and try again.")
-  if (list(process.env.BLOCKED_KEYS).includes(key.toLowerCase())) return fail(403, "This license key has been disabled. Contact support if you think this is a mistake.")
+  if (list(process.env.BLOCKED_KEYS).includes(key.toLowerCase())) return fail(403, "This license key has been disabled. Email contact@etkits.us if you think this is a mistake.")
   const p = product(slug)
   if (!p) return fail(404, "Unknown product.")
   const id = hash(key)
   const cur = await load(id)
   const r = cur && cur.record
-  if (r && r.revoked) return fail(403, "This license has been revoked. Contact support if you think this is a mistake.")
+  if (r && r.revoked) return fail(403, "This license has been revoked. Email contact@etkits.us if you think this is a mistake.")
   const trusted = r && r.store === "manual" && r.products.includes(slug)
   const fresh = r && r.products.includes(slug) && r.storeOk !== false && r.verifiedAt && Date.now() - Date.parse(r.verifiedAt) < REVERIFY_MS
   let s = null
@@ -177,7 +177,7 @@ async function authorize(key, slug, device) {
     const limit = x.limit || c.p.deviceLimit
     if (mine.length >= limit) {
       pushEvent(x, { kind: device.kind, product: slug, device: device.id.slice(0, 8), ok: false, note: "device limit" })
-      denied = fail(403, `This license is already used on ${mine.length} device${mine.length === 1 ? "" : "s"} (the limit is ${limit}). Contact support to free up a device, or buy a team license.`)
+      denied = fail(403, `This license is already used on ${mine.length} device${mine.length === 1 ? "" : "s"} (the limit is ${limit}). Email contact@etkits.us to free up a device, or buy a team license.`)
       return true
     }
     x.devices.push({ id: device.id, product: slug, kind: device.kind || "web", name: String(device.name || "").slice(0, 80), firstSeen: t, lastSeen: t, uses: 1 })
@@ -198,7 +198,7 @@ async function claim(key) {
     if (ENVATO_CODE.test(key)) { const e = await envato(key); candidates = e.ok ? [e.product] : []; if (!e.ok && e.reason !== "invalid") return fail(503, storeMessage(e.reason)) }
     else {
       const configured = slugs().filter((s) => product(s).gumroadProductId)
-      if (!configured.length) return fail(503, "Claiming isn't available yet. Please contact support.")
+      if (!configured.length) return fail(503, "Claiming isn't available yet. Please email contact@etkits.us.")
       for (const s of configured) { const g = await storeCheck(key, s); if (g.ok) { candidates = [s]; break } if (g.reason !== "invalid") return fail(g.reason === "unreachable" ? 503 : 403, storeMessage(g.reason, product(s))) }
     }
   }
@@ -207,14 +207,14 @@ async function claim(key) {
   const c = await check(key, slug, "figma")
   if (!c.ok) return c
   const figmaUrl = c.p.figmaUrl(c.s ? c.s.store : (known && known.record.store) || "gumroad")
-  if (!figmaUrl) return fail(503, `Claiming for ${c.p.name} isn't set up yet. Please contact support.`)
+  if (!figmaUrl) return fail(503, `Claiming for ${c.p.name} isn't set up yet. Please email contact@etkits.us.`)
   let denied = null
   const record = await update(c.id, (x) => {
     applyStore(x, slug, c.s)
     const limit = x.claimLimit || c.p.claimLimit
     if ((x.claims || 0) >= limit) {
       pushEvent(x, { kind: "figma", product: slug, ok: false, note: "claim limit" })
-      denied = fail(403, "This purchase code has already been claimed the maximum number of times. Contact support if you need help.")
+      denied = fail(403, "This purchase code has already been claimed the maximum number of times. Email contact@etkits.us if you need help.")
       return true
     }
     x.claims = (x.claims || 0) + 1; x.lastSeen = now()
