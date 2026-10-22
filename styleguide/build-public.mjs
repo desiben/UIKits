@@ -35,6 +35,7 @@ fs.rmSync(OUT, { recursive: true, force: true })
 await walk(".")
 // The style guide's Changelog page reads CHANGELOG.md from the repo root.
 const CHANGELOG = path.join(ROOT, "../CHANGELOG.md")
-if (fs.existsSync(CHANGELOG)) fs.copyFileSync(CHANGELOG, path.join(OUT, "CHANGELOG.md"))
+// Links to the private repo become plain text: the public site must never link it.
+if (fs.existsSync(CHANGELOG)) fs.writeFileSync(path.join(OUT, "CHANGELOG.md"), fs.readFileSync(CHANGELOG, "utf8").replace(/\[([^\]]+)\]\(https:\/\/github\.com\/desiben\/[^)]*\)/g, "$1"))
 else console.warn("CHANGELOG.md not found next to styleguide/: the Changelog page will show a fallback")
 console.log(`public-build: ${min} files minified (${Math.round(saved / 1024)} KB smaller), ${copied} copied`)
