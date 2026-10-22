@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // facetui — installs Facet UI animated React components into your project.
-// Made by ETKits · https://facetui.vercel.app/react/
+// Made by ETKits · https://facet.etkits.us/react/
 import fs from "node:fs"
 import path from "node:path"
 import { spawnSync } from "node:child_process"
@@ -9,9 +9,9 @@ import os from "node:os"
 import { randomUUID } from "node:crypto"
 
 const VERSION = "1.0.0"
-const REGISTRY = (process.env.FACET_REGISTRY_URL || "https://facetui.vercel.app/r").replace(/\/$/, "")
+const REGISTRY = (process.env.FACET_REGISTRY_URL || "https://facet.etkits.us/r").replace(/\/$/, "")
 const CONFIG = "facet.json"
-const DOCS = "https://facetui.vercel.app/react/#install"
+const DOCS = "https://facet.etkits.us/react/#install"
 const cwd = process.cwd()
 
 /* ---------- output ---------- */

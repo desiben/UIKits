@@ -12,7 +12,7 @@ Copy-paste text and settings for the Gumroad product page. The images are in thi
 | Cover images (in order) | `01-cover.png`, `02-highlights.png`, `03-templates.png`, `04-thank-you.png` (1920×1080) |
 | Thumbnail | `05-thumbnail-square.png` (1200×1200) |
 | Description image | `facet-ui-gumroad-long.png` (optional, 1280 wide) |
-| Live preview link | https://facetui.vercel.app |
+| Live preview link | https://facet.etkits.us |
 
 ## 2. Versions (pricing tiers)
 
@@ -43,7 +43,7 @@ Facet UI is a complete design system and dashboard UI kit for Figma, with code t
 
 Every color, space, radius and text style is a Figma Variable. Switch brand, light/dark and density in one click, and hand off exact CSS variable names to developers.
 
-Live preview: https://facetui.vercel.app
+Live preview: https://facet.etkits.us
 
 ## What's inside
 
@@ -69,7 +69,7 @@ Live preview: https://facetui.vercel.app
 
 ## How you get the Figma file
 
-After you buy, Gumroad emails you a license key. Enter it at https://etkits.vercel.app/claim to open your copy of the Figma file. The download includes the code, tokens and a Start Here guide.
+After you buy, Gumroad emails you a license key. Enter it at https://www.etkits.us/claim to open your copy of the Figma file. The download includes the code, tokens and a Start Here guide.
 
 ## License
 
@@ -91,7 +91,7 @@ Personal, Commercial and Team licenses. No resale or redistribution of the kit o
 ```
 Thanks for buying Facet UI!
 
-1. Open https://etkits.vercel.app/claim
+1. Open https://www.etkits.us/claim
 2. Enter your license key (it's in this email) and press Unlock.
 3. Open the Figma file and choose "Duplicate" to save it to your drafts.
 
@@ -106,5 +106,5 @@ Your key can be claimed up to 3 times. Need help? Reply to this email.
    - `GUMROAD_PRODUCT_ID`: the product ID from step 2
    - `FIGMA_DELIVERY_URL`: the sale-copy link from step 1
    - `DOWNLOAD_URL`: optional, a link to the code download
-4. Test with a 100% discount code: buy it, then claim the key at https://etkits.vercel.app/claim.
+4. Test with a 100% discount code: buy it, then claim the key at https://www.etkits.us/claim.
 5. Add the product link to `ETKITS_STORES` on the ETKits site so the "Available on" button points to it.

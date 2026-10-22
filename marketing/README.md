@@ -1,6 +1,6 @@
 # Facet UI — marketing kit sources
 
-Everything on the live [marketing page](https://facetui.vercel.app/marketing/) is generated from this folder, so you can re-brand or re-render it.
+Everything on the live [marketing page](https://facet.etkits.us/marketing/) is generated from this folder, so you can re-brand or re-render it.
 
 | File | What it is |
 |---|---|

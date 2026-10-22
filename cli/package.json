@@ -7,7 +7,7 @@
   "files": ["bin", "README.md", "LICENSE"],
   "engines": { "node": ">=18.17" },
   "keywords": ["facet", "facet-ui", "etkits", "react", "components", "tailwind", "motion", "ui kit"],
-  "homepage": "https://facetui.vercel.app/react/",
+  "homepage": "https://facet.etkits.us/react/",
   "author": "ETKits",
   "license": "MIT"
 }

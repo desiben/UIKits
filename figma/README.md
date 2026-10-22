@@ -1,6 +1,6 @@
 # Facet UI — Figma file guide
 
-**File:** delivered with your purchase. Enter your purchase code at [etkits.vercel.app/claim](https://etkits.vercel.app/claim) to open it.
+**File:** delivered with your purchase. Enter your purchase code at [www.etkits.us/claim](https://www.etkits.us/claim) to open it.
 
 ## Before you start
 1. Install **Mona Sans** (Google Fonts) so text renders correctly.

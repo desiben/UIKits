@@ -8,7 +8,7 @@
 
 It uses the component model and naming React developers already know, with its own visual language: the *Facet cut* and the *signal rail*.
 
-**[Live style guide](https://facetui.vercel.app)** · **[Marketing kit](https://facetui.vercel.app/marketing/)** · **[Buy on ETKits](https://etkits.vercel.app/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facetui.vercel.app/#/examples) · [Changelog](CHANGELOG.md)
+**[Live style guide](https://facet.etkits.us)** · **[Marketing kit](https://facet.etkits.us/marketing/)** · **[Buy on ETKits](https://www.etkits.us/#get)** · Figma file (delivered with purchase) · [▶ Demo video](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4) · [Marketplace previews](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) · [Tokens](tokens/) · [Examples](https://facet.etkits.us/#/examples) · [Changelog](CHANGELOG.md)
 
 ![Facet UI — the design system with an edge](styleguide/marketing/media/facet-ui-hero.jpg)
 
@@ -18,7 +18,7 @@ It uses the component model and naming React developers already know, with its o
 
 ## New: animated React components
 
-All 109 components are now **React components with motion on every interaction**: springs, layout animations, gestures, drag, tilt and number tickers. They're built on Radix and Tailwind, and buyers install them with the Facet CLI (`npx facetui`), so the code lands in their own project. [Browse them live](https://facetui.vercel.app/react/).
+All 109 components are now **React components with motion on every interaction**: springs, layout animations, gestures, drag, tilt and number tickers. They're built on Radix and Tailwind, and buyers install them with the Facet CLI (`npx facetui`), so the code lands in their own project. [Browse them live](https://facet.etkits.us/react/).
 
 ```bash
 npx facetui@latest init          # Tailwind, the @/ alias, the Facet theme and base files
@@ -40,8 +40,8 @@ Setup, the license key and the full component list are in [React components](#re
 - **56 new components** across Charts, Data display, AI, Feedback, Forms, Layout, Navigation and Overlays — built in Figma (Variables, variants) and live on the site with a **Desktop / Mobile preview toggle** on every example.
 - **Charts** — `assets/charts.js` renders area, line, bar, composed, pie, radar, radial and sparkline charts from `data-chart` JSON, with tooltips and auto re-render on resize and theme change.
 - **Style themes** — Default, Soft, Glass and Mono (`html[data-style]`, `Facet.theme.setStyle()`), stacked on top of the 6 brand colors and light/dark. In Figma they live in the **Style** collection.
-- **AI agents** — 6 working demos at [`/#/agents`](https://facetui.vercel.app/#/agents) (Banking, Commerce ops, Travel, Email, Health, Support): chain of thought, tool calls, generative UI and approvals that really change the app.
-- **Components overview** at [`/#/components`](https://facetui.vercel.app/#/components) with live previews, search and **Copy Markdown** for AI coding tools.
+- **AI agents** — 6 working demos at [`/#/agents`](https://facet.etkits.us/#/agents) (Banking, Commerce ops, Travel, Email, Health, Support): chain of thought, tool calls, generative UI and approvals that really change the app.
+- **Components overview** at [`/#/components`](https://facet.etkits.us/#/components) with live previews, search and **Copy Markdown** for AI coding tools.
 
 ## Table of contents
 
@@ -174,7 +174,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 
 ## The living style guide
 
-**Live at [facetui.vercel.app](https://facetui.vercel.app)** (deployed automatically by Vercel from the `FacetUI` branch, root directory `styleguide`; in the **facetui** Vercel project, Production Branch must be set to `FacetUI`). It is a public preview, so it never links the Figma source file or the private repo.
+**Live at [facet.etkits.us](https://facet.etkits.us)** (deployed automatically by Vercel from the `FacetUI` branch, root directory `styleguide`; in the **facetui** Vercel project, Production Branch must be set to `FacetUI`). It is a public preview, so it never links the Figma source file or the private repo.
 
 `styleguide/index.html` is a component documentation site, built with Facet itself.
 
@@ -191,7 +191,7 @@ Every component page in the style guide has a **Copy HTML** button. The copied m
 | **Theme controls** | Brand picker, density toggle and light/dark switch in the header; persisted per browser |
 | **Brand colors studio** | Pick any color, see the generated ramp and contrast ratios, copy the CSS |
 | **Motion** | Micro-interactions on every component, plus a Motion guide page and a ⚡ on/off toggle |
-| **Showcase** | The marketplace previews and the demo video, on the [Showcase page](https://facetui.vercel.app/#/showcase) |
+| **Showcase** | The marketplace previews and the demo video, on the [Showcase page](https://facet.etkits.us/#/showcase) |
 | **Responsive** | Works down to 390 px (the sidebar becomes a drawer) |
 
 ---
@@ -276,7 +276,7 @@ Choices are saved in `localStorage` (key `facet-theme`) and restored on load.
 
 Every component reacts to the cursor with a small, springy motion, in the spirit of Kokonut UI, Motion and Animate UI. It's fast enough to feel instant and soft enough to feel alive. The effects come from two optional, dependency-free files: `motion.css` (CSS-only effects) and `motion.js` (cursor-aware effects).
 
-**▶ [Watch the 20-second demo](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4)**. You can also see it on the [live Showcase page](https://facetui.vercel.app/#/showcase), or try every effect yourself on the [Motion page](https://facetui.vercel.app/#/motion).
+**▶ [Watch the 20-second demo](https://github.com/desiben/UIKits/blob/FacetUI/facet-micro-interactions.mp4)**. You can also see it on the [live Showcase page](https://facet.etkits.us/#/showcase), or try every effect yourself on the [Motion page](https://facet.etkits.us/#/motion).
 
 ![Micro-interactions demo](docs/motion/facet-micro-interactions.gif)
 
@@ -322,7 +322,7 @@ Facet.motion.refresh(el);    // after injecting new markup (SPA routes, modals)
 
 ## Marketplace previews
 
-Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumroad, UI8 or Creative Market. They're in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) and on the [live Showcase page](https://facetui.vercel.app/#/showcase). In Figma, they're the "Marketplace previews" section on **00 — Start Here**, set to export at 1x and 2x.
+Eight ready-to-upload gallery images (1920×1080 PNG) for Figma Community, Gumroad, UI8 or Creative Market. They're in [`FacetUI-marketplace-previews/`](https://github.com/desiben/UIKits/tree/FacetUI/FacetUI-marketplace-previews) and on the [live Showcase page](https://facet.etkits.us/#/showcase). In Figma, they're the "Marketplace previews" section on **00 — Start Here**, set to export at 1x and 2x.
 
 | | |
 |---|---|
@@ -337,7 +337,7 @@ For a short listing video, use [`facet-micro-interactions.mp4`](https://github.c
 
 ## Marketing kit: videos & images
 
-Everything you need to market and sell Facet UI is on one page: **[facetui.vercel.app/marketing](https://facetui.vercel.app/marketing/)**. The files are in [`styleguide/marketing/media/`](https://github.com/desiben/UIKits/tree/FacetUI/styleguide/marketing/media), and the sources that generate them are in [`marketing/`](marketing/).
+Everything you need to market and sell Facet UI is on one page: **[facet.etkits.us/marketing](https://facet.etkits.us/marketing/)**. The files are in [`styleguide/marketing/media/`](https://github.com/desiben/UIKits/tree/FacetUI/styleguide/marketing/media), and the sources that generate them are in [`marketing/`](marketing/).
 
 | Asset | Details |
 |---|---|
@@ -371,7 +371,7 @@ To re-render them (for example after changing the brand), see [`marketing/README
 
 ## Selling on Gumroad, Envato and UI8
 
-Facet UI is sold on **Gumroad**, **Envato Market** and **UI8**. The storefront is the ETKits site ([etkits.vercel.app](https://etkits.vercel.app), the `main` branch), which lists all three stores.
+Facet UI is sold on **Gumroad**, **Envato Market** and **UI8**. The storefront is the ETKits site ([www.etkits.us](https://www.etkits.us), the `main` branch), which lists all three stores.
 
 ### Listing images
 
@@ -394,13 +394,13 @@ The sizes follow each store's usual listing format; check the current upload for
 
 | Store | How buyers get the Figma file |
 |---|---|
-| **Gumroad** | Gumroad emails a unique license key; the buyer unlocks the file at [etkits.vercel.app/claim](https://etkits.vercel.app/claim). |
+| **Gumroad** | Gumroad emails a unique license key; the buyer unlocks the file at [www.etkits.us/claim](https://www.etkits.us/claim). |
 | **Envato Market** | Each sale has a unique purchase code; the buyer unlocks the file on the same claim page (verified with the Envato author API). |
 | **UI8** | UI8 hosts and delivers the files itself; upload the `.fig`/zip there. |
 
 - **Figma:** never link the master file. Keep it *Only people invited*, turn off copying and export for viewers, and use a separate sale copy per store so a leak can be traced and replaced.
 - **Repo:** keep `desiben/UIKits` private. The ETKits site and the public style guide must not link to it.
-- **Live preview:** [facetui.vercel.app](https://facetui.vercel.app) is public, so treat it as a demo. Everything it serves (CSS, JS, tokens) can be saved from a browser.
+- **Live preview:** [facet.etkits.us](https://facet.etkits.us) is public, so treat it as a demo. Everything it serves (CSS, JS, tokens) can be saved from a browser.
 - **Envato exclusivity:** selling on Gumroad and UI8 as well means listing on Envato as a *non-exclusive* author.
 
 Claim-page setup (store IDs, tokens and Figma links as Vercel environment variables) is documented in the README on `main`.
@@ -459,11 +459,11 @@ pnpm, yarn and bun work too: `pnpm dlx facetui@latest …`, `yarn dlx facetui@la
 | Variable | Required | Purpose |
 |---|---|---|
 | `ETKITS_SERVICE_TOKEN` | yes | Shared secret for asking the ETKits license hub (the same value is set on the et-uikits project) |
-| `ETKITS_URL` | no | License hub address (default `https://etkits.vercel.app`) |
+| `ETKITS_URL` | no | License hub address (default `https://www.etkits.us`) |
 
 The Gumroad product ID, device limits and Figma delivery links are set on the **et-uikits** project.
 
-**Licenses are managed by ETKits.** ETKits (etkits.vercel.app) is the license hub for every ETKits product. Each time a buyer unlocks the style guide or runs `npx facetui`, `styleguide/api/_lib/license.js` asks ETKits whether the key may be used for `facetui` on that device. ETKits checks the purchase with Gumroad or Envato, counts devices, and refuses revoked keys. Revoke keys, change device limits and add keys at **etkits.vercel.app/admin** (code on the `main` branch).
+**Licenses are managed by ETKits.** ETKits (www.etkits.us) is the license hub for every ETKits product. Each time a buyer unlocks the style guide or runs `npx facetui`, `styleguide/api/_lib/license.js` asks ETKits whether the key may be used for `facetui` on that device. ETKits checks the purchase with Gumroad or Envato, counts devices, and refuses revoked keys. Revoke keys, change device limits and add keys at **www.etkits.us/admin** (code on the `main` branch).
 
 **Code in the style guide.** Live demos are public; copyable code is for buyers. `styleguide/assets/license.js` shows an *Unlock code* dialog, checks the key against `/r/docs-snippets.json` (same license check as the CLI) and remembers it in the browser. The React markup snippets live in `react/registry/docs-snippets.json` and are served only through that gated item. Vercel builds the public site with `styleguide/build-public.mjs` (minified CSS/JS with a license banner, no `api/`, `assets/src` or build files). The buyer zip adds `assets/buyer.js`, so its style guide is unlocked offline.
 

@@ -59,7 +59,7 @@
         '<div class="dialog-body"><div class="field"><label class="label" for="lic-key">License key</label>' +
         '<input class="input" id="lic-key" autocomplete="off" spellcheck="false" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" required>' +
         '<p class="help" id="lic-msg" role="status"></p></div></div>' +
-        '<div class="dialog-footer"><a class="btn btn-ghost" href="https://etkits.vercel.app/#facetui" target="_blank" rel="noopener">Buy Facet UI</a>' +
+        '<div class="dialog-footer"><a class="btn btn-ghost" href="https://www.etkits.us/#facetui" target="_blank" rel="noopener">Buy Facet UI</a>' +
         '<button type="button" class="btn btn-outline" data-lic-close>Cancel</button><button class="btn" type="submit" data-lic-go>Unlock</button></div></form>';
       document.body.appendChild(dlg);
       var input = dlg.querySelector("#lic-key"), msg = dlg.querySelector("#lic-msg"), go = dlg.querySelector("[data-lic-go]");

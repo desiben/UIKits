@@ -6,7 +6,7 @@
   const i = (n, c = "") => `<svg class="icon${c ? " " + c : ""}" aria-hidden="true"><use href="#${n}"/></svg>`;
   const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   // The Figma source is delivered after purchase, so public links go to the store.
-  const FIGMA = "https://etkits.vercel.app/#get";
+  const FIGMA = "https://www.etkits.us/#get";
 
   /* ---------- syntax highlight (tiny, HTML/JS/CSS) ---------- */
   function hl(code, lang) {

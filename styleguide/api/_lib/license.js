@@ -1,10 +1,10 @@
-// Facet UI asks ETKits whether a license key may be used. ETKits (etkits.vercel.app) is the license
+// Facet UI asks ETKits whether a license key may be used. ETKits (www.etkits.us) is the license
 // hub for every ETKits product: it checks the purchase with the store, counts devices, and lets you
-// revoke keys from its dashboard at etkits.vercel.app/admin.
+// revoke keys from its dashboard at www.etkits.us/admin.
 //
 // Env: ETKITS_SERVICE_TOKEN (same value as on the et-uikits project), ETKITS_URL (optional).
 const PRODUCT = "facetui"
-const HUB = () => (process.env.ETKITS_URL || "https://etkits.vercel.app").replace(/\/$/, "")
+const HUB = () => (process.env.ETKITS_URL || "https://www.etkits.us").replace(/\/$/, "")
 const recentOk = new Map() // key|device -> until. The CLI fetches many items in a row; ask the hub once a minute.
 
 // device: { id, kind: "web" | "cli", name }. Returns { ok: true } or { ok: false, status, error }.

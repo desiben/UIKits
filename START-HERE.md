@@ -4,7 +4,7 @@ Thanks for buying Facet UI v1.3!
 
 ## 1. Open the Figma file
 
-1. Go to **https://etkits.vercel.app/claim**.
+1. Go to **https://www.etkits.us/claim**.
 2. Enter your purchase code (your Gumroad license key, or your Envato purchase code) and press **Unlock**.
 3. Open the Figma file and choose **Duplicate** to save your own copy.
 
@@ -33,7 +33,7 @@ Theme with attributes on `<html>`: `data-theme="dark"`, `data-brand="ember"`, `d
 
 ## 3. Read more
 
-- `styleguide/index.html`: full documentation for every component, token and theme (also live at https://facetui.vercel.app)
+- `styleguide/index.html`: full documentation for every component, token and theme (also live at https://facet.etkits.us)
 - `figma/README.md`: Figma file guide (pages, themes, adding your brand)
 - `CHANGELOG.md`: what's new
 - `LICENSE.md`: what you can and can't do

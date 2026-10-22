@@ -12,7 +12,7 @@ const OUT = path.join(ROOT, "public-build")
 const SKIP = new Set(["public-build", "node_modules", "api", "package.json", "package-lock.json", "build-public.mjs", "vercel.json", ".gitignore", "assets/src", "assets/buyer.js"])
 // Already minified (React showcase) or third-party under its own license (Lucide, ISC).
 const KEEP = (rel) => rel.startsWith("react/assets/") || rel === "assets/icons.js" || rel === "assets/lucide.js"
-const BANNER = "/*! Facet UI · © 2026 ETKits · Licensed to Facet UI buyers only, not for redistribution. https://etkits.vercel.app */"
+const BANNER = "/*! Facet UI · © 2026 ETKits · Licensed to Facet UI buyers only, not for redistribution. https://www.etkits.us */"
 
 let min = 0, copied = 0, saved = 0
 async function walk(dir) {

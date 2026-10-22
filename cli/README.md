@@ -20,4 +20,4 @@ Components are downloaded from the Facet registry with your license key (from yo
 | `--css <file>` | your global stylesheet, if `init` can't find it |
 | `--cwd <dir>` | run in another directory |
 
-Docs and live demos: https://facetui.vercel.app/react/
+Docs and live demos: https://facet.etkits.us/react/

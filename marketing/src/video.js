@@ -33,7 +33,7 @@
     <div class="center"><span class="mark"><b></b>Facet UI</span>
       <h2 class="h1">Ship SaaS UI <span class="grad">faster.</span></h2>
       <p class="sub">Figma UI kit · 158 components · 10 templates · tokens &amp; code</p>
-      <span class="url">facetui.vercel.app</span>
+      <span class="url">facet.etkits.us</span>
       <span class="by">Made by ETKits</span></div>`);
 
   const $ = (sel, root = document) => root.querySelector(sel);

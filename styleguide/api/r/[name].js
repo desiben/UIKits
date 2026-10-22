@@ -9,7 +9,7 @@ const { authorize, deviceFrom } = require("../_lib/license")
 const REGISTRY_DIR = [path.join(__dirname, "..", "_registry"), path.join(process.cwd(), "api", "_registry")].find((d) =>
   fs.existsSync(d),
 )
-const DOCS = "https://facetui.vercel.app/react/#install"
+const DOCS = "https://facet.etkits.us/react/#install"
 
 function fail(res, status, error) {
   res.statusCode = status

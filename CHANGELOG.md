@@ -9,11 +9,12 @@ All notable changes to Facet UI. Dates are YYYY-MM-DD.
 - **`facetui` CLI and license-gated registry.** `npx facetui@latest init` sets up Tailwind CSS v4, the `@/` alias, the Facet theme (light and dark tokens plus the signature corner utilities, `rounded-facet*`) and the base files. `npx facetui@latest add <name>` adds components with everything they need, `add --all` adds every one. The `/r/<name>.json` endpoint checks the buyer's Gumroad license key.
 - **React showcase** at `/react/` with live demos and copyable install commands (pnpm, npm, yarn, bun).
 - **The full Lucide icon set (1,903 icons, v1.61.0).** The style guide Icons page lets you search every icon by name and tag, filter by Lucide's 42 categories, and copy each one as HTML, SVG or React. `assets/lucide.js` is the full sprite (old Lucide names still work). In Figma, the new page "10 — Icons" has every icon as a component, grouped by category, in the same style as the existing icons (24px, 1.75 stroke, `icon/primary`).
-- **Licenses managed by ETKits.** The style guide unlock and `npx facetui` ask the ETKits license hub (etkits.vercel.app) whether a key may be used. It checks the purchase, counts devices (5 per key by default) and refuses revoked keys; manage keys at etkits.vercel.app/admin.
+- **Licenses managed by ETKits.** The style guide unlock and `npx facetui` ask the ETKits license hub (www.etkits.us) whether a key may be used. It checks the purchase, counts devices (5 per key by default) and refuses revoked keys; manage keys at www.etkits.us/admin.
 - **Code for buyers only.** The live demos stay public, but the HTML of every example, the React markup, the template HTML and Copy Markdown unlock only with a valid license key (checked by the server, then remembered in that browser). The React markup is no longer in the public files. The public site serves minified CSS/JS with a license banner and no longer serves `assets/src`; the readable source ships in the download, where the style guide is unlocked offline.
 - **Style guide:** every component page has a "React · animated" install section, the Installation page has a React section, and the header nav has a React link.
 
 ### Changed
+- **New addresses.** The style guide is at **facet.etkits.us** and ETKits (storefront, claim page, license hub) at **www.etkits.us**. Links, the CLI's registry, the license hub address and the file banner use them. The old facetui.vercel.app and etkits.vercel.app addresses keep working.
 - The core icon sprite (`icons.js`) is redrawn from Lucide v1.61.0 (was v0.460.0). Icon names are unchanged.
 - The maker credit is now **ETKits** everywhere: README, license, style guide, marketing page, Figma file, and the re-rendered marketing images and videos.
 
