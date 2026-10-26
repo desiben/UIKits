@@ -1,0 +1,6 @@
+const componentAliases={'toggle-toggle-group':'toggle','checkbox-radio':'checkbox','slider-progress':'slider','activity-timeline-notifications':'timeline','data-table':'table','kbd-spinner-skeleton-separator':'kbd','pricing-card':'pricing','ai-prompt-composer-message':'ai','emoji-reaction-button':'emoji-reaction','pressable-feedback':'pressable','breadcrumb-pagination':'breadcrumb','chip-link':'chip','popover-hover-card-tooltip':'popover','sheet-sides-parts':'sheet-pro','sheet-drawer':'sheet'};
+const aliases={'figma-file':'figma','spacing-density':'spacing','radius-edges':'radius','elevation-focus':'elevation','ai-agents':'agents','style-themes':'styles'};
+export const componentPath=s=>'components/'+(componentAliases[s]||s);
+export const docPath=s=>aliases[s]||s;
+export function resolveRoute(raw){if(raw.startsWith('components/')){const s=raw.slice(11);return Object.entries(componentAliases).find(([,v])=>v===s)?.[0]||s}if(raw.startsWith('agents/'))return 'agent/'+({'banking':'business-banking','commerce':'commerce-ops'}[raw.slice(7)]||raw.slice(7));return Object.entries(aliases).find(([,v])=>v===raw)?.[0]||raw;}
+export const agentPath=s=>'agents/'+({'business-banking':'banking','commerce-ops':'commerce'}[s]||s);

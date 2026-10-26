@@ -1,0 +1,30 @@
+:root{--duration-fast:120ms;--duration-state:160ms;--duration-panel:220ms;--duration-sheet:280ms;--ease-standard:cubic-bezier(.2,0,0,1);--ease-enter:cubic-bezier(0,0,.2,1)}
+.s-button{transition:transform var(--duration-fast) var(--ease-standard),filter var(--duration-fast),box-shadow var(--duration-fast)}
+.s-input,.s-input-group,.s-choice,input[type=checkbox],input[type=radio]{transition:border-color var(--duration-state),background-color var(--duration-state),box-shadow var(--duration-state)}
+.s-switch-row .s-switch::after{transition:left var(--duration-state) var(--ease-standard),background-color var(--duration-state)}
+.s-dialog[open]{animation:satin-dialog-in var(--duration-panel) var(--ease-enter)}
+.s-dialog[open]::backdrop{animation:satin-fade var(--duration-panel)}
+.s-dialog[data-closing]{animation:satin-dialog-out var(--duration-state) var(--ease-standard) forwards}
+.s-sheet[open]{animation:satin-sheet-in var(--duration-sheet) var(--ease-enter)}
+.s-sheet[data-closing]{animation:satin-sheet-out var(--duration-state) forwards}
+.s-sheet[data-side=left]{--sheet-x:-100%;--sheet-y:0;left:0;right:auto}
+.s-sheet[data-side=top]{--sheet-x:0;--sheet-y:-100%;top:0;bottom:auto;left:0;right:0;width:100%;max-width:none;height:auto}
+.s-sheet[data-side=bottom]{--sheet-x:0;--sheet-y:100%;top:auto;bottom:0;left:0;right:0;width:100%;max-width:none;height:auto}
+.s-menu[open]>.menu-panel{animation:satin-rise var(--duration-state) var(--ease-enter)}
+.s-accordion details>summary .icon{transition:transform var(--duration-state)}
+.s-accordion details[open]>summary .icon{transform:rotate(180deg)}
+.s-accordion details[open]>:not(summary){animation:satin-rise 180ms var(--ease-standard)}
+[data-panel]:not([hidden]),[data-slide],[data-messages]>.s-bubble,[data-number-value]{animation:satin-rise 180ms var(--ease-standard)}
+.s-tooltip:focus-within>[role=tooltip],.s-tooltip:hover>[role=tooltip]{animation:satin-rise var(--duration-state) var(--ease-enter)}
+.s-tabs button{transition:background-color var(--duration-state),box-shadow var(--duration-state),color var(--duration-state)}
+.s-progress::-webkit-progress-value{transition:width 240ms var(--ease-standard)}
+.s-progress::-moz-progress-bar{transition:width 240ms var(--ease-standard)}
+.toast[data-closing]{animation:satin-dialog-out var(--duration-state) forwards}
+@keyframes satin-dialog-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes satin-dialog-out{to{opacity:0;transform:translateY(4px) scale(.98)}}
+@keyframes satin-sheet-in{from{opacity:0;transform:translate(var(--sheet-x,100%),var(--sheet-y,0))}to{opacity:1;transform:none}}
+@keyframes satin-sheet-out{to{opacity:0;transform:translate(var(--sheet-x,100%),var(--sheet-y,0))}}
+@keyframes satin-rise{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@keyframes satin-fade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+[data-motion=off] *,[data-motion=off] *::before,[data-motion=off] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}

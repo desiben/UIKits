@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "technology",
+    "sourceUrl": "https://www.pexels.com/photo/crop-faceless-developer-working-on-software-code-on-laptop-5926382/",
+    "alt": "From above crop anonymous male programmer in black hoodie working on software code on contemporary netbook and typing on keyboard in workspace",
+    "photographer": "Sora Shimazaki",
+    "deliveredUrl": "https://images.pexels.com/photos/5926382/pexels-photo-5926382.jpeg?auto=compress&dpr=1&h=750&w=1260",
+    "library": "Pexels",
+    "licenseUrl": "https://www.pexels.com/license/",
+    "placement": "Homepage hero, template gallery preview, inner-page illustration",
+    "src": "images/technology-1.webp",
+    "attributionRequired": false,
+    "retrievedAt": "2026-10-22",
+    "httpStatus": 200,
+    "width": 1600,
+    "height": 1067,
+    "bytes": 100108,
+    "downloadUrl": "https://images.pexels.com/photos/5926382/pexels-photo-5926382.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    "status": "downloaded-verified",
+    "suggestedObjectPosition": "50% 50%",
+    "localFile": "dist/assets/workspace.webp"
+  },
+  {
+    "localFile": "dist/assets/product.webp",
+    "source": "https://unsplash.com/photos/black-jbl-cordless-headphones-on-white-surface---z13hWoxio",
+    "image": "https://images.unsplash.com/photo-1552585140-bdeefd6b9d6a",
+    "purpose": "Illustrative product photography"
+  }
+]
