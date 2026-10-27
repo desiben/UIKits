@@ -2,15 +2,18 @@
 
 <sub>by ETKits</sub>
 
-The storefront and marketing site for ETKits, the UI kit collection. The first product is **Facet UI**.
+The storefront, license hub and private source repository for **ETKits**, including **Facet UI** and **Satin UI Kit**. Sanoa is the workspace template collection within Satin.
 
-Live: **[www.etkits.us](https://www.etkits.us)**. It is a static site with no build step: open `index.html` in a browser, or serve the repo root.
+Live: **[www.etkits.us](https://www.etkits.us)**. The storefront builds with `node build-storefront.mjs` into `storefront-build/`. Only approved public files are copied; paid kit source is excluded. Vercel serves the license functions from `api/`.
 
 ## Kits
 
-| Kit | Branch | Live preview | Stores |
-|---|---|---|---|
-| **Facet UI** v1.3 | [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI) | [facet.etkits.us](https://facet.etkits.us) | Gumroad, Envato Market, UI8 (set in `ETKITS_STORES`) |
+| Kit | Source on `main` | Live preview |
+|---|---|---|
+| **Facet UI** | [`kits/facetui/`](kits/facetui/) | [facet.etkits.us](https://facet.etkits.us) |
+| **Satin UI Kit** | [`kits/satinui/`](kits/satinui/) | [satin.etkits.us](https://satin.etkits.us) |
+
+Satin support: **[satin+contact@etkits.us](mailto:satin+contact@etkits.us)**. Store links are configured in `ETKITS_STORES`.
 
 ## What's on the page
 
@@ -43,7 +46,7 @@ Buyers never see a Figma link until their purchase is verified:
 **Setup (once per kit):**
 
 1. **Gumroad:** open the product → **Content** → enable **Generate a unique license key per sale**, and copy the **product ID** shown there. **Envato:** once the item is approved, note its item ID (in the item URL) and create a personal token at [build.envato.com](https://build.envato.com/create-token/) with the *View your items' sales history* permission.
-2. In Figma, make a *sale copy* of the kit, share it as view-only with copying allowed only via its duplicate link, and copy that link. Keep the master file as *Only people invited*.
+2. In Figma, make a *sale copy* of the kit, configure its sharing for buyer delivery, and store its delivery link server-side. Keep the master restricted to invited collaborators. A sale-copy link can be forwarded; license verification does not make the Figma URL itself license-aware.
 3. In Vercel → project **et-uikits** → Settings → Environment Variables, add:
 
 | Variable | Value |
@@ -76,29 +79,46 @@ ETKits manages the licenses for all its products. Every license key has one reco
 
 **Dashboard sign-in (2FA).** Password, then a 6-digit code from an authenticator app (Google Authenticator, 1Password, Authy, Microsoft Authenticator). The first sign-in shows a QR code to scan and gives you 10 one-time recovery codes; keep them in your password manager. **Security** in the dashboard makes new recovery codes. Sessions last 12 hours and end when the password or 2FA secret changes; each code works once; 5 failed attempts lock sign-in for 15 minutes. The 2FA secret and hashed recovery codes are stored in the private license store (`admin/2fa.json`). Code: [`api/_lib/admin-auth.js`](api/_lib/admin-auth.js), [`api/admin-auth.js`](api/admin-auth.js).
 
-In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at www.etkits.us/claim with your purchase code."* (Gumroad calls it a license key; buyers paste it in the same box.) If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; the old link stops being handed out immediately.
+In the Gumroad receipt and the Envato item description, tell buyers: *"Unlock the Figma file at www.etkits.us/claim with your purchase code."* (Gumroad calls it a license key; buyers paste it in the same box.) If a link ever leaks, make a new sale copy and update `FIGMA_DELIVERY_URL`; redeploy to stop handing out the old link. Separately revoke access to the old Figma sale copy; changing the variable does not invalidate links already shared.
 
-Listing images for each store (Gumroad, UI8, Envato) live on the `FacetUI` branch in [`marketing/listings/`](https://github.com/desiben/UIKits/tree/FacetUI/marketing/listings).
+Facet UI listing images live in [`kits/facetui/marketing/listings/`](kits/facetui/marketing/listings/).
+
+**Satin delivery setup remains pending:** `api/_lib/products.js` currently registers Facet UI only. Add Satin with its own Gumroad product ID and private delivery variables, redeploy, and verify a Satin purchase before promising claim access. Never use Facet UI delivery fallbacks for Satin.
 
 ## How this repo is organized
 
-- **`main`** holds only the ETKits site: `index.html`, `assets/` and one showreel per kit in `kits/<id>/` (a poster, a short muted reel and a few preview images).
-- **Each kit has its own branch** holding all of its content: Figma notes, tokens, style guide, marketing and so on. Facet UI lives on [`FacetUI`](https://github.com/desiben/UIKits/tree/FacetUI), and all Facet UI changes are pushed there, never to `main`.
-- The repo is **private**. Keep it that way: it contains the full kits.
+- **`main`** contains the storefront, license hub and both kits.
+- **`kits/facetui/`**: Facet UI source, React components, CLI, tokens, documentation and marketing. Public app: `styleguide/`.
+- **`kits/satinui/`**: Satin's React documentation app, components, templates, fonts and assets.
+- **`api/`**: shared license verification, claims and admin endpoints.
+- **`build-storefront.mjs`**: explicit public-file allowlist. Never copy all of `kits/` into the storefront output.
+- Old **`FacetUI`** and **`Satin`** branches remain historical backups. Make ongoing changes in the kit folders on `main`.
+- This repository contains paid source and must remain **private**.
 
 ## Deployment
 
-| Site | Vercel project | Production branch |
-|---|---|---|
-| www.etkits.us (etkits.us redirects to it; www.etkits.us still works) | `et-uikits` | `main` |
-| facet.etkits.us (facet.etkits.us still works) | `facetui` | `FacetUI` (root directory `styleguide`) |
+| Site | Vercel project | Source | Build / output |
+|---|---|---|---|
+| [www.etkits.us](https://www.etkits.us) | `et-uikits` | `main`, repository root | `node build-storefront.mjs` → `storefront-build/` |
+| [facet.etkits.us](https://facet.etkits.us) | `facetui` | `main`, `kits/facetui/styleguide` | `node build-public.mjs` → `public-build/` |
+| [satin.etkits.us](https://satin.etkits.us) | `satin` | `main`, `kits/satinui` | `npm run build` → `dist/` |
+
+**`facetui.vercel.app` has been removed.** Use `facet.etkits.us`. Its Vercel project remains to host the custom domain.
+
+### Local development
+
+Storefront: install dependencies at the repository root, run `node build-storefront.mjs`, and serve only `storefront-build/` locally. Use a Vercel-compatible environment for API testing.
+
+Satin: from `kits/satinui/`, run `npm ci`, `npm run build`, `npm test`, then `npm run dev`. See each kit's README for development and buyer-package instructions.
 
 ## Adding a kit
 
-1. Create a branch named after the kit and put the kit's content there.
-2. On `main`, add `kits/<id>/` with a poster (`.jpg`, 16:9) and a short reel (`.webm`, plus `.mp4` for older Safari).
-3. Add an entry to `window.UIKITS` in [`assets/kits.js`](assets/kits.js) (use `buy: true` for the purchase link, never a Figma or repo link), and lower `UIKITS_COMING_SOON` if you want fewer placeholder tiles.
-4. Add a row to the table above.
+1. Add complete source under `kits/<kit-id>/` on `main`.
+2. Configure a separate Vercel project with the kit's root and public-only build output.
+3. Add showcase media and explicitly allow those paths in `build-storefront.mjs`.
+4. Add the storefront entry and store links in [`assets/kits.js`](assets/kits.js). Never link master Figma files or private repository URLs from public purchase buttons.
+5. Register the kit in [`api/_lib/products.js`](api/_lib/products.js), configure product-specific server-side delivery variables, and test licensed claims before launch.
+6. Update the kit and deployment tables here.
 
 ## Credits
 
