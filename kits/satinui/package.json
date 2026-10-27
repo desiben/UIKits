@@ -1,0 +1,21 @@
+{
+  "name": "satin-ui-kit",
+  "version": "1.0.0",
+  "description": "Satin UI Kit living design system",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node dev.mjs",
+    "test": "node tests.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "dependencies": {
+    "esbuild": "^0.28.2",
+    "lucide-react": "^1.61.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "private": true
+}
