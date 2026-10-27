@@ -7,7 +7,7 @@
     var node = document.createElement(tag);
     Object.keys(attrs || {}).forEach(function (k) {
       if (k === "text") node.textContent = attrs[k];
-      else node.setAttribute(k, attrs[k]);
+      else if (attrs[k] != null) node.setAttribute(k, attrs[k]);
     });
     (children || []).forEach(function (c) { if (c) node.appendChild(c); });
     return node;
@@ -22,7 +22,7 @@
     video.muted = true;
     sources(video, kit.reel);
 
-    var media = el("button", { class: "kit-media", type: "button", "data-reel": kit.id, "aria-label": "Play the " + kit.name + " showreel" }, [
+    var media = el("button", { class: "kit-media", type: "button", "data-reel": kit.id, "aria-label": "Play the " + kit.name + " showreel", style: kit.mediaBg ? "background:" + kit.mediaBg : null }, [
       video,
       el("span", { class: "play", "aria-hidden": "true", text: "▶" }),
       el("span", { class: "badge", text: kit.version })
@@ -33,6 +33,8 @@
     }));
     var tags = el("ul", { class: "tags" }, kit.tags.map(function (t) { return el("li", { text: t }); }));
     var links = el("div", { class: "links" }, kit.links.map(function (l) {
+      // buy: true uses the site-wide store (Facet UI); buy: "<id>" uses that kit's own buyUrl.
+      if (typeof l.buy === "string") return el("a", { class: "btn" + (l.primary ? " btn-primary" : ""), href: kit.buyUrl || kit.links.filter(function (x) { return x.href; })[0].href, target: "_blank", rel: "noopener", text: l.label });
       if (l.buy) return el("a", { class: "btn" + (l.primary ? " btn-primary" : ""), "data-buy": "", href: "#get", text: l.label });
       return el("a", { class: "btn" + (l.primary ? " btn-primary" : ""), href: l.href, target: "_blank", rel: "noopener", text: l.label });
     }));
