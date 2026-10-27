@@ -1,0 +1,1 @@
+{ "name": "chat-source", "title": "Chat Source", "description": "Source chips that stagger in and inline numbered citations that pop a hover preview of the source.", "categories": ["ai"], "files": ["ui/chat-source.tsx"] }

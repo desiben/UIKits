@@ -1,0 +1,11 @@
+{
+  "name": "radio-button-group",
+  "title": "Radio Button Group",
+  "description": "Radio cards and buttons with a sliding selection ring and springy indicator.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/radio-button-group.tsx"
+  ]
+}

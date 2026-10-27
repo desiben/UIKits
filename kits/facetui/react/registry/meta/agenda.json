@@ -1,0 +1,7 @@
+{
+  "name": "agenda",
+  "title": "Agenda",
+  "description": "A day-by-day list of events with times, colored category rails and a highlighted live event; days and events stagger in and rails grow.",
+  "categories": ["data-display"],
+  "files": ["ui/agenda.tsx"]
+}

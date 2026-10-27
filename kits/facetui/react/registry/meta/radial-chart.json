@@ -1,0 +1,11 @@
+{
+  "name": "radial-chart",
+  "title": "Radial Chart",
+  "description": "Progress rings or a half gauge; arcs sweep to their value while the center number counts up, and hovering a ring focuses it.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/radial-chart.tsx"
+  ]
+}

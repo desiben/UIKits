@@ -1,0 +1,1 @@
+import{a as e,ct as t,dt as n,i as r,o as i}from"./react-BaQ5Op-n.js";var a=n(t(),1);function o(){!e.current&&r();let[t]=(0,a.useState)(i.current);return t}export{o as t};

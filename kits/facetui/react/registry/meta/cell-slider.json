@@ -1,0 +1,11 @@
+{
+  "name": "cell-slider",
+  "title": "Cell Slider",
+  "description": "Settings row with a spring-counting formatted value and a full-width slider.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/cell-slider.tsx"
+  ]
+}

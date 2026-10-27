@@ -1,0 +1,1 @@
+{ "name": "sonner", "title": "Sonner", "description": "Sonner-style toasts: a <Toaster /> plus an imperative toast() API with types, actions and promise toasts. Toasts stack with depth, fan out on hover, pause while read, swipe away and morph their icon from loading to done.", "categories": ["feedback"], "files": ["ui/sonner.tsx"] }

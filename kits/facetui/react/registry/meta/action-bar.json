@@ -1,0 +1,7 @@
+{
+  "name": "action-bar",
+  "title": "Action Bar",
+  "description": "A floating bulk-action bar that springs up when items are selected, with a ticking selection count and Escape to clear.",
+  "categories": ["data-display"],
+  "files": ["ui/action-bar.tsx"]
+}

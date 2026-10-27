@@ -1,0 +1,1 @@
+{ "name": "kpi-group", "title": "KPI Group", "description": "Several KPIs joined into one card with shared dividers that wraps responsively. Metrics stagger in on view, values tick on change and cells tint on hover.", "categories": ["data-display"], "files": ["ui/kpi-group.tsx"] }

@@ -1,0 +1,11 @@
+{
+  "name": "input-otp",
+  "title": "Input OTP",
+  "description": "One-time code input; digits pop into their slots, wrong codes shake and a correct code ripples green.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/input-otp.tsx"
+  ]
+}

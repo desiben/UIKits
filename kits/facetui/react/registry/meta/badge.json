@@ -1,0 +1,1 @@
+{ "name": "badge", "title": "Badge", "description": "Short status or metadata label in nine tones. Text changes roll over while the width springs to fit, with an optional pulsing live dot.", "categories": ["data-display"], "files": ["ui/badge.tsx"] }

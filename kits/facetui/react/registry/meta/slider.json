@@ -1,0 +1,11 @@
+{
+  "name": "slider",
+  "title": "Slider",
+  "description": "Range slider and progress bar; thumbs grow while dragging, a value bubble pops up and progress springs to its value.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/slider.tsx"
+  ]
+}

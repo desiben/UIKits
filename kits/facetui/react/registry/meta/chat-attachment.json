@@ -1,0 +1,1 @@
+{ "name": "chat-attachment", "title": "Chat Attachment", "description": "File and image chips with type colours, a springy upload progress bar and remove; chips pop in and removed ones collapse.", "categories": ["ai"], "files": ["ui/chat-attachment.tsx"] }

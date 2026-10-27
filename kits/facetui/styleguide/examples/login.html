@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-brand="iris" data-density="comfortable">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in — Facet UI example</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/tokens.css">
+  <link rel="stylesheet" href="../assets/facet.css">
+  <link rel="stylesheet" href="../assets/motion.css">
+  <link rel="stylesheet" href="example.css">
+  <script src="../assets/icons.js"></script>
+  <script src="../assets/facet.js"></script>
+  <script src="../assets/motion.js"></script>
+</head>
+<body>
+<div class="auth">
+  <section class="auth-form">
+    <!-- Step 1: sign in -->
+    <div id="step-signin">
+      <a class="workspace" href="#" style="padding:0;text-decoration:none;color:inherit"><span class="logo">F</span><b class="t-label-lg">Facet</b></a>
+      <div><h1 class="t-h2">Welcome back</h1><p class="t-body-sm text-tertiary" style="margin-top:6px">Sign in to continue to your workspace.</p></div>
+      <div class="row" style="--gap:8px;flex-wrap:nowrap"><button class="btn btn-outline grow"><svg class="icon"><use href="#globe"/></svg>Google</button><button class="btn btn-outline grow"><svg class="icon"><use href="#building-2"/></svg>SSO</button></div>
+      <div class="divider">or continue with email</div>
+      <form class="stack" style="--gap:16px" id="signin-form" novalidate>
+        <div class="field"><label class="label" for="email">Email</label><input class="input" id="email" type="email" autocomplete="email" placeholder="maya@acme.co" required></div>
+        <div class="field" id="pw-field">
+          <label class="label" for="pw">Password</label>
+          <div class="input-group"><input class="input" id="pw" type="password" autocomplete="current-password" placeholder="••••••••" required style="padding-right:40px"><button type="button" class="btn btn-ghost btn-sm icon-btn" id="pw-toggle" aria-label="Show password" style="position:absolute;right:4px"><svg class="icon icon-sm"><use href="#eye"/></svg></button></div>
+          <span class="help" id="pw-help" hidden>Enter your password.</span>
+        </div>
+        <div class="row" style="justify-content:space-between"><label class="check"><input type="checkbox" checked><span>Remember me</span></label><a class="link t-label-sm" href="#">Forgot password?</a></div>
+        <button class="btn btn-lg btn-block" type="submit">Sign in</button>
+      </form>
+      <p class="t-body-sm text-tertiary" style="text-align:center">New to Facet? <a class="link t-label-sm" href="#">Create an account</a></p>
+    </div>
+
+    <!-- Step 2: verify -->
+    <div id="step-verify" hidden>
+      <button class="btn btn-ghost btn-sm" style="align-self:flex-start" id="back"><svg class="icon icon-sm"><use href="#chevron-left"/></svg>Back</button>
+      <span class="ai-mark" style="width:44px;height:44px"><svg class="icon"><use href="#mail"/></svg></span>
+      <div><h1 class="t-h2">Check your email</h1><p class="t-body-sm text-tertiary" style="margin-top:6px">We sent a 6-digit code to <b id="sent-to" style="color:var(--text-primary)">maya@acme.co</b>.</p></div>
+      <div class="otp" role="group" aria-label="Verification code">
+        <input inputmode="numeric" maxlength="1" autocomplete="one-time-code" aria-label="Digit 1"><input inputmode="numeric" maxlength="1" aria-label="Digit 2"><input inputmode="numeric" maxlength="1" aria-label="Digit 3"><span class="sep"></span><input inputmode="numeric" maxlength="1" aria-label="Digit 4"><input inputmode="numeric" maxlength="1" aria-label="Digit 5"><input inputmode="numeric" maxlength="1" aria-label="Digit 6">
+      </div>
+      <a class="btn btn-lg btn-block" href="dashboard.html">Verify and continue</a>
+      <p class="t-body-sm text-tertiary">Didn't get it? <button class="btn btn-link" data-toast='{"title":"Code re-sent","description":"Check your inbox in a few seconds."}'>Resend code</button></p>
+    </div>
+  </section>
+
+  <section class="auth-brand" aria-hidden="true">
+    <blockquote>“Tokens, components and code finally say the same thing — our handoff went from days to hours.”</blockquote>
+    <div class="row" style="--gap:12px;margin-top:24px;position:relative;z-index:1"><span class="avatar" style="background:rgb(255 255 255 / .2);color:#fff">SN</span><div><b class="t-label-md">Sample quote</b><div class="t-caption" style="opacity:.8">Replace with your customer</div></div></div>
+  </section>
+</div>
+<script>
+  const f = document.getElementById("signin-form");
+  f.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const pw = document.getElementById("pw"), em = document.getElementById("email");
+    const bad = !pw.value; pw.setAttribute("aria-invalid", bad); document.getElementById("pw-help").hidden = !bad; document.getElementById("pw-field").dataset.invalid = bad;
+    if (bad) return pw.focus();
+    document.getElementById("sent-to").textContent = em.value || "maya@acme.co";
+    document.getElementById("step-signin").hidden = true; document.getElementById("step-verify").hidden = false;
+    document.querySelector(".otp input").focus();
+  });
+  document.getElementById("back").onclick = () => { document.getElementById("step-signin").hidden = false; document.getElementById("step-verify").hidden = true; };
+  document.getElementById("pw-toggle").onclick = (e) => { const pw = document.getElementById("pw"); const show = pw.type === "password"; pw.type = show ? "text" : "password"; e.currentTarget.setAttribute("aria-label", show ? "Hide password" : "Show password"); e.currentTarget.innerHTML = `<svg class="icon icon-sm"><use href="#${show ? "eye-off" : "eye"}"/></svg>`; };
+</script>
+</body>
+</html>

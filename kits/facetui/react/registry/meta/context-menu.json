@@ -1,0 +1,7 @@
+{
+  "name": "context-menu",
+  "title": "Context Menu",
+  "description": "A right-click menu that pops out from the cursor, staggers its items, slides a highlight between them and draws checkmarks for checkable items.",
+  "categories": ["overlays"],
+  "files": ["ui/context-menu.tsx"]
+}

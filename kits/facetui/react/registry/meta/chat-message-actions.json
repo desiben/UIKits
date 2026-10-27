@@ -1,0 +1,1 @@
+{ "name": "chat-message-actions", "title": "Chat Message Actions", "description": "Copy, rate and regenerate controls for an assistant reply; copy morphs to a check, thumbs pop and regenerate spins.", "categories": ["ai"], "files": ["ui/chat-message-actions.tsx"] }

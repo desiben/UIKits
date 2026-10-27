@@ -1,0 +1,1 @@
+{ "name": "chat-list-view", "title": "Chat List View", "description": "Sidebar chat threads grouped by date with a selection highlight that slides between rows, popping unread dots, a hover menu and collapsing deletes.", "categories": ["ai"], "files": ["ui/chat-list-view.tsx"] }

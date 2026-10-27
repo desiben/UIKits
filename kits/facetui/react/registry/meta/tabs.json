@@ -1,0 +1,7 @@
+{
+  "name": "tabs",
+  "title": "Tabs",
+  "description": "Switch between views of the same context: the underline or pill indicator slides between tabs on a spring and panels fade up.",
+  "categories": ["navigation"],
+  "files": ["ui/tabs.tsx"]
+}

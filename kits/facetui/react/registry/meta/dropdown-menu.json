@@ -1,0 +1,7 @@
+{
+  "name": "dropdown-menu",
+  "title": "Dropdown Menu",
+  "description": "Actions in a floating menu that scales out of its trigger, staggers its items in and slides a signal-rail highlight between them.",
+  "categories": ["overlays"],
+  "files": ["ui/dropdown-menu.tsx"]
+}

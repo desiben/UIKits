@@ -1,0 +1,11 @@
+{
+  "name": "questionnaire",
+  "title": "Questionnaire",
+  "description": "Step-by-step questionnaire: options stagger in, steps slide, progress animates; keyboard friendly.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/questionnaire.tsx"
+  ]
+}

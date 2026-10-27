@@ -1,0 +1,11 @@
+{
+  "name": "cell-color-picker",
+  "title": "Cell Color Picker",
+  "description": "Settings row with preset swatches and a custom colour input; the selection ring glides between swatches.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/cell-color-picker.tsx"
+  ]
+}

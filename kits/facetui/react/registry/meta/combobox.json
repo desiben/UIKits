@@ -1,0 +1,11 @@
+{
+  "name": "combobox",
+  "title": "Combobox",
+  "description": "Searchable combobox (cmdk) with filtering, multi-select chips that animate in and out.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/combobox.tsx"
+  ]
+}

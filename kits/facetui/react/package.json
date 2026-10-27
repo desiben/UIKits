@@ -1,0 +1,41 @@
+{
+  "name": "facet-ui-react",
+  "private": true,
+  "version": "1.3.0",
+  "type": "module",
+  "description": "Facet UI animated React components. Buyers install them with the facetui CLI.",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dev": "vite",
+    "build:showcase": "vite build",
+    "build:registry": "node scripts/sync-registry.mjs",
+    "build": "npm run typecheck && npm run build:registry && npm run build:showcase"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^4.4.0",
+    "input-otp": "^1.5.0",
+    "lucide-react": "^1.61.0",
+    "motion": "^14.5.0",
+    "radix-ui": "^1.8.1",
+    "react": "^19.3.1",
+    "react-day-picker": "^10.0.2",
+    "react-dom": "^19.3.1",
+    "react-resizable-panels": "^4.14.8",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "playwright": "^1.56.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
+  }
+}

@@ -1,0 +1,1 @@
+{ "name": "item-card", "title": "Item Card", "description": "A horizontal row card with icon, title, description and trailing action, in five surface styles. Groups stagger in; pressable cards tint, settle on press and nudge their chevron.", "categories": ["data-display"], "files": ["ui/item-card.tsx"] }

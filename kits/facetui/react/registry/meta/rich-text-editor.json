@@ -1,0 +1,11 @@
+{
+  "name": "rich-text-editor",
+  "title": "Rich Text Editor",
+  "description": "Lightweight rich text editor with an animated toolbar, bubble menu and live word count.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/rich-text-editor.tsx"
+  ]
+}

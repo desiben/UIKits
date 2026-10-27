@@ -1,0 +1,7 @@
+{
+  "name": "pricing",
+  "title": "Pricing Card",
+  "description": "Plan comparison card whose price rolls digit-by-digit on billing changes; the featured plan lifts with a brand glow, cards tilt toward the pointer and features stagger in with drawn checks.",
+  "categories": ["signature"],
+  "files": ["ui/pricing.tsx"]
+}

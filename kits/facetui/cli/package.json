@@ -1,0 +1,13 @@
+{
+  "name": "facetui",
+  "version": "1.0.0",
+  "description": "Install Facet UI animated React components into your project. Made by ETKits.",
+  "type": "module",
+  "bin": { "facetui": "bin/facetui.mjs" },
+  "files": ["bin", "README.md", "LICENSE"],
+  "engines": { "node": ">=18.17" },
+  "keywords": ["facet", "facet-ui", "etkits", "react", "components", "tailwind", "motion", "ui kit"],
+  "homepage": "https://facet.etkits.us/react/",
+  "author": "ETKits",
+  "license": "MIT"
+}

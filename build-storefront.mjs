@@ -1,0 +1,4 @@
+import {rm,mkdir,cp} from 'node:fs/promises';
+await rm('storefront-build',{recursive:true,force:true});
+await mkdir('storefront-build',{recursive:true});
+for(const path of ["index.html","claim.html","admin.html","assets","kits/facetui/01-cover.png","kits/facetui/02-highlights.png","kits/facetui/03-templates.png","kits/facetui/04-thank-you.png","kits/facetui/05-thumbnail-square.png","kits/facetui/facet-ui-components-reel-poster.jpg","kits/facetui/facet-ui-components-reel.mp4","kits/facetui/facet-ui-components-reel.webm","kits/facetui/facet-ui-gumroad-long.png","kits/facetui/handoff.webp","kits/facetui/layers.webp","kits/facetui/mobile.webp","kits/facetui/themes.webp","kits/facetui/variables.webp"]){await mkdir('storefront-build/'+path.split('/').slice(0,-1).join('/'),{recursive:true});await cp(path,'storefront-build/'+path,{recursive:true});}

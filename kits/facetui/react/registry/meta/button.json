@@ -1,0 +1,17 @@
+{
+  "name": "button",
+  "title": "Button",
+  "description": "Triggers an action. Spring press, ink ripple and a loading state that morphs the label.",
+  "dependencies": [
+    "motion",
+    "radix-ui",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "files": [
+    "ui/button.tsx"
+  ],
+  "categories": [
+    "actions"
+  ]
+}

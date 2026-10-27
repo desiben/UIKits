@@ -1,0 +1,1 @@
+{ "name": "chat-message", "title": "Chat Message", "description": "A user or assistant message with avatar, meta and bubble variants; messages rise in on arrival and streamed words fade into place.", "categories": ["ai"], "files": ["ui/chat-message.tsx"] }

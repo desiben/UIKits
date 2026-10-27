@@ -1,0 +1,11 @@
+{
+  "name": "data-grid",
+  "title": "Data Grid",
+  "description": "Spreadsheet-style grid with cell editing, animated row selection and live totals.",
+  "categories": [
+    "data-display"
+  ],
+  "files": [
+    "ui/data-grid.tsx"
+  ]
+}

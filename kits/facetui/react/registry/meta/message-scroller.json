@@ -1,0 +1,1 @@
+{ "name": "message-scroller", "title": "Message Scroller", "description": "Conversation scroll container that sticks to the bottom while replies stream, anchors new turns, restores history without jumping, tracks seen messages and floats in a jump-to-latest pill with a popping unread count.", "categories": ["ai"], "files": ["ui/message-scroller.tsx"] }

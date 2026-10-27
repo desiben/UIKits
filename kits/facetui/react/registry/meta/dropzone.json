@@ -1,0 +1,11 @@
+{
+  "name": "dropzone",
+  "title": "Dropzone",
+  "description": "File upload target that lifts and glows on drag-over, with a staggered file list, springy progress and collapsing removal.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/dropzone.tsx"
+  ]
+}

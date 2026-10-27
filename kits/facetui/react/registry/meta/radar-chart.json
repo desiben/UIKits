@@ -1,0 +1,11 @@
+{
+  "name": "radar-chart",
+  "title": "Radar Chart",
+  "description": "Compares qualities across spokes; shapes unfold in sequence and hovering a shape or legend item brings it forward.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/radar-chart.tsx"
+  ]
+}

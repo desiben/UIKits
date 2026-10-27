@@ -1,0 +1,1 @@
+{ "name": "empty-state", "title": "Empty State", "description": "Explains why a view is empty and what to do next. Content staggers in on view, the icon pops in and floats gently on hover.", "categories": ["feedback"], "files": ["ui/empty-state.tsx"] }

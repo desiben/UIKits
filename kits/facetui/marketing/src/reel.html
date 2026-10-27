@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-brand="iris">
+<head>
+<meta charset="utf-8">
+<title>Facet UI — components reel</title>
+<link rel="stylesheet" href="../../styleguide/assets/tokens.css">
+<link rel="stylesheet" href="../../styleguide/assets/facet.css">
+<link rel="stylesheet" href="../../styleguide/assets/motion.css">
+<link rel="stylesheet" href="mkt.css">
+<script src="../../styleguide/assets/icons.js"></script>
+<style>
+  /* Laid out at 1200×675 CSS px and captured at deviceScaleFactor 1.6 → 1920×1080, so components render at native size, crisp. */
+  html, body { width: 1200px; height: 675px; overflow: hidden; margin: 0; background: #07070c; user-select: none; -webkit-user-select: none; }
+  section.scene { position: absolute; left: 0; top: 0; width: 1200px; height: 675px; opacity: 0; visibility: hidden; }
+  .bg-grid::before { background-size: 50px 50px; }
+  .glow { filter: blur(90px); }
+  .zoom { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding-bottom: 40px; }
+  .zoom > .inner { display: flex; gap: 14px; align-items: center; justify-content: center; }
+  .cap { position: absolute; left: 75px; bottom: 56px; z-index: 5000; }
+  .cap .n { font: 600 10px/1 "Mona Sans"; letter-spacing: .14em; color: var(--brand-2); display: flex; gap: 7px; align-items: center; }
+  .cap .n::before { content: ""; width: 18px; height: 1.5px; background: currentColor; border-radius: 2px; }
+  .cap h2 { font: 650 32px/1.05 "Mona Sans"; letter-spacing: -0.035em; margin: 9px 0 0; color: #fff; }
+  .cap p { font: 420 13.5px/1.4 "Mona Sans"; color: var(--muted); margin: 6px 0 0; }
+  .brandtag { position: absolute; right: 75px; top: 38px; z-index: 5000; }
+  .brandtag .mark { font-size: 13px; gap: 7px; } .brandtag .mark b { width: 21px; height: 21px; border-radius: 6px 2px 6px 6px; box-shadow: 0 6px 18px rgb(93 79 243 / .45); } .brandtag .mark b::after { width: 8px; height: 8px; border-radius: 2px 1px 2px 2px; }
+  .dots { position: absolute; right: 75px; bottom: 62px; display: flex; gap: 5px; z-index: 5000; }
+  .dots i { width: 18px; height: 3px; border-radius: 3px; background: rgb(255 255 255 / .12); overflow: hidden; position: relative; }
+  .dots i b { position: absolute; inset: 0; background: var(--brand-2); transform-origin: left; }
+  #cursor { position: absolute; left: 0; top: 0; width: 18px; height: 18px; z-index: 9999; pointer-events: none; filter: drop-shadow(0 3px 6px rgb(0 0 0 / .5)); }
+  #cursor svg { width: 18px; height: 18px; }
+  #cursor .ring { position: absolute; left: -10px; top: -10px; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid rgb(255 255 255 / .7); opacity: 0; }
+  .vbig .mark { font-size: 34px; gap: 15px; } .vbig .mark b { width: 56px; height: 56px; border-radius: 16px 5px 16px 16px; } .vbig .mark b::after { width: 21px; height: 21px; border-radius: 5px 2px 5px 5px; }
+  .center { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; text-align: center; }
+  .center .h1 { font-size: 60px; margin-top: 18px; }
+  .center .sub { margin-top: 14px; font: 450 16px/1.4 "Mona Sans"; color: var(--muted); }
+  .url { margin-top: 22px; display: inline-flex; align-items: center; height: 36px; padding: 0 18px; border-radius: 999px; background: linear-gradient(145deg, #8f84ff, #5d4ff3 55%, #3b2fc0); font: 600 14px/1 "Mona Sans"; box-shadow: 0 12px 36px -6px rgb(93 79 243 / .6), inset 0 1px 0 rgb(255 255 255 / .3); }
+  .by { margin-top: 16px; font: 500 11.5px/1 "Mona Sans"; color: rgb(255 255 255 / .5); }
+  .credit { left: 75px; bottom: 32px; font-size: 10px; gap: 8px; }
+  .toast-region { right: 75px !important; bottom: 120px !important; z-index: 6000 !important; }
+  .stack { display: flex; flex-direction: column; gap: 12px; }
+  button, input { font-family: inherit; }
+</style>
+</head>
+<body>
+
+<section class="scene bg-grid noise vbig" id="s-title">
+  <div class="glow brand" style="width:562px;height:438px;left:319px;top:125px;opacity:.5"></div>
+  <div class="center"><span class="mark"><b></b>Facet UI</span><h1 class="h1">Components <span class="grad">in motion.</span></h1><p class="sub">Micro-interactions built into every component — no plugins, no setup.</p></div>
+  <div class="credit">Facet UI <span class="dot"></span> by ETKits</div>
+</section>
+
+<section class="scene bg-grid noise" id="s-buttons">
+  <div class="glow brand" style="width:500px;height:375px;left:350px;top:150px;opacity:.38"></div>
+  <div class="zoom"><div class="inner" style="flex-direction:column;gap:22px">
+    <div class="row" style="--gap:14px"><button class="btn btn-lg" data-magnetic id="b1"><svg class="icon"><use href="#plus"/></svg> Create project</button><button class="btn btn-outline btn-lg" data-magnetic id="b2">Invite team</button><button class="btn btn-outline btn-lg icon-btn" data-magnetic id="b3" aria-label="Settings"><svg class="icon"><use href="#settings"/></svg></button></div>
+    <div class="row" style="--gap:14px"><button class="btn btn-secondary" id="b4">Secondary</button><button class="btn btn-ghost" id="b5">Ghost</button><button class="btn btn-destructive" id="b6"><svg class="icon"><use href="#trash-2"/></svg> Delete</button></div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise" id="s-cards">
+  <div class="glow brand" style="width:562px;height:438px;left:319px;top:112px;opacity:.38"></div>
+  <div class="zoom"><div class="inner" style="align-items:stretch;">
+    <div class="card pricing" data-tilt="4" style="width:280px" id="c1"><div><b class="t-h4">Starter</b><p class="t-body-sm text-tertiary">For small teams</p></div><div class="price">$0<small> /user/mo</small></div><button class="btn btn-outline btn-block">Get started</button><ul><li><svg class="icon"><use href="#check"/></svg>Up to 5 projects</li><li><svg class="icon"><use href="#check"/></svg>Basic analytics</li></ul></div>
+    <div class="card pricing featured" data-tilt="4" style="width:280px" id="c2"><div class="row" style="justify-content:space-between"><b class="t-h4">Growth</b><span class="badge badge-accent">Popular</span></div><div class="price">$24<small> /user/mo</small></div><button class="btn btn-block" id="c2b">Start free trial</button><ul><li><svg class="icon"><use href="#check"/></svg>Unlimited projects</li><li><svg class="icon"><use href="#check"/></svg>AI copilot</li><li><svg class="icon"><use href="#check"/></svg>Advanced permissions</li></ul></div>
+    <div class="card pricing" data-tilt="4" style="width:280px" id="c3"><div><b class="t-h4">Scale</b><p class="t-body-sm text-tertiary">For larger orgs</p></div><div class="price">$48<small> /user/mo</small></div><button class="btn btn-outline btn-block">Contact sales</button><ul><li><svg class="icon"><use href="#check"/></svg>SSO &amp; SCIM</li><li><svg class="icon"><use href="#check"/></svg>Audit logs</li></ul></div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise" id="s-tabs">
+  <div class="glow brand" style="width:500px;height:375px;left:350px;top:150px;opacity:.38"></div>
+  <div class="zoom"><div class="inner" style="flex-direction:column;gap:34px">
+    <div class="tabs-pill" role="tablist" aria-label="Range"><button class="tab" role="tab" aria-selected="true" id="t1">Day</button><button class="tab" role="tab" aria-selected="false" id="t2">Week</button><button class="tab" role="tab" aria-selected="false" id="t3">Month</button><button class="tab" role="tab" aria-selected="false" id="t4">Year</button></div>
+    <div class="tabs-list" role="tablist" aria-label="Project" style="width:460px"><button class="tab" role="tab" aria-selected="true" id="u1">Overview</button><button class="tab" role="tab" aria-selected="false" id="u2">Analytics <span class="badge">12</span></button><button class="tab" role="tab" aria-selected="false" id="u3">Settings</button></div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise" id="s-forms">
+  <div class="glow brand" style="width:500px;height:375px;left:350px;top:150px;opacity:.38"></div>
+  <div class="zoom"><div class="inner">
+    <div class="card" style="width:380px;padding:22px;display:flex;flex-direction:column;gap:18px">
+      <b class="t-label-md">Notifications</b>
+      <label class="switch" id="w1"><input type="checkbox" role="switch" checked> Auto-sync</label>
+      <label class="switch" id="w2"><input type="checkbox" role="switch"> Push notifications</label>
+      <label class="check" id="k1"><input type="checkbox"><span>Email me weekly digests<small>A summary of activity across projects.</small></span></label>
+      <div class="field"><label class="label">Volume</label><input class="slider" type="range" min="0" max="100" value="30" id="sl" aria-label="Volume"></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise" id="s-nav">
+  <div class="glow brand" style="width:562px;height:375px;left:319px;top:150px;opacity:.38"></div>
+  <div class="zoom"><div class="inner" style="align-items:flex-start;">
+    <nav class="sidebar card" aria-label="Main" style="height:360px;width:230px" id="nav">
+      <div class="workspace"><span class="logo">A</span><b class="t-label-md grow">Acme Inc.</b><svg class="icon icon-sm"><use href="#chevrons-up-down"/></svg></div>
+      <div class="sidebar-label">Workspace</div>
+      <a class="sidebar-item" href="#" aria-current="page" id="n1"><svg class="icon"><use href="#layout-dashboard"/></svg> Dashboard</a>
+      <a class="sidebar-item" href="#" id="n2"><svg class="icon"><use href="#inbox"/></svg> Inbox <span class="count">12</span></a>
+      <a class="sidebar-item" href="#" id="n3"><svg class="icon"><use href="#folder"/></svg> Projects</a>
+      <a class="sidebar-item" href="#" id="n4"><svg class="icon"><use href="#users"/></svg> Customers</a>
+      <div class="sidebar-label">Insights</div>
+      <a class="sidebar-item" href="#" id="n5"><svg class="icon"><use href="#bar-chart-3"/></svg> Reports</a>
+    </nav>
+    <div class="command" role="dialog" aria-label="Command palette" style="width:520px">
+      <div class="command-input"><svg class="icon"><use href="#search"/></svg><span class="scope"><svg class="icon icon-sm"><use href="#folder"/></svg> Q4 Launch</span><input value="budget" aria-label="Search"><span class="kbd">esc</span></div>
+      <div class="command-list" role="listbox">
+        <div class="menu-label">Ask AI</div>
+        <div class="menu-item" role="option" id="m1"><svg class="icon"><use href="#sparkles"/></svg> Summarize budget changes this week</div>
+        <div class="menu-label">Results in Q4 Launch</div>
+        <div class="menu-item" role="option" id="m2"><svg class="icon"><use href="#file-text"/></svg> Budget review — doc <span class="shortcut">⌘1</span></div>
+        <div class="menu-item" role="option" id="m3"><svg class="icon"><use href="#list-todo"/></svg> Approve budget — task <span class="shortcut">⌘2</span></div>
+        <div class="menu-item" role="option" id="m4"><svg class="icon"><use href="#plus"/></svg> Create budget request <span class="shortcut">⌘N</span></div>
+      </div>
+      <div class="command-foot"><span><span class="kbd">↑↓</span> Navigate</span><span><span class="kbd">↵</span> Open</span><span><span class="kbd">⇥</span> Change scope</span></div>
+    </div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise" id="s-feedback">
+  <div class="glow brand" style="width:500px;height:375px;left:250px;top:150px;opacity:.38"></div>
+  <div class="zoom"><div class="inner" style="align-items:flex-start;gap:28px">
+    <div class="card calendar" id="cal"><div class="cal-head"><button class="btn btn-ghost btn-sm icon-btn"><svg class="icon"><use href="#chevron-left"/></svg></button>November 2026<button class="btn btn-ghost btn-sm icon-btn"><svg class="icon"><use href="#chevron-right"/></svg></button></div><div class="cal-grid" id="calgrid"></div></div>
+    <div class="stack">
+      <div class="kanban-card" style="width:300px" id="kb"><div class="row" style="--gap:6px"><span class="badge badge-brand">Design</span><span class="badge badge-danger">P1</span></div><b>Redesign onboarding</b><div class="progress progress-sm"><span style="--value:75%"></span></div><footer><span class="row" style="--gap:4px"><svg class="icon icon-sm"><use href="#calendar"/></svg> Nov 24</span><span class="avatar-group"><span class="avatar avatar-sm av-1">MC</span><span class="avatar avatar-sm av-2">JR</span></span></footer></div>
+      <button class="btn" id="save" data-magnetic><svg class="icon"><use href="#check"/></svg> Save changes</button>
+    </div>
+  </div></div>
+</section>
+
+<section class="scene bg-grid noise vbig" id="s-outro">
+  <div class="glow brand" style="width:625px;height:438px;left:288px;top:162px;opacity:.5"></div>
+  <div class="glow lime" style="width:312px;height:250px;left:875px;top:475px"></div>
+  <div class="center"><span class="mark"><b></b>Facet UI</span><h2 class="h1">158 components. <span class="grad">Zero setup.</span></h2><p class="sub">Figma UI kit · Variables · Auto Layout · tokens &amp; code</p><span class="url">facet.etkits.us</span><span class="by">Made by ETKits</span></div>
+</section>
+
+<div class="cap" id="cap"><span class="n" id="capn"></span><h2 id="capt"></h2><p id="capp"></p></div>
+<div class="brandtag" id="btag"><span class="mark"><b></b>Facet UI</span></div>
+<div class="dots" id="dots"></div>
+<div id="cursor"><span class="ring"></span><svg width="28" height="28" viewBox="0 0 28 28"><path d="M4 2.5 L4 22 L9.2 17.4 L12.6 25 L16 23.5 L12.7 16 L19.8 16 Z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+
+<script src="../../styleguide/assets/facet.js"></script>
+<script src="../../styleguide/assets/motion.js"></script>
+<script src="reel.js"></script>
+</body>
+</html>

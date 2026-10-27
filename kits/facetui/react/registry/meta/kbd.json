@@ -1,0 +1,1 @@
+{ "name": "kbd", "title": "Kbd, Spinner, Skeleton, Separator", "description": "Small utilities: keycaps that press in when the real key is held, a breathing arc spinner, shimmering skeletons and a separator that draws in.", "categories": ["data-display"], "files": ["ui/kbd.tsx"] }

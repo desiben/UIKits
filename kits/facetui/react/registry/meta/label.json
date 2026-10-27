@@ -1,0 +1,11 @@
+{
+  "name": "label",
+  "title": "Label",
+  "description": "Form label with required/optional markers that animate as the form's rules change.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/label.tsx"
+  ]
+}

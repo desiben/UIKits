@@ -1,0 +1,11 @@
+{
+  "name": "pressable",
+  "title": "Pressable Feedback",
+  "description": "Press feedback wrapper \u2014 scale, highlight or lift \u2014 for any card or tile.",
+  "categories": [
+    "feedback"
+  ],
+  "files": [
+    "ui/pressable.tsx"
+  ]
+}

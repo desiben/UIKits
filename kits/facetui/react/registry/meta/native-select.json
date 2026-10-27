@@ -1,0 +1,11 @@
+{
+  "name": "native-select",
+  "title": "Native Select",
+  "description": "Styled native <select> with an animated chevron and an error shake.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/native-select.tsx"
+  ]
+}

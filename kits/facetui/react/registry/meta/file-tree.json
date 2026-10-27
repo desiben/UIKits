@@ -1,0 +1,11 @@
+{
+  "name": "file-tree",
+  "title": "File Tree",
+  "description": "Expandable file tree: folders open with height animation and rotating chevrons; full keyboard support.",
+  "categories": [
+    "data-display"
+  ],
+  "files": [
+    "ui/file-tree.tsx"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "input",
+  "title": "Input",
+  "description": "Single-line text input with leading/trailing addons, a fading focus ring, a brand underline sweep and an invalid shake.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/input.tsx"
+  ]
+}

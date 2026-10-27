@@ -1,0 +1,11 @@
+{
+  "name": "cell-select",
+  "title": "Cell Select",
+  "description": "Settings row with a compact right-aligned select; the value rolls on change and the menu pops in from the trigger.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/cell-select.tsx"
+  ]
+}

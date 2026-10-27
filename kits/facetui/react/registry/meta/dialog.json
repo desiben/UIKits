@@ -1,0 +1,7 @@
+{
+  "name": "dialog",
+  "title": "Dialog",
+  "description": "A modal for focused tasks: the scrim fades in while the panel springs up from slightly below and scales into place.",
+  "categories": ["overlays"],
+  "files": ["ui/dialog.tsx"]
+}

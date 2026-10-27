@@ -1,0 +1,11 @@
+{
+  "name": "number-stepper",
+  "title": "Number Stepper",
+  "description": "Number stepper whose digits roll on change; hold to repeat with acceleration.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/number-stepper.tsx"
+  ]
+}

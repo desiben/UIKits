@@ -1,0 +1,7 @@
+{
+  "name": "emoji-picker",
+  "title": "Emoji Picker",
+  "description": "Emoji picker with search, categories, skin tones and a live preview: the category indicator slides and follows the scroll, search results re-flow with layout animations, and the picked emoji pops and floats up.",
+  "categories": ["overlays"],
+  "files": ["ui/emoji-picker.tsx"]
+}

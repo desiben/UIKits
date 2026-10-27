@@ -1,0 +1,11 @@
+{
+  "name": "cell-switch",
+  "title": "Cell Switch",
+  "description": "Settings-list rows (group, label, icon tile) with a trailing switch; rows stagger in and the whole row toggles.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/cell-switch.tsx"
+  ]
+}

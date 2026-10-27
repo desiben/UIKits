@@ -1,0 +1,11 @@
+{
+  "name": "floating-toc",
+  "title": "Floating TOC",
+  "description": "Floating table of contents: compact bars that expand into a panel, with an active marker that follows the scroll.",
+  "categories": [
+    "data-display"
+  ],
+  "files": [
+    "ui/floating-toc.tsx"
+  ]
+}

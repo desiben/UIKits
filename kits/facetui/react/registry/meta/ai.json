@@ -1,0 +1,11 @@
+{
+  "name": "ai",
+  "title": "AI: Prompt Composer & Message",
+  "description": "AI assistant panel: messages fade in, context chips animate and the send button morphs while a reply streams.",
+  "categories": [
+    "signature"
+  ],
+  "files": [
+    "ui/ai.tsx"
+  ]
+}

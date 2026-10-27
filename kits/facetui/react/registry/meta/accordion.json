@@ -1,0 +1,7 @@
+{
+  "name": "accordion",
+  "title": "Accordion",
+  "description": "Progressive disclosure: panels spring open to their natural height with a soft fade-in while the chevron rotates.",
+  "categories": ["overlays"],
+  "files": ["ui/accordion.tsx"]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "inline-select",
+  "title": "Inline Select",
+  "description": "Inline select inside a sentence: the value swaps with a roll and the menu pops from the word.",
+  "categories": [
+    "forms"
+  ],
+  "files": [
+    "ui/inline-select.tsx"
+  ]
+}

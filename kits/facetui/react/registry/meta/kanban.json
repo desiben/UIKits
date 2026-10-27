@@ -1,0 +1,7 @@
+{
+  "name": "kanban",
+  "title": "Kanban",
+  "description": "Board columns with draggable task cards; cards lift and tilt while dragged, a drop line marks the target, neighbours shift with layout animations and keyboard moves (Space, arrows) are announced.",
+  "categories": ["signature"],
+  "files": ["ui/kanban.tsx"]
+}

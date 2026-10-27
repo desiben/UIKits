@@ -1,0 +1,11 @@
+{
+  "name": "bar-chart",
+  "title": "Bar Chart",
+  "description": "Compares categories with grouped or stacked bars that grow in with a stagger; hovering a bar dims the others and the tooltip springs between values.",
+  "categories": [
+    "charts"
+  ],
+  "files": [
+    "ui/bar-chart.tsx"
+  ]
+}

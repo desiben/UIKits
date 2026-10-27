@@ -1,0 +1,11 @@
+{
+  "name": "command-palette",
+  "title": "Command Palette",
+  "description": "\u2318K command palette on cmdk: scoped search, grouped results and a highlight that glides between items.",
+  "categories": [
+    "signature"
+  ],
+  "files": [
+    "ui/command-palette.tsx"
+  ]
+}

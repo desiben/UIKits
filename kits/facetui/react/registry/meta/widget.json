@@ -1,0 +1,1 @@
+{ "name": "widget", "title": "Widget", "description": "Dashboard container with a soft shell, header, legend and an elevated content area for charts, tables or KPIs. Widgets rise in on view and stagger inside a widget grid.", "categories": ["data-display"], "files": ["ui/widget.tsx"] }
