@@ -13,7 +13,7 @@ Live: **[www.etkits.us](https://www.etkits.us)**. The storefront builds with `no
 | **Facet UI** | [`kits/facetui/`](kits/facetui/) | [facet.etkits.us](https://facet.etkits.us) |
 | **Satin UI Kit** | [`kits/satinui/`](kits/satinui/) | [satin.etkits.us](https://satin.etkits.us) |
 
-Facet UI support: **[contact+facet@etkits.us](mailto:contact+facet@etkits.us)**.
+Facet UI support: **[facet+contact@etkits.us](mailto:facet+contact@etkits.us)**.
 
 Satin support: **[satin+contact@etkits.us](mailto:satin+contact@etkits.us)**. Store links are configured in `ETKITS_STORES`.
 
