@@ -13,6 +13,16 @@ const PRODUCTS = {
     claimLimit: ["CLAIM_MAX_USES_FACETUI", "CLAIM_MAX_USES"], // Figma claims per key
     defaults: { deviceLimit: 5, claimLimit: 3 },
   },
+  satinui: {
+    name: "Satin UI",
+    gumroadProductId: ["GUMROAD_PRODUCT_ID_SATINUI"],
+    envatoItemIds: ["ENVATO_ITEM_ID_SATINUI"],
+    figmaUrl: { gumroad: ["FIGMA_DELIVERY_URL_SATINUI_GUMROAD"], envato: ["FIGMA_DELIVERY_URL_SATINUI_ENVATO"], any: ["FIGMA_DELIVERY_URL_SATINUI"] },
+    downloadUrl: ["DOWNLOAD_URL_SATINUI"],
+    deviceLimit: ["DEVICE_LIMIT_SATINUI", "DEVICE_LIMIT"],
+    claimLimit: ["CLAIM_MAX_USES_SATINUI", "CLAIM_MAX_USES"],
+    defaults: { deviceLimit: 5, claimLimit: 3 },
+  },
 }
 
 const env = (names) => { for (const n of [].concat(names || [])) { const v = process.env[n]; if (v && String(v).trim()) return String(v).trim() } return null }
