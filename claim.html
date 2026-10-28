@@ -89,10 +89,12 @@
         .then(function (r) { return r.json().catch(function () { return { ok: false, error: "Something went wrong. Please try again." }; }); })
         .then(function (data) {
           if (!data.ok) { error.textContent = data.error || "That purchase code couldn't be verified."; error.hidden = false; return; }
-          document.getElementById("figma-link").href = data.figmaUrl;
+          var fl = document.getElementById("figma-link");
+          fl.href = data.figmaUrl;
+          fl.textContent = data.product ? "Open the " + data.product + " Figma file" : "Open the Figma file";
           var dl = document.getElementById("download-link");
           if (data.downloadUrl) { dl.href = data.downloadUrl; dl.hidden = false; } else { dl.hidden = true; }
-          document.getElementById("uses-left").textContent = "Purchase verified." + (data.usesLeft != null ? " Claims left on this code: " + data.usesLeft + "." : "");
+          document.getElementById("uses-left").textContent = (data.product ? data.product + " purchase verified." : "Purchase verified.") + (data.usesLeft != null ? " Claims left on this code: " + data.usesLeft + "." : "");
           result.hidden = false;
         })
         .catch(function () { error.textContent = "Couldn't reach the server. Check your connection and try again."; error.hidden = false; })
