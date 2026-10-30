@@ -6,22 +6,25 @@ const PRODUCTS = {
     name: "Facet UI",
     gumroadProductId: ["GUMROAD_PRODUCT_ID_FACETUI", "GUMROAD_PRODUCT_ID"],
     envatoItemIds: ["ENVATO_ITEM_ID_FACETUI", "ENVATO_ITEM_ID"],
+    // Etsy listing id -> license tier. A team license gets the team limits below.
+    etsyListings: { "4605960243": "individual", "4605981174": "team" },
     // Figma sale copy, per store first (so a leaked link can be traced and swapped per store).
-    figmaUrl: { gumroad: ["FIGMA_DELIVERY_URL_FACETUI_GUMROAD", "FIGMA_DELIVERY_URL_GUMROAD"], envato: ["FIGMA_DELIVERY_URL_FACETUI_ENVATO", "FIGMA_DELIVERY_URL_ENVATO"], any: ["FIGMA_DELIVERY_URL_FACETUI", "FIGMA_DELIVERY_URL"] },
+    figmaUrl: { gumroad: ["FIGMA_DELIVERY_URL_FACETUI_GUMROAD", "FIGMA_DELIVERY_URL_GUMROAD"], envato: ["FIGMA_DELIVERY_URL_FACETUI_ENVATO", "FIGMA_DELIVERY_URL_ENVATO"], etsy: ["FIGMA_DELIVERY_URL_FACETUI_ETSY", "FIGMA_DELIVERY_URL_ETSY"], any: ["FIGMA_DELIVERY_URL_FACETUI", "FIGMA_DELIVERY_URL"] },
     downloadUrl: ["DOWNLOAD_URL_FACETUI", "DOWNLOAD_URL"],
     deviceLimit: ["DEVICE_LIMIT_FACETUI", "DEVICE_LIMIT"], // browsers + machines per key (style guide, npx facetui)
     claimLimit: ["CLAIM_MAX_USES_FACETUI", "CLAIM_MAX_USES"], // Figma claims per key
-    defaults: { deviceLimit: 5, claimLimit: 3 },
+    defaults: { deviceLimit: 5, claimLimit: 3, teamDeviceLimit: 25, teamClaimLimit: 10 },
   },
   satinui: {
     name: "Satin UI",
     gumroadProductId: ["GUMROAD_PRODUCT_ID_SATINUI"],
     envatoItemIds: ["ENVATO_ITEM_ID_SATINUI"],
-    figmaUrl: { gumroad: ["FIGMA_DELIVERY_URL_SATINUI_GUMROAD"], envato: ["FIGMA_DELIVERY_URL_SATINUI_ENVATO"], any: ["FIGMA_DELIVERY_URL_SATINUI"] },
+    etsyListings: { "4605963751": "individual", "4605964959": "team" },
+    figmaUrl: { gumroad: ["FIGMA_DELIVERY_URL_SATINUI_GUMROAD"], envato: ["FIGMA_DELIVERY_URL_SATINUI_ENVATO"], etsy: ["FIGMA_DELIVERY_URL_SATINUI_ETSY"], any: ["FIGMA_DELIVERY_URL_SATINUI"] },
     downloadUrl: ["DOWNLOAD_URL_SATINUI"],
     deviceLimit: ["DEVICE_LIMIT_SATINUI", "DEVICE_LIMIT"],
     claimLimit: ["CLAIM_MAX_USES_SATINUI", "CLAIM_MAX_USES"],
-    defaults: { deviceLimit: 5, claimLimit: 3 },
+    defaults: { deviceLimit: 5, claimLimit: 3, teamDeviceLimit: 25, teamClaimLimit: 10 },
   },
 }
 
@@ -39,9 +42,13 @@ function product(slug) {
     downloadUrl: env(p.downloadUrl),
     deviceLimit: int(p.deviceLimit, p.defaults.deviceLimit),
     claimLimit: int(p.claimLimit, p.defaults.claimLimit),
+    teamDeviceLimit: p.defaults.teamDeviceLimit,
+    teamClaimLimit: p.defaults.teamClaimLimit,
+    etsyListings: p.etsyListings || {},
   }
 }
 const slugs = () => Object.keys(PRODUCTS)
+const byEtsyListing = (listingId) => { for (const s of slugs()) { const tier = (PRODUCTS[s].etsyListings || {})[String(listingId)]; if (tier) return { slug: s, tier } } return null }
 const byEnvatoItem = (itemId) => slugs().map(product).find((p) => p.envatoItemIds.includes(String(itemId))) || null
 
-module.exports = { product, slugs, byEnvatoItem }
+module.exports = { product, slugs, byEnvatoItem, byEtsyListing }

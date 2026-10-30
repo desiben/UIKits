@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
   "buildCommand": "node build-storefront.mjs",
-  "outputDirectory": "storefront-build"
+  "outputDirectory": "storefront-build",
+  "crons": [
+    {
+      "path": "/api/etsy-keepalive",
+      "schedule": "17 9 * * *"
+    }
+  ]
 }

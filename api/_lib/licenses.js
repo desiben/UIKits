@@ -5,10 +5,11 @@
 // Used by api/claim.js (Figma delivery), api/licenses/verify.js (product sites such as Facet UI)
 // and api/admin.js (the dashboard at /admin).
 //
-// Env: BLOB_READ_WRITE_TOKEN (set by Vercel for the etkits-licenses store), ENVATO_TOKEN,
+// Env: BLOB_READ_WRITE_TOKEN (set by Vercel for the etkits-licenses store), ENVATO_TOKEN, ETSY_* (see etsy.js),
 //      per-product variables in products.js, BLOCKED_KEYS (optional, comma-separated).
 const crypto = require("crypto")
-const { product, slugs, byEnvatoItem } = require("./products")
+const { product, slugs, byEnvatoItem, byEtsyListing } = require("./products")
+const etsy = require("./etsy")
 
 const REVERIFY_MS = 6 * 60 * 60 * 1000 // re-check the store (refunds, disputes) at most every 6 hours
 const TOUCH_MS = 60 * 60 * 1000 // update a device's "last seen" at most hourly
@@ -108,8 +109,26 @@ async function envato(code) {
   if (!p) return { ok: false, reason: "invalid" }
   return { ok: true, store: "envato", product: p.slug, info: { email: s.buyer || null, purchasedAt: s.sold_at || null, saleId: code, variant: s.license || null } }
 }
+// Etsy: the "key" is the order number. One order can hold several of our listings.
+async function etsyOrder(orderNo) {
+  const r = await etsy.receipt(orderNo)
+  if (!r.ok) return r
+  const hits = r.items.map((i) => byEtsyListing(i.listingId)).filter(Boolean)
+  if (!hits.length) return { ok: false, reason: "invalid" }
+  return { ok: true, store: "etsy", products: [...new Set(hits.map((h) => h.slug))], hits, info: r.info }
+}
 // Is this key a genuine, paid, non-refunded purchase of `slug`?
 async function storeCheck(key, slug) {
+  const orderNo = etsy.orderNumber(key)
+  if (orderNo) {
+    const ck = "etsy|" + orderNo, hit = storeCache.get(ck)
+    const o = hit && hit.until > Date.now() ? hit.data : await etsyOrder(orderNo)
+    if (o.reason !== "unreachable") storeCache.set(ck, { until: Date.now() + 10 * 60 * 1000, data: o })
+    if (!o.ok) return o
+    const h = o.hits.find((x) => x.slug === slug)
+    if (!h) return { ok: false, reason: "invalid" }
+    return { ok: true, store: "etsy", tier: h.tier, info: { ...o.info, variant: h.tier === "team" ? "Team license" : "Individual license" } }
+  }
   const ck = slug + "|" + key, hit = storeCache.get(ck)
   if (hit && hit.until > Date.now()) return hit.data
   let out
@@ -119,9 +138,10 @@ async function storeCheck(key, slug) {
   return out
 }
 const storeMessage = (reason, p) => reason === "not-configured" ? `Licensing for ${p ? p.name : "this product"} isn't set up yet. Please email contact@etkits.us.`
-  : reason === "unreachable" ? "Couldn't reach the store to check your license. Please try again in a minute."
+  : reason === "unreachable" ? "Couldn't reach the store to check your purchase. Please try again in a minute."
   : ["refunded", "chargebacked", "disputed"].includes(reason) ? "This purchase was refunded or disputed, so the license no longer works."
   : reason === "subscription ended" ? "This subscription is no longer active."
+  : reason === "unpaid" ? "This order hasn't been paid yet. Once Etsy confirms the payment, try again."
   : `This license key isn't valid for ${p ? p.name : "this product"}.`
 
 // Shared first half of authorize() and claim(): blocked list, revoked flag, store re-check.
@@ -150,14 +170,17 @@ async function check(key, slug, kind) {
 function applyStore(x, slug, s) {
   if (!s) return
   if (!x.products.includes(slug)) x.products.push(slug)
+  // Team licenses (Etsy team listings) get the team limits, unless you've set limits by hand.
+  if (s.tier === "team") { const p = product(slug); if (x.limit == null) x.limit = p.teamDeviceLimit; if (x.claimLimit == null) x.claimLimit = p.teamClaimLimit }
   Object.assign(x, { store: x.store === "manual" ? "manual" : s.store, storeOk: true, storeReason: null, verifiedAt: now() })
   for (const [k, v] of Object.entries(s.info || {})) if (v) x[k] = v
 }
 
 /* ---------- product access: style guide unlock, CLI installs ---------- */
 // device: { id, kind: "web" | "cli", name }. Returns { ok, record } or { ok: false, status, error }.
+const normalize = (key) => etsy.orderNumber(key) || String(key || "").trim()
 async function authorize(key, slug, device) {
-  key = String(key || "").trim()
+  key = normalize(key)
   const c = await check(key, slug, device.kind || "api")
   if (!c.ok) return c
   let denied = null
@@ -190,12 +213,13 @@ async function authorize(key, slug, device) {
 /* ---------- Figma delivery (claim page) ---------- */
 // Works out which product the key belongs to, then counts a claim against the key's claim limit.
 async function claim(key) {
-  key = String(key || "").trim()
+  key = normalize(key)
   if (!KEY_PATTERN.test(key)) return fail(400, "That doesn't look like a purchase code. Please check it and try again.")
   const known = await load(hash(key)).catch(() => null)
   let candidates = known ? known.record.products : []
   if (!candidates.length) {
-    if (ENVATO_CODE.test(key)) { const e = await envato(key); candidates = e.ok ? [e.product] : []; if (!e.ok && e.reason !== "invalid") return fail(503, storeMessage(e.reason)) }
+    if (etsy.orderNumber(key)) { const o = await etsyOrder(key); candidates = o.ok ? o.products : []; if (!o.ok && o.reason !== "invalid") return fail(o.reason === "unreachable" || o.reason === "not-configured" ? 503 : 403, storeMessage(o.reason)) }
+    else if (ENVATO_CODE.test(key)) { const e = await envato(key); candidates = e.ok ? [e.product] : []; if (!e.ok && e.reason !== "invalid") return fail(503, storeMessage(e.reason)) }
     else {
       const configured = slugs().filter((s) => product(s).gumroadProductId)
       if (!configured.length) return fail(503, "Claiming isn't available yet. Please email contact@etkits.us.")

@@ -157,7 +157,7 @@
     var kpi = function (label, value) { return '<div class="card kpi"><span class="kpi-label">' + label + '</span><span class="kpi-value">' + value + "</span></div>"; };
     var rows = visible().map(function (l) {
       var lim = limitOf(l), pct = Math.min(100, Math.round(l.devices.length / lim * 100));
-      return '<tr><td><b>' + esc(l.email || "—") + '</b><div class="t-caption muted">' + esc(l.store === "manual" ? "Added by you" : l.store === "envato" ? "Envato" : "Gumroad") + (l.note ? " · " + esc(l.note.slice(0, 40)) : "") + "</div></td>" +
+      return '<tr><td><b>' + esc(l.email || "—") + '</b><div class="t-caption muted">' + esc(l.store === "manual" ? "Added by you" : l.store === "envato" ? "Envato" : l.store === "etsy" ? "Etsy" : "Gumroad") + (l.note ? " · " + esc(l.note.slice(0, 40)) : "") + "</div></td>" +
         "<td>" + esc(pname(l)) + "</td>" +
         '<td class="mono hide-sm">' + esc(l.keyMasked) + "</td>" +
         '<td><div class="dev-bar"><div class="progress progress-sm"><span style="--value:' + pct + '%"></span></div><span class="t-caption">' + l.devices.length + " / " + lim + "</span></div></td>" +
